@@ -34,6 +34,22 @@ CREATE TABLE `customers_table` (
 
 /*Data for the table `customers_table` */
 
+/*Table structure for table `inventory_logs_table` */
+
+DROP TABLE IF EXISTS `inventory_logs_table`;
+
+CREATE TABLE `inventory_logs_table` (
+  `inventorylogId` int(6) NOT NULL AUTO_INCREMENT,
+  `productId` int(6) DEFAULT NULL,
+  `inOrOut` varchar(60) DEFAULT NULL,
+  `quantity` int(6) DEFAULT NULL,
+  PRIMARY KEY (`inventorylogId`),
+  KEY `FK_inventory_logs_table` (`productId`),
+  CONSTRAINT `FK_inventory_logs_table` FOREIGN KEY (`productId`) REFERENCES `products_table` (`productId`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+/*Data for the table `inventory_logs_table` */
+
 /*Table structure for table `order_details_table` */
 
 DROP TABLE IF EXISTS `order_details_table`;
@@ -151,6 +167,9 @@ CREATE TABLE `products_table` (
   `productSKU` varchar(60) DEFAULT NULL COMMENT 'product code / sku',
   `productUpdateDate` varchar(60) DEFAULT NULL COMMENT 'when ging update ang product',
   `productLive` tinyint(1) DEFAULT NULL COMMENT 'if ang product is i display sa shop',
+  `productStock` varchar(60) DEFAULT NULL,
+  `productStatus` varchar(60) DEFAULT NULL,
+  `productStocksReorderPoint` int(6) DEFAULT NULL,
   PRIMARY KEY (`productId`),
   KEY `FK_products_table123` (`productSubCategoryId`),
   CONSTRAINT `FK_products_table123` FOREIGN KEY (`productSubCategoryId`) REFERENCES `product_sub_categories_table` (`productSubCategoryId`)
