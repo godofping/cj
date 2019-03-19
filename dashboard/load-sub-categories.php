@@ -19,10 +19,10 @@
  */
  
 // DB table to use
-$table = 'product_categories_table';
+$table = 'product_sub_categories_view';
  
 // Table's primary key
-$primaryKey = 'productCategoryId';
+$primaryKey = 'productSubCategoryId';
  
 // Array of database columns which should be read and sent back to DataTables.
 // The `db` parameter represents the column name in the database, while the `dt`
@@ -33,8 +33,9 @@ $primaryKey = 'productCategoryId';
 $columns = array(
 
     array( 'db' => 'productCategory',   'dt' => 0 ),
-    array( 'db' => 'productCategoryId', 'dt' => 1,'formatter' => function( $d, $row ) {
-        return '<a class = "btn btn-info btn-xs" href="update-category.php?productCategoryId=' . $row['productCategoryId'] . '">Update</a> <a class = "btn btn-danger btn-xs" onclick = "return confirm('."'Are you sure want to delete this record?'".')" href="controller.php?from=delete-category&productCategoryId=' . $row['productCategoryId'] . '">Delete</a>';
+    array( 'db' => 'productSubCategory',   'dt' => 1 ),
+    array( 'db' => 'productSubCategoryId', 'dt' => 2,'formatter' => function( $d, $row ) {
+        return '<a class = "btn btn-info btn-xs" href="update-sub-category.php?productSubCategoryId=' . $row['productSubCategoryId'] . '">Update</a> <a class = "btn btn-danger btn-xs" onclick = "return confirm('."'Are you sure want to delete this record?'".')" href="controller.php?from=delete-sub-category&productSubCategoryId=' . $row['productSubCategoryId'] . '">Delete</a>';
     } ),
     
   

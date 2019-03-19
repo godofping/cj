@@ -255,4 +255,56 @@ if (isset($_GET['from']) and $_GET['from'] == 'add-product') {
 }
 
 
+if (isset($_GET['from']) and $_GET['from'] == 'add-sub-category') {
+
+	$productCategoryId = $db->escapeString($_POST['productCategoryId']);
+	$productSubCategory = $db->escapeString($_POST['productSubCategory']);
+
+	$db->insert('product_sub_categories_table',
+	array(
+		'productCategoryId'=>$productCategoryId,
+		'productSubCategory'=>$productSubCategory,
+		)
+	);
+
+	$res = $db->getResult();
+
+	header("Location: add-sub-category.php");
+	$_SESSION['toast'] = 'add-sub-category';
+
+}
+
+
+if (isset($_GET['from']) and $_GET['from'] == 'update-sub-category') {
+
+	$productCategoryId = $db->escapeString($_POST['productCategoryId']);
+	$productSubCategory = $db->escapeString($_POST['productSubCategory']);
+
+	$db->update('product_sub_categories_table',
+	array(
+		'productCategoryId'=>$productCategoryId,
+		'productSubCategory'=>$productSubCategory,
+		)
+	);
+
+	$res = $db->getResult();
+
+	header("Location: update-sub-category.php");
+	$_SESSION['toast'] = 'update-sub-category';
+
+}
+
+
+if (isset($_GET['from']) and $_GET['from'] == 'delete-sub-category') {
+
+	$productSubCategoryId = $db->escapeString($_GET['productSubCategoryId']);
+
+	$db->delete('product_sub_categories_table','productSubCategoryId=' . $productSubCategoryId); 
+
+	$res = $db->getResult();
+
+	header("Location: sub-categories.php");
+	$_SESSION['toast'] = 'delete-sub-category';
+}
+
 ?>

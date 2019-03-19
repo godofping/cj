@@ -1,6 +1,6 @@
 /*
 SQLyog Ultimate v8.53 
-MySQL - 5.5.5-10.1.37-MariaDB : Database - cj_db
+MySQL - 5.5.5-10.1.38-MariaDB : Database - cj_db
 *********************************************************************
 */
 
@@ -116,11 +116,11 @@ CREATE TABLE `product_categories_table` (
   `productCategoryId` int(6) NOT NULL AUTO_INCREMENT,
   `productCategory` varchar(60) DEFAULT NULL,
   PRIMARY KEY (`productCategoryId`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
 
 /*Data for the table `product_categories_table` */
 
-insert  into `product_categories_table`(`productCategoryId`,`productCategory`) values (1,'Clothing'),(3,'Accessories'),(4,'Beauty Products'),(5,'Bags'),(6,'Shoes'),(7,'Gadgets');
+insert  into `product_categories_table`(`productCategoryId`,`productCategory`) values (8,'Men Fashion'),(9,'Women Fashion'),(10,'Beauty Products'),(11,'Gadgets'),(12,'Bags'),(13,'Shoes');
 
 /*Table structure for table `product_images_table` */
 
@@ -149,9 +149,11 @@ CREATE TABLE `product_sub_categories_table` (
   PRIMARY KEY (`productSubCategoryId`),
   KEY `FK_product_sub_categories_table` (`productCategoryId`),
   CONSTRAINT `FK_product_sub_categories_table` FOREIGN KEY (`productCategoryId`) REFERENCES `product_categories_table` (`productCategoryId`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 /*Data for the table `product_sub_categories_table` */
+
+insert  into `product_sub_categories_table`(`productSubCategoryId`,`productSubCategory`,`productCategoryId`) values (3,'t',NULL),(4,'t',12);
 
 /*Table structure for table `products_table` */
 
@@ -173,7 +175,7 @@ CREATE TABLE `products_table` (
   PRIMARY KEY (`productId`),
   KEY `FK_products_table123` (`productSubCategoryId`),
   CONSTRAINT `FK_products_table123` FOREIGN KEY (`productSubCategoryId`) REFERENCES `product_sub_categories_table` (`productSubCategoryId`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*Data for the table `products_table` */
 
@@ -194,6 +196,27 @@ CREATE TABLE `users_table` (
 /*Data for the table `users_table` */
 
 insert  into `users_table`(`userId`,`userName`,`userPassword`,`userLevel`,`isDeleted`,`fullName`) values (1,'admin','21232f297a57a5a743894a0e4a801fc3',1,0,'test'),(2,'user1','user1',2,0,'user1'),(3,'user2','user2',2,0,'user2'),(4,'user3','user3',2,0,'user3'),(5,'asd','asd',2,1,NULL),(6,'12','22',2,1,'33');
+
+/*Table structure for table `product_sub_categories_view` */
+
+DROP TABLE IF EXISTS `product_sub_categories_view`;
+
+/*!50001 DROP VIEW IF EXISTS `product_sub_categories_view` */;
+/*!50001 DROP TABLE IF EXISTS `product_sub_categories_view` */;
+
+/*!50001 CREATE TABLE  `product_sub_categories_view`(
+ `productSubCategoryId` int(6) ,
+ `productSubCategory` varchar(60) ,
+ `productCategoryId` int(6) ,
+ `productCategory` varchar(60) 
+)*/;
+
+/*View structure for view product_sub_categories_view */
+
+/*!50001 DROP TABLE IF EXISTS `product_sub_categories_view` */;
+/*!50001 DROP VIEW IF EXISTS `product_sub_categories_view` */;
+
+/*!50001 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `product_sub_categories_view` AS select `product_sub_categories_table`.`productSubCategoryId` AS `productSubCategoryId`,`product_sub_categories_table`.`productSubCategory` AS `productSubCategory`,`product_sub_categories_table`.`productCategoryId` AS `productCategoryId`,`product_categories_table`.`productCategory` AS `productCategory` from (`product_sub_categories_table` join `product_categories_table` on((`product_sub_categories_table`.`productCategoryId` = `product_categories_table`.`productCategoryId`))) */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
