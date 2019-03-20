@@ -280,16 +280,17 @@ if (isset($_GET['from']) and $_GET['from'] == 'update-sub-category') {
 	$productCategoryId = $db->escapeString($_POST['productCategoryId']);
 	$productSubCategory = $db->escapeString($_POST['productSubCategory']);
 
-	$db->update('product_sub_categories_table',
+	$db->update('product_sub_categories_view',
 	array(
 		'productCategoryId'=>$productCategoryId,
 		'productSubCategory'=>$productSubCategory,
-		)
+		),
+		'productSubCategoryId=' . $_POST['productSubCategoryId']
 	);
 
 	$res = $db->getResult();
 
-	header("Location: update-sub-category.php");
+	header("Location: update-sub-category.php?productSubCategoryId=".$_POST['productSubCategoryId']);
 	$_SESSION['toast'] = 'update-sub-category';
 
 }
