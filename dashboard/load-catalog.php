@@ -19,7 +19,7 @@
  */
  
 // DB table to use
-$table = 'products_table';
+$table = 'products_view';
  
 // Table's primary key
 $primaryKey = 'productId';
@@ -34,11 +34,14 @@ $columns = array(
 
     array( 'db' => 'productSKU',   'dt' => 0 ),
     array( 'db' => 'productName',   'dt' => 1 ),
-    array( 'db' => 'productPrice',   'dt' => 2 ),
-    array( 'db' => 'productPrice',   'dt' => 3 ),
-    array( 'db' => 'productUpdateDate',   'dt' => 4 ),
-    array( 'db' => 'productId', 'dt' => 5,'formatter' => function( $d, $row ) {
-        return '<a class = "btn btn-info btn-xs" href="update-product.php?productId=' . $row['productId'] . '">Update</a> <a class = "btn btn-danger btn-xs" onclick = "return confirm('."'Are you sure want to delete this record?'".')" href="controller.php?from=delete-product&productId=' . $row['productId'] . '">Delete</a>';
+    array( 'db' => 'productPrice', 'dt' => 2,'formatter' => function( $d, $row ) {
+        return '₱' .number_format($d, 2);
+    } ),
+    array( 'db' => 'productCategory',   'dt' => 3 ),
+    array( 'db' => 'productSubCategory',   'dt' => 4 ),
+    array( 'db' => 'productUpdateDate',   'dt' => 5 ),
+    array( 'db' => 'productId', 'dt' => 6,'formatter' => function( $d, $row ) {
+        return '<a class = "btn btn-warning btn-xs" href="view-product.php?productId=' . $row['productId'] . '">View</a> <a class = "btn btn-success btn-xs" href="product-images.php?productId=' . $row['productId'] . '">Images</a> <a class = "btn btn-info btn-xs" href="update-product.php?productId=' . $row['productId'] . '">Update</a> <a class = "btn btn-danger btn-xs" onclick = "return confirm('."'Are you sure want to delete this record?'".')" href="controller.php?from=delete-product&productId=' . $row['productId'] . '">Delete</a>';
     } ),
     
   

@@ -1,5 +1,9 @@
+<?php 
+include('header.php');
 
-<?php include('header.php'); ?>
+$db->select('products_view','*',NULL,'productId = "' . $_GET['productId'] . '"', NULL); 
+$res = $db->getResult(); $res = $res[0];
+?>
 <link rel="stylesheet" href="assets/plugins/html5-editor/bootstrap-wysihtml5.css" />
 <div class="row page-titles">
     <div class="col-md-5 align-self-center">
@@ -30,13 +34,13 @@
             <div class="card">
                 <div class="card-body">
                     <p>* indicates required fields</p>
-                	<form autocomplete="off" class="form-material m-t-40" method="POST" action="controller.php?from=add-product">
+                	<form autocomplete="off" class="form-material m-t-40" method="POST" action="controller.php?from=update-product">
 
                         <div class="row">
                         	<div class="col-12">
                         		<div class="form-group">
 		                            <label>Product Name *</label>
-		                            <input type="text" class="form-control form-control-line" required="" name="productName">
+		                            <input type="text" class="form-control form-control-line" required="" name="productName" value="<?php echo $res['productName'] ?>">
 		                        </div>
                         	</div>
                         </div>
@@ -46,11 +50,12 @@
                         		<div class="form-group">
 		                            <label>Product Category *</label>
 		                            <select class="form-control" id="productCategoryId" required="" name="productCategoryId">
+                                        <option value="<?php echo $res['productCategoryId'] ?>"><?php echo $res['productCategory']; ?></option>
                                         <?php
                                         $db->select('product_categories_view'); 
 										$output = $db->getResult();
-										foreach ($output as $res) { ?>
-											<option value="<?php echo $res['productCategoryId'] ?>"><?php echo $res['productCategory']; ?></option>
+										foreach ($output as $res1) { ?>
+											<option value="<?php echo $res1['productCategoryId'] ?>"><?php echo $res1['productCategory']; ?></option>
 										<?php } ?>
 
                                     </select>
@@ -68,7 +73,7 @@
                         	<div class="col-12">
                         		<div class="form-group">
 		                            <label>Product Price *</label>
-		                            <input type="number" class="form-control form-control-line" required="" name="productPrice">
+		                            <input type="number" class="form-control form-control-line" required="" name="productPrice" value="<?php echo $res['productPrice'] ?>">
 		                        </div>
                         	</div>
                         </div>
@@ -77,7 +82,7 @@
                         	<div class="col-12">
                         		<div class="form-group">
 		                            <label>Product Details *</label>
-		                            <textarea id="mymce" name="productDetails"></textarea>
+		                            <textarea id="mymce" name="productDetails"><?php echo $res['productDetails']; ?></textarea>
 		                        </div>
                         	</div>
                         </div>
@@ -86,7 +91,7 @@
                         	<div class="col-12">
                         		<div class="form-group">
 		                            <label>Product SKU *</label>
-		                            <input type="text" class="form-control form-control-line" required="" name="productSKU">
+		                            <input type="text" class="form-control form-control-line" required="" name="productSKU" value="<?php echo $res['productSKU'] ?>">
 		                        </div>
                         	</div>
                         </div>
@@ -96,6 +101,7 @@
                         		<div class="form-group">
 		                            <label>Display Product to Shop</label>
 		                            <select class="form-control" required="" name="productLive">
+                                        <option><?php echo $res['productLive']; ?></option>
                                         <option>Yes</option>
                                         <option>No</option>
                                     </select>
@@ -107,7 +113,7 @@
                             <div class="col-12">
                                 <div class="form-group">
                                     <label>Product Stock *</label>
-                                    <input type="number" class="form-control form-control-line" required="" name="productStock">
+                                    <input type="number" class="form-control form-control-line" required="" name="productStock" value="<?php echo $res['productStock'] ?>">
                                 </div>
                             </div>
                         </div>
@@ -116,16 +122,15 @@
                             <div class="col-12">
                                 <div class="form-group">
                                     <label>Product Stock Reorder Point *</label>
-                                    <input type="number" class="form-control form-control-line" required="" name="productStocksReorderPoint">
+                                    <input type="number" class="form-control form-control-line" required="" name="productStocksReorderPoint" value="<?php echo $res['productStocksReorderPoint'] ?>">
                                 </div>
                             </div>
                         </div>
 
 
-
-
-
                     <button type="submit" class="btn btn-success waves-effect waves-light m-r-10 pull-right">Save Changes</button>
+
+                    <input type="text" name="productId" value="<?php echo $res['productId'] ?>" hidden>
 
 
                     </form>
@@ -176,7 +181,7 @@
 
             var productCategoryId = $('#productCategoryId').val();
 
-            $.get("inc-subcategories.php",{productCategoryId: productCategoryId},function(data, status){
+            $.get("inc-update-subcategories.php",{productCategoryId: productCategoryId, productId: <?php echo $res['productId']; ?>},function(data, status){
                 $('#subCategoriesDiv').html(data);
             });
         }

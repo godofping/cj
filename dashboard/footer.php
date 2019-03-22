@@ -79,7 +79,7 @@
 
         <?php if (isset($_SESSION['toast']) and $_SESSION['toast'] == 'add-category'): ?>
             $.toast({
-              heading: 'ADDED SUCCESSFUL',
+              heading: 'SUCCESSFULLY ADDED',
               text: 'Category Saved!',
               position: 'top-center',
               loaderBg:'#ff6849',
@@ -91,7 +91,7 @@
 
         <?php if (isset($_SESSION['toast']) and $_SESSION['toast'] == 'update-category'): ?>
             $.toast({
-              heading: 'UPDATED SUCCESSFUL',
+              heading: 'SUCCESSFULLY UPDATED',
               text: 'Category Updated!',
               position: 'top-center',
               loaderBg:'#ff6849',
@@ -103,7 +103,7 @@
 
         <?php if (isset($_SESSION['toast']) and $_SESSION['toast'] == 'delete-category'): ?>
             $.toast({
-              heading: 'DELETED SUCCESSFUL',
+              heading: 'SUCCESSFULLY DELETED',
               text: 'Category Deleted!',
               position: 'top-center',
               loaderBg:'#ff6849',
@@ -115,7 +115,7 @@
 
         <?php if (isset($_SESSION['toast']) and $_SESSION['toast'] == 'add-user'): ?>
             $.toast({
-              heading: 'ADDED SUCCESSFUL',
+              heading: 'SUCCESSFULLY ADDED',
               text: 'User Saved!',
               position: 'top-center',
               loaderBg:'#ff6849',
@@ -127,7 +127,7 @@
 
         <?php if (isset($_SESSION['toast']) and $_SESSION['toast'] == 'update-user'): ?>
             $.toast({
-              heading: 'UPDATED SUCCESSFUL',
+              heading: 'SUCCESSFULLY UPDATED',
               text: 'User Updated!',
               position: 'top-center',
               loaderBg:'#ff6849',
@@ -139,7 +139,7 @@
 
         <?php if (isset($_SESSION['toast']) and $_SESSION['toast'] == 'delete-user'): ?>
             $.toast({
-              heading: 'DELETED SUCCESSFUL',
+              heading: 'SUCCESSFULLY DELETED',
               text: 'User Deleted!',
               position: 'top-center',
               loaderBg:'#ff6849',
@@ -167,7 +167,7 @@
 
         <?php if (isset($_SESSION['toast']) and $_SESSION['toast'] == 'change-password'): ?>
             $.toast({
-              heading: 'UPDATED SUCCESSFUL',
+              heading: 'SUCCESSFULLY UPDATED',
               text: 'Password Updated!',
               position: 'top-center',
               loaderBg:'#ff6849',
@@ -179,7 +179,7 @@
 
         <?php if (isset($_SESSION['toast']) and $_SESSION['toast'] == 'update-profile'): ?>
             $.toast({
-              heading: 'UPDATED SUCCESSFUL',
+              heading: 'SUCCESSFULLY UPDATED',
               text: 'Profile Updated!',
               position: 'top-center',
               loaderBg:'#ff6849',
@@ -190,7 +190,78 @@
         <?php endif?>
 
 
-        <?php unset($_SESSION['toast']) ?>
+         <?php if (isset($_SESSION['toast']) and $_SESSION['toast'] == 'add-sub-category'): ?>
+            $.toast({
+              heading: 'SUCCESSFULLY ADDED',
+              text: 'Sub Category Saved!',
+              position: 'top-center',
+              loaderBg:'#ff6849',
+              icon: 'success',
+              hideAfter: 5000, 
+              stack: 6
+            });
+        <?php endif?>
+
+        <?php if (isset($_SESSION['toast']) and $_SESSION['toast'] == 'update-sub-category'): ?>
+            $.toast({
+              heading: 'SUCCESSFULLY UPDATED',
+              text: 'Sub Category Updated!',
+              position: 'top-center',
+              loaderBg:'#ff6849',
+              icon: 'success',
+              hideAfter: 5000, 
+              stack: 6
+            });
+        <?php endif?>
+
+        <?php if (isset($_SESSION['toast']) and $_SESSION['toast'] == 'delete-sub-category'): ?>
+            $.toast({
+              heading: 'SUCCESSFULLY DELETED',
+              text: 'Sub Category Deleted!',
+              position: 'top-center',
+              loaderBg:'#ff6849',
+              icon: 'error',
+              hideAfter: 5000, 
+              stack: 6
+            });
+         <?php endif?>
+
+
+         <?php if (isset($_SESSION['toast']) and $_SESSION['toast'] == 'add-product'): ?>
+            $.toast({
+              heading: 'SUCCESSFULLY ADDED',
+              text: 'Product Saved!',
+              position: 'top-center',
+              loaderBg:'#ff6849',
+              icon: 'success',
+              hideAfter: 5000, 
+              stack: 6
+            });
+        <?php endif?>
+
+        <?php if (isset($_SESSION['toast']) and $_SESSION['toast'] == 'update-product'): ?>
+            $.toast({
+              heading: 'SUCCESSFULLY UPDATED',
+              text: 'Product Updated!',
+              position: 'top-center',
+              loaderBg:'#ff6849',
+              icon: 'success',
+              hideAfter: 5000, 
+              stack: 6
+            });
+        <?php endif?>
+
+        <?php if (isset($_SESSION['toast']) and $_SESSION['toast'] == 'delete-product'): ?>
+            $.toast({
+              heading: 'SUCCESSFULLY DELETED',
+              text: 'Product Deleted!',
+              position: 'top-center',
+              loaderBg:'#ff6849',
+              icon: 'error',
+              hideAfter: 5000, 
+              stack: 6
+            });
+         <?php endif?>
 
         
     </script>
@@ -202,3 +273,4 @@
 </body>
 
 </html>
+<?php unset($_SESSION['toast']) ?>

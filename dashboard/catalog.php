@@ -36,8 +36,9 @@
                                                 <th>Product SKU</th>
                                                 <th>Name</th>
                                                 <th>Price</th>
-                                                <th>Status</th>
-                                                <th>Created</th>
+                                                <th>Category</th>
+                                                <th>Sub Category</th>
+                                                <th>Updated</th>
                                                 <th class="noExport">Actions</th>
 
                                             </tr>
@@ -58,7 +59,7 @@
 <?php include('footer.php'); ?>
 
 <script type="text/javascript">
-	var title = "List of All Gun Club Affiliation Form";
+	var title = "";
     var dataTable = $('#datable').DataTable({
         "processing":true,
         "serverSide":true,
@@ -70,7 +71,7 @@
                 },
         "columnDefs":[
             {
-                "targets":[3],
+                "targets":[6],
                 "orderable":false,
             },
         ],

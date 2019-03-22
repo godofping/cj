@@ -226,32 +226,123 @@ if (isset($_GET['from']) and $_GET['from'] == 'change-password') {
 if (isset($_GET['from']) and $_GET['from'] == 'add-product') {
 
 	$productName = $db->escapeString($_POST['productName']);
-	$productCategoryId = $db->escapeString($_POST['productCategoryId']);
+	$productSubCategoryId = $db->escapeString($_POST['productSubCategoryId']);
 	$productPrice = $db->escapeString($_POST['productPrice']);
-	$productWeight = $db->escapeString($_POST['productWeight']);
 	$productDetails = $db->escapeString($_POST['productDetails']);
 	$productSKU = $db->escapeString($_POST['productSKU']);
-	$menOrWomenOrNotAppplicable = $db->escapeString($_POST['menOrWomenOrNotAppplicable']);
-
+	$productLive = $db->escapeString($_POST['productLive']);
+	$productStock = $db->escapeString($_POST['productStock']);
+	$productStocksReorderPoint = $db->escapeString($_POST['productStocksReorderPoint']);
 
 	$db->insert('products_table',
 	array(
 		'productName'=>$productName,
-		'productCategoryId'=>$productCategoryId,
+		'productSubCategoryId'=>$productSubCategoryId,
 		'productPrice'=>$productPrice,
-		'productWeight'=>$productWeight,
 		'productDetails'=>$productDetails,
 		'productSKU'=>$productSKU,
-		'menOrWomenOrNotAppplicable'=>$menOrWomenOrNotAppplicable,
 		'productUpdateDate'=>date('Y-m-d H:i:s'),
-		'productLive'=>'1',
+		'productLive'=>$productLive,
+		'productStock'=>$productStock,
+		'productStocksReorderPoint'=>$productStocksReorderPoint,
 		)
 	);
 
 	$res = $db->getResult();
 
+	$productId = $res[0];
+
+
+	$db->insert('product_images_table',
+	array(
+		'productImageLocation'=>'images/default-image.jpg',
+		'isThumbnail'=>'1',
+		'productId'=>$productId,
+		)
+	);
+
+	$res = $db->getResult();
+
+
+	$db->insert('product_images_table',
+	array(
+		'productImageLocation'=>'images/default-image.jpg',
+		'isThumbnail'=>'0',
+		'productId'=>$productId,
+		)
+	);
+
+	$res = $db->getResult();
+
+
+	$db->insert('product_images_table',
+	array(
+		'productImageLocation'=>'images/default-image.jpg',
+		'isThumbnail'=>'0',
+		'productId'=>$productId,
+		)
+	);
+
+	$res = $db->getResult();
+
+
 	header("Location: add-product.php");
 	$_SESSION['toast'] = 'add-product';
+}
+
+
+
+
+if (isset($_GET['from']) and $_GET['from'] == 'update-product') {
+
+	$productName = $db->escapeString($_POST['productName']);
+	$productSubCategoryId = $db->escapeString($_POST['productSubCategoryId']);
+	$productPrice = $db->escapeString($_POST['productPrice']);
+	$productDetails = $db->escapeString($_POST['productDetails']);
+	$productSKU = $db->escapeString($_POST['productSKU']);
+	$productLive = $db->escapeString($_POST['productLive']);
+	$productStock = $db->escapeString($_POST['productStock']);
+	$productStocksReorderPoint = $db->escapeString($_POST['productStocksReorderPoint']);
+
+
+
+	$db->update('products_table',
+	array(
+		'productName'=>$productName,
+		'productSubCategoryId'=>$productSubCategoryId,
+		'productPrice'=>$productPrice,
+		'productDetails'=>$productDetails,
+		'productSKU'=>$productSKU,
+		'productUpdateDate'=>date('Y-m-d H:i:s'),
+		'productLive'=>$productLive,
+		'productStock'=>$productStock,
+		'productStocksReorderPoint'=>$productStocksReorderPoint,
+		),
+		'productId=' . $_POST['productId']
+	);
+
+	$res = $db->getResult();
+
+	header("Location: update-product.php?productId=".$_POST['productId']);
+	$_SESSION['toast'] = 'update-product';
+}
+
+if (isset($_GET['from']) and $_GET['from'] == 'delete-product') {
+
+
+
+	$db->update('products_table',
+	array(
+		'productIsDeleted'=>'1',
+
+		),
+		'productId=' . $_GET['productId']
+	);
+
+	$res = $db->getResult();
+
+	header("Location: catalog.php");
+	$_SESSION['toast'] = 'delete-product';
 }
 
 

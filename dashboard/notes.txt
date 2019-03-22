@@ -1,0 +1,1 @@
+-min and maximum value on products stocks and restore point
