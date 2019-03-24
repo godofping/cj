@@ -70,24 +70,6 @@ $res = $db->getResult(); $res = $res[0];
                         </div>
 
                         <div class="row">
-                            <div class="col-12">
-                                <div class="form-group">
-                                    <label>Product Option Group *</label>
-                                    <select class="form-control" required="" name="productOptionGroupId">
-                                        <option value="<?php echo $res['productOptionGroupId'] ?>"><?php echo $res['productOptionGroupName']; ?></option>
-                                        <?php
-                                        $db->select('product_option_group_view'); 
-                                        $output = $db->getResult();
-                                        foreach ($output as $res1) { ?>
-                                            <option value="<?php echo $res1['productOptionGroupId'] ?>"><?php echo $res1['productOptionGroupName']; ?></option>
-                                        <?php } ?>
-
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
                         	<div class="col-12">
                         		<div class="form-group">
 		                            <label>Product Details *</label>

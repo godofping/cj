@@ -100,7 +100,7 @@ if (isset($_GET['from']) and $_GET['from'] == 'add-user') {
 	
 	if (count($res) == 0) {
 		$userName = $db->escapeString($_POST['userName']);
-		$userPassword = $db->escapeString($_POST['userPassword']);
+		$userPassword = $db->escapeString(md5($_POST['userPassword']));
 		$fullName = $db->escapeString($_POST['fullName']);
 
 		$db->insert('users_table',
@@ -131,7 +131,7 @@ if (isset($_GET['from']) and $_GET['from'] == 'add-user') {
 if (isset($_GET['from']) and $_GET['from'] == 'update-user') {
 
 	$userName = $db->escapeString($_POST['userName']);
-	$userPassword = $db->escapeString($_POST['userPassword']);
+	$userPassword = $db->escapeString(md5($_POST['userPassword']));
 	$fullName = $db->escapeString($_POST['fullName']);
 
 	$db->select('users_table','*',NULL,'userId = "' . $_POST['userId'] . '"', NULL); 
@@ -229,7 +229,7 @@ if (isset($_GET['from']) and $_GET['from'] == 'add-product') {
 	$productName = $db->escapeString($_POST['productName']);
 	$productSubCategoryId = $db->escapeString($_POST['productSubCategoryId']);
 	$productDetails = $db->escapeString($_POST['productDetails']);
-	$productOptionGroupId = $db->escapeString($_POST['productOptionGroupId']);
+
 
 
 
@@ -239,7 +239,6 @@ if (isset($_GET['from']) and $_GET['from'] == 'add-product') {
 		'productSubCategoryId'=>$productSubCategoryId,
 		'productDetails'=>$productDetails,
 		'productUpdateDate'=>date('Y-m-d H:i:s'),
-		'productOptionGroupId'=>$productOptionGroupId,
 		)
 	);
 
@@ -293,7 +292,6 @@ if (isset($_GET['from']) and $_GET['from'] == 'update-product') {
 	$productName = $db->escapeString($_POST['productName']);
 	$productSubCategoryId = $db->escapeString($_POST['productSubCategoryId']);
 	$productDetails = $db->escapeString($_POST['productDetails']);
-	$productOptionGroupId = $db->escapeString($_POST['productOptionGroupId']);
 
 
 	$db->update('products_table',
@@ -303,7 +301,6 @@ if (isset($_GET['from']) and $_GET['from'] == 'update-product') {
 		'productDetails'=>$productDetails,
 		'productUpdateDate'=>date('Y-m-d H:i:s'),
 		'productSubCategoryId'=>$productSubCategoryId,
-		'productOptionGroupId'=>$productOptionGroupId,
 		),
 		'productId=' . $_POST['productId']
 	);
@@ -482,56 +479,6 @@ if (isset($_GET['from']) and $_GET['from'] == 'delete-sub-category') {
 }
 
 
-if (isset($_GET['from']) and $_GET['from'] == 'add-option-group') {
-
-	$productOptionGroupName = $db->escapeString($_POST['productOptionGroupName']);
-
-
-	$db->insert('product_option_groups_table',
-	array(
-		'productOptionGroupName'=>$productOptionGroupName,
-		)
-	);
-
-	$res = $db->getResult();
-
-	print_r($res);
-
-	header("Location: add-option-group.php");
-	$_SESSION['toast'] = 'add-option-group';
-
-}
-
-if (isset($_GET['from']) and $_GET['from'] == 'update-option-group') {
-
-	$productOptionGroupName = $db->escapeString($_POST['productOptionGroupName']);
-
-	$db->update('product_option_groups_table',
-	array(
-		'productOptionGroupName'=>$productOptionGroupName,
-		),
-		'productOptionGroupId=' . $_POST['productOptionGroupId']
-	);
-
-	$res = $db->getResult();
-
-	header("Location: update-option-group.php?productOptionGroupId=".$_POST['productOptionGroupId']);
-	$_SESSION['toast'] = 'update-option-group';
-
-}
-
-
-if (isset($_GET['from']) and $_GET['from'] == 'delete-option-group') {
-
-	$productOptionGroupId = $db->escapeString($_GET['productOptionGroupId']);
-
-	$db->delete('product_option_groups_table','productOptionGroupId=' . $productOptionGroupId); 
-
-	$res = $db->getResult();
-
-	header("Location: option-group.php");
-	$_SESSION['toast'] = 'delete-option-group';
-}
 
 
 if (isset($_GET['from']) and $_GET['from'] == 'add-product-variation') {
@@ -585,36 +532,28 @@ if (isset($_GET['from']) and $_GET['from'] == 'update-product-variation') {
 
 	$res = $db->getResult();
 
-	print_r($res);
 
-	// header("Location: manage-product.php?productId=".$_POST['productId']);
-	// $_SESSION['toast'] = 'update-product-variation';
+
+	header("Location: manage-product.php?productId=".$_POST['productId']);
+	$_SESSION['toast'] = 'update-product-variation';
 
 }
 
 if (isset($_GET['from']) and $_GET['from'] == 'delete-product-variation') {
 
-	$productStocksReorderPoint = $db->escapeString($_POST['productStocksReorderPoint']);
-	$productOptionGroupId = $db->escapeString($_POST['productOptionGroupId']);
-	$productOption1 = $db->escapeString($_POST['productOption1']);
-	$productOption2 = $db->escapeString($_POST['productOption2']);
 
 	$db->update('product_variations_table',
 	array(
-		'productStocksReorderPoint'=>$productStocksReorderPoint,
-		'productOptionGroupId'=>$productOptionGroupId,
-		'productOption1'=>$productOption1,
-		'productOption2'=>$productOsption2,
+		'productVariationIsDeleted'=>'1',
 		),
-		'productVariationId=' . $_POST['productVariationId']
+		'productVariationId=' . $_GET['productVariationId']
 	);
 
 	$res = $db->getResult();
 
-	print_r($res);
 
-	// header("Location: manage-product.php?productId=".$_POST['productId']);
-	// $_SESSION['toast'] = 'update-product-variation';
+	header("Location: manage-product.php?productId=".$_GET['productId']);
+	$_SESSION['toast'] = 'delete-product-variation';
 
 }
 

@@ -32,15 +32,15 @@ $primaryKey = 'productId';
 
 $columns = array(
 
-
-    array( 'db' => 'productName',   'dt' => 0 ),
-    array( 'db' => 'productCategory',   'dt' => 1 ),
-    array( 'db' => 'productSubCategory',   'dt' => 2 ),
-    array( 'db' => 'productUpdateDate',   'dt' => 3 ),
-    array( 'db' => 'productId', 'dt' => 4,'formatter' => function( $d, $row ) {
-        return '<a class = "btn btn-warning btn-xs" href="view-product.php?productId=' . $row['productId'] . '">View</a> <a class = "btn btn-success btn-xs" href="manage-product.php?productId=' . $row['productId'] . '">Manage</a> <a class = "btn btn-info btn-xs" href="update-product.php?productId=' . $row['productId'] . '">Update</a> <a class = "btn btn-danger btn-xs" onclick = "return confirm('."'Are you sure want to delete this record?'".')" href="controller.php?from=delete-product&productId=' . $row['productId'] . '">Delete</a>';
+    array( 'db' => 'productId',   'dt' => 0 ),
+    array( 'db' => 'productName',   'dt' => 1 ),
+    array( 'db' => 'productCategory',   'dt' => 2 ),
+    array( 'db' => 'productSubCategory',   'dt' => 3 ),
+    array( 'db' => 'productUpdateDate',   'dt' => 4 ),
+    array( 'db' => 'productId', 'dt' => 5,'formatter' => function( $d, $row ) {
+        return '<a class = "btn btn-success btn-xs" href="manage-product.php?productId=' . $row['productId'] . '">Manage</a> <a class = "btn btn-info btn-xs" href="update-product.php?productId=' . $row['productId'] . '">Update</a> <a class = "btn btn-danger btn-xs" onclick = "return confirm('."'Are you sure want to delete this record?'".')" href="controller.php?from=delete-product&productId=' . $row['productId'] . '">Delete</a>';
     } ),
-    
+    // <a class = "btn btn-warning btn-xs" href="view-product.php?productId=' . $row['productId'] . '">View</a>
   
 );
  

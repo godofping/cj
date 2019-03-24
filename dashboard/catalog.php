@@ -33,6 +33,7 @@
                                     <table id="datable" class="table table-bordered table-striped">
                                         <thead>
                                             <tr>
+                                                <th>Product ID</th>
                                                 <th>Name</th>
                                                 <th>Category</th>
                                                 <th>Sub Category</th>
@@ -61,7 +62,7 @@
     var dataTable = $('#datable').DataTable({
         "processing":true,
         "serverSide":true,
-        "order":[],
+        "order":[[ 0, "asc" ]],
         "ajax": {
                     "type": 'POST',
                     "url": 'load-catalog.php',
@@ -69,7 +70,7 @@
                 },
         "columnDefs":[
             {
-                "targets":[4],
+                "targets":[5],
                 "orderable":false,
             },
         ],

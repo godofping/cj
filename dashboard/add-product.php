@@ -65,23 +65,6 @@
                         </div>
 
                         <div class="row">
-                            <div class="col-12">
-                                <div class="form-group">
-                                    <label>Product Option Group *</label>
-                                    <select class="form-control" required="" name="productOptionGroupId">
-                                        <?php
-                                        $db->select('product_option_group_view'); 
-                                        $output = $db->getResult();
-                                        foreach ($output as $res) { ?>
-                                            <option value="<?php echo $res['productOptionGroupId'] ?>"><?php echo $res['productOptionGroupName']; ?></option>
-                                        <?php } ?>
-
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
                         	<div class="col-12">
                         		<div class="form-group">
 		                            <label>Product Details *</label>

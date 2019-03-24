@@ -36,12 +36,12 @@
                         <li class="<?php if ($filename == 'add-product' or $filename == 'update-product' or $filename == 'add-category' or $filename == 'update-category' or $filename == 'add-sub-category' or $filename == 'update-sub-category' or $filename == 'manage-product' or $filename == 'add-option-group' or $filename == 'update-option-group' or $filename == 'option-group'): ?>
                             active
                         <?php endif ?>"> 
-                            <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-crosshairs-gps"></i><span class="hide-menu">Products</span></a>
+                            <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-basket"></i><span class="hide-menu">Products</span></a>
                             <ul aria-expanded="false" class="collapse">
                                  <li><a href="catalog.php" class="<?php if ($filename == 'add-product' or $filename == 'update-product' or $filename == 'manage-product'): ?>active<?php endif ?>">Catalog</a></li>
                                 <li><a href="categories.php" class="<?php if ($filename == 'add-category' or $filename == 'update-category'): ?>active<?php endif ?>">Categories</a></li>
                                 <li><a href="sub-categories.php" class="<?php if ($filename == 'add-sub-category' or $filename == 'update-sub-category'): ?>active<?php endif ?>">Sub Categories</a></li>
-                                <li><a href="option-group.php" class="<?php if ($filename == 'add-option-group' or $filename == 'update-option-group'): ?>active<?php endif ?>">Option Groups</a></li>
+
                        
                                 
                             </ul>
@@ -50,9 +50,18 @@
                         <li class="<?php if ($filename == 'view-match-sanctioning' or $filename == 'edit-match-sanctioning'): ?>
                             active
                         <?php endif ?>"> 
-                            <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-crosshairs-gps"></i><span class="hide-menu">Inventory</span></a>
+                            <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-cart"></i><span class="hide-menu">Orders</span></a>
                             <ul aria-expanded="false" class="collapse">
-                                <li><a href="add-match-sanctioning.php">Add</a></li>
+                                <li><a href="all-match-sanctioning.php" class="<?php if ($filename == 'view-match-sanctioning' or $filename == 'edit-match-sanctioning'): ?>active<?php endif ?>">View All</a></li>
+                                
+                            </ul>
+                        </li>
+
+                        <li class="<?php if ($filename == 'view-match-sanctioning' or $filename == 'edit-match-sanctioning'): ?>
+                            active
+                        <?php endif ?>"> 
+                            <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-format-list-bulleted"></i><span class="hide-menu">Inventory</span></a>
+                            <ul aria-expanded="false" class="collapse">
                                 <li><a href="all-match-sanctioning.php" class="<?php if ($filename == 'view-match-sanctioning' or $filename == 'edit-match-sanctioning'): ?>active<?php endif ?>">View All</a></li>
                                 
                             </ul>
@@ -61,7 +70,19 @@
                         <li class="<?php if ($filename == 'add-user' or $filename == 'update-user'): ?>
                             active
                         <?php endif ?>"> 
-                            <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-crosshairs-gps"></i><span class="hide-menu">Users</span></a>
+                            <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-account"></i><span class="hide-menu">Customers</span></a>
+                            <ul aria-expanded="false" class="collapse">
+                                <li><a href="manage-users.php" class="<?php if ($filename == 'add-user' or $filename == 'update-user'): ?>active<?php endif ?>">Manage</a></li>
+                                
+                            </ul>
+                        </li>
+
+
+
+                        <li class="<?php if ($filename == 'add-user' or $filename == 'update-user'): ?>
+                            active
+                        <?php endif ?>"> 
+                            <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-account-settings-variant"></i><span class="hide-menu">Users</span></a>
                             <ul aria-expanded="false" class="collapse">
                                 <li><a href="manage-users.php" class="<?php if ($filename == 'add-user' or $filename == 'update-user'): ?>active<?php endif ?>">Manage</a></li>
                                 

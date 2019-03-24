@@ -33,9 +33,8 @@ $primaryKey = 'userId';
 $columns = array(
 
     array( 'db' => 'userName',   'dt' => 0 ),
-    array( 'db' => 'userPassword',   'dt' => 1 ),
-    array( 'db' => 'fullName',   'dt' => 2 ),
-    array( 'db' => 'userId', 'dt' => 3,'formatter' => function( $d, $row ) {
+    array( 'db' => 'fullName',   'dt' => 1 ),
+    array( 'db' => 'userId', 'dt' => 2,'formatter' => function( $d, $row ) {
         return '<a class = "btn btn-info btn-xs" href="update-user.php?userId=' . $row['userId'] . '">Update</a> <a class = "btn btn-danger btn-xs" onclick = "return confirm('."'Are you sure want to delete this record?'".')" href="controller.php?from=delete-user&userId=' . $row['userId'] . '">Delete</a>';
     } ),
 

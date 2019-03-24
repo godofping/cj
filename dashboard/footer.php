@@ -6,7 +6,7 @@
             <!-- footer -->
             <!-- ============================================================== -->
             <footer class="footer">
-                © <?php echo date('Y'); ?> PSMOC Information System
+                © <?php echo date('Y'); ?> CJ-Ashley Fashion Hub
             </footer>
             <!-- ============================================================== -->
             <!-- End footer -->

@@ -85,14 +85,7 @@ $res = $db->getResult();
                     $res = $db->getResult(); $res = $res[0];
                     ?>
 
-                    <div class="row">
-                    	<div class="col-md-8">
-                    		<div class="form-group">
-	                            <label>The Option Group Name of this product is "<?php echo $res['productOptionGroupName'] ?>".</label>
-	                            <input type="text" name="productOptionGroupId" hidden="" value="<?php echo $res['productOptionGroupId'] ?>">
-	                        </div>
-                    	</div>
-                    </div>
+
 
                     <div class="row">
                     	<div class="col-md-2">
@@ -118,17 +111,17 @@ $res = $db->getResult();
 
                     	<div class="col-md-2">
                     		<div class="form-group">
-	                            <label>Initial Stocks *</label>
-	                            <input type="number" required="" class="form-control form-control-line" min="0" name="productStock">
-	                        </div>
-                    	</div>
-
-                    	<div class="col-md-2">
-                    		<div class="form-group">
 	                            <label>Reorder Point *</label>
 	                            <input type="number" required="" class="form-control form-control-line" min="0" name="productStocksReorderPoint">
 	                        </div>
                     	</div>
+
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label>Initial Stocks *</label>
+                                <input type="number" required="" class="form-control form-control-line" min="0" name="productStock">
+                            </div>
+                        </div>
 
                     	<div class="col-md-2">
                     		<button type="submit" class="btn btn-success waves-effect waves-light m-r-10 pull-right mt-4">Add</button>
@@ -184,8 +177,15 @@ $res = $db->getResult();
 	                        </div>
                     	</div>
 
-                    	<div class="col-md-4">
-                    		<a href="controller.php?from=delete-product-variation"><button type="button" class="btn btn-danger waves-effect waves-light m-r-10 pull-right mt-4">Delete</button></a>
+                        <div class="col-md-1">
+                            <div class="form-group">
+                                <label>Stocks</label>
+                                <input type="number" readonly="" class="form-control form-control-line" min="0" name="productStocksReorderPoint" value="<?php echo $res['productStock'] ?>">
+                            </div>
+                        </div>
+
+                    	<div class="col-md-3">
+                    		<a href="controller.php?from=delete-product-variation&productVariationId=<?php echo $res['productVariationId'] ?>&productId=<?php echo $res['productId'] ?>"><button type="button" class="btn btn-danger waves-effect waves-light m-r-10 pull-right mt-4">Delete</button></a>
                     		<button type="submit" class="btn btn-success waves-effect waves-light m-r-10 pull-right mt-4">Update</button> 
                     	</div>
                     </div>

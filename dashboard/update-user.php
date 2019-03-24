@@ -46,8 +46,8 @@ $res = $db->getResult(); $res = $res[0];
                         <div class="row">
                             <div class="col-12">
                                 <div class="form-group">
-                                    <label>Username:</label>
-                                    <input type="text" class="form-control form-control-line" required="" name="userPassword" value="<?php echo $res['userPassword'] ?>"> 
+                                    <label>Password:</label>
+                                    <input type="password" class="form-control form-control-line" required="" name="userPassword" value="<?php echo $res['userPassword'] ?>"> 
                                 </div>
                             </div>
                         </div>

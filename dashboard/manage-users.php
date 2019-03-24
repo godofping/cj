@@ -35,7 +35,6 @@
                             <thead>
                                 <tr>
                                     <th>Username</th>
-                                    <th>Password</th>
                                     <th>Full Name</th>
                                     <th class="noExport">Actions</th>
 
@@ -69,7 +68,7 @@
                 },
         "columnDefs":[
             {
-                "targets":[1],
+                "targets":[2],
                 "orderable":false,
             },
         ],
