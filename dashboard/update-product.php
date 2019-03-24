@@ -7,13 +7,13 @@ $res = $db->getResult(); $res = $res[0];
 <link rel="stylesheet" href="assets/plugins/html5-editor/bootstrap-wysihtml5.css" />
 <div class="row page-titles">
     <div class="col-md-5 align-self-center">
-        <h3 class="text-themecolor">Add Product</h3>
+        <h3 class="text-themecolor">Update Product</h3>
     </div>
     <div class="col-md-7 align-self-center">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="javascript:void(0)">Products</a></li>
             <li class="breadcrumb-item">Catalog</li>
-            <li class="breadcrumb-item active">Add Product</li>
+            <li class="breadcrumb-item active">Update Product</li>
         </ol>
     </div>
    
@@ -70,12 +70,21 @@ $res = $db->getResult(); $res = $res[0];
                         </div>
 
                         <div class="row">
-                        	<div class="col-12">
-                        		<div class="form-group">
-		                            <label>Product Price *</label>
-		                            <input type="number" class="form-control form-control-line" required="" name="productPrice" value="<?php echo $res['productPrice'] ?>">
-		                        </div>
-                        	</div>
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label>Product Option Group *</label>
+                                    <select class="form-control" required="" name="productOptionGroupId">
+                                        <option value="<?php echo $res['productOptionGroupId'] ?>"><?php echo $res['productOptionGroupName']; ?></option>
+                                        <?php
+                                        $db->select('product_option_group_view'); 
+                                        $output = $db->getResult();
+                                        foreach ($output as $res1) { ?>
+                                            <option value="<?php echo $res1['productOptionGroupId'] ?>"><?php echo $res1['productOptionGroupName']; ?></option>
+                                        <?php } ?>
+
+                                    </select>
+                                </div>
+                            </div>
                         </div>
 
                         <div class="row">
@@ -87,46 +96,7 @@ $res = $db->getResult(); $res = $res[0];
                         	</div>
                         </div>
 
-                        <div class="row">
-                        	<div class="col-12">
-                        		<div class="form-group">
-		                            <label>Product SKU *</label>
-		                            <input type="text" class="form-control form-control-line" required="" name="productSKU" value="<?php echo $res['productSKU'] ?>">
-		                        </div>
-                        	</div>
-                        </div>
-
-                        <div class="row">
-                        	<div class="col-12">
-                        		<div class="form-group">
-		                            <label>Display Product to Shop</label>
-		                            <select class="form-control" required="" name="productLive">
-                                        <option><?php echo $res['productLive']; ?></option>
-                                        <option>Yes</option>
-                                        <option>No</option>
-                                    </select>
-		                        </div>
-                        	</div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="form-group">
-                                    <label>Product Stock *</label>
-                                    <input type="number" class="form-control form-control-line" required="" name="productStock" value="<?php echo $res['productStock'] ?>">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="form-group">
-                                    <label>Product Stock Reorder Point *</label>
-                                    <input type="number" class="form-control form-control-line" required="" name="productStocksReorderPoint" value="<?php echo $res['productStocksReorderPoint'] ?>">
-                                </div>
-                            </div>
-                        </div>
-
+                       
 
                     <button type="submit" class="btn btn-success waves-effect waves-light m-r-10 pull-right">Save Changes</button>
 

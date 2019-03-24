@@ -1,1 +1,16 @@
 -min and maximum value on products stocks and restore point
+
+
+
+tshirt-novo - color  - red - s
+product name - group
+
+s3 - color - red - capacity - 64
+
+option-group footer
+-may pa pm pm pa kayong nalalaman. ano ung pinaguusapan niyo sa pm
+
+-sa delete show message if hindi na delete.
+
+-add all
+<p>* indicates required fields</p>

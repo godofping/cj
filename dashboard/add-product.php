@@ -65,12 +65,20 @@
                         </div>
 
                         <div class="row">
-                        	<div class="col-12">
-                        		<div class="form-group">
-		                            <label>Product Price *</label>
-		                            <input type="number" class="form-control form-control-line" required="" name="productPrice">
-		                        </div>
-                        	</div>
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label>Product Option Group *</label>
+                                    <select class="form-control" required="" name="productOptionGroupId">
+                                        <?php
+                                        $db->select('product_option_group_view'); 
+                                        $output = $db->getResult();
+                                        foreach ($output as $res) { ?>
+                                            <option value="<?php echo $res['productOptionGroupId'] ?>"><?php echo $res['productOptionGroupName']; ?></option>
+                                        <?php } ?>
+
+                                    </select>
+                                </div>
+                            </div>
                         </div>
 
                         <div class="row">
@@ -81,49 +89,6 @@
 		                        </div>
                         	</div>
                         </div>
-
-                        <div class="row">
-                        	<div class="col-12">
-                        		<div class="form-group">
-		                            <label>Product SKU *</label>
-		                            <input type="text" class="form-control form-control-line" required="" name="productSKU">
-		                        </div>
-                        	</div>
-                        </div>
-
-                        <div class="row">
-                        	<div class="col-12">
-                        		<div class="form-group">
-		                            <label>Display Product to Shop</label>
-		                            <select class="form-control" required="" name="productLive">
-                                        <option>Yes</option>
-                                        <option>No</option>
-                                    </select>
-		                        </div>
-                        	</div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="form-group">
-                                    <label>Product Stock *</label>
-                                    <input type="number" class="form-control form-control-line" required="" name="productStock">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="form-group">
-                                    <label>Product Stock Reorder Point *</label>
-                                    <input type="number" class="form-control form-control-line" required="" name="productStocksReorderPoint">
-                                </div>
-                            </div>
-                        </div>
-
-
-
-
 
                     <button type="submit" class="btn btn-success waves-effect waves-light m-r-10 pull-right">Save Changes</button>
 

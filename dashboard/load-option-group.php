@@ -19,10 +19,10 @@
  */
  
 // DB table to use
-$table = 'products_view';
+$table = 'product_option_group_view';
  
 // Table's primary key
-$primaryKey = 'productId';
+$primaryKey = 'productOptionGroupId';
  
 // Array of database columns which should be read and sent back to DataTables.
 // The `db` parameter represents the column name in the database, while the `dt`
@@ -32,13 +32,9 @@ $primaryKey = 'productId';
 
 $columns = array(
 
-
-    array( 'db' => 'productName',   'dt' => 0 ),
-    array( 'db' => 'productCategory',   'dt' => 1 ),
-    array( 'db' => 'productSubCategory',   'dt' => 2 ),
-    array( 'db' => 'productUpdateDate',   'dt' => 3 ),
-    array( 'db' => 'productId', 'dt' => 4,'formatter' => function( $d, $row ) {
-        return '<a class = "btn btn-warning btn-xs" href="view-product.php?productId=' . $row['productId'] . '">View</a> <a class = "btn btn-success btn-xs" href="manage-product.php?productId=' . $row['productId'] . '">Manage</a> <a class = "btn btn-info btn-xs" href="update-product.php?productId=' . $row['productId'] . '">Update</a> <a class = "btn btn-danger btn-xs" onclick = "return confirm('."'Are you sure want to delete this record?'".')" href="controller.php?from=delete-product&productId=' . $row['productId'] . '">Delete</a>';
+    array( 'db' => 'productOptionGroupName',   'dt' => 0 ),
+    array( 'db' => 'productOptionGroupId', 'dt' => 1,'formatter' => function( $d, $row ) {
+        return '<a class = "btn btn-info btn-xs" href="update-option-group.php?productOptionGroupId=' . $row['productOptionGroupId'] . '">Update</a> <a class = "btn btn-danger btn-xs" onclick = "return confirm('."'Are you sure want to delete this record?'".')" href="controller.php?from=delete-option-group&productOptionGroupId=' . $row['productOptionGroupId'] . '">Delete</a>';
     } ),
     
   
@@ -59,7 +55,7 @@ $sql_details = array(
 
    require( 'ssp.class.php' );
     echo json_encode(
-    SSP::simple( $_POST, $sql_details, $table, $primaryKey, $columns )
+    SSP::complex( $_POST, $sql_details, $table, $primaryKey, $columns, "productOptionGroupName <> 'None'" )
 );
 
 

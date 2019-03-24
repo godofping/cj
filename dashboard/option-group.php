@@ -2,13 +2,13 @@
 <?php include('header.php'); ?>
 <div class="row page-titles">
     <div class="col-md-5 align-self-center">
-        <h3 class="text-themecolor">Catalog</h3>
+        <h3 class="text-themecolor">Option Groups</h3>
     </div>
     <div class="col-md-7 align-self-center">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="javascript:void(0)">Products</a></li>
 <!--             <li class="breadcrumb-item">pages</li> -->
-            <li class="breadcrumb-item active">Catalog</li>
+            <li class="breadcrumb-item active">Option Groups</li>
         </ol>
     </div>
    
@@ -26,27 +26,25 @@
     <!-- ============================================================== -->
     <div class="row">
         <div class="col-12">
-            <div class="card">
-                            <div class="card-body">
-                            <a href="add-product.php"><button class="btn btn-info pull-right">Add Product</button></a>
-                                <div class="table-responsive m-t-40">
-                                    <table id="datable" class="table table-bordered table-striped">
-                                        <thead>
-                                            <tr>
-                                                <th>Name</th>
-                                                <th>Category</th>
-                                                <th>Sub Category</th>
-                                                <th>Updated</th>
-                                                <th class="noExport">Actions</th>
 
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
+            <div class="card">
+                <div class="card-body">
+ 					<a href="add-option-group.php"><button class="btn btn-info pull-right">Add Option Group</button></a>
+                    <div class="table-responsive m-t-40">
+                        <table id="datable" class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Option Group Name </th>
+                                    <th class="noExport">Actions</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
         </div>
 </div>
 <!-- ============================================================== -->
@@ -64,12 +62,12 @@
         "order":[],
         "ajax": {
                     "type": 'POST',
-                    "url": 'load-catalog.php',
+                    "url": 'load-option-group.php',
                     
                 },
         "columnDefs":[
             {
-                "targets":[4],
+                "targets":[1],
                 "orderable":false,
             },
         ],

@@ -56,12 +56,14 @@ DROP TABLE IF EXISTS `order_details_table`;
 
 CREATE TABLE `order_details_table` (
   `orderDetailId` int(6) NOT NULL AUTO_INCREMENT,
-  `productId` int(6) DEFAULT NULL,
+  `productVariationId` int(6) DEFAULT NULL,
   `orderId` int(6) DEFAULT NULL,
   `quantity` int(11) DEFAULT NULL,
   `price` float DEFAULT NULL,
   PRIMARY KEY (`orderDetailId`),
   KEY `FK_order_details_table2` (`orderId`),
+  KEY `FK_order_details_table1` (`productVariationId`),
+  CONSTRAINT `FK_order_details_table1` FOREIGN KEY (`productVariationId`) REFERENCES `product_variations_table` (`productVariationId`),
   CONSTRAINT `FK_order_details_table2` FOREIGN KEY (`orderId`) REFERENCES `orders` (`orderId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -134,11 +136,25 @@ CREATE TABLE `product_images_table` (
   PRIMARY KEY (`productImageId`),
   KEY `FK_product_images_table` (`productId`),
   CONSTRAINT `FK_product_images_table` FOREIGN KEY (`productId`) REFERENCES `products_table` (`productId`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
 
 /*Data for the table `product_images_table` */
 
-insert  into `product_images_table`(`productImageId`,`productImageLocation`,`isThumbnail`,`productId`) values (1,'images/default-image.jpg',1,21),(2,'images/default-image.jpg',0,21),(3,'images/default-image.jpg',0,21);
+insert  into `product_images_table`(`productImageId`,`productImageLocation`,`isThumbnail`,`productId`) values (1,'88215a14f2ff04ac6acd5398fe349304test.jpg',1,21),(2,'3ea8c26260a522e6e5a689afc28178a7test.jpg',0,21),(3,'cb580195445fda73417256b844e78853test.jpg',0,21),(4,'default-image.jpg',1,22),(5,'default-image.jpg',0,22),(6,'default-image.jpg',0,22),(7,'default-image.jpg',1,23),(8,'default-image.jpg',0,23),(9,'default-image.jpg',0,23),(10,'default-image.jpg',1,24),(11,'default-image.jpg',0,24),(12,'default-image.jpg',0,24),(13,'default-image.jpg',1,25),(14,'default-image.jpg',0,25),(15,'default-image.jpg',0,25),(16,'default-image.jpg',1,26),(17,'default-image.jpg',0,26),(18,'default-image.jpg',0,26);
+
+/*Table structure for table `product_option_groups_table` */
+
+DROP TABLE IF EXISTS `product_option_groups_table`;
+
+CREATE TABLE `product_option_groups_table` (
+  `productOptionGroupId` int(6) NOT NULL AUTO_INCREMENT,
+  `productOptionGroupName` varchar(60) DEFAULT NULL,
+  PRIMARY KEY (`productOptionGroupId`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+
+/*Data for the table `product_option_groups_table` */
+
+insert  into `product_option_groups_table`(`productOptionGroupId`,`productOptionGroupName`) values (1,'Colors'),(3,'Sizes'),(4,'Storage Capacity'),(5,'None'),(10,'Volume');
 
 /*Table structure for table `product_sub_categories_table` */
 
@@ -157,6 +173,28 @@ CREATE TABLE `product_sub_categories_table` (
 
 insert  into `product_sub_categories_table`(`productSubCategoryId`,`productSubCategory`,`productCategoryId`) values (3,'t',NULL),(5,'Casual Tops',8),(6,'shirts',8),(7,'Pants',8),(8,'Jeans',8),(9,'Jackets & Coats',8),(10,'Sneakers',8),(11,'Formal Shoes',8),(12,'Boots',8),(13,'Bags',8),(14,'Accessories',8),(15,'Dresses',9),(16,'Tops',9),(17,'Pants & Leggings',9),(18,'Jackets & Coats',9),(19,'Lingerie, Sleep & Lounge',9),(20,'Flat Shoes',9),(21,'Sandals',9),(22,'Sneakers',9),(23,'Bags',9),(24,'Muslim Wear',9),(25,'Bath & Body',10),(26,'Beauty Tools',10),(27,'Fragrances',10),(28,'Hair Care',10),(29,'Makeup',10),(30,'Men\'s Care',10),(31,'Personal Care',10),(32,'Skin Care',10),(33,'Food Supplements',10),(34,'Medical Supplies',10),(35,'Mobiles',11),(36,'Tablets',11),(37,'Security Cameras',11),(38,'Car Cameras',11),(39,'Action/Video Cameras',11),(40,'Digital Cameras',11),(41,'Laptops',11),(42,'Desktops',11),(43,'Gaming Consoles',11),(44,'Gadgets',11);
 
+/*Table structure for table `product_variations_table` */
+
+DROP TABLE IF EXISTS `product_variations_table`;
+
+CREATE TABLE `product_variations_table` (
+  `productVariationId` int(6) NOT NULL AUTO_INCREMENT,
+  `productId` int(6) DEFAULT NULL,
+  `productStock` int(6) DEFAULT NULL,
+  `productStocksReorderPoint` int(6) DEFAULT NULL,
+  `productOption1` varchar(60) DEFAULT NULL,
+  `productOption2` varchar(60) DEFAULT NULL,
+  `productVariationIsDeleted` tinyint(1) DEFAULT NULL,
+  `productPrice` float DEFAULT NULL,
+  PRIMARY KEY (`productVariationId`),
+  KEY `FK_product_variations_table1` (`productId`),
+  CONSTRAINT `FK_product_variations_table1` FOREIGN KEY (`productId`) REFERENCES `products_table` (`productId`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+
+/*Data for the table `product_variations_table` */
+
+insert  into `product_variations_table`(`productVariationId`,`productId`,`productStock`,`productStocksReorderPoint`,`productOption1`,`productOption2`,`productVariationIsDeleted`,`productPrice`) values (2,23,100,10,'250ml','',0,179),(3,23,0,0,'tae','',0,0),(4,26,10,1,'620ml','',0,399),(5,26,123,123,'tae1','',0,123123);
+
 /*Table structure for table `products_table` */
 
 DROP TABLE IF EXISTS `products_table`;
@@ -165,22 +203,20 @@ CREATE TABLE `products_table` (
   `productId` int(6) NOT NULL AUTO_INCREMENT COMMENT 'product primary key ',
   `productName` varchar(60) DEFAULT NULL COMMENT 'product name',
   `productSubCategoryId` int(6) DEFAULT NULL COMMENT 'product category fk',
-  `productPrice` float DEFAULT NULL COMMENT 'product price',
   `productDetails` text COMMENT 'product details',
-  `productSKU` varchar(60) DEFAULT NULL COMMENT 'product code / sku',
   `productUpdateDate` datetime DEFAULT NULL COMMENT 'when ging update ang product',
-  `productLive` varchar(5) DEFAULT NULL COMMENT 'if ang product is i display sa shop',
-  `productStock` int(6) DEFAULT NULL COMMENT 'number of stocks sang product',
-  `productStocksReorderPoint` int(6) DEFAULT NULL COMMENT 'reorder point sang product',
+  `productOptionGroupId` int(6) DEFAULT NULL,
   `productIsDeleted` tinyint(1) DEFAULT '0',
   PRIMARY KEY (`productId`),
   KEY `FK_products_table123` (`productSubCategoryId`),
+  KEY `FK_products_table` (`productOptionGroupId`),
+  CONSTRAINT `FK_products_table` FOREIGN KEY (`productOptionGroupId`) REFERENCES `product_option_groups_table` (`productOptionGroupId`),
   CONSTRAINT `FK_products_table123` FOREIGN KEY (`productSubCategoryId`) REFERENCES `product_sub_categories_table` (`productSubCategoryId`)
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=latin1;
 
 /*Data for the table `products_table` */
 
-insert  into `products_table`(`productId`,`productName`,`productSubCategoryId`,`productPrice`,`productDetails`,`productSKU`,`productUpdateDate`,`productLive`,`productStock`,`productStocksReorderPoint`,`productIsDeleted`) values (21,'Huawei Y6 Pro 2019 32GB â€” 3GB 6.09 inches HD+ Screen Smart',35,6990,'<ul class=\"\" data-spm-anchor-id=\"a2o4l.pdp.product_detail.i1.7e9f43d8rr8Wa7\">\r\n<li class=\"\">EMUI 9.0 (compatible with Android 9)</li>\r\n<li class=\"\">Screen Size: 6.09inches</li>\r\n<li class=\"\">Battery capacity: 3020mAh</li>\r\n<li class=\"\">3GB RAM + 32 GB ROM</li>\r\n<li class=\"\" data-spm-anchor-id=\"a2o4l.pdp.product_detail.i0.7e9f43d8rr8Wa7\">Rear camera: 13MP, LED flash and f/1.8 aperture</li>\r\n<li class=\"\">Front camera: 8MP, LED flash and f/2.0 aperture</li>\r\n<li class=\"\">Network: LTE TDD / LTE FDD / WCDMA / GSM , support 2/3/4G &amp; wifi</li>\r\n<li class=\"\">Connectivity:Bluetooth 4.2 , Micro USB, Wi-Fi Direct, Wi-Fi Hot Spot</li>\r\n<li class=\"\" data-spm-anchor-id=\"a2o4l.pdp.product_detail.i2.7e9f43d8rr8Wa7\">External memory support:microSD up to 512GB</li>\r\n</ul>','HUAWEIY6PRO201932GB','2019-03-21 19:56:33','Yes',10,1,0);
+insert  into `products_table`(`productId`,`productName`,`productSubCategoryId`,`productDetails`,`productUpdateDate`,`productOptionGroupId`,`productIsDeleted`) values (21,'Huawei Y6 Pro 2019 32GB â€” 3GB 6.09 inches HD+ Screen Smart',35,'<ul class=\"\" data-spm-anchor-id=\"a2o4l.pdp.product_detail.i1.7e9f43d8rr8Wa7\">\r\n<li class=\"\">EMUI 9.0 (compatible with Android 9)</li>\r\n<li class=\"\">Screen Size: 6.09inches</li>\r\n<li class=\"\">Battery capacity: 3020mAh</li>\r\n<li class=\"\">3GB RAM + 32 GB ROM</li>\r\n<li class=\"\" data-spm-anchor-id=\"a2o4l.pdp.product_detail.i0.7e9f43d8rr8Wa7\">Rear camera: 13MP, LED flash and f/1.8 aperture</li>\r\n<li class=\"\">Front camera: 8MP, LED flash and f/2.0 aperture</li>\r\n<li class=\"\">Network: LTE TDD / LTE FDD / WCDMA / GSM , support 2/3/4G &amp; wifi</li>\r\n<li class=\"\">Connectivity:Bluetooth 4.2 , Micro USB, Wi-Fi Direct, Wi-Fi Hot Spot</li>\r\n<li class=\"\" data-spm-anchor-id=\"a2o4l.pdp.product_detail.i2.7e9f43d8rr8Wa7\">External memory support:microSD up to 512GB</li>\r\n</ul>','2019-03-24 01:38:18',1,0),(22,'Imarflex IHS-210C Curling iron',26,'<ul class=\"\">\r\n<li class=\"\">CURLING IRON</li>\r\n<li class=\"\">CERAMIC Coated Curling Tong&nbsp;</li>\r\n<li class=\"\">Hanging Ring Feature</li>\r\n<li class=\"\">Foldable Stand</li>\r\n<li class=\"\">Safety Heat Guard</li>\r\n<li class=\"\">Pilot Light Indicator</li>\r\n<li class=\"\">360&deg; FREE SWIVEL Power Cord &amp; Hook</li>\r\n<li class=\"\">25W heating Power</li>\r\n<li class=\"\" data-spm-anchor-id=\"a2o4l.pdp.product_detail.i0.291c321bKtWUcT\">Advance Heating COMPONENT</li>\r\n</ul>','2019-03-22 22:10:21',1,0),(23,'BODY TREATS Body Oil Lavender Almond Nut',25,'<ul class=\"\">\r\n<li class=\"\" data-spm-anchor-id=\"a2o4l.pdp.product_detail.i0.51f6b5bfx8gvD3\">Vanishing Light Oil that makes your skin moisturized soft and silky.It absorbs quickly too!Moisturizes and protects skin from the sun damage</li>\r\n</ul>','2019-03-24 19:06:38',10,0),(24,'ta',5,'<p>123tae</p>','2019-03-24 08:18:45',1,1),(25,'Huawei MediaPad T3 7',41,'<ul class=\"\">\r\n<li class=\"\">OS : Andriod N .EMUI 5.1</li>\r\n<li class=\"\">Processor :Spreadtrum SC7731G, quad-core A7, 4 x 1.3 GHz</li>\r\n<li class=\"\" data-spm-anchor-id=\"a2o4l.pdp.product_detail.i1.30155762ZS4VEc\">Display :7 inches, 1024&times;600 IPS</li>\r\n<li class=\"\">Internal Storage : 16GB ROM</li>\r\n<li class=\"\">Memory : 2GB RAM</li>\r\n<li class=\"\">Rear camera: 2 MP and fixed focus</li>\r\n<li class=\"\">Front camera: 2 MP and fixed focus</li>\r\n<li class=\"\">Battery :4100 mAh* (typical)</li>\r\n<li class=\"\" data-spm-anchor-id=\"a2o4l.pdp.product_detail.i0.30155762ZS4VEc\">Supports GPS, A-GPS</li>\r\n</ul>','2019-03-24 18:40:46',1,0),(26,'TRESEMME HAIR CONDITIONER KERATIN SMOOTH',28,'<ul class=\"\">\r\n<li class=\"\">TRESemme Keratin Smooth Hair Conditioner with Argan Oil and Keratin.</li>\r\n<li class=\"\">Micro-Conditioning Technology.</li>\r\n<li class=\"\">5 benefits in just 1 wash: anti-frizz, detangles, shines, smoothens, tames flyaways.</li>\r\n<li class=\"\">For smooth hair.</li>\r\n<li class=\"\" data-spm-anchor-id=\"a2o4l.pdp.product_detail.i0.6f75657ahgj17z\">Suitable for colour treated hair.</li>\r\n</ul>','2019-03-24 19:33:47',5,0);
 
 /*Table structure for table `users_table` */
 
@@ -212,6 +248,40 @@ DROP TABLE IF EXISTS `product_categories_view`;
  `productCategory` varchar(60) 
 )*/;
 
+/*Table structure for table `product_images_view` */
+
+DROP TABLE IF EXISTS `product_images_view`;
+
+/*!50001 DROP VIEW IF EXISTS `product_images_view` */;
+/*!50001 DROP TABLE IF EXISTS `product_images_view` */;
+
+/*!50001 CREATE TABLE  `product_images_view`(
+ `productImageId` int(6) ,
+ `productImageLocation` text ,
+ `isThumbnail` tinyint(1) ,
+ `productId` int(6) ,
+ `productName` varchar(60) ,
+ `productSubCategoryId` int(6) ,
+ `productDetails` text ,
+ `productUpdateDate` datetime ,
+ `productIsDeleted` tinyint(1) ,
+ `productSubCategory` varchar(60) ,
+ `productCategoryId` int(6) ,
+ `productCategory` varchar(60) 
+)*/;
+
+/*Table structure for table `product_option_group_view` */
+
+DROP TABLE IF EXISTS `product_option_group_view`;
+
+/*!50001 DROP VIEW IF EXISTS `product_option_group_view` */;
+/*!50001 DROP TABLE IF EXISTS `product_option_group_view` */;
+
+/*!50001 CREATE TABLE  `product_option_group_view`(
+ `productOptionGroupId` int(6) ,
+ `productOptionGroupName` varchar(60) 
+)*/;
+
 /*Table structure for table `product_sub_categories_view` */
 
 DROP TABLE IF EXISTS `product_sub_categories_view`;
@@ -226,6 +296,34 @@ DROP TABLE IF EXISTS `product_sub_categories_view`;
  `productCategory` varchar(60) 
 )*/;
 
+/*Table structure for table `product_variations_view` */
+
+DROP TABLE IF EXISTS `product_variations_view`;
+
+/*!50001 DROP VIEW IF EXISTS `product_variations_view` */;
+/*!50001 DROP TABLE IF EXISTS `product_variations_view` */;
+
+/*!50001 CREATE TABLE  `product_variations_view`(
+ `productVariationId` int(6) ,
+ `productId` int(6) ,
+ `productStock` int(6) ,
+ `productStocksReorderPoint` int(6) ,
+ `productOption1` varchar(60) ,
+ `productOption2` varchar(60) ,
+ `productVariationIsDeleted` tinyint(1) ,
+ `productPrice` float ,
+ `productName` varchar(60) ,
+ `productSubCategoryId` int(6) ,
+ `productDetails` text ,
+ `productUpdateDate` datetime ,
+ `productOptionGroupId` int(6) ,
+ `productIsDeleted` tinyint(1) ,
+ `productSubCategory` varchar(60) ,
+ `productCategoryId` int(6) ,
+ `productCategory` varchar(60) ,
+ `productOptionGroupName` varchar(60) 
+)*/;
+
 /*Table structure for table `products_view` */
 
 DROP TABLE IF EXISTS `products_view`;
@@ -237,17 +335,14 @@ DROP TABLE IF EXISTS `products_view`;
  `productId` int(6) ,
  `productName` varchar(60) ,
  `productSubCategoryId` int(6) ,
- `productPrice` float ,
  `productDetails` text ,
- `productSKU` varchar(60) ,
  `productUpdateDate` datetime ,
- `productLive` varchar(5) ,
- `productStock` int(6) ,
- `productStocksReorderPoint` int(6) ,
+ `productOptionGroupId` int(6) ,
+ `productIsDeleted` tinyint(1) ,
  `productSubCategory` varchar(60) ,
  `productCategoryId` int(6) ,
  `productCategory` varchar(60) ,
- `productIsDeleted` tinyint(1) 
+ `productOptionGroupName` varchar(60) 
 )*/;
 
 /*View structure for view product_categories_view */
@@ -257,6 +352,20 @@ DROP TABLE IF EXISTS `products_view`;
 
 /*!50001 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `product_categories_view` AS select `product_categories_table`.`productCategoryId` AS `productCategoryId`,`product_categories_table`.`productCategory` AS `productCategory` from `product_categories_table` */;
 
+/*View structure for view product_images_view */
+
+/*!50001 DROP TABLE IF EXISTS `product_images_view` */;
+/*!50001 DROP VIEW IF EXISTS `product_images_view` */;
+
+/*!50001 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `product_images_view` AS select `product_images_table`.`productImageId` AS `productImageId`,`product_images_table`.`productImageLocation` AS `productImageLocation`,`product_images_table`.`isThumbnail` AS `isThumbnail`,`product_images_table`.`productId` AS `productId`,`products_table`.`productName` AS `productName`,`products_table`.`productSubCategoryId` AS `productSubCategoryId`,`products_table`.`productDetails` AS `productDetails`,`products_table`.`productUpdateDate` AS `productUpdateDate`,`products_table`.`productIsDeleted` AS `productIsDeleted`,`product_sub_categories_table`.`productSubCategory` AS `productSubCategory`,`product_sub_categories_table`.`productCategoryId` AS `productCategoryId`,`product_categories_table`.`productCategory` AS `productCategory` from (((`product_images_table` join `products_table` on((`product_images_table`.`productId` = `products_table`.`productId`))) join `product_sub_categories_table` on((`products_table`.`productSubCategoryId` = `product_sub_categories_table`.`productSubCategoryId`))) join `product_categories_table` on((`product_sub_categories_table`.`productCategoryId` = `product_categories_table`.`productCategoryId`))) */;
+
+/*View structure for view product_option_group_view */
+
+/*!50001 DROP TABLE IF EXISTS `product_option_group_view` */;
+/*!50001 DROP VIEW IF EXISTS `product_option_group_view` */;
+
+/*!50001 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `product_option_group_view` AS select `product_option_groups_table`.`productOptionGroupId` AS `productOptionGroupId`,`product_option_groups_table`.`productOptionGroupName` AS `productOptionGroupName` from `product_option_groups_table` */;
+
 /*View structure for view product_sub_categories_view */
 
 /*!50001 DROP TABLE IF EXISTS `product_sub_categories_view` */;
@@ -264,12 +373,19 @@ DROP TABLE IF EXISTS `products_view`;
 
 /*!50001 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `product_sub_categories_view` AS select `product_sub_categories_table`.`productSubCategoryId` AS `productSubCategoryId`,`product_sub_categories_table`.`productSubCategory` AS `productSubCategory`,`product_sub_categories_table`.`productCategoryId` AS `productCategoryId`,`product_categories_table`.`productCategory` AS `productCategory` from (`product_sub_categories_table` join `product_categories_table` on((`product_sub_categories_table`.`productCategoryId` = `product_categories_table`.`productCategoryId`))) */;
 
+/*View structure for view product_variations_view */
+
+/*!50001 DROP TABLE IF EXISTS `product_variations_view` */;
+/*!50001 DROP VIEW IF EXISTS `product_variations_view` */;
+
+/*!50001 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `product_variations_view` AS select `product_variations_table`.`productVariationId` AS `productVariationId`,`product_variations_table`.`productId` AS `productId`,`product_variations_table`.`productStock` AS `productStock`,`product_variations_table`.`productStocksReorderPoint` AS `productStocksReorderPoint`,`product_variations_table`.`productOption1` AS `productOption1`,`product_variations_table`.`productOption2` AS `productOption2`,`product_variations_table`.`productVariationIsDeleted` AS `productVariationIsDeleted`,`product_variations_table`.`productPrice` AS `productPrice`,`products_table`.`productName` AS `productName`,`products_table`.`productSubCategoryId` AS `productSubCategoryId`,`products_table`.`productDetails` AS `productDetails`,`products_table`.`productUpdateDate` AS `productUpdateDate`,`products_table`.`productOptionGroupId` AS `productOptionGroupId`,`products_table`.`productIsDeleted` AS `productIsDeleted`,`product_sub_categories_table`.`productSubCategory` AS `productSubCategory`,`product_sub_categories_table`.`productCategoryId` AS `productCategoryId`,`product_categories_table`.`productCategory` AS `productCategory`,`product_option_groups_table`.`productOptionGroupName` AS `productOptionGroupName` from ((((`product_variations_table` join `products_table` on((`product_variations_table`.`productId` = `products_table`.`productId`))) join `product_sub_categories_table` on((`products_table`.`productSubCategoryId` = `product_sub_categories_table`.`productSubCategoryId`))) join `product_categories_table` on((`product_sub_categories_table`.`productCategoryId` = `product_categories_table`.`productCategoryId`))) join `product_option_groups_table` on((`products_table`.`productOptionGroupId` = `product_option_groups_table`.`productOptionGroupId`))) where ((`products_table`.`productIsDeleted` = 0) and (`product_variations_table`.`productVariationIsDeleted` = 0)) */;
+
 /*View structure for view products_view */
 
 /*!50001 DROP TABLE IF EXISTS `products_view` */;
 /*!50001 DROP VIEW IF EXISTS `products_view` */;
 
-/*!50001 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `products_view` AS select `products_table`.`productId` AS `productId`,`products_table`.`productName` AS `productName`,`products_table`.`productSubCategoryId` AS `productSubCategoryId`,`products_table`.`productPrice` AS `productPrice`,`products_table`.`productDetails` AS `productDetails`,`products_table`.`productSKU` AS `productSKU`,`products_table`.`productUpdateDate` AS `productUpdateDate`,`products_table`.`productLive` AS `productLive`,`products_table`.`productStock` AS `productStock`,`products_table`.`productStocksReorderPoint` AS `productStocksReorderPoint`,`product_sub_categories_table`.`productSubCategory` AS `productSubCategory`,`product_sub_categories_table`.`productCategoryId` AS `productCategoryId`,`product_categories_table`.`productCategory` AS `productCategory`,`products_table`.`productIsDeleted` AS `productIsDeleted` from ((`products_table` join `product_sub_categories_table` on((`products_table`.`productSubCategoryId` = `product_sub_categories_table`.`productSubCategoryId`))) join `product_categories_table` on((`product_sub_categories_table`.`productCategoryId` = `product_categories_table`.`productCategoryId`))) where (`products_table`.`productIsDeleted` = 0) */;
+/*!50001 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `products_view` AS select `products_table`.`productId` AS `productId`,`products_table`.`productName` AS `productName`,`products_table`.`productSubCategoryId` AS `productSubCategoryId`,`products_table`.`productDetails` AS `productDetails`,`products_table`.`productUpdateDate` AS `productUpdateDate`,`products_table`.`productOptionGroupId` AS `productOptionGroupId`,`products_table`.`productIsDeleted` AS `productIsDeleted`,`product_sub_categories_table`.`productSubCategory` AS `productSubCategory`,`product_sub_categories_table`.`productCategoryId` AS `productCategoryId`,`product_categories_table`.`productCategory` AS `productCategory`,`product_option_groups_table`.`productOptionGroupName` AS `productOptionGroupName` from (((`product_sub_categories_table` join `product_categories_table` on((`product_sub_categories_table`.`productCategoryId` = `product_categories_table`.`productCategoryId`))) join `products_table` on((`products_table`.`productSubCategoryId` = `product_sub_categories_table`.`productSubCategoryId`))) join `product_option_groups_table` on((`products_table`.`productOptionGroupId` = `product_option_groups_table`.`productOptionGroupId`))) */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

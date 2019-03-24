@@ -1,3 +1,4 @@
+
 <?php 
 include('connection.php');
 
@@ -227,24 +228,18 @@ if (isset($_GET['from']) and $_GET['from'] == 'add-product') {
 
 	$productName = $db->escapeString($_POST['productName']);
 	$productSubCategoryId = $db->escapeString($_POST['productSubCategoryId']);
-	$productPrice = $db->escapeString($_POST['productPrice']);
 	$productDetails = $db->escapeString($_POST['productDetails']);
-	$productSKU = $db->escapeString($_POST['productSKU']);
-	$productLive = $db->escapeString($_POST['productLive']);
-	$productStock = $db->escapeString($_POST['productStock']);
-	$productStocksReorderPoint = $db->escapeString($_POST['productStocksReorderPoint']);
+	$productOptionGroupId = $db->escapeString($_POST['productOptionGroupId']);
+
+
 
 	$db->insert('products_table',
 	array(
 		'productName'=>$productName,
 		'productSubCategoryId'=>$productSubCategoryId,
-		'productPrice'=>$productPrice,
 		'productDetails'=>$productDetails,
-		'productSKU'=>$productSKU,
 		'productUpdateDate'=>date('Y-m-d H:i:s'),
-		'productLive'=>$productLive,
-		'productStock'=>$productStock,
-		'productStocksReorderPoint'=>$productStocksReorderPoint,
+		'productOptionGroupId'=>$productOptionGroupId,
 		)
 	);
 
@@ -255,7 +250,7 @@ if (isset($_GET['from']) and $_GET['from'] == 'add-product') {
 
 	$db->insert('product_images_table',
 	array(
-		'productImageLocation'=>'images/default-image.jpg',
+		'productImageLocation'=>'default-image.jpg',
 		'isThumbnail'=>'1',
 		'productId'=>$productId,
 		)
@@ -266,7 +261,7 @@ if (isset($_GET['from']) and $_GET['from'] == 'add-product') {
 
 	$db->insert('product_images_table',
 	array(
-		'productImageLocation'=>'images/default-image.jpg',
+		'productImageLocation'=>'default-image.jpg',
 		'isThumbnail'=>'0',
 		'productId'=>$productId,
 		)
@@ -277,7 +272,7 @@ if (isset($_GET['from']) and $_GET['from'] == 'add-product') {
 
 	$db->insert('product_images_table',
 	array(
-		'productImageLocation'=>'images/default-image.jpg',
+		'productImageLocation'=>'default-image.jpg',
 		'isThumbnail'=>'0',
 		'productId'=>$productId,
 		)
@@ -297,36 +292,123 @@ if (isset($_GET['from']) and $_GET['from'] == 'update-product') {
 
 	$productName = $db->escapeString($_POST['productName']);
 	$productSubCategoryId = $db->escapeString($_POST['productSubCategoryId']);
-	$productPrice = $db->escapeString($_POST['productPrice']);
 	$productDetails = $db->escapeString($_POST['productDetails']);
-	$productSKU = $db->escapeString($_POST['productSKU']);
-	$productLive = $db->escapeString($_POST['productLive']);
-	$productStock = $db->escapeString($_POST['productStock']);
-	$productStocksReorderPoint = $db->escapeString($_POST['productStocksReorderPoint']);
-
+	$productOptionGroupId = $db->escapeString($_POST['productOptionGroupId']);
 
 
 	$db->update('products_table',
 	array(
 		'productName'=>$productName,
 		'productSubCategoryId'=>$productSubCategoryId,
-		'productPrice'=>$productPrice,
 		'productDetails'=>$productDetails,
-		'productSKU'=>$productSKU,
 		'productUpdateDate'=>date('Y-m-d H:i:s'),
-		'productLive'=>$productLive,
-		'productStock'=>$productStock,
-		'productStocksReorderPoint'=>$productStocksReorderPoint,
+		'productSubCategoryId'=>$productSubCategoryId,
+		'productOptionGroupId'=>$productOptionGroupId,
 		),
 		'productId=' . $_POST['productId']
 	);
 
 	$res = $db->getResult();
+	print_r($res);
 
 	header("Location: update-product.php?productId=".$_POST['productId']);
 	$_SESSION['toast'] = 'update-product';
 }
 
+
+
+if (isset($_GET['from']) and $_GET['from'] == 'product-images') {
+
+	$triggerAlert = 0;
+	$filename = basename($_FILES["image1"]["name"]);
+
+	$db->select('product_images_view','*',NULL,'productId = "' . $_POST['productId'] . '"', NULL); 
+	$res = $db->getResult();
+
+	$filename1 = $res[0]['productImageLocation'];
+	$filename2 = $res[1]['productImageLocation'];
+	$filename3 = $res[2]['productImageLocation'];
+
+
+	if ($filename != '') {
+		unlink('images/'.$filename1);
+		$filename = md5(date("Y-m-d H:i:s") . "1") . $filename;
+		$target_dir = "images/";
+		$target_file = $target_dir . $filename;
+		$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+	    move_uploaded_file($_FILES["image1"]["tmp_name"], $target_file);
+
+		$db->update('product_images_table',
+		array(
+			'productImageLocation'=>$filename,
+
+			),
+			'productImageId=' . $_POST['productImageId1']
+		);
+		$triggerAlert = 1;
+		$res = $db->getResult();
+
+	}
+
+	$filename = basename($_FILES["image2"]["name"]);
+
+
+	if ($filename != '') {
+		unlink('images/'.$filename2);
+		$filename = md5(date("Y-m-d H:i:s") . "2") . $filename;
+
+		$target_dir = "images/";
+		$target_file = $target_dir . $filename;
+		$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+	    move_uploaded_file($_FILES["image2"]["tmp_name"], $target_file);
+
+		$db->update('product_images_table',
+		array(
+			'productImageLocation'=>$filename,
+
+			),
+			'productImageId=' . $_POST['productImageId2']
+		);
+		$triggerAlert = 1;
+		$res = $db->getResult();
+		print_r($res);
+	}
+
+	$filename = basename($_FILES["image3"]["name"]);
+
+
+	if ($filename != '') {
+		unlink('images/'.$filename3);
+		$filename = md5(date("Y-m-d H:i:s") . "3") . $filename;
+
+		$target_dir = "images/";
+		$target_file = $target_dir . $filename;
+		$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+	    move_uploaded_file($_FILES["image3"]["tmp_name"], $target_file);
+
+		$db->update('product_images_table',
+		array(
+			'productImageLocation'=>$filename,
+
+			),
+			'productImageId=' . $_POST['productImageId3']
+		);
+		$triggerAlert = 1;
+		$res = $db->getResult();
+		print_r($res);
+	}
+
+
+
+
+	if ($triggerAlert == 1) {
+		$_SESSION['toast'] = 'product-images';
+	}
+	
+
+	header("Location: manage-product.php?productId=".$_POST['productId']);
+	
+}
 if (isset($_GET['from']) and $_GET['from'] == 'delete-product') {
 
 
@@ -398,5 +480,143 @@ if (isset($_GET['from']) and $_GET['from'] == 'delete-sub-category') {
 	header("Location: sub-categories.php");
 	$_SESSION['toast'] = 'delete-sub-category';
 }
+
+
+if (isset($_GET['from']) and $_GET['from'] == 'add-option-group') {
+
+	$productOptionGroupName = $db->escapeString($_POST['productOptionGroupName']);
+
+
+	$db->insert('product_option_groups_table',
+	array(
+		'productOptionGroupName'=>$productOptionGroupName,
+		)
+	);
+
+	$res = $db->getResult();
+
+	print_r($res);
+
+	header("Location: add-option-group.php");
+	$_SESSION['toast'] = 'add-option-group';
+
+}
+
+if (isset($_GET['from']) and $_GET['from'] == 'update-option-group') {
+
+	$productOptionGroupName = $db->escapeString($_POST['productOptionGroupName']);
+
+	$db->update('product_option_groups_table',
+	array(
+		'productOptionGroupName'=>$productOptionGroupName,
+		),
+		'productOptionGroupId=' . $_POST['productOptionGroupId']
+	);
+
+	$res = $db->getResult();
+
+	header("Location: update-option-group.php?productOptionGroupId=".$_POST['productOptionGroupId']);
+	$_SESSION['toast'] = 'update-option-group';
+
+}
+
+
+if (isset($_GET['from']) and $_GET['from'] == 'delete-option-group') {
+
+	$productOptionGroupId = $db->escapeString($_GET['productOptionGroupId']);
+
+	$db->delete('product_option_groups_table','productOptionGroupId=' . $productOptionGroupId); 
+
+	$res = $db->getResult();
+
+	header("Location: option-group.php");
+	$_SESSION['toast'] = 'delete-option-group';
+}
+
+
+if (isset($_GET['from']) and $_GET['from'] == 'add-product-variation') {
+
+	$productId = $db->escapeString($_POST['productId']);
+	$productOption1 = $db->escapeString($_POST['productOption1']);
+	$productOption2 = $db->escapeString($_POST['productOption2']);
+	$productStock = $db->escapeString($_POST['productStock']);
+	$productStocksReorderPoint = $db->escapeString($_POST['productStocksReorderPoint']);
+	$productPrice = $db->escapeString($_POST['productPrice']);
+
+
+	$db->insert('product_variations_table',
+	array(
+		'productId'=>$productId,
+		'productOption1'=>$productOption1,
+		'productOption2'=>$productOption2,
+		'productStock'=>$productStock,
+		'productStocksReorderPoint'=>$productStocksReorderPoint,
+		'productVariationIsDeleted'=>'0',
+		'productPrice'=>$productPrice,
+		)
+	);
+
+	$res = $db->getResult();
+
+	print_r($res);
+
+	header("Location: manage-product.php?productId=".$productId);
+	$_SESSION['toast'] = 'add-product-variation';
+
+}
+
+
+if (isset($_GET['from']) and $_GET['from'] == 'update-product-variation') {
+
+	$productOption1 = $db->escapeString($_POST['productOption1']);
+	$productOption2 = $db->escapeString($_POST['productOption2']);
+	$productStocksReorderPoint = $db->escapeString($_POST['productStocksReorderPoint']);
+	$productPrice = $db->escapeString($_POST['productPrice']);
+
+	$db->update('product_variations_table',
+	array(
+		'productOption1'=>$productOption1,
+		'productOption2'=>$productOption2,
+		'productStocksReorderPoint'=>$productStocksReorderPoint,
+		'productPrice'=>$productPrice,
+		),
+		'productVariationId=' . $_POST['productVariationId']
+	);
+
+	$res = $db->getResult();
+
+	print_r($res);
+
+	// header("Location: manage-product.php?productId=".$_POST['productId']);
+	// $_SESSION['toast'] = 'update-product-variation';
+
+}
+
+if (isset($_GET['from']) and $_GET['from'] == 'delete-product-variation') {
+
+	$productStocksReorderPoint = $db->escapeString($_POST['productStocksReorderPoint']);
+	$productOptionGroupId = $db->escapeString($_POST['productOptionGroupId']);
+	$productOption1 = $db->escapeString($_POST['productOption1']);
+	$productOption2 = $db->escapeString($_POST['productOption2']);
+
+	$db->update('product_variations_table',
+	array(
+		'productStocksReorderPoint'=>$productStocksReorderPoint,
+		'productOptionGroupId'=>$productOptionGroupId,
+		'productOption1'=>$productOption1,
+		'productOption2'=>$productOsption2,
+		),
+		'productVariationId=' . $_POST['productVariationId']
+	);
+
+	$res = $db->getResult();
+
+	print_r($res);
+
+	// header("Location: manage-product.php?productId=".$_POST['productId']);
+	// $_SESSION['toast'] = 'update-product-variation';
+
+}
+
 
 ?>

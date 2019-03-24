@@ -33,14 +33,15 @@
                         </li>
 
                         
-                        <li class="<?php if ($filename == 'add-product' or $filename == 'update-product' or $filename == 'add-category' or $filename == 'update-category' or $filename == 'add-sub-category' or $filename == 'update-sub-category'): ?>
+                        <li class="<?php if ($filename == 'add-product' or $filename == 'update-product' or $filename == 'add-category' or $filename == 'update-category' or $filename == 'add-sub-category' or $filename == 'update-sub-category' or $filename == 'manage-product' or $filename == 'add-option-group' or $filename == 'update-option-group' or $filename == 'option-group'): ?>
                             active
                         <?php endif ?>"> 
                             <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-crosshairs-gps"></i><span class="hide-menu">Products</span></a>
                             <ul aria-expanded="false" class="collapse">
-                                 <li><a href="catalog.php" class="<?php if ($filename == 'add-product' or $filename == 'update-product'): ?>active<?php endif ?>">Catalog</a></li>
+                                 <li><a href="catalog.php" class="<?php if ($filename == 'add-product' or $filename == 'update-product' or $filename == 'manage-product'): ?>active<?php endif ?>">Catalog</a></li>
                                 <li><a href="categories.php" class="<?php if ($filename == 'add-category' or $filename == 'update-category'): ?>active<?php endif ?>">Categories</a></li>
                                 <li><a href="sub-categories.php" class="<?php if ($filename == 'add-sub-category' or $filename == 'update-sub-category'): ?>active<?php endif ?>">Sub Categories</a></li>
+                                <li><a href="option-group.php" class="<?php if ($filename == 'add-option-group' or $filename == 'update-option-group'): ?>active<?php endif ?>">Option Groups</a></li>
                        
                                 
                             </ul>
