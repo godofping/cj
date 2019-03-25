@@ -31,6 +31,13 @@
                     Username is already taken! Please change a new one.
                   </div>
                   <?php endif ?>
+
+                  <?php if (isset($_SESSION['toast']) and $_SESSION['toast'] == 'login-failed'): ?>
+                    <div class="alert alert-danger" role="alert">
+                    Login failed! Email and/or password is incorrect.
+                  </div>
+                  <?php endif ?>
+
                                   
                   <!-- Login -->
                   <div class="tab-pane fade <?php if (isset($_GET['show']) and $_GET['show'] == 'login'): ?>show active<?php endif ?>" id="log" role="tabpanel" aria-labelledby="login-tab">

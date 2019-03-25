@@ -67,12 +67,13 @@
                             </ul>
                         </li>
 
-                        <li class="<?php if ($filename == 'add-user' or $filename == 'update-user'): ?>
+                        <li class="<?php if ($filename == 'customers' or $filename == 'feedbacks'): ?>
                             active
                         <?php endif ?>"> 
                             <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-account"></i><span class="hide-menu">Customers</span></a>
                             <ul aria-expanded="false" class="collapse">
                                 <li><a href="manage-users.php" class="<?php if ($filename == 'add-user' or $filename == 'update-user'): ?>active<?php endif ?>">Manage</a></li>
+                                <li><a href="feedbacks.php" class="<?php if ($filename == 'feedback'): ?>active<?php endif ?>">Feedbacks</a></li>
                                 
                             </ul>
                         </li>

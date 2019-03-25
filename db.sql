@@ -25,12 +25,15 @@ CREATE TABLE `customer_feedbacks_table` (
   `customerId` int(6) DEFAULT NULL,
   `customerFeedback` text,
   `customerFeedbackDate` date DEFAULT NULL,
+  `customerFeedbackStatus` tinyint(1) DEFAULT '0',
   PRIMARY KEY (`customerFeedbackId`),
   KEY `FK_customer_feedbacks_table` (`customerId`),
   CONSTRAINT `FK_customer_feedbacks_table` FOREIGN KEY (`customerId`) REFERENCES `customers_table` (`customerId`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 /*Data for the table `customer_feedbacks_table` */
+
+insert  into `customer_feedbacks_table`(`customerFeedbackId`,`customerId`,`customerFeedback`,`customerFeedbackDate`,`customerFeedbackStatus`) values (1,6,'test','2019-03-25',1),(2,6,'test','2019-03-25',2),(3,6,'tae','2019-03-25',2),(4,6,'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer commodo quam ac eros suscipit, vitae rhoncus risus vestibulum. Mauris at dapibus quam. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ut enim sodales, scelerisque libero quis, efficitur lorem. Curabitur et finibus nunc.','2019-03-25',1);
 
 /*Table structure for table `customers_table` */
 
@@ -52,7 +55,7 @@ CREATE TABLE `customers_table` (
 
 /*Data for the table `customers_table` */
 
-insert  into `customers_table`(`customerId`,`customerEmail`,`customerPassword`,`customerFirstName`,`customerLastName`,`customerAddress`,`customerRegistrationDate`,`customerPhoneNumber`,`customerType`,`customerIsBlocked`) values (1,'cjashleywalkincustomer@gmail.com','7ede9788c3c58bf9cb78147c155f0eff','Walkin','Walkin','none','2019-03-24','none','walkin',0),(6,'customer@gmail.com','91ec1f9324753048c0096d036a694f86',NULL,NULL,NULL,'2019-03-24',NULL,'2',0),(7,'test@gmail.com','1aedb8d9dc4751e229a335e371db8058','albert','yale','66 malvar street, tacurong city, sultan kudarat','2019-03-24','09754363941','2',0);
+insert  into `customers_table`(`customerId`,`customerEmail`,`customerPassword`,`customerFirstName`,`customerLastName`,`customerAddress`,`customerRegistrationDate`,`customerPhoneNumber`,`customerType`,`customerIsBlocked`) values (1,'cjashleywalkincustomer@gmail.com','7ede9788c3c58bf9cb78147c155f0eff','Walkin','Walkin','none','2019-03-24','none','walkin',0),(6,'customer@gmail.com','91ec1f9324753048c0096d036a694f86','Cesar','Santiago','72, mabini street, tacurong city, sutltan kudarat','2019-03-24','09367489655','online',0),(7,'test@gmail.com','1aedb8d9dc4751e229a335e371db8058','albert','yale','66 malvar street, tacurong city, sultan kudarat','2019-03-24','09754363941','online',0);
 
 /*Table structure for table `inventory_logs_table` */
 
@@ -160,7 +163,7 @@ CREATE TABLE `product_images_table` (
 
 /*Data for the table `product_images_table` */
 
-insert  into `product_images_table`(`productImageId`,`productImageLocation`,`isThumbnail`,`productId`) values (1,'88215a14f2ff04ac6acd5398fe349304test.jpg',1,21),(2,'3ea8c26260a522e6e5a689afc28178a7test.jpg',0,21),(3,'cb580195445fda73417256b844e78853test.jpg',0,21),(4,'default-image.jpg',1,22),(5,'default-image.jpg',0,22),(6,'default-image.jpg',0,22),(7,'default-image.jpg',1,23),(8,'default-image.jpg',0,23),(9,'default-image.jpg',0,23),(10,'default-image.jpg',1,24),(11,'default-image.jpg',0,24),(12,'default-image.jpg',0,24),(13,'default-image.jpg',1,25),(14,'default-image.jpg',0,25),(15,'default-image.jpg',0,25),(16,'default-image.jpg',1,26),(17,'default-image.jpg',0,26),(18,'default-image.jpg',0,26),(19,'default-image.jpg',1,27),(20,'default-image.jpg',0,27),(21,'default-image.jpg',0,27);
+insert  into `product_images_table`(`productImageId`,`productImageLocation`,`isThumbnail`,`productId`) values (1,'c19980b7098c74e9c05a095c603f8696test.jpg',1,21),(2,'3ea8c26260a522e6e5a689afc28178a7test.jpg',0,21),(3,'cb580195445fda73417256b844e78853test.jpg',0,21),(4,'default-image.jpg',1,22),(5,'default-image.jpg',0,22),(6,'default-image.jpg',0,22),(7,'default-image.jpg',1,23),(8,'default-image.jpg',0,23),(9,'default-image.jpg',0,23),(10,'default-image.jpg',1,24),(11,'default-image.jpg',0,24),(12,'default-image.jpg',0,24),(13,'default-image.jpg',1,25),(14,'default-image.jpg',0,25),(15,'default-image.jpg',0,25),(16,'default-image.jpg',1,26),(17,'default-image.jpg',0,26),(18,'default-image.jpg',0,26),(19,'default-image.jpg',1,27),(20,'default-image.jpg',0,27),(21,'default-image.jpg',0,27);
 
 /*Table structure for table `product_reviews_table` */
 
@@ -214,11 +217,11 @@ CREATE TABLE `product_variations_table` (
   PRIMARY KEY (`productVariationId`),
   KEY `FK_product_variations_table1` (`productId`),
   CONSTRAINT `FK_product_variations_table1` FOREIGN KEY (`productId`) REFERENCES `products_table` (`productId`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
 /*Data for the table `product_variations_table` */
 
-insert  into `product_variations_table`(`productVariationId`,`productId`,`productStock`,`productStocksReorderPoint`,`productOption1`,`productOption2`,`productVariationIsDeleted`,`productPrice`) values (2,23,100,10,'250ml','',0,179),(3,23,0,2,'tae1','tae',1,1),(4,26,10,1,'620ml','',0,399),(5,26,123,123,'tae1','',0,123123),(6,21,5,1,'32GB ROM','3gb RAM',0,6990);
+insert  into `product_variations_table`(`productVariationId`,`productId`,`productStock`,`productStocksReorderPoint`,`productOption1`,`productOption2`,`productVariationIsDeleted`,`productPrice`) values (2,23,100,10,'250ml','',0,179),(3,23,0,2,'tae1','tae',1,1),(4,26,10,1,'620ml','',0,399),(5,26,123,123,'tae1','',0,123123),(6,21,5,5,'32GB ROM','3gb RAM',0,6990),(7,21,1,1,'1','1',1,1);
 
 /*Table structure for table `products_table` */
 
@@ -257,6 +260,31 @@ CREATE TABLE `users_table` (
 /*Data for the table `users_table` */
 
 insert  into `users_table`(`userId`,`userName`,`userPassword`,`userLevel`,`isDeleted`,`fullName`) values (1,'admin','21232f297a57a5a743894a0e4a801fc3',1,0,'Admin Name'),(2,'user1','24c9e15e52afc47c225b757e7bee1f9d',2,0,'user1'),(3,'user2','7e58d63b60197ceb55a1c487989a3720',2,0,'user2'),(4,'user3','92877af70a45fd6a2ed7fe81e1236b78',2,0,'user3');
+
+/*Table structure for table `customer_feedbacks_view` */
+
+DROP TABLE IF EXISTS `customer_feedbacks_view`;
+
+/*!50001 DROP VIEW IF EXISTS `customer_feedbacks_view` */;
+/*!50001 DROP TABLE IF EXISTS `customer_feedbacks_view` */;
+
+/*!50001 CREATE TABLE  `customer_feedbacks_view`(
+ `customerFeedbackId` int(6) ,
+ `customerId` int(6) ,
+ `customerFeedback` text ,
+ `customerFeedbackDate` date ,
+ `customerFeedbackStatus` tinyint(1) ,
+ `customerEmail` varchar(60) ,
+ `customerPassword` varchar(60) ,
+ `customerFirstName` varchar(60) ,
+ `customerLastName` varchar(60) ,
+ `customerFullName` varchar(121) ,
+ `customerAddress` varchar(60) ,
+ `customerRegistrationDate` date ,
+ `customerPhoneNumber` varchar(60) ,
+ `customerType` varchar(60) ,
+ `customerIsBlocked` tinyint(1) 
+)*/;
 
 /*Table structure for table `customers_view` */
 
@@ -386,6 +414,13 @@ DROP TABLE IF EXISTS `users_view`;
  `isDeleted` tinyint(1) ,
  `fullName` varchar(60) 
 )*/;
+
+/*View structure for view customer_feedbacks_view */
+
+/*!50001 DROP TABLE IF EXISTS `customer_feedbacks_view` */;
+/*!50001 DROP VIEW IF EXISTS `customer_feedbacks_view` */;
+
+/*!50001 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `customer_feedbacks_view` AS select `customer_feedbacks_table`.`customerFeedbackId` AS `customerFeedbackId`,`customer_feedbacks_table`.`customerId` AS `customerId`,`customer_feedbacks_table`.`customerFeedback` AS `customerFeedback`,`customer_feedbacks_table`.`customerFeedbackDate` AS `customerFeedbackDate`,`customer_feedbacks_table`.`customerFeedbackStatus` AS `customerFeedbackStatus`,`customers_table`.`customerEmail` AS `customerEmail`,`customers_table`.`customerPassword` AS `customerPassword`,`customers_table`.`customerFirstName` AS `customerFirstName`,`customers_table`.`customerLastName` AS `customerLastName`,concat(`customers_table`.`customerFirstName`,' ',`customers_table`.`customerLastName`) AS `customerFullName`,`customers_table`.`customerAddress` AS `customerAddress`,`customers_table`.`customerRegistrationDate` AS `customerRegistrationDate`,`customers_table`.`customerPhoneNumber` AS `customerPhoneNumber`,`customers_table`.`customerType` AS `customerType`,`customers_table`.`customerIsBlocked` AS `customerIsBlocked` from (`customer_feedbacks_table` join `customers_table` on((`customer_feedbacks_table`.`customerId` = `customers_table`.`customerId`))) where ((`customers_table`.`customerIsBlocked` = 0) and (`customer_feedbacks_table`.`customerFeedbackStatus` <> 2)) */;
 
 /*View structure for view customers_view */
 

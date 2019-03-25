@@ -275,8 +275,77 @@
           });
       <?php endif?>
 
+
+      <?php if (isset($_SESSION['toast']) and $_SESSION['toast'] == 'confirm-feedback'): ?>
+          $.toast({
+            heading: 'SUCCESSFULLY CONFIRMED',
+            text: 'Feedback Confirmed!',
+            position: 'top-center',
+            loaderBg:'#ff6849',
+            icon: 'success',
+            hideAfter: 5000, 
+            stack: 6
+          });
+      <?php endif?>
+
+      <?php if (isset($_SESSION['toast']) and $_SESSION['toast'] == 'delete-feedback'): ?>
+          $.toast({
+            heading: 'SUCCESSFULLY DELETED',
+            text: 'Feedback Deleted!',
+            position: 'top-center',
+            loaderBg:'#ff6849',
+            icon: 'error',
+            hideAfter: 5000, 
+            stack: 6
+          });
+      <?php endif?>
+
+
+      <?php if (isset($_SESSION['toast']) and $_SESSION['toast'] == 'add-product-variation'): ?>
+          $.toast({
+            heading: 'SUCCESSFULLY ADDED',
+            text: 'Product Variation Saved!',
+            position: 'top-center',
+            loaderBg:'#ff6849',
+            icon: 'success',
+            hideAfter: 5000, 
+            stack: 6
+          });
+      <?php endif?>
+
+
+      <?php if (isset($_SESSION['toast']) and $_SESSION['toast'] == 'update-product-variation'): ?>
+          $.toast({
+            heading: 'SUCCESSFULLY UPDATED',
+            text: 'Product Variation Updated!',
+            position: 'top-center',
+            loaderBg:'#ff6849',
+            icon: 'success',
+            hideAfter: 5000, 
+            stack: 6
+          });
+      <?php endif?>
+
+      <?php if (isset($_SESSION['toast']) and $_SESSION['toast'] == 'delete-product-variation'): ?>
+          $.toast({
+            heading: 'SUCCESSFULLY DELETED',
+            text: 'Product Variation Deleted!',
+            position: 'top-center',
+            loaderBg:'#ff6849',
+            icon: 'error',
+            hideAfter: 5000, 
+            stack: 6
+          });
+      <?php endif?>
          
         
+
+
+
+
+
+
+
     </script>
 
     

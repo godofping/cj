@@ -19,7 +19,8 @@ if (isset($_GET['from']) and $_GET['from'] == 'login') {
 		$_SESSION['customerLastName'] = $res['customerLastName'];
 		$_SESSION['toast'] = 'login-successful';
 
-		$res = $res[0];
+	
+
 		if ($res['customerFirstName'] == '' and $res['customerLastName'] == '' and $res['customerAddress'] == '' and $res['customerPhoneNumber'] == '') {
 			header("Location: finish-registration.php");
 		}
@@ -28,8 +29,6 @@ if (isset($_GET['from']) and $_GET['from'] == 'login') {
 			header("Location: index.php");
 		}
 
-
-		
 	}
 	else
 	{
@@ -79,7 +78,7 @@ if (isset($_GET['from']) and $_GET['from'] == 'customer-registration') {
 		array(
 			'customerEmail'=>$customerEmail,
 			'customerPassword'=>$customerPassword,
-			'customerType'=>'2',
+			'customerType'=>'online',
 			'customerIsBlocked'=>'0',
 			'customerRegistrationDate'=>date('Y-m-d'),
 			)
@@ -183,6 +182,26 @@ if (isset($_GET['from']) and $_GET['from'] == 'finish-registration') {
 }
 
 
+if (isset($_GET['from']) and $_GET['from'] == 'add-feedback') {
+
+	$customerFeedback = $db->escapeString($_POST['customerFeedback']);
+
+	$db->insert('customer_feedbacks_table',
+	array(
+		'customerFeedback'=>$customerFeedback,
+		'customerFeedbackDate'=>date('Y-m-d'),
+		'customerFeedbackStatus'=>0,
+		'customerId'=>$_SESSION['customerId'],
+		
+
+		)
+	);
+
+	$res = $db->getResult();
+
+	header("Location: feedback.php");
+	$_SESSION['toast'] = 'add-feedback';
+}
 
 
 ?>

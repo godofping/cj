@@ -118,7 +118,9 @@ $filename = basename($_SERVER["SCRIPT_FILENAME"], '.php');
           <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"> <span></span> </button>
           <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="nav">
-              <li class="active"> <a href="contact.html"> Home</a> </li>
+              <li class="<?php if ($filename == 'index'): ?>
+                active
+              <?php endif ?>"> <a href="contact.html"> Home</a> </li>
               <li class="dropdown"> <a href="index.html" class="dropdown-toggle" data-toggle="dropdown">Categories</a>
                 <ul class="dropdown-menu">
 
@@ -135,7 +137,9 @@ $filename = basename($_SERVER["SCRIPT_FILENAME"], '.php');
                 </ul>
               </li>
               <li> <a href="about-us_01.html">About </a> </li>
-              <li> <a href="about-us_01.html">Feedbacks </a> </li>
+              <li class="<?php if ($filename == 'feedback'): ?>
+                active
+              <?php endif ?>"> <a href="feedback.php">Feedbacks </a> </li>
               
 
 

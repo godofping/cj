@@ -17,7 +17,7 @@
               <div id="contact_message" class="success-msg"> <i class="fa fa-paper-plane-o"></i>Thank You. Your Message has been Submitted</div>
               
               <!--======= FORM  =========-->
-              <form role="form" id="contact_form" class="contact-form" method="post" action="controller.php?from=finish-registration">
+              <form role="form" id="contact_form" class="contact-form" method="post" action="controller.php?from=finish-registration" autocomplete="off">
                 <ul class="row">
                   <li class="col-sm-6">
                     <label>First name *
@@ -30,12 +30,12 @@
                     </label>
                   </li>
                   <li class="col-sm-12">
-                    <label>Address *
+                    <label>Address * <small>(building number, street name, city, province)</small>
                       <input type="text" class="form-control" name="customerAddress" id="customerAddress" placeholder="" required="">
                     </label>
                   </li>
                   <li class="col-sm-6">
-                    <label>Phone Number
+                    <label>Phone Number *
                       <input type="text" class="form-control" name="customerPhoneNumber" id="customerPhoneNumber" placeholder="" required="">
                     </label>
                   </li>
@@ -50,15 +50,12 @@
             <!--======= ADDRESS INFO  =========-->
             <div class="col-md-4">
               <div class="contact-info">
-                <h6>OUR ADDRESS</h6>
+                <h6>You can also buy on us through walkin. Just go to our store or contact us.</h6>
                 <ul>
-                  <li> <i class="icon-map-pin"></i> Street No. 12, Newyork 12,<br>
-                    MD - 123, USA.</li>
-                  <li> <i class="icon-call-end"></i> 1.800.123.456789</li>
-                  <li> <i class="icon-envelope"></i> <a href="mailto:someone@example.com" target="_top">info@ecoshop.com</a> </li>
-                  <li>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam erat turpis, pellentesque non leo eget.</p>
-                  </li>
+                  <li> <i class="icon-map-pin"></i> Bendero Bldg, Nat’l Highway, Tacurong City, Sultan Kudarat or Alunan Ave. near roundball/fronting RMMC school, Koronadal, South Cotabato</li>
+                  <li> <i class="icon-call-end"></i> 0975 436 3955</li>
+                  <li> <i class="icon-envelope"></i> <a href="mailto:someone@example.com" target="_top">cjashley@gmail.com</a> </li>
+           
                 </ul>
               </div>
             </div>

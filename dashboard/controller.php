@@ -557,5 +557,45 @@ if (isset($_GET['from']) and $_GET['from'] == 'delete-product-variation') {
 
 }
 
+if (isset($_GET['from']) and $_GET['from'] == 'confirm-feedback') {
+
+
+
+	$db->update('customer_feedbacks_table',
+	array(
+		'customerFeedbackStatus'=>1,
+		),
+		'customerFeedbackId=' . $_GET['customerFeedbackId']
+	);
+
+	$res = $db->getResult();
+
+
+	header("Location: feedbacks.php");
+	$_SESSION['toast'] = 'confirm-feedback';
+
+}
+
+
+if (isset($_GET['from']) and $_GET['from'] == 'delete-feedback') {
+
+
+
+	$db->update('customer_feedbacks_table',
+	array(
+		'customerFeedbackStatus'=>2,
+		),
+		'customerFeedbackId=' . $_GET['customerFeedbackId']
+	);
+
+	$res = $db->getResult();
+
+
+	header("Location: feedbacks.php");
+	$_SESSION['toast'] = 'delete-feedback';
+
+}
+
+
 
 ?>
