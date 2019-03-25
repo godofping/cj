@@ -552,24 +552,14 @@
       <div class="container-full">
           <div class="news-letter padding-top-150 padding-bottom-150">
             <div class="row">
-              <div class="col-lg-6">
+              <div class="col-lg-10">
                 <h3>We always stay with our clients and respect their business. We deliver 100% and provide instant response to help them succeed in constantly changing and challenging business world. </h3>
                 <ul class="social_icons">
-                  <li><a href="#."><i class="icon-social-facebook"></i></a></li>
-                  <li><a href="#."><i class="icon-social-twitter"></i></a></li>
-                  <li><a href="#."><i class="icon-social-tumblr"></i></a></li>
-                  <li><a href="#."><i class="icon-social-youtube"></i></a></li>
-                  <li><a href="#."><i class="icon-social-dribbble"></i></a></li>
+                  <li><a href="https://www.facebook.com/ashley.simpal.1"><i class="icon-social-facebook"></i></a></li>
+                  <li><a href="https://twitter.com/XinBasco"><i class="icon-social-twitter"></i></a></li>
                 </ul>
               </div>
-              <div class="col-lg-6">
-                <h3>Subscribe Our Newsletter</h3>
-                <span>Phasellus lacinia fermentum bibendum. Interdum et malesuada fames ac.</span>
-                <form>
-                  <input type="email" placeholder="Enter your email address" required>
-                  <button type="submit">Subscribe</button>
-                </form>
-              </div>
+     
             </div>
           </div>
         </div>
@@ -586,25 +576,22 @@
         </div>
         
         <!-- Slide -->
-        <div class="two-col"> 
+        <div class="two-col">
+
+          <?php
+          $db->select('customer_feedbacks_view','*',NULL,'customerFeedbackStatus = 1', "customerFeedbackId DESC LIMIT 10"); 
+          $output = $db->getResult();
+          foreach ($output as $res) { ?>    
           
           <!-- Slide -->
           <div class="testi-in"> <i class="fa fa-quote-left"></i>
-            <p>Phasellus lacinia fermentum bibendum. Interdum et malesuada fames ac ante ipsum primis in faucibus. Sed ullamcorper sapien lacus, eu luctus non. Nulla lacinia, eros vel fermentum consectetur,</p>
-            <h5>John Smith</h5>
-            <span>Themeforest</span> </div>
+            <p><?php echo $res['customerFeedback']; ?></p>
+            <h5><?php echo $res['customerFullName'] ?></h5>
+            <span><?php echo date('F d, Y',strtotime($res['customerFeedbackDate'])); ?></span>
+          </div>
+
+          <?php } ?>
           
-          <!-- Slide -->
-          <div class="testi-in"> <i class="fa fa-quote-left"></i>
-            <p>Phasellus lacinia fermentum bibendum. Interdum et malesuada fames ac ante ipsum primis in faucibus. Sed lacus, eu posuere odio luctus non. Nulla lacinia, eros vel fermentum consectetur, </p>
-            <h5>John Smith</h5>
-            <span>Themeforest</span> </div>
-          
-          <!-- Slide -->
-          <div class="testi-in"> <i class="fa fa-quote-left"></i>
-            <p>Phasellus lacinia fermentum bibendum. Interdum et malesuada fames ac ante ipsum. Sed ullamcorper sapien lacus, eu posuere odio luctus non. Nulla lacinia, eros vel fermentum consectetur, </p>
-            <h5>John Smith</h5>
-            <span>Themeforest</span> </div>
         </div>
       </div>
     </section>

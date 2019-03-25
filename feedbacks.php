@@ -30,8 +30,8 @@
                     <div class="testi-in text-left"> 
                       <i class="fa fa-quote-left"></i>
                         <p><?php echo $res['customerFeedback']; ?></p>
-                      <h5><?php echo $res['customerFullName'] ?></h5>
-                      <span><?php echo date('F d, Y',strtotime($res['customerFeedbackDate'])); ?></span>
+                        <h5><?php echo $res['customerFullName'] ?></h5>
+                        <span><?php echo date('F d, Y',strtotime($res['customerFeedbackDate'])); ?></span>
                     </div>
                   </div>
                 </div>
