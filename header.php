@@ -131,6 +131,7 @@ $filename = basename($_SERVER["SCRIPT_FILENAME"], '.php');
 
                 </ul>
               </li>
+              <?php if (isset($_SESSION['customerId'])): ?>
               <li class="dropdown <?php if ($filename == 'profile' or $filename == 'orders' or $filename == 'reviews'): ?>active<?php endif ?>"> <a href="#" class="dropdown-toggle" data-toggle="dropdown">My Account</a>
                 <ul class="dropdown-menu">
                   <li> <a href="profile.php">Profile </a> </li>
@@ -139,10 +140,11 @@ $filename = basename($_SERVER["SCRIPT_FILENAME"], '.php');
                   <li> <a href="my-feedback.php">My Feedbacks</a> </li>
                 </ul>
               </li>
+              <?php endif ?>
 
               <li class="<?php if ($filename == 'feedbacks'): ?>active<?php endif ?>"> <a href="feedbacks.php">Feedbacks </a> </li>
-              <li class="<?php if ($filename == 'about'): ?>active<?php endif ?>"> <a href="feedbacks.php">About </a> </li>
-              <li class="<?php if ($filename == 'contact'): ?>active<?php endif ?>"> <a href="feedbacks.php">Contact </a> </li>
+              <li class="<?php if ($filename == 'about'): ?>active<?php endif ?>"> <a href="about.php">About </a> </li>
+              <li class="<?php if ($filename == 'contact'): ?>active<?php endif ?>"> <a href="contact.php">Contact </a> </li>
 
 
               

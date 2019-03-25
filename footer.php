@@ -5,12 +5,10 @@
           <!-- ABOUT Location -->
           <div class="col-md-4">
             <div class="about-footer"> <img class="margin-bottom-30" height="150" src="images/logo.jpg" alt="" >
-              <p><i class="icon-pointer"></i> Street No. 12, Newyork 12, <br>
-                MD - 123, USA.</p>
-              <p><i class="icon-call-end"></i> 1.800.123.456789 <br>
-                1.800.123.456789</p>
-              <p><i class="icon-envelope"></i> info@BoShop.com <br>
-                contact@BoShop.com</p>
+              <p><i class="icon-pointer"></i> Bendero Bldg, Nat’l Highway, Tacurong City, Sultan Kudarat  <br>
+               Alunan Ave. near roundball/fronting RMMC school, Koronadal, South Cotabato</p>
+              <p><i class="icon-call-end"></i> 0975 436 3955</p>
+              <p><i class="icon-envelope"></i> icjashley@gmail.com</p>
             </div>
           </div>
           
@@ -28,6 +26,7 @@
           
           <!-- HELPFUL LINKS -->
           <div class="col-md-3">
+            <?php if (isset($_SESSION['customerId'])): ?>
             <h6>My Account</h6>
             <ul class="link">
               <li><a href="#."> Profile</a></li>
@@ -35,6 +34,7 @@
               <li><a href="#."> Reviews</a></li>
               <li><a href="#."> Feedbacks</a></li>
             </ul>
+            <?php endif ?>
           </div>
         </div>
       </div>
@@ -43,7 +43,7 @@
       <div class="container">
         <div class="row">
           <div class="col-md-6">
-            <p>©  2018 BoShop All right reserved. <a href="https://webicode.com/">webicode</a></p>
+            <p>©  <?php echo date('Y'); ?> CJ-Ashley Fashion Hub.  All right reserved.</p>
           </div>
           <div class="col-md-6 text-right"> <img src="images/card-icon.png" alt="" > </div>
         </div>
