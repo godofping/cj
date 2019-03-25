@@ -113,13 +113,13 @@ $filename = basename($_SERVER["SCRIPT_FILENAME"], '.php');
       <div class="container-full"> 
         
         <!-- Logo -->
-        <div class="logo"> <a href="index.php"><img class="img-responsive" height="50px" src="images/logo.jpg" alt="" ></a> </div>
+        <div class="logo"> <a href="index.php"><img class="img-responsive" height="30px" src="images/logo.jpg" alt="" ></a> </div>
         <nav class="navbar ownmenu navbar-expand-lg ">
           <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"> <span></span> </button>
           <div class="collapse navbar-collapse" id="navbarNav">
             
             <ul class="nav">
-              <li class="<?php if ($filename == 'index'): ?>active<?php endif ?>"> <a href="contact.html"> Home</a> </li>
+              <li class="<?php if ($filename == 'index'): ?>active<?php endif ?>"> <a href="index.php"> Home</a> </li>
               <li class="dropdown"> <a href="index.html" class="dropdown-toggle" data-toggle="dropdown">Categories</a>
                 <ul class="dropdown-menu">
                 <?php 
@@ -136,15 +136,14 @@ $filename = basename($_SERVER["SCRIPT_FILENAME"], '.php');
                   <li> <a href="profile.php">Profile </a> </li>
                   <li> <a href="orders.php">Orders </a> </li>
                   <li> <a href="reviews.php">Reviews </a> </li>
-                  <li> <a href="my-feedback.php">Feedbacks</a> </li>
+                  <li> <a href="my-feedback.php">My Feedbacks</a> </li>
                 </ul>
               </li>
 
               <li class="<?php if ($filename == 'feedbacks'): ?>active<?php endif ?>"> <a href="feedbacks.php">Feedbacks </a> </li>
+              <li class="<?php if ($filename == 'about'): ?>active<?php endif ?>"> <a href="feedbacks.php">About </a> </li>
+              <li class="<?php if ($filename == 'contact'): ?>active<?php endif ?>"> <a href="feedbacks.php">Contact </a> </li>
 
-              <li style="margin-left: -10px;" class="<?php if ($filename == 'about'): ?>active<?php endif ?>"> <a href="about.php"> <a href="about.php">About </a> </li>
-
-              <li style="margin-left: -10px;" class="<?php if ($filename == 'contact'): ?>active<?php endif ?>"> <a href="contact.php"> <a href="contact.php">Contact</a></li>
 
               
             </ul>
