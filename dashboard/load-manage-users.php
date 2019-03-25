@@ -19,7 +19,7 @@
  */
  
 // DB table to use
-$table = 'users_table';
+$table = 'users_view';
  
 // Table's primary key
 $primaryKey = 'userId';

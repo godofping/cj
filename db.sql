@@ -46,12 +46,13 @@ CREATE TABLE `customers_table` (
   `customerRegistrationDate` date DEFAULT NULL,
   `customerPhoneNumber` varchar(60) DEFAULT NULL,
   `customerType` varchar(60) DEFAULT NULL,
+  `customerIsBlocked` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`customerId`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
 /*Data for the table `customers_table` */
 
-insert  into `customers_table`(`customerId`,`customerEmail`,`customerPassword`,`customerFirstName`,`customerLastName`,`customerAddress`,`customerRegistrationDate`,`customerPhoneNumber`,`customerType`) values (1,'cjashleywalkincustomer@gmail.com','7ede9788c3c58bf9cb78147c155f0eff','Walkin','Walkin','none','2019-03-24','none','walkin');
+insert  into `customers_table`(`customerId`,`customerEmail`,`customerPassword`,`customerFirstName`,`customerLastName`,`customerAddress`,`customerRegistrationDate`,`customerPhoneNumber`,`customerType`,`customerIsBlocked`) values (1,'cjashleywalkincustomer@gmail.com','7ede9788c3c58bf9cb78147c155f0eff','Walkin','Walkin','none','2019-03-24','none','walkin',0),(6,'customer@gmail.com','91ec1f9324753048c0096d036a694f86',NULL,NULL,NULL,'2019-03-24',NULL,'2',0),(7,'test@gmail.com','1aedb8d9dc4751e229a335e371db8058','albert','yale','66 malvar street, tacurong city, sultan kudarat','2019-03-24','09754363941','2',0);
 
 /*Table structure for table `inventory_logs_table` */
 
@@ -257,6 +258,26 @@ CREATE TABLE `users_table` (
 
 insert  into `users_table`(`userId`,`userName`,`userPassword`,`userLevel`,`isDeleted`,`fullName`) values (1,'admin','21232f297a57a5a743894a0e4a801fc3',1,0,'Admin Name'),(2,'user1','24c9e15e52afc47c225b757e7bee1f9d',2,0,'user1'),(3,'user2','7e58d63b60197ceb55a1c487989a3720',2,0,'user2'),(4,'user3','92877af70a45fd6a2ed7fe81e1236b78',2,0,'user3');
 
+/*Table structure for table `customers_view` */
+
+DROP TABLE IF EXISTS `customers_view`;
+
+/*!50001 DROP VIEW IF EXISTS `customers_view` */;
+/*!50001 DROP TABLE IF EXISTS `customers_view` */;
+
+/*!50001 CREATE TABLE  `customers_view`(
+ `customerId` int(6) ,
+ `customerEmail` varchar(60) ,
+ `customerPassword` varchar(60) ,
+ `customerFirstName` varchar(60) ,
+ `customerLastName` varchar(60) ,
+ `customerAddress` varchar(60) ,
+ `customerRegistrationDate` date ,
+ `customerPhoneNumber` varchar(60) ,
+ `customerType` varchar(60) ,
+ `customerIsBlocked` tinyint(1) 
+)*/;
+
 /*Table structure for table `product_categories_view` */
 
 DROP TABLE IF EXISTS `product_categories_view`;
@@ -350,6 +371,29 @@ DROP TABLE IF EXISTS `products_view`;
  `productCategory` varchar(60) 
 )*/;
 
+/*Table structure for table `users_view` */
+
+DROP TABLE IF EXISTS `users_view`;
+
+/*!50001 DROP VIEW IF EXISTS `users_view` */;
+/*!50001 DROP TABLE IF EXISTS `users_view` */;
+
+/*!50001 CREATE TABLE  `users_view`(
+ `userId` int(6) ,
+ `userName` varchar(60) ,
+ `userPassword` varchar(60) ,
+ `userLevel` tinyint(1) ,
+ `isDeleted` tinyint(1) ,
+ `fullName` varchar(60) 
+)*/;
+
+/*View structure for view customers_view */
+
+/*!50001 DROP TABLE IF EXISTS `customers_view` */;
+/*!50001 DROP VIEW IF EXISTS `customers_view` */;
+
+/*!50001 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `customers_view` AS select `customers_table`.`customerId` AS `customerId`,`customers_table`.`customerEmail` AS `customerEmail`,`customers_table`.`customerPassword` AS `customerPassword`,`customers_table`.`customerFirstName` AS `customerFirstName`,`customers_table`.`customerLastName` AS `customerLastName`,`customers_table`.`customerAddress` AS `customerAddress`,`customers_table`.`customerRegistrationDate` AS `customerRegistrationDate`,`customers_table`.`customerPhoneNumber` AS `customerPhoneNumber`,`customers_table`.`customerType` AS `customerType`,`customers_table`.`customerIsBlocked` AS `customerIsBlocked` from `customers_table` where (`customers_table`.`customerIsBlocked` = 0) */;
+
 /*View structure for view product_categories_view */
 
 /*!50001 DROP TABLE IF EXISTS `product_categories_view` */;
@@ -384,6 +428,13 @@ DROP TABLE IF EXISTS `products_view`;
 /*!50001 DROP VIEW IF EXISTS `products_view` */;
 
 /*!50001 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `products_view` AS select `products_table`.`productId` AS `productId`,`products_table`.`productName` AS `productName`,`products_table`.`productSubCategoryId` AS `productSubCategoryId`,`products_table`.`productDetails` AS `productDetails`,`products_table`.`productUpdateDate` AS `productUpdateDate`,`products_table`.`productIsDeleted` AS `productIsDeleted`,`product_sub_categories_table`.`productSubCategory` AS `productSubCategory`,`product_sub_categories_table`.`productCategoryId` AS `productCategoryId`,`product_categories_table`.`productCategory` AS `productCategory` from ((`products_table` join `product_sub_categories_table` on((`products_table`.`productSubCategoryId` = `product_sub_categories_table`.`productSubCategoryId`))) join `product_categories_table` on((`product_sub_categories_table`.`productCategoryId` = `product_categories_table`.`productCategoryId`))) where (`products_table`.`productIsDeleted` = 0) */;
+
+/*View structure for view users_view */
+
+/*!50001 DROP TABLE IF EXISTS `users_view` */;
+/*!50001 DROP VIEW IF EXISTS `users_view` */;
+
+/*!50001 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `users_view` AS select `users_table`.`userId` AS `userId`,`users_table`.`userName` AS `userName`,`users_table`.`userPassword` AS `userPassword`,`users_table`.`userLevel` AS `userLevel`,`users_table`.`isDeleted` AS `isDeleted`,`users_table`.`fullName` AS `fullName` from `users_table` */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

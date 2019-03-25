@@ -4,7 +4,7 @@
         <div class="row"> 
           <!-- ABOUT Location -->
           <div class="col-md-4">
-            <div class="about-footer"> <img class="margin-bottom-30" src="images/logo-foot.png" alt="" >
+            <div class="about-footer"> <img class="margin-bottom-30" height="150" src="images/logo.jpg" alt="" >
               <p><i class="icon-pointer"></i> Street No. 12, Newyork 12, <br>
                 MD - 123, USA.</p>
               <p><i class="icon-call-end"></i> 1.800.123.456789 <br>
@@ -70,3 +70,4 @@
 <script src="js/main.js"></script>
 </body>
 </html>
+<?php unset($_SESSION['toast']) ?>
