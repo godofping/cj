@@ -18,31 +18,22 @@
           <div class="col-md-5">
             <h6>Links</h6>
             <ul class="link two-half">
-              <li><a href="#."> Products</a></li>
-              <li><a href="#."> Find a Store</a></li>
-              <li><a href="#."> Features</a></li>
-              <li><a href="#."> Privacy Policy</a></li>
-              <li><a href="#."> Blog</a></li>
-              <li><a href="#."> Press Kit </a></li>
-              <li><a href="#."> Products</a></li>
-              <li><a href="#."> Find a Store</a></li>
-              <li><a href="#."> Features</a></li>
-              <li><a href="#."> Privacy Policy</a></li>
-              <li><a href="#."> Blog</a></li>
-              <li><a href="#."> Press Kit </a></li>
+              <li><a href="index.php"> Home</a></li>
+              <li><a href="about.php"> About</a></li>
+              <li><a href="feedback.php"> Feedbacks</a></li>
+              <li><a href="contact.php"> Contact</a></li>
+
             </ul>
           </div>
           
           <!-- HELPFUL LINKS -->
           <div class="col-md-3">
-            <h6>Account Info</h6>
+            <h6>My Account</h6>
             <ul class="link">
-              <li><a href="#."> Products</a></li>
-              <li><a href="#."> Find a Store</a></li>
-              <li><a href="#."> Features</a></li>
-              <li><a href="#."> Privacy Policy</a></li>
-              <li><a href="#."> Blog</a></li>
-              <li><a href="#."> Press Kit </a></li>
+              <li><a href="#."> Profile</a></li>
+              <li><a href="#."> Orders</a></li>
+              <li><a href="#."> Reviews</a></li>
+              <li><a href="#."> Feedbacks</a></li>
             </ul>
           </div>
         </div>

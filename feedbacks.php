@@ -40,8 +40,16 @@
               <?php } ?>
 
             </div>
+            <?php if (isset($_SESSION['customerId'])): ?>
             <div class="col-md-4"> 
               <h5>Submit a feedback.</h5>
+
+              <?php if (isset($_SESSION['toast']) and $_SESSION['toast'] == 'add-feedback'): ?>
+                    <div class="alert alert-success" role="alert">
+                    Feedback is submitted to the admin for the approval.
+                  </div>
+              <?php endif ?>
+
               <!--======= FORM  =========-->
               <form role="form" id="contact_form" class="contact-form" method="post" action="controller.php?from=add-feedback" autocomplete="off">
                 <ul class="row">
@@ -59,6 +67,7 @@
                 </ul>
               </form>
             </div>
+            <?php endif ?>
 
             
           </div>

@@ -67,8 +67,8 @@ $filename = basename($_SERVER["SCRIPT_FILENAME"], '.php');
           <li><a href="login.php?show=login">LOGIN/REGISTER</a></li>
           <?php endif ?>
           <?php if (isset($_SESSION['customerId'])): ?>
-          <li><a href="#."> MY ACCOUNT </a></li>
-  
+     
+
           
           <!-- USER BASKET -->
           <li class="dropdown user-basket"> <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true"> (2) Items <i class="icon-basket-loaded"></i> </a>
@@ -113,37 +113,40 @@ $filename = basename($_SERVER["SCRIPT_FILENAME"], '.php');
       <div class="container-full"> 
         
         <!-- Logo -->
-        <div class="logo"> <a href="index.html"><img class="img-responsive" height="50px" src="images/logo.jpg" alt="" ></a> </div>
+        <div class="logo"> <a href="index.php"><img class="img-responsive" height="50px" src="images/logo.jpg" alt="" ></a> </div>
         <nav class="navbar ownmenu navbar-expand-lg ">
           <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"> <span></span> </button>
           <div class="collapse navbar-collapse" id="navbarNav">
+            
             <ul class="nav">
-              <li class="<?php if ($filename == 'index'): ?>
-                active
-              <?php endif ?>"> <a href="contact.html"> Home</a> </li>
+              <li class="<?php if ($filename == 'index'): ?>active<?php endif ?>"> <a href="contact.html"> Home</a> </li>
               <li class="dropdown"> <a href="index.html" class="dropdown-toggle" data-toggle="dropdown">Categories</a>
                 <ul class="dropdown-menu">
-
-          		<?php 
-          		$db->select('product_categories_view'); 
-				$output = $db->getResult();
-				foreach ($output as $res) { ?>
-					<li> <a href="shop_03.html"><?php echo $res['productCategory']; ?> </a> </li>
-				<?php }?>
-                  
-           
-
+                <?php 
+                $db->select('product_categories_view'); 
+                $output = $db->getResult();
+                foreach ($output as $res) { ?>
+                  <li> <a href="shop_03.html"><?php echo $res['productCategory']; ?> </a> </li>
+                <?php }?>
 
                 </ul>
               </li>
-              <li> <a href="about-us_01.html">About </a> </li>
-              <li class="<?php if ($filename == 'feedback'): ?>
-                active
-              <?php endif ?>"> <a href="feedback.php">Feedbacks </a> </li>
+              <li class="dropdown <?php if ($filename == 'profile' or $filename == 'orders' or $filename == 'reviews'): ?>active<?php endif ?>"> <a href="#" class="dropdown-toggle" data-toggle="dropdown">My Account</a>
+                <ul class="dropdown-menu">
+                  <li> <a href="profile.php">Profile </a> </li>
+                  <li> <a href="orders.php">Orders </a> </li>
+                  <li> <a href="reviews.php">Reviews </a> </li>
+                  <li> <a href="my-feedback.php">Feedbacks</a> </li>
+                </ul>
+              </li>
+
+              <li class="<?php if ($filename == 'feedbacks'): ?>active<?php endif ?>"> <a href="feedbacks.php">Feedbacks </a> </li>
+
+              <li style="margin-left: -10px;" class="<?php if ($filename == 'about'): ?>active<?php endif ?>"> <a href="about.php"> <a href="about.php">About </a> </li>
+
+              <li style="margin-left: -10px;" class="<?php if ($filename == 'contact'): ?>active<?php endif ?>"> <a href="contact.php"> <a href="contact.php">Contact</a></li>
+
               
-
-
-              <li> <a href="contact.html"> contact</a> </li>
             </ul>
           </div>
         </nav>

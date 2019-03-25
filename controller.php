@@ -199,7 +199,7 @@ if (isset($_GET['from']) and $_GET['from'] == 'add-feedback') {
 
 	$res = $db->getResult();
 
-	header("Location: feedback.php");
+	header("Location: feedbacks.php");
 	$_SESSION['toast'] = 'add-feedback';
 }
 
