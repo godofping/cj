@@ -18,7 +18,13 @@ $res = $db->getResult(); $res = $res[0];
             <div class="shop-sidebar"> 
               
               <!-- Category -->
-              <h5 class="shop-tittle margin-bottom-30"><?php echo $res['productCategory']; ?></h5>
+              <h5 class="shop-tittle margin-bottom-30"><?php echo $res['productCategory']; ?> 
+              <?php 
+              if (!isset($_GET['productSubCategoryId'])) {
+               echo "(All)";
+              }
+               ?>
+            </h5>
               <ul class="shop-cate">
                 <?php 
                 $db->select('product_sub_categories_view','*',NULL,'productCategoryId = "' . $res['productCategoryId'] . '"', NULL); 
@@ -65,7 +71,17 @@ $res = $db->getResult(); $res = $res[0];
                 <div class="row"> 
                   
                   <?php 
-                    $db->select('product_variations_group_by_products_view','*',NULL,'productSubCategoryId = "' . $_GET['productSubCategoryId'] . '"', NULL); 
+
+                    if (isset($_GET['productSubCategoryId'])) {
+                      $db->select('product_variations_group_by_products_view','*',NULL,'productSubCategoryId = "' . $_GET['productSubCategoryId'] . '"', NULL); 
+                    }
+                    else
+                    {
+                      $db->select('product_variations_group_by_products_view','*',NULL,'productCategoryId = "' . $_GET['productCategoryId'] . '"', NULL); 
+                    }
+                    
+
+
                     $output = $db->getResult();
                     foreach ($output as $res) { ?>
 
