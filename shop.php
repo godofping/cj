@@ -36,8 +36,7 @@ $res = $db->getResult(); $res = $res[0];
                     <span>
                       <?php 
                       $db->select('product_variations_group_by_products_view','count(*) as total',NULL,'productSubCategoryId = "' . $res['productSubCategoryId'] . '"', NULL); 
-                      $output1 = $db->getResult(); 
-                      $output1 = $output1[0];
+                      $output1 = $db->getResult(); $output1 = $output1[0];
                       echo $output1['total'];
 
                       ?>
@@ -58,7 +57,7 @@ $res = $db->getResult(); $res = $res[0];
               <!-- Item Filter -->
               <div class="item-fltr"> 
                 <!-- short-by -->
-                <div class="short-by"> Showing 1–10 of 20 results </div>
+                <!-- <div class="short-by"> Showing 1–10 of 20 results </div> -->
                 <!-- List and Grid Style -->
                 <div class="lst-grd"> <a href="#" id="list"><i class="flaticon-interface"></i></a> <a href="#" id="grid"><i class="icon-grid"></i></a> 
                   <!-- Select -->
@@ -72,18 +71,17 @@ $res = $db->getResult(); $res = $res[0];
                   
                   <?php 
 
-                    if (isset($_GET['productSubCategoryId'])) {
-                      $db->select('product_variations_group_by_products_view','*',NULL,'productSubCategoryId = "' . $_GET['productSubCategoryId'] . '"', NULL); 
-                    }
-                    else
-                    {
-                      $db->select('product_variations_group_by_products_view','*',NULL,'productCategoryId = "' . $_GET['productCategoryId'] . '"', NULL); 
-                    }
-                    
-
-
-                    $output = $db->getResult();
-                    foreach ($output as $res) { ?>
+                  if (isset($_GET['productSubCategoryId'])) {
+                    $db->select('product_variations_group_by_products_view','*',NULL,'productSubCategoryId = "' . $_GET['productSubCategoryId'] . '"', NULL); 
+                  }
+                  else
+                  {
+                    $db->select('product_variations_group_by_products_view','*',NULL,'productCategoryId = "' . $_GET['productCategoryId'] . '"', NULL); 
+                  }
+                  
+                  $output = $db->getResult();
+                  foreach ($output as $res) { 
+                  ?>
 
                       <!-- Item -->
                       <div class="item">
@@ -104,12 +102,45 @@ $res = $db->getResult(); $res = $res[0];
                               <div class="add-crt"><a href="#."><i class="icon-basket margin-right-10"></i> Add To Cart</a></div>
                             </div>
                           </div>
+
+                          <?php 
+                            $db->select('product_variations_view','min(productPrice) as min',NULL,'productId = "' . $res['productId'] . '"', NULL); 
+                            $getMinMax = $db->getResult(); $getMinMax = $getMinMax[0];
+                            $min = $getMinMax['min'];
+
+                            $db->select('product_variations_view','max(productPrice) as max',NULL,'productId = "' . $res['productId'] . '"', NULL); 
+                            $getMinMax = $db->getResult(); $getMinMax = $getMinMax[0];
+                            $max = $getMinMax['max'];
+
+                           ?>
+
                           
                           <!-- Item Name -->
-                          <div class="item-name fr-grd"> <a href="#." class="i-tittle"><?php echo $res['productName']; ?></a> <span class="price"><small>$</small>199.00</span> </div>
+                          <div class="item-name fr-grd"> <a href="#." class="i-tittle"><?php echo $res['productName']; ?></a> 
+
+                            <?php if ($min == $max): ?>
+                              <span class="price"><small>₱</small><?php echo $max; ?> </span>
+                            <?php endif ?>
+
+                            <?php if ($min != $max): ?>
+                              <span class="price"><small>₱</small><?php echo $min; ?> ~ </span>
+                              <span class="price"><small>₱</small><?php echo $max; ?> </span>
+                            <?php endif ?>
+
+                          </div>
+
                           <!-- Item Details -->
                           <div class="cap-text">
-                            <div class="item-name"> <a href="#." class="i-tittle"><?php echo $res['productName']; ?></a> <span class="price"><small>$</small>199.00</span> 
+                            <div class="item-name"> <a href="#." class="i-tittle"><?php echo $res['productName']; ?></a> 
+
+                              <?php if ($min == $max): ?>
+                                <span class="price"><small>₱</small><?php echo $max; ?> </span>
+                              <?php endif ?>
+
+                              <?php if ($min != $max): ?>
+                                <span class="price"><small>₱</small><?php echo $min; ?> ~ </span>
+                                <span class="price"><small>₱</small><?php echo $max; ?> </span>
+                              <?php endif ?>
                 
                               <p>Phasellus lacinia fermentum bibendum. Interdum et malesuada fames ac ante ipsum primis in faucibus. Sed ullamcorper sapien lacus, eu luctus non. Nulla lacinia, eros vel fermentum consectetur,</p>
                               <p>Phasellus lacinia fermesntum bibendum. Interdum et malesuada fames ac ante ipsum primis in faucibus.</p>
@@ -127,14 +158,30 @@ $res = $db->getResult(); $res = $res[0];
               <!-- View All Items --> 
               
               <!-- Pagination -->
-              <ul class="pagination">
+           <!--    <ul class="pagination">
                 <li class="active"><a href="#">1</a></li>
                 <li><a href="#">2</a></li>
                 <li><a href="#">3</a></li>
                 <li><a href="#">...</a></li>
                 <li><a href="#">></a></li>
               </ul>
+               -->
+
+           <?php 
+
+              if (isset($_GET['productSubCategoryId'])) {
+                $db->select('product_variations_group_by_products_view','*',NULL,'productSubCategoryId = "' . $_GET['productSubCategoryId'] . '"', NULL); 
+              }
+              else
+              {
+                $db->select('product_variations_group_by_products_view','*',NULL,'productCategoryId = "' . $_GET['productCategoryId'] . '"', NULL); 
+              }
               
+              $output = $db->getResult();
+              foreach ($output as $res) { 
+              ?>
+
+
               <!-- Quick View -->
               <div id="qck-view-shop" class="zoom-anim-dialog qck-inside mfp-hide">
                 <div class="row">
@@ -143,9 +190,21 @@ $res = $db->getResult(); $res = $res[0];
                     <!-- Images Slider -->
                     <div class="images-slider">
                       <ul class="slides">
-                        <li data-thumb="images/item-img-1-1.jpg"> <img src="images/item-img-1-1.jpg" alt=""> </li>
-                        <li data-thumb="images/item-img-1-1-1.jpg"> <img src="images/item-img-1-1-1.jpg" alt=""> </li>
-                        <li data-thumb="images/item-img-1-1.jpg"> <img src="images/item-img-1-1.jpg" alt=""> </li>
+
+                        <?php 
+                          $db->select('product_images_view','*',NULL,'productId = "' . $res['productId'] . '" and isThumbnail = 1', NULL); 
+                          $imgres = $db->getResult();
+                          foreach ($imgres as $img) { ?>
+                          <li data-thumb="dashboard/images/<?php echo $img['productImageLocation'] ?>"> <img src="dashboard/images/<?php echo $img['productImageLocation'] ?>" alt=""> </li>
+                        <?php } ?>
+
+                        <?php 
+                          $db->select('product_images_view','*',NULL,'productId = "' . $res['productId'] . '" and isThumbnail <> 1', NULL); 
+                          $imgres = $db->getResult();
+                          foreach ($imgres as $img) { ?>
+                          <li data-thumb="dashboard/images/<?php echo $img['productImageLocation'] ?>"> <img src="dashboard/images/<?php echo $img['productImageLocation'] ?>" alt=""> </li>
+                        <?php } ?>
+
                       </ul>
                     </div>
                   </div>
@@ -153,10 +212,8 @@ $res = $db->getResult(); $res = $res[0];
                   <!-- Content Info -->
                   <div class="col-md-6">
                     <div class="contnt-info">
-                      <h3>Mid Rise Skinny Jeans</h3>
-                      <p>This is dummy copy. It is not meant to be read. It has been placed here solely to demonstrate the look and feel of finished, typeset text. Only for show. He who searches for meaning here will be sorely disappointed. <br>
-                        <br>
-                        These words are here to provide the reader with a basic impression of how actual text will appear in its final presentation. </p>
+                      <h3><?php echo $res['productName']; ?></h3>
+                      <?php echo $res['productDetails']; ?>
                       
                       <!-- Btn  -->
                       <div class="add-info">
@@ -168,6 +225,10 @@ $res = $db->getResult(); $res = $res[0];
                   </div>
                 </div>
               </div>
+
+            <?php } ?>
+
+
             </div>
           </div>
         </div>
