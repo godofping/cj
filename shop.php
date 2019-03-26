@@ -142,8 +142,7 @@ $res = $db->getResult(); $res = $res[0];
                                 <span class="price"><small>₱</small><?php echo $max; ?> </span>
                               <?php endif ?>
                 
-                              <p>Phasellus lacinia fermentum bibendum. Interdum et malesuada fames ac ante ipsum primis in faucibus. Sed ullamcorper sapien lacus, eu luctus non. Nulla lacinia, eros vel fermentum consectetur,</p>
-                              <p>Phasellus lacinia fermesntum bibendum. Interdum et malesuada fames ac ante ipsum primis in faucibus.</p>
+                              <?php echo $res['productDetails']; ?>
                             </div>
                           </div>
                         </div>
@@ -220,7 +219,9 @@ $res = $db->getResult(); $res = $res[0];
                         <div class="quantity">
                           <input type="number" min="1" max="100" step="1" value="1" class="form-control qty">
                         </div>
-                        <a href="#." class="btn btn-inverse"><i class="icon-heart"></i></a> <a href="#." class="btn">ADD TO CART </a> </div>
+                        <a href="#." class="btn">ADD TO CART </a> 
+                      </div>
+
                     </div>
                   </div>
                 </div>
