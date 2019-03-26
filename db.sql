@@ -29,11 +29,11 @@ CREATE TABLE `customer_feedbacks_table` (
   PRIMARY KEY (`customerFeedbackId`),
   KEY `FK_customer_feedbacks_table` (`customerId`),
   CONSTRAINT `FK_customer_feedbacks_table` FOREIGN KEY (`customerId`) REFERENCES `customers_table` (`customerId`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
 /*Data for the table `customer_feedbacks_table` */
 
-insert  into `customer_feedbacks_table`(`customerFeedbackId`,`customerId`,`customerFeedback`,`customerFeedbackDate`,`customerFeedbackStatus`) values (1,6,'test','2019-03-25',1),(2,6,'test','2019-03-25',2),(3,6,'tae','2019-03-25',2),(4,6,'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer commodo quam ac eros suscipit, vitae rhoncus risus vestibulum. Mauris at dapibus quam. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ut enim sodales, scelerisque libero quis, efficitur lorem. Curabitur et finibus nunc.','2019-03-25',1);
+insert  into `customer_feedbacks_table`(`customerFeedbackId`,`customerId`,`customerFeedback`,`customerFeedbackDate`,`customerFeedbackStatus`) values (1,6,'test','2019-03-25',1),(2,6,'test','2019-03-25',2),(3,6,'tae','2019-03-25',2),(4,6,'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer commodo quam ac eros suscipit, vitae rhoncus risus vestibulum. Mauris at dapibus quam. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ut enim sodales, scelerisque libero quis, efficitur lorem. Curabitur et finibus nunc.','2019-03-25',1),(5,6,'test','2019-03-25',1),(6,6,'te','2019-03-25',0),(7,6,'tes','2019-03-25',0);
 
 /*Table structure for table `customers_table` */
 
@@ -123,9 +123,12 @@ DROP TABLE IF EXISTS `payment_table`;
 
 CREATE TABLE `payment_table` (
   `paymentId` int(6) NOT NULL AUTO_INCREMENT,
-  `amount` varchar(60) DEFAULT NULL,
+  `paymentAmount` varchar(60) DEFAULT NULL,
   `paymentType` varchar(60) DEFAULT NULL,
   `orderId` int(6) DEFAULT NULL,
+  `paymentDetails` text,
+  `paymentRecieptImage` text,
+  `paymentStatus` varchar(60) DEFAULT NULL,
   PRIMARY KEY (`paymentId`),
   KEY `FK_payment_table` (`orderId`),
   CONSTRAINT `FK_payment_table` FOREIGN KEY (`orderId`) REFERENCES `orders` (`orderId`)
@@ -217,11 +220,11 @@ CREATE TABLE `product_variations_table` (
   PRIMARY KEY (`productVariationId`),
   KEY `FK_product_variations_table1` (`productId`),
   CONSTRAINT `FK_product_variations_table1` FOREIGN KEY (`productId`) REFERENCES `products_table` (`productId`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 
 /*Data for the table `product_variations_table` */
 
-insert  into `product_variations_table`(`productVariationId`,`productId`,`productStock`,`productStocksReorderPoint`,`productOption1`,`productOption2`,`productVariationIsDeleted`,`productPrice`) values (2,23,100,10,'250ml','',0,179),(3,23,0,2,'tae1','tae',1,1),(4,26,10,1,'620ml','',0,399),(5,26,123,123,'tae1','',0,123123),(6,21,5,5,'32GB ROM','3gb RAM',0,6990),(7,21,1,1,'1','1',1,1);
+insert  into `product_variations_table`(`productVariationId`,`productId`,`productStock`,`productStocksReorderPoint`,`productOption1`,`productOption2`,`productVariationIsDeleted`,`productPrice`) values (2,23,100,10,'250ml','',0,179),(3,23,0,2,'tae1','tae',1,1),(4,26,10,1,'620ml','',0,399),(5,26,123,123,'tae1','',0,123123),(6,21,5,5,'32GB ROM','3gb RAM',0,6990),(7,21,1,1,'1','1',1,1),(8,21,0,0,'16GB ROM','2gb RAM',0,4990);
 
 /*Table structure for table `products_table` */
 
@@ -255,7 +258,7 @@ CREATE TABLE `users_table` (
   `isDeleted` tinyint(1) DEFAULT '0',
   `fullName` varchar(60) DEFAULT NULL,
   PRIMARY KEY (`userId`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 /*Data for the table `users_table` */
 

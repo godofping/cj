@@ -486,8 +486,6 @@ if (isset($_GET['from']) and $_GET['from'] == 'add-product-variation') {
 	$productId = $db->escapeString($_POST['productId']);
 	$productOption1 = $db->escapeString($_POST['productOption1']);
 	$productOption2 = $db->escapeString($_POST['productOption2']);
-	$productStock = $db->escapeString($_POST['productStock']);
-	$productStocksReorderPoint = $db->escapeString($_POST['productStocksReorderPoint']);
 	$productPrice = $db->escapeString($_POST['productPrice']);
 
 
@@ -496,9 +494,9 @@ if (isset($_GET['from']) and $_GET['from'] == 'add-product-variation') {
 		'productId'=>$productId,
 		'productOption1'=>$productOption1,
 		'productOption2'=>$productOption2,
-		'productStock'=>$productStock,
-		'productStocksReorderPoint'=>$productStocksReorderPoint,
-		'productVariationIsDeleted'=>'0',
+		'productStock'=>0,
+		'productStocksReorderPoint'=>0,
+		'productVariationIsDeleted'=>0,
 		'productPrice'=>$productPrice,
 		)
 	);
@@ -517,14 +515,12 @@ if (isset($_GET['from']) and $_GET['from'] == 'update-product-variation') {
 
 	$productOption1 = $db->escapeString($_POST['productOption1']);
 	$productOption2 = $db->escapeString($_POST['productOption2']);
-	$productStocksReorderPoint = $db->escapeString($_POST['productStocksReorderPoint']);
 	$productPrice = $db->escapeString($_POST['productPrice']);
 
 	$db->update('product_variations_table',
 	array(
 		'productOption1'=>$productOption1,
 		'productOption2'=>$productOption2,
-		'productStocksReorderPoint'=>$productStocksReorderPoint,
 		'productPrice'=>$productPrice,
 		),
 		'productVariationId=' . $_POST['productVariationId']

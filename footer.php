@@ -20,6 +20,8 @@
               <li><a href="about.php"> About</a></li>
               <li><a href="feedback.php"> Feedbacks</a></li>
               <li><a href="contact.php"> Contact</a></li>
+              <li><a href="login.php?show=login"> Login</a></li>
+              <li><a href="login.php?show=registration"> Register</a></li>
 
             </ul>
           </div>

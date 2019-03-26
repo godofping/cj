@@ -63,13 +63,8 @@ $filename = basename($_SERVER["SCRIPT_FILENAME"], '.php');
       <!-- Login Info -->
       <div class="login-info">
         <ul>
-          <?php if (!isset($_SESSION['customerId'])): ?>
-          <li><a href="login.php?show=login">LOGIN/REGISTER</a></li>
-          <?php endif ?>
-          <?php if (isset($_SESSION['customerId'])): ?>
-     
 
-          
+          <?php if (isset($_SESSION['customerId'])): ?>
           <!-- USER BASKET -->
           <li class="dropdown user-basket"> <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true"> (2) Items <i class="icon-basket-loaded"></i> </a>
             <ul class="dropdown-menu">
@@ -100,7 +95,6 @@ $filename = basename($_SERVER["SCRIPT_FILENAME"], '.php');
               </li>
             </ul>
           </li>
-          <li><a href="controller.php?from=logout">LOGOUT</a></li>
           <?php endif ?>
         </ul>
       </div>
@@ -126,7 +120,17 @@ $filename = basename($_SERVER["SCRIPT_FILENAME"], '.php');
                 $db->select('product_categories_view'); 
                 $output = $db->getResult();
                 foreach ($output as $res) { ?>
-                  <li> <a href="shop_03.html"><?php echo $res['productCategory']; ?> </a> </li>
+                  <li class="dropdown"> <a href="shop.php?productCategoryId=<?php echo $res['productCategoryId'] ?>"><?php echo $res['productCategory']; ?> </a>
+                  <ul class="dropdown-menu animated-3s fadeInRightSm">
+                    <?php 
+                    $db->select('product_sub_categories_view','*',NULL,'productCategoryId = "' . $res['productCategoryId'] . '"', NULL); 
+                    $output1 = $db->getResult();
+                    foreach ($output1 as $res1) { ?>
+                      <li> <a href="shop.php?productCategoryId=<?php echo $res['productCategoryId'] ?>&productSubCategoryId=<?php echo $res1['productSubCategoryId'] ?>"><?php echo $res1['productSubCategory']; ?> </a> </li>
+                    <?php }?>
+                  </ul>
+                </li>
+
                 <?php }?>
 
                 </ul>
@@ -134,10 +138,12 @@ $filename = basename($_SERVER["SCRIPT_FILENAME"], '.php');
               <?php if (isset($_SESSION['customerId'])): ?>
               <li class="dropdown <?php if ($filename == 'profile' or $filename == 'orders' or $filename == 'reviews'): ?>active<?php endif ?>"> <a href="#" class="dropdown-toggle" data-toggle="dropdown">My Account</a>
                 <ul class="dropdown-menu">
-                  <li> <a href="profile.php">Profile </a> </li>
-                  <li> <a href="orders.php">Orders </a> </li>
-                  <li> <a href="reviews.php">Reviews </a> </li>
+                  <li> <a href="my-feedback.php">Cart</a> </li>
                   <li> <a href="my-feedback.php">My Feedbacks</a> </li>
+                  <li> <a href="my-feedback.php">Notifications</a> </li>
+                  <li> <a href="orders.php">Orders </a> </li>
+                  <li> <a href="profile.php">Profile </a> </li>
+                  <li> <a href="reviews.php">Reviews </a> </li>
                 </ul>
               </li>
               <?php endif ?>
@@ -145,7 +151,12 @@ $filename = basename($_SERVER["SCRIPT_FILENAME"], '.php');
               <li class="<?php if ($filename == 'feedbacks'): ?>active<?php endif ?>"> <a href="feedbacks.php">Feedbacks </a> </li>
               <li class="<?php if ($filename == 'about'): ?>active<?php endif ?>"> <a href="about.php">About </a> </li>
               <li class="<?php if ($filename == 'contact'): ?>active<?php endif ?>"> <a href="contact.php">Contact </a> </li>
-
+              <?php if (!isset($_SESSION['customerId'])): ?>
+              <li class="<?php if ($filename == 'login'): ?>active<?php endif ?>"> <a href="login.php?show=login">Login/Register </a> </li>
+              <?php endif ?>
+              <?php if (isset($_SESSION['customerId'])): ?>
+              <li class="<?php if ($filename == 'login'): ?>active<?php endif ?>"> <a href="controller.php?from=logout">Logout </a> </li>
+              <?php endif ?>
 
               
             </ul>
