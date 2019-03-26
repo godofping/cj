@@ -114,7 +114,7 @@ $filename = basename($_SERVER["SCRIPT_FILENAME"], '.php');
             
             <ul class="nav">
               <li class="<?php if ($filename == 'index'): ?>active<?php endif ?>"> <a href="index.php"> Home</a> </li>
-              <li class="dropdown"> <a href="index.html" class="dropdown-toggle" data-toggle="dropdown">Categories</a>
+              <li class="dropdown <?php if ($filename == 'shop'): ?>active<?php endif ?>""> <a href="#." class="dropdown-toggle" data-toggle="dropdown">Categories</a>
                 <ul class="dropdown-menu">
                 <?php 
                 $db->select('product_categories_view'); 
