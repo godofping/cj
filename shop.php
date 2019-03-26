@@ -198,7 +198,7 @@ $res = $db->getResult(); $res = $res[0];
                         <?php } ?>
 
                         <?php 
-                          $db->select('product_images_view','*',NULL,'productId = "' . $res['productId'] . '" and isThumbnail <> 1', NULL); 
+                          $db->select('product_images_view','*',NULL,'productId = "' . $res['productId'] . '" and isThumbnail <> 1 and productImageLocation <> "default-image.jpg" ', NULL); 
                           $imgres = $db->getResult();
                           foreach ($imgres as $img) { ?>
                           <li data-thumb="dashboard/images/<?php echo $img['productImageLocation'] ?>"> <img src="dashboard/images/<?php echo $img['productImageLocation'] ?>" alt=""> </li>

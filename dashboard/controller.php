@@ -328,7 +328,13 @@ if (isset($_GET['from']) and $_GET['from'] == 'product-images') {
 
 
 	if ($filename != '') {
-		unlink('images/'.$filename1);
+
+
+		if ($filename1 != 'default-image.jpg') {
+			unlink('images/'.$filename1);
+		}
+		
+
 		$filename = md5(date("Y-m-d H:i:s") . "1") . $filename;
 		$target_dir = "images/";
 		$target_file = $target_dir . $filename;
@@ -351,7 +357,12 @@ if (isset($_GET['from']) and $_GET['from'] == 'product-images') {
 
 
 	if ($filename != '') {
-		unlink('images/'.$filename2);
+
+		if ($filename2 != 'default-image.jpg') {
+			unlink('images/'.$filename2);
+		}
+
+
 		$filename = md5(date("Y-m-d H:i:s") . "2") . $filename;
 
 		$target_dir = "images/";
@@ -375,7 +386,12 @@ if (isset($_GET['from']) and $_GET['from'] == 'product-images') {
 
 
 	if ($filename != '') {
-		unlink('images/'.$filename3);
+
+		if ($filename3 != 'default-image.jpg') {
+			unlink('images/'.$filename3);
+		}
+
+
 		$filename = md5(date("Y-m-d H:i:s") . "3") . $filename;
 
 		$target_dir = "images/";
