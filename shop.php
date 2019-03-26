@@ -29,7 +29,7 @@ $res = $db->getResult(); $res = $res[0];
                     <a href="shop.php?productCategoryId=<?php echo $res['productCategoryId'] ?>&productSubCategoryId=<?php echo $res['productSubCategoryId'] ?>"> <?php echo $res['productSubCategory']; ?> 
                     <span>
                       <?php 
-                      $db->select('product_variations_view','count(*) as total',NULL,'productSubCategoryId = "' . $res['productSubCategoryId'] . '"', NULL); 
+                      $db->select('product_variations_group_by_products_view','count(*) as total',NULL,'productSubCategoryId = "' . $res['productSubCategoryId'] . '"', NULL); 
                       $output1 = $db->getResult(); 
                       $output1 = $output1[0];
                       echo $output1['total'];
@@ -63,36 +63,46 @@ $res = $db->getResult(); $res = $res[0];
               <!-- Item -->
               <div id="products" class="arrival-block col-item-4 list-group">
                 <div class="row"> 
-             
-
                   
-                  <!-- Item -->
-                  <div class="item">
-                    <div class="img-ser"> 
-                      <!-- Images -->
-                      <div class="thumb"> <img class="img-1" src="images/item-img-1-3.jpg" alt=""><img class="img-2" src="images/item-img-1-3-1.jpg" alt=""> 
-                        <!-- Overlay  -->
-                        <div class="overlay">
-                          <div class="position-center-center"> <a class="popup-with-move-anim" href="#qck-view-shop"><i class="icon-eye"></i></a> </div>
-                          <div class="add-crt"><a href="#."><i class="icon-basket margin-right-10"></i> Add To Cart</a></div>
+                  <?php 
+                    $db->select('product_variations_group_by_products_view','*',NULL,'productSubCategoryId = "' . $_GET['productSubCategoryId'] . '"', NULL); 
+                    $output = $db->getResult();
+                    foreach ($output as $res) { ?>
+
+                      <!-- Item -->
+                      <div class="item">
+                        <div class="img-ser"> 
+                          <!-- Images -->
+                          <div class="thumb"> 
+
+                            <?php 
+                              $db->select('product_images_view','*',NULL,'productId = "' . $res['productId'] . '" and isThumbnail = 1', NULL); 
+                              $imgres = $db->getResult(); $imgres = $imgres[0];
+                             ?>
+
+                            <img class="img-1" src="dashboard/images/<?php echo $imgres['productImageLocation'] ?>" alt="">
+                            <img class="img-2" src="dashboard/images/<?php echo $imgres['productImageLocation'] ?>" alt=""> 
+                            <!-- Overlay  -->
+                            <div class="overlay">
+                              <div class="position-center-center"> <a class="popup-with-move-anim" href="#qck-view-shop"><i class="icon-eye"></i></a> </div>
+                              <div class="add-crt"><a href="#."><i class="icon-basket margin-right-10"></i> Add To Cart</a></div>
+                            </div>
+                          </div>
+                          
+                          <!-- Item Name -->
+                          <div class="item-name fr-grd"> <a href="#." class="i-tittle"><?php echo $res['productName']; ?></a> <span class="price"><small>$</small>199.00</span> </div>
+                          <!-- Item Details -->
+                          <div class="cap-text">
+                            <div class="item-name"> <a href="#." class="i-tittle"><?php echo $res['productName']; ?></a> <span class="price"><small>$</small>199.00</span> 
+                
+                              <p>Phasellus lacinia fermentum bibendum. Interdum et malesuada fames ac ante ipsum primis in faucibus. Sed ullamcorper sapien lacus, eu luctus non. Nulla lacinia, eros vel fermentum consectetur,</p>
+                              <p>Phasellus lacinia fermesntum bibendum. Interdum et malesuada fames ac ante ipsum primis in faucibus.</p>
+                            </div>
+                          </div>
                         </div>
                       </div>
-                      
-                      <!-- Item Name -->
-                      <div class="item-name fr-grd"> <a href="#." class="i-tittle">Mid Rise taew Jeans</a> <span class="price"><small>$</small>199.00</span> </div>
-                      <!-- Item Details -->
-                      <div class="cap-text">
-                        <div class="item-name"> <a href="#." class="i-tittle">Mid Rise Skinny Jeans</a> <span class="price"><small>$</small>199.00</span> 
-                          <!-- Stars --> 
-                          <span class="stras"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star-half-o"></i> </span>
-                          <p>Phasellus lacinia fermentum bibendum. Interdum et malesuada fames ac ante ipsum primis in faucibus. Sed ullamcorper sapien lacus, eu luctus non. Nulla lacinia, eros vel fermentum consectetur,</p>
-                          <p>Phasellus lacinia fermesntum bibendum. Interdum et malesuada fames ac ante ipsum primis in faucibus.</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
                   
-
+                  <?php } ?>
 
 
                 </div>
