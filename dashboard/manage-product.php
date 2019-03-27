@@ -105,7 +105,7 @@ $res = $db->getResult();
                     	<div class="col-md-3">
                     		<div class="form-group">
 	                            <label>Price *</label>
-	                            <input type="number" min="1" required="" class="form-control form-control-line" name="productPrice">
+	                            <input type="number" step="0.01" min="1" required="" class="form-control form-control-line" name="productPrice">
 	                        </div>
                     	</div>
 
@@ -152,7 +152,7 @@ $res = $db->getResult();
                     	<div class="col-md-3">
                     		<div class="form-group">
 	                            <label>Price *</label>
-	                            <input type="number" min="0" class="form-control form-control-line" name="productPrice" value="<?php echo $res['productPrice'] ?>">
+	                            <input type="number" step="0.01" min="0" class="form-control form-control-line" name="productPrice" value="<?php echo $res['productPrice'] ?>">
 	                        </div>
                     	</div>
 

@@ -1,7 +1,7 @@
 <?php 
 include('header.php');
 
-$db->select('product_categories_table','*',NULL,'productCategoryId = "' . $_GET['productCategoryId'] . '"', NULL); 
+$db->select('product_categories_view','*',NULL,'productCategoryId = "' . $_GET['productCategoryId'] . '"', NULL); 
 $res = $db->getResult(); $res = $res[0];
 ?>
   
@@ -72,11 +72,11 @@ $res = $db->getResult(); $res = $res[0];
                   <?php 
 
                   if (isset($_GET['productSubCategoryId'])) {
-                    $db->select('product_variations_group_by_products_view','*',NULL,'productSubCategoryId = "' . $_GET['productSubCategoryId'] . '"', NULL); 
+                    $db->select('product_variations_group_by_products_view','*',NULL,'productSubCategoryId = "' . $_GET['productSubCategoryId'] . '" and totalProductVariation <> 0', NULL); 
                   }
                   else
                   {
-                    $db->select('product_variations_group_by_products_view','*',NULL,'productCategoryId = "' . $_GET['productCategoryId'] . '"', NULL); 
+                    $db->select('product_variations_group_by_products_view','*',NULL,'productCategoryId = "' . $_GET['productCategoryId'] . '" and totalProductVariation <> 0', NULL); 
                   }
                   
                   $output = $db->getResult();
@@ -89,10 +89,10 @@ $res = $db->getResult(); $res = $res[0];
                           <!-- Images -->
                           <div class="thumb"> 
 
-                            <?php 
-                              $db->select('product_images_view','*',NULL,'productId = "' . $res['productId'] . '" and isThumbnail = 1', NULL); 
-                              $imgres = $db->getResult(); $imgres = $imgres[0];
-                             ?>
+                          <?php 
+                            $db->select('product_images_view','*',NULL,'productId = "' . $res['productId'] . '" and isThumbnail = 1', NULL); 
+                            $imgres = $db->getResult(); $imgres = $imgres[0];
+                           ?>
 
                             <img class="img-1" src="dashboard/images/<?php echo $imgres['productImageLocation'] ?>" alt="">
                             <img class="img-2" src="dashboard/images/<?php echo $imgres['productImageLocation'] ?>" alt=""> 
@@ -167,19 +167,26 @@ $res = $db->getResult(); $res = $res[0];
               </ul>
                -->
 
+
+
            <?php 
 
               if (isset($_GET['productSubCategoryId'])) {
-                $db->select('product_variations_group_by_products_view','*',NULL,'productSubCategoryId = "' . $_GET['productSubCategoryId'] . '"', NULL); 
+                $db->select('product_variations_group_by_products_view','*',NULL,'productSubCategoryId = "' . $_GET['productSubCategoryId'] . '" and totalProductVariation <> 0', NULL); 
               }
               else
               {
-                $db->select('product_variations_group_by_products_view','*',NULL,'productCategoryId = "' . $_GET['productCategoryId'] . '"', NULL); 
+                $db->select('product_variations_group_by_products_view','*',NULL,'productCategoryId = "' . $_GET['productCategoryId'] . '" and totalProductVariation <> 0', NULL); 
               }
               
+              $itemCounter = 0;
+
               $output = $db->getResult();
               foreach ($output as $res) { 
+                $itemCounter++;
               ?>
+
+
 
 
               <!-- Quick View -->
@@ -234,6 +241,9 @@ $res = $db->getResult(); $res = $res[0];
 
             <?php } ?>
 
+            <?php if ($itemCounter == 0): ?>
+              <h3>No items available :(</h3>
+            <?php endif ?>
 
             </div>
           </div>
