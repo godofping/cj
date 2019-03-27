@@ -1,11 +1,10 @@
 <?php
- 
 /*
  * DataTables example server-side processing script.
  *
  * Please note that this script is intentionally extremely simply to show how
  * server-side processing can be implemented, and probably shouldn't be used as
- * the basis for a large complex system. It is suitable for simple use cases as
+ * the basis for a large inventorylogId system. It is suitable for simple use cases as
  * for learning.
  *
  * See http://datatables.net/usage/server-side for full details on the server-
@@ -19,10 +18,10 @@
  */
  
 // DB table to use
-$table = 'product_option_group_view';
+$table = 'inventory_logs_view';
  
 // Table's primary key
-$primaryKey = 'productOptionGroupId';
+$primaryKey = 'inventorylogId';
  
 // Array of database columns which should be read and sent back to DataTables.
 // The `db` parameter represents the column name in the database, while the `dt`
@@ -32,10 +31,14 @@ $primaryKey = 'productOptionGroupId';
 
 $columns = array(
 
-    array( 'db' => 'productOptionGroupName',   'dt' => 0 ),
-    array( 'db' => 'productOptionGroupId', 'dt' => 1,'formatter' => function( $d, $row ) {
-        return '<a class = "btn btn-info btn-xs" href="update-option-group.php?productOptionGroupId=' . $row['productOptionGroupId'] . '">Update</a> <a class = "btn btn-danger btn-xs" onclick = "return confirm('."'Are you sure want to delete this record?'".')" href="controller.php?from=delete-option-group&productOptionGroupId=' . $row['productOptionGroupId'] . '">Delete</a>';
+    array( 'db' => 'transactionDateTime', 'dt' => 0,'formatter' => function( $d, $row ) {
+
+        return date('F d, Y g:i A', strtotime($d));
     } ),
+    array( 'db' => 'inOrOut',   'dt' => 1 ),
+    array( 'db' => 'quantity',   'dt' => 2 ),
+    array( 'db' => 'productRemainingStocks',   'dt' => 3 ),
+
     
   
 );
@@ -55,7 +58,7 @@ $sql_details = array(
 
    require( 'ssp.class.php' );
     echo json_encode(
-    SSP::complex( $_POST, $sql_details, $table, $primaryKey, $columns, "productOptionGroupName <> 'None'" )
+    SSP::complex( $_POST, $sql_details, $table, $primaryKey, $columns, "productVariationId = '" . $_POST['productVariationId'] . "'" )
 );
 
 

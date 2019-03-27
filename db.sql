@@ -63,15 +63,19 @@ DROP TABLE IF EXISTS `inventory_logs_table`;
 
 CREATE TABLE `inventory_logs_table` (
   `inventorylogId` int(6) NOT NULL AUTO_INCREMENT,
-  `productId` int(6) DEFAULT NULL,
+  `productVariationId` int(6) DEFAULT NULL,
   `inOrOut` varchar(60) DEFAULT NULL,
   `quantity` int(6) DEFAULT NULL,
+  `transactionDateTime` datetime DEFAULT NULL,
+  `productRemainingStocks` int(6) DEFAULT NULL,
   PRIMARY KEY (`inventorylogId`),
-  KEY `FK_inventory_logs_table` (`productId`),
-  CONSTRAINT `FK_inventory_logs_table` FOREIGN KEY (`productId`) REFERENCES `products_table` (`productId`) ON DELETE SET NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  KEY `FK_inventory_logs_table` (`productVariationId`),
+  CONSTRAINT `FK_inventory_logs_table` FOREIGN KEY (`productVariationId`) REFERENCES `product_variations_table` (`productVariationId`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 /*Data for the table `inventory_logs_table` */
+
+insert  into `inventory_logs_table`(`inventorylogId`,`productVariationId`,`inOrOut`,`quantity`,`transactionDateTime`,`productRemainingStocks`) values (1,9,'In',10,'2019-03-27 12:33:18',10),(2,9,'Out',1,'2019-03-27 12:33:22',9),(3,9,'In',10,'2019-03-27 12:33:27',19),(4,9,'In',11,'2019-03-27 12:33:34',30);
 
 /*Table structure for table `order_details_table` */
 
@@ -224,7 +228,7 @@ CREATE TABLE `product_variations_table` (
 
 /*Data for the table `product_variations_table` */
 
-insert  into `product_variations_table`(`productVariationId`,`productId`,`productStock`,`productStocksReorderPoint`,`productOption1`,`productOption2`,`productVariationIsDeleted`,`productPrice`) values (2,23,100,10,'250ml','',0,179),(3,23,0,2,'tae1','tae',1,1),(4,26,10,1,'620ml','',0,399),(5,26,123,123,'tae1','',0,123123),(6,21,5,5,'32GB ROM','3gb RAM',0,6990),(7,21,1,1,'1','1',1,1),(8,21,0,0,'16GB ROM','2gb RAM',0,4990),(9,28,0,0,'XS','',0,159),(10,28,0,0,'S','',0,159),(11,28,0,0,'M','',0,159),(12,28,0,0,'L','',0,159),(13,28,0,0,'XL','',0,159),(14,29,0,0,'S','',0,159),(15,29,0,0,'M','',0,159),(16,29,0,0,'L','',0,159),(17,29,0,0,'XL','',0,159),(18,30,0,0,'CHECK','M',0,89),(19,30,0,0,'KELLY','M',0,89),(20,30,0,0,'NIKE','M',0,89),(21,31,0,0,'XS','',0,199),(22,31,0,0,'S','',0,199),(23,31,0,0,'M','',0,199),(24,31,0,0,'L','',0,199),(25,31,0,0,'XL','',0,199),(26,32,0,0,'BLUE','S',0,149),(27,32,0,0,'BLUE','M',0,149),(28,32,0,0,'BLUE','L',0,149),(29,32,0,0,'GRAY','S',0,159),(30,32,0,0,'GRAY','M',0,159),(31,32,0,0,'GRAY','L',0,159),(32,32,0,0,'RED','S',0,169),(33,32,0,0,'RED','M',0,169),(34,32,0,0,'RED','L',0,169),(35,33,0,0,'M','',0,398),(36,33,0,0,'L','',0,398),(37,33,0,0,'XL','',0,398),(38,33,0,0,'XXL','',0,398),(39,34,0,0,'BLACK','40',0,299),(40,34,0,0,'BLACK','42',0,299),(41,34,0,0,'BLACK','44',0,299),(42,35,0,0,'BLACK','38',0,251.75),(43,35,0,0,'BLACK','40',0,251.75),(44,35,0,0,'BLACK','42',0,251.75),(45,35,0,0,'BLACK','44',0,251.75),(46,36,0,0,'SAND','39',0,1455);
+insert  into `product_variations_table`(`productVariationId`,`productId`,`productStock`,`productStocksReorderPoint`,`productOption1`,`productOption2`,`productVariationIsDeleted`,`productPrice`) values (2,23,0,0,'250ml','',0,179),(3,23,0,0,'tae1','tae',1,1),(4,26,0,0,'620ml','',0,399),(5,26,0,0,'tae1','',0,123123),(6,21,0,0,'32GB ROM','3gb RAM',0,6990),(7,21,0,0,'1','1',1,1),(8,21,0,0,'16GB ROM','2gb RAM',0,4990),(9,28,30,0,'XS','',0,159),(10,28,0,0,'S','',0,159),(11,28,0,0,'M','',0,159),(12,28,0,0,'L','',0,159),(13,28,0,0,'XL','',0,159),(14,29,0,0,'S','',0,159),(15,29,0,0,'M','',0,159),(16,29,0,0,'L','',0,159),(17,29,0,0,'XL','',0,159),(18,30,0,0,'CHECK','M',0,89),(19,30,0,0,'KELLY','M',0,89),(20,30,0,0,'NIKE','M',0,89),(21,31,0,0,'XS','',0,199),(22,31,0,0,'S','',0,199),(23,31,0,0,'M','',0,199),(24,31,0,0,'L','',0,199),(25,31,0,0,'XL','',0,199),(26,32,0,0,'BLUE','S',0,149),(27,32,0,0,'BLUE','M',0,149),(28,32,0,0,'BLUE','L',0,149),(29,32,0,0,'GRAY','S',0,159),(30,32,0,0,'GRAY','M',0,159),(31,32,0,0,'GRAY','L',0,159),(32,32,0,0,'RED','S',0,169),(33,32,0,0,'RED','M',0,169),(34,32,0,0,'RED','L',0,169),(35,33,0,0,'M','',0,398),(36,33,0,0,'L','',0,398),(37,33,0,0,'XL','',0,398),(38,33,0,0,'XXL','',0,398),(39,34,0,0,'BLACK','40',0,299),(40,34,0,0,'BLACK','42',0,299),(41,34,0,0,'BLACK','44',0,299),(42,35,0,0,'BLACK','38',0,251.75),(43,35,0,0,'BLACK','40',0,251.75),(44,35,0,0,'BLACK','42',0,251.75),(45,35,0,0,'BLACK','44',0,251.75),(46,36,0,0,'SAND','39',0,1455);
 
 /*Table structure for table `products_table` */
 
@@ -307,6 +311,29 @@ DROP TABLE IF EXISTS `customers_view`;
  `customerPhoneNumber` varchar(60) ,
  `customerType` varchar(60) ,
  `customerIsBlocked` tinyint(1) 
+)*/;
+
+/*Table structure for table `inventory_logs_view` */
+
+DROP TABLE IF EXISTS `inventory_logs_view`;
+
+/*!50001 DROP VIEW IF EXISTS `inventory_logs_view` */;
+/*!50001 DROP TABLE IF EXISTS `inventory_logs_view` */;
+
+/*!50001 CREATE TABLE  `inventory_logs_view`(
+ `inventorylogId` int(6) ,
+ `productVariationId` int(6) ,
+ `inOrOut` varchar(60) ,
+ `quantity` int(6) ,
+ `transactionDateTime` datetime ,
+ `productRemainingStocks` int(6) ,
+ `productId` int(6) ,
+ `productStock` int(6) ,
+ `productStocksReorderPoint` int(6) ,
+ `productOption1` varchar(60) ,
+ `productOption2` varchar(60) ,
+ `productVariationIsDeleted` tinyint(1) ,
+ `productPrice` float 
 )*/;
 
 /*Table structure for table `product_categories_view` */
@@ -458,6 +485,13 @@ DROP TABLE IF EXISTS `users_view`;
 /*!50001 DROP VIEW IF EXISTS `customers_view` */;
 
 /*!50001 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `customers_view` AS select `customers_table`.`customerId` AS `customerId`,`customers_table`.`customerEmail` AS `customerEmail`,`customers_table`.`customerPassword` AS `customerPassword`,`customers_table`.`customerFirstName` AS `customerFirstName`,`customers_table`.`customerLastName` AS `customerLastName`,`customers_table`.`customerAddress` AS `customerAddress`,`customers_table`.`customerRegistrationDate` AS `customerRegistrationDate`,`customers_table`.`customerPhoneNumber` AS `customerPhoneNumber`,`customers_table`.`customerType` AS `customerType`,`customers_table`.`customerIsBlocked` AS `customerIsBlocked` from `customers_table` where (`customers_table`.`customerIsBlocked` = 0) */;
+
+/*View structure for view inventory_logs_view */
+
+/*!50001 DROP TABLE IF EXISTS `inventory_logs_view` */;
+/*!50001 DROP VIEW IF EXISTS `inventory_logs_view` */;
+
+/*!50001 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `inventory_logs_view` AS select `inventory_logs_table`.`inventorylogId` AS `inventorylogId`,`inventory_logs_table`.`productVariationId` AS `productVariationId`,`inventory_logs_table`.`inOrOut` AS `inOrOut`,`inventory_logs_table`.`quantity` AS `quantity`,`inventory_logs_table`.`transactionDateTime` AS `transactionDateTime`,`inventory_logs_table`.`productRemainingStocks` AS `productRemainingStocks`,`product_variations_table`.`productId` AS `productId`,`product_variations_table`.`productStock` AS `productStock`,`product_variations_table`.`productStocksReorderPoint` AS `productStocksReorderPoint`,`product_variations_table`.`productOption1` AS `productOption1`,`product_variations_table`.`productOption2` AS `productOption2`,`product_variations_table`.`productVariationIsDeleted` AS `productVariationIsDeleted`,`product_variations_table`.`productPrice` AS `productPrice` from (`inventory_logs_table` join `product_variations_table` on((`inventory_logs_table`.`productVariationId` = `product_variations_table`.`productVariationId`))) */;
 
 /*View structure for view product_categories_view */
 

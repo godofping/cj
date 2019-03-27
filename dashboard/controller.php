@@ -609,5 +609,77 @@ if (isset($_GET['from']) and $_GET['from'] == 'delete-feedback') {
 }
 
 
+if (isset($_GET['from']) and $_GET['from'] == 'stock-in') {
+
+
+	$productStock = $db->escapeString($_POST['productStock']);
+	$quantity = $db->escapeString($_POST['quantity']);
+	$productVariationId = $db->escapeString($_POST['productVariationId']);
+
+	$total = $productStock + $quantity;
+
+	$db->update('product_variations_table',
+	array(
+		'productStock'=>$total,
+		),
+		'productVariationId=' . $_POST['productVariationId']
+	);
+	$res = $db->getResult();
+
+
+	$db->insert('inventory_logs_table',
+	array(
+		'productVariationId'=>$productVariationId,
+		'inOrOut'=>'In',
+		'quantity'=>$quantity,
+		'transactionDateTime'=>date('Y-m-d H:i:s'),
+		'productRemainingStocks'=>$total,
+		)
+	);
+	$res = $db->getResult();
+
+	
+
+	header("Location: stock-in-and-out.php?productVariationId=".$_POST['productVariationId']);
+	$_SESSION['toast'] = 'stock-in';
+
+}
+
+if (isset($_GET['from']) and $_GET['from'] == 'stock-out') {
+
+
+	$productStock = $db->escapeString($_POST['productStock']);
+	$quantity = $db->escapeString($_POST['quantity']);
+	$productVariationId = $db->escapeString($_POST['productVariationId']);
+
+	$total = $productStock - $quantity;
+
+	$db->update('product_variations_table',
+	array(
+		'productStock'=>$total,
+		),
+		'productVariationId=' . $_POST['productVariationId']
+	);
+	$res = $db->getResult();
+
+
+	$db->insert('inventory_logs_table',
+	array(
+		'productVariationId'=>$productVariationId,
+		'inOrOut'=>'Out',
+		'quantity'=>$quantity,
+		'transactionDateTime'=>date('Y-m-d H:i:s'),
+		'productRemainingStocks'=>$total,
+
+		)
+	);
+	$res = $db->getResult();
+
+
+
+	header("Location: stock-in-and-out.php?productVariationId=".$_POST['productVariationId']);
+	$_SESSION['toast'] = 'stock-out';
+
+}
 
 ?>
