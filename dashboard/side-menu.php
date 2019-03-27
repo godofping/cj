@@ -57,12 +57,12 @@
                             </ul>
                         </li>
 
-                        <li class="<?php if ($filename == 'view-match-sanctioning' or $filename == 'edit-match-sanctioning'): ?>
+                        <li class="<?php if ($filename == 'inventory' or $filename == 'edit-match-sanctioning'): ?>
                             active
                         <?php endif ?>"> 
                             <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-format-list-bulleted"></i><span class="hide-menu">Inventory</span></a>
                             <ul aria-expanded="false" class="collapse">
-                                <li><a href="all-match-sanctioning.php" class="<?php if ($filename == 'view-match-sanctioning' or $filename == 'edit-match-sanctioning'): ?>active<?php endif ?>">View All</a></li>
+                                <li><a href="Inventory.php" class="<?php if ($filename == 'view-match-sanctioning' or $filename == 'edit-match-sanctioning'): ?>active<?php endif ?>">Manage</a></li>
                                 
                             </ul>
                         </li>
