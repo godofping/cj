@@ -158,8 +158,13 @@ $res = $db->getResult();
 
 
                     	<div class="col-md-3">
-                    		<a href="controller.php?from=delete-product-variation&productVariationId=<?php echo $res['productVariationId'] ?>&productId=<?php echo $res['productId'] ?>"><button type="button" class="btn btn-danger waves-effect waves-light m-r-10 pull-right mt-4">Delete</button></a>
-                    		<button type="submit" class="btn btn-success waves-effect waves-light m-r-10 pull-right mt-4">Update</button> 
+
+                    		<a href="controller.php?from=delete-product-variation&productVariationId=<?php echo $res['productVariationId'] ?>&productId=<?php echo $res['productId'] ?>"><button type="button" class="btn btn-xs btn-danger waves-effect waves-light m-r-10 pull-right mt-4">Delete</button></a>
+
+                    		<button type="submit" class="btn btn-xs btn-success waves-effect waves-light m-r-10 pull-right mt-4">Update</button>
+
+                            <a href="stock-in-and-out.php?productVariationId=<?php echo $res['productVariationId'] ?>"><button type="button" class="btn btn-xs btn-info waves-effect waves-light m-r-10 pull-right mt-4">View Stocks</button></a>
+
                     	</div>
                     </div>
                     <input type="text" name="productVariationId" hidden value="<?php echo $res['productVariationId'] ?>">
