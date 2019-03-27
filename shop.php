@@ -99,7 +99,8 @@ $res = $db->getResult(); $res = $res[0];
                             <!-- Overlay  -->
                             <div class="overlay">
                               <div class="position-center-center"> <a class="popup-with-move-anim" href="#qck-view-shop"><i class="icon-eye"></i></a> </div>
-                              <div class="add-crt"><a href="#."><i class="icon-basket margin-right-10"></i> Add To Cart</a></div>
+                              <div class="add-crt"><a href="product-details.php?productId=<?php echo $res['productId'] ?>"><i class="icon-info margin-right-10"></i> VIEW MORE DETAILS</a></div>
+                             
                             </div>
                           </div>
 
@@ -206,6 +207,15 @@ $res = $db->getResult(); $res = $res[0];
 
                       </ul>
                     </div>
+                    
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="add-info mb-3 text-center">
+                          <a href="product-details.php?productId=<?php echo $res['productId'] ?>" class="btn">VIEW MORE DETAILS </a> 
+                        </div>
+                      </div>
+                    </div>
+                      
                   </div>
                   
                   <!-- Content Info -->
@@ -214,16 +224,11 @@ $res = $db->getResult(); $res = $res[0];
                       <h3><?php echo $res['productName']; ?></h3>
                       <?php echo $res['productDetails']; ?>
                       
-                      <!-- Btn  -->
-                      <div class="add-info">
-                        <div class="quantity">
-                          <input type="number" min="1" max="100" step="1" value="1" class="form-control qty">
-                        </div>
-                        <a href="#." class="btn">ADD TO CART </a> 
-                      </div>
+                      
 
                     </div>
                   </div>
+
                 </div>
               </div>
 
