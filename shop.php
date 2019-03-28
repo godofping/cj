@@ -120,11 +120,11 @@ $res = $db->getResult(); $res = $res[0];
                           <div class="item-name fr-grd"> <a href="#." class="i-tittle"><?php echo $res['productName']; ?></a> 
 
                             <?php if ($min == $max): ?>
-                              <span class="price"><small>₱</small><?php echo $max; ?> </span>
+                              <span class="price"><small>₱</small><?php echo number_format($max, 2); ?> </span>
                             <?php endif ?>
 
                             <?php if ($min != $max): ?>
-                              <span class="price"><small>₱</small><?php echo $min; ?> ~ <small>₱</small><?php echo $max; ?></span>
+                              <span class="price"><small>₱</small><?php echo number_format($min, 2); ?> ~ <small>₱</small><?php echo $max; ?></span>
   
                             <?php endif ?>
 
@@ -245,11 +245,11 @@ $res = $db->getResult(); $res = $res[0];
                        ?>
 
                       <?php if ($min == $max): ?>
-                        <h5 class="price"><small>₱</small><?php echo $max; ?> </h5>
+                        <h5 class="price"><small>₱</small><?php echo number_format($max, 2); ?> </h5>
                       <?php endif ?>
 
                       <?php if ($min != $max): ?>
-                        <h5 class="price"><small>₱</small><?php echo $min; ?> ~ <small>₱</small><?php echo $max; ?></h5>
+                        <h5 class="price"><small>₱</small><?php echo number_format($min, 2); ?> ~ <small>₱</small><?php echo $max; ?></h5>
             
                       <?php endif ?>
 

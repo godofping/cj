@@ -62,17 +62,14 @@ $res = $db->getResult(); $res = $res[0];
             <div class="col-md-5">
               <h4><?php echo $res['productName']; ?></h4>
   
-              <span class="price" style="margin-top: -5px;"><small>₱</small>299</span>
-              <br>
-              <p>2 piece available</p>
-
               <form method="POST" action="controller.php?from=add-cart">
                <!-- Short By -->
               <div class="some-info">
                 <ul class="row mt-3">
-                  <li class="col-sm-12">
+                  <li class="col-md-12">
 
-                    <div class="form-group">
+                    <div class="col-md-12">
+                      <div class="form-group">
                       <select class="form-control" required="" name="productVariationId" id="productVariationId">
                         <option disabled="" selected="">Please select an option</option>
                         <?php
@@ -83,10 +80,11 @@ $res = $db->getResult(); $res = $res[0];
                         <?php } ?>
                       </select>
                     </div>
+                    </div>
 
                   </li>
 
-                  <div id="productInformation"></div>
+                  <div class="col-md-12" id="productInformation"></div>
                   
                 </ul>
               </div>
@@ -197,8 +195,15 @@ $res = $db->getResult(); $res = $res[0];
   <?php include('footer.php'); ?>
 
 <script type="text/javascript">
-  $('.productVariationId').change(function(){
+  $('#productVariationId').change(function(){
 
-    alert("tae");
+    var productVariationId = $(this).children("option:selected").val();
+
+    $.post("inc-product-details.php", { productVariationId:productVariationId, } , function(data, status){
+
+    $('#productInformation').html(data);
+
+    });
+    
   });
 </script>
