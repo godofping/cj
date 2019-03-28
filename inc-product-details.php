@@ -17,14 +17,16 @@ $res = $db->getResult(); $res = $res[0];
 	<!-- Quantity -->
 	<div class="quinty">
 	  <button type="button" class="quantity-left-minus"  data-type="minus" data-field=""> <span>-</span> </button>
-	  <input type="number" min="1" id="quantity" name="quantity" class="form-control input-number" value="0">
+	  <input type="number" min="1" id="quantity" name="quantity" class="form-control input-number" value="1">
 	  <button type="button" class="quantity-right-plus" data-type="plus" data-field=""> <span>+</span> </button>
 	</div>
 </li>
 
 <!-- ADD TO CART -->
 <li class="col-md-12">
-	<button type="submit" class="btn">ADD TO CART</button>
+	<button type="submit" class="btn" <?php if ($res['productStock'] == 0): ?>
+		disabled
+	<?php endif ?>>ADD TO CART</button>
 </li>
 
 

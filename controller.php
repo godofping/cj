@@ -204,4 +204,26 @@ if (isset($_GET['from']) and $_GET['from'] == 'add-feedback') {
 }
 
 
+if (isset($_GET['from']) and $_GET['from'] == 'add-cart') {
+
+	echo $_POST['quantity'];
+
+
+	// $productStocksReorderPoint = $db->escapeString($_POST['productStocksReorderPoint']);
+
+	// $db->update('product_variations_table',
+	// array(
+	// 	'productStocksReorderPoint'=>$productStocksReorderPoint,
+	// 	),
+	// 	'productVariationId=' . $_POST['productVariationId']
+	// );
+	// $res = $db->getResult();
+
+
+	// header("Location: shop.php?productId=".$_POST['productId']);
+	// $_SESSION['toast'] = 'reorder-point';
+
+}
+
+
 ?>

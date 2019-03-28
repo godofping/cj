@@ -696,12 +696,11 @@ if (isset($_GET['from']) and $_GET['from'] == 'reorder-point') {
 	$res = $db->getResult();
 
 
-
-
-
-
 	header("Location: manage-stocks.php?productVariationId=".$_POST['productVariationId']);
 	$_SESSION['toast'] = 'reorder-point';
 
 }
+
+
+
 ?>
