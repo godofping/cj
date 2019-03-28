@@ -73,7 +73,7 @@ $res = $db->getResult(); $res = $res[0];
                   <li class="col-sm-12">
 
                     <div class="form-group">
-                      <select class="form-control">
+                      <select class="form-control" required="" name="productVariationId" id="productVariationId">
                         <option disabled="" selected="">Please select an option</option>
                         <?php
                         $db->select('product_variations_view','*',NULL,'productId = "' . $_GET['productId'] . '"', NULL);
@@ -197,7 +197,7 @@ $res = $db->getResult(); $res = $res[0];
   <?php include('footer.php'); ?>
 
 <script type="text/javascript">
-  $('.productInformation').change(function(){
+  $('.productVariationId').change(function(){
 
     alert("tae");
   });
