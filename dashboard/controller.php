@@ -633,14 +633,14 @@ if (isset($_GET['from']) and $_GET['from'] == 'stock-in') {
 		'inOrOut'=>'In',
 		'quantity'=>$quantity,
 		'transactionDateTime'=>date('Y-m-d H:i:s'),
-		'productRemainingStocks'=>$total,
+		'inventoryLogRemark'=>'The stocks is increased by ' . $quantity . '.',
 		)
 	);
 	$res = $db->getResult();
 
 	
 
-	header("Location: stock-in-and-out.php?productVariationId=".$_POST['productVariationId']);
+	header("Location: manage-stocks.php?productVariationId=".$_POST['productVariationId']);
 	$_SESSION['toast'] = 'stock-in';
 
 }
@@ -669,7 +669,7 @@ if (isset($_GET['from']) and $_GET['from'] == 'stock-out') {
 		'inOrOut'=>'Out',
 		'quantity'=>$quantity,
 		'transactionDateTime'=>date('Y-m-d H:i:s'),
-		'productRemainingStocks'=>$total,
+		'inventoryLogRemark'=>'The stocks is decreased by ' . $quantity . ' manually.',
 
 		)
 	);
@@ -677,9 +677,31 @@ if (isset($_GET['from']) and $_GET['from'] == 'stock-out') {
 
 
 
-	header("Location: stock-in-and-out.php?productVariationId=".$_POST['productVariationId']);
+	header("Location: manage-stocks.php?productVariationId=".$_POST['productVariationId']);
 	$_SESSION['toast'] = 'stock-out';
 
 }
 
+
+if (isset($_GET['from']) and $_GET['from'] == 'reorder-point') {
+
+	$productStocksReorderPoint = $db->escapeString($_POST['productStocksReorderPoint']);
+
+	$db->update('product_variations_table',
+	array(
+		'productStocksReorderPoint'=>$productStocksReorderPoint,
+		),
+		'productVariationId=' . $_POST['productVariationId']
+	);
+	$res = $db->getResult();
+
+
+
+
+
+
+	header("Location: manage-stocks.php?productVariationId=".$_POST['productVariationId']);
+	$_SESSION['toast'] = 'reorder-point';
+
+}
 ?>

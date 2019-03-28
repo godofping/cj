@@ -37,7 +37,7 @@ $columns = array(
     } ),
     array( 'db' => 'inOrOut',   'dt' => 1 ),
     array( 'db' => 'quantity',   'dt' => 2 ),
-    array( 'db' => 'productRemainingStocks',   'dt' => 3 ),
+    array( 'db' => 'inventoryLogRemark',   'dt' => 3),
 
     
   

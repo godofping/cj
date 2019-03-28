@@ -163,7 +163,7 @@ $res = $db->getResult();
 
                     		<button type="submit" class="btn btn-xs btn-success waves-effect waves-light m-r-10 pull-right mt-4">Update</button>
 
-                            <a href="stock-in-and-out.php?productVariationId=<?php echo $res['productVariationId'] ?>"><button type="button" class="btn btn-xs btn-info waves-effect waves-light m-r-10 pull-right mt-4">View Stocks</button></a>
+                            <a href="manage-stocks.php?productVariationId=<?php echo $res['productVariationId'] ?>"><button type="button" class="btn btn-xs btn-info waves-effect waves-light m-r-10 pull-right mt-4">Manage Stocks</button></a>
 
                     	</div>
                     </div>

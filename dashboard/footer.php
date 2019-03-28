@@ -362,7 +362,17 @@
           });
       <?php endif?>
 
-
+      <?php if (isset($_SESSION['toast']) and $_SESSION['toast'] == 'reorder-point'): ?>
+          $.toast({
+            heading: 'SUCCESSFULLY UPDATED',
+            text: 'Stocks Reorder Point Updated!',
+            position: 'top-center',
+            loaderBg:'#ff6849',
+            icon: 'success',
+            hideAfter: 5000, 
+            stack: 6
+          });
+      <?php endif?>
 
 
 

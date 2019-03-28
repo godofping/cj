@@ -60,8 +60,9 @@
 <script type="text/javascript">
 	var title = "";
     var dataTable = $('#datable').DataTable({
-        "processing":true,
-        "serverSide":true,
+        // "processing":true,
+        // "serverSide":true,
+        deferRender: true,
         "order":[[ 0, "asc" ]],
         "ajax": {
                     "type": 'POST',

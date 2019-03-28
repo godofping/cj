@@ -2,13 +2,13 @@
 <?php include('header.php'); ?>
 <div class="row page-titles">
     <div class="col-md-5 align-self-center">
-        <h3 class="text-themecolor">Manage</h3>
+        <h3 class="text-themecolor">View all</h3>
     </div>
     <div class="col-md-7 align-self-center">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="javascript:void(0)">Inventory</a></li>
 <!--             <li class="breadcrumb-item">pages</li> -->
-            <li class="breadcrumb-item active">Manage</li>
+            <li class="breadcrumb-item active">View all</li>
         </ol>
     </div>
    
@@ -62,8 +62,9 @@
 <script type="text/javascript">
 	var title = "";
     var dataTable = $('#datable').DataTable({
-        "processing":true,
-        "serverSide":true,
+        // "processing":true,
+        // "serverSide":true,
+        deferRender: true,
         "order":[],
         "ajax": {
                     "type": 'POST',

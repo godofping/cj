@@ -59,7 +59,7 @@ $columns = array(
 
     } ),
     array( 'db' => 'productVariationId', 'dt' => 7,'formatter' => function( $d, $row ) {
-        return '<a class = "btn btn-info btn-xs" href="stock-in-and-out.php?productVariationId=' . $row['productVariationId'] . '">Stock In / Stock Out</a>';
+        return '<a class = "btn btn-info btn-xs" href="manage-stocks.php?productVariationId=' . $row['productVariationId'] . '">Manage</a>';
     } ),
     
   
