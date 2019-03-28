@@ -33,7 +33,9 @@ $primaryKey = 'productVariationId';
 $columns = array(
 
     array( 'db' => 'productName',   'dt' => 0 ),
-    array( 'db' => 'productPrice',   'dt' => 1 ),
+    array( 'db' => 'productPrice', 'dt' => 1,'formatter' => function( $d, $row ) {
+        return number_format($d,2);
+    } ),
     array( 'db' => 'productOption1',   'dt' => 2 ),
     array( 'db' => 'productOption2',   'dt' => 3 ),
     array( 'db' => 'productStock',   'dt' => 4 ),
@@ -59,7 +61,7 @@ $columns = array(
 
     } ),
     array( 'db' => 'productVariationId', 'dt' => 7,'formatter' => function( $d, $row ) {
-        return '<a class = "btn btn-info btn-xs" href="manage-stocks.php?productVariationId=' . $row['productVariationId'] . '">Manage</a>';
+        return '<a class = "btn btn-info btn-xs" href="manage-stocks.php?productVariationId=' . $row['productVariationId'] . '">Manage Stocks</a>';
     } ),
     
   

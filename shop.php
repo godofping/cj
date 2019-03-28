@@ -98,7 +98,7 @@ $res = $db->getResult(); $res = $res[0];
                             <img class="img-2" src="dashboard/images/<?php echo $imgres['productImageLocation'] ?>" alt=""> 
                             <!-- Overlay  -->
                             <div class="overlay">
-                              <div class="position-center-center"> <a class="popup-with-move-anim" href="#qck-view-shop"><i class="icon-eye"></i></a> </div>
+                              <div class="position-center-center"> <a class="popup-with-move-anim" href="#qck-view-shop<?php echo $res['productId'] ?>"><i class="icon-eye"></i></a> </div>
                               <div class="add-crt"><a href="product-details.php?productId=<?php echo $res['productId'] ?>"><i class="icon-info margin-right-10"></i> VIEW MORE DETAILS</a></div>
                              
                             </div>
@@ -124,8 +124,8 @@ $res = $db->getResult(); $res = $res[0];
                             <?php endif ?>
 
                             <?php if ($min != $max): ?>
-                              <span class="price"><small>₱</small><?php echo $min; ?> ~ </span>
-                              <span class="price"><small>₱</small><?php echo $max; ?> </span>
+                              <span class="price"><small>₱</small><?php echo $min; ?> ~ <small>₱</small><?php echo $max; ?></span>
+  
                             <?php endif ?>
 
                           </div>
@@ -139,8 +139,8 @@ $res = $db->getResult(); $res = $res[0];
                               <?php endif ?>
 
                               <?php if ($min != $max): ?>
-                                <span class="price"><small>₱</small><?php echo $min; ?> ~ </span>
-                                <span class="price"><small>₱</small><?php echo $max; ?> </span>
+                                <span class="price"><small>₱</small><?php echo $min; ?> ~ <small>₱</small><?php echo $max; ?></span>
+                    
                               <?php endif ?>
                 
                               <?php echo $res['productDetails']; ?>
@@ -171,6 +171,7 @@ $res = $db->getResult(); $res = $res[0];
 
            <?php 
 
+
               if (isset($_GET['productSubCategoryId'])) {
                 $db->select('product_variations_group_by_products_view','*',NULL,'productSubCategoryId = "' . $_GET['productSubCategoryId'] . '" and totalProductVariation <> 0', NULL); 
               }
@@ -181,6 +182,8 @@ $res = $db->getResult(); $res = $res[0];
               
               $itemCounter = 0;
 
+
+
               $output = $db->getResult();
               foreach ($output as $res) { 
                 $itemCounter++;
@@ -190,7 +193,7 @@ $res = $db->getResult(); $res = $res[0];
 
 
               <!-- Quick View -->
-              <div id="qck-view-shop" class="zoom-anim-dialog qck-inside mfp-hide">
+              <div id="qck-view-shop<?php echo $res['productId'] ?>" class="zoom-anim-dialog qck-inside mfp-hide">
                 <div class="row">
                   <div class="col-md-6"> 
                     
@@ -229,7 +232,32 @@ $res = $db->getResult(); $res = $res[0];
                   <div class="col-md-6">
                     <div class="contnt-info">
                       <h3><?php echo $res['productName']; ?></h3>
-                      <?php echo $res['productDetails']; ?>
+
+                      <?php 
+
+                      $db->select('product_variations_view','min(productPrice) as min',NULL,'productId = "' . $res['productId'] . '"', NULL); 
+                            $getMinMax = $db->getResult(); $getMinMax = $getMinMax[0];
+                            $min = $getMinMax['min'];
+
+                            $db->select('product_variations_view','max(productPrice) as max',NULL,'productId = "' . $res['productId'] . '"', NULL); 
+                            $getMinMax = $db->getResult(); $getMinMax = $getMinMax[0];
+                            $max = $getMinMax['max'];
+                       ?>
+
+                      <?php if ($min == $max): ?>
+                        <h5 class="price"><small>₱</small><?php echo $max; ?> </h5>
+                      <?php endif ?>
+
+                      <?php if ($min != $max): ?>
+                        <h5 class="price"><small>₱</small><?php echo $min; ?> ~ <small>₱</small><?php echo $max; ?></h5>
+            
+                      <?php endif ?>
+
+
+
+                      <div class="mt-2"></div>
+                        <?php echo $res['productDetails']; ?>
+                      
                       
                       
 

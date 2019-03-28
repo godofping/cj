@@ -35,7 +35,7 @@
                             <thead>
                                 <tr>
                                     <th>Product Name</th>
-                                    <th>Price</th>
+                                    <th>Price (₱)</th>
                                     <th>Option 1</th>
                                     <th>Option 2</th>
                                     <th>Stocks</th>

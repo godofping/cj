@@ -30,7 +30,7 @@ $res = $db->getResult(); $res = $res[0];
                   <?php } ?>
 
                   <?php 
-                    $db->select('product_images_view','*',NULL,'productId = "' . $res['productId'] . '" and isThumbnail <> 1', NULL); 
+                    $db->select('product_images_view','*',NULL,'productId = "' . $res['productId'] . '" and isThumbnail <> 1 and productImageLocation <> "default-image.jpg"', NULL); 
                     $imgres = $db->getResult();
                     foreach ($imgres as $img) { ?>
                     <li> <img class="img-responsive" src="dashboard/images/<?php echo $img['productImageLocation'] ?>" alt=""> </li>
@@ -49,7 +49,7 @@ $res = $db->getResult(); $res = $res[0];
                   <?php } ?>
 
                   <?php 
-                    $db->select('product_images_view','*',NULL,'productId = "' . $res['productId'] . '" and isThumbnail <> 1', NULL); 
+                    $db->select('product_images_view','*',NULL,'productId = "' . $res['productId'] . '" and isThumbnail <> 1 and productImageLocation <> "default-image.jpg"', NULL); 
                     $imgres = $db->getResult();
                     foreach ($imgres as $img) { ?>
                     <li> <img class="img-responsive" src="dashboard/images/<?php echo $img['productImageLocation'] ?>" alt=""> </li>
@@ -62,36 +62,46 @@ $res = $db->getResult(); $res = $res[0];
             <div class="col-md-5">
               <h4><?php echo $res['productName']; ?></h4>
   
-              <span class="price"><small>$</small>299</span>
-              <ul class="item-owner">
+              <span class="price" style="margin-top: -5px;"><small>₱</small>299</span>
+              <br>
+              <p>2 piece available</p>
+
+              <form method="POST" action="controller.php?from=add-cart">
+               <!-- Short By -->
+              <div class="some-info">
+                <ul class="row mt-3">
+                  <li class="col-sm-12">
+
+                    <div class="form-group">
+                      <select class="form-control">
+                        <option disabled="" selected="">Please select an option</option>
+                        <?php
+                        $db->select('product_variations_view','*',NULL,'productId = "' . $_GET['productId'] . '"', NULL);
+                        $output = $db->getResult();
+                        foreach ($output as $res) { ?>
+                          <option value="<?php echo $res['productVariationId'] ?>"><?php echo $res['productOption1']; ?> <?php echo $res['productOption2']; ?></option>
+                        <?php } ?>
+                      </select>
+                    </div>
+
+                  </li>
+
+                  <div id="productInformation"></div>
+                  
+                </ul>
+              </div>
+
+              </form>
+
+
+              <ul class="item-owner" style="margin-top: -5px;">
                 <li>Category:<span> <a href="shop.php?productCategoryId=<?php echo $res['productCategoryId'] ?>"><?php echo $res['productCategory']; ?></a></span></li>
                 <li>Sub Category:<span> <a href="shop.php?productCategoryId=<?php echo $res['productCategoryId'] ?>&productSubCategoryId=<?php echo $res['productSubCategoryId'] ?>"><?php echo $res['productSubCategory']; ?></a></span></li>
               </ul>
               
               <!-- Item Detail -->
               <?php echo $res['productDetails']; ?>
-              
-              <!-- Short By -->
-              <div class="some-info">
-                <ul class="row margin-top-30">
-                  <li class="col-sm-6"> 
-                    
-                    <!-- Quantity -->
-                    <div class="quinty">
-                      <button type="button" class="quantity-left-minus"  data-type="minus" data-field=""> <span>-</span> </button>
-                      <input type="number" id="quantity" name="quantity" class="form-control input-number" value="1">
-                      <button type="button" class="quantity-right-plus" data-type="plus" data-field=""> <span>+</span> </button>
-                    </div>
-                  </li>
-                  
-                  <!-- ADD TO CART -->
-                  <li class="col-sm-6"> <a href="#." class="btn">ADD TO CART</a> </li>
-                  
-         
-                </ul>
-                
 
-              </div>
             </div>
           </div>
         </div>
@@ -185,3 +195,10 @@ $res = $db->getResult(); $res = $res[0];
 
   </div>
   <?php include('footer.php'); ?>
+
+<script type="text/javascript">
+  $('.productInformation').change(function(){
+
+    alert("tae");
+  });
+</script>

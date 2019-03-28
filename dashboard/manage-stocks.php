@@ -6,13 +6,13 @@ $res = $db->getResult(); $res = $res[0];
 ?>
 <div class="row page-titles">
     <div class="col-md-5 align-self-center">
-        <h3 class="text-themecolor">Manage</h3>
+        <h3 class="text-themecolor">Manage Stocks</h3>
     </div>
     <div class="col-md-7 align-self-center">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="javascript:void(0)">Inventory</a></li>
             <li class="breadcrumb-item">View all</li>
-            <li class="breadcrumb-item active">Manage</li>
+            <li class="breadcrumb-item active">Manage Stocks</li>
         </ol>
     </div>
    
