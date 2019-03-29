@@ -1,6 +1,16 @@
 <?php
 include('dashboard/connection.php');
 $filename = basename($_SERVER["SCRIPT_FILENAME"], '.php');
+
+if ($filename != "finish-registration" and isset($_SESSION['customerId'])) {
+  $db->select('customers_view','*',NULL,'customerId = "' . $_SESSION['customerId'] . '"', NULL); 
+  $res = $db->getResult(); $res = $res[0];
+
+  if ($res['customerFirstName'] == '' and $res['customerLastName'] == '' and $res['customerAddress'] == '' and $res['customerPhoneNumber'] == '') { ?>
+     <script type="text/javascript">window.location.replace("finish-registration.php");</script>
+  <?php }
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -133,14 +143,26 @@ $filename = basename($_SERVER["SCRIPT_FILENAME"], '.php');
 
                   <?php 
                     $db->select('orders_view', '*', NULL, 'customerId = "' . $_SESSION['customerId']  .'" and orderStatus = "On Cart"');
-                    $res = $db->getResult(); $res = $res['0'];
+                    $res = $db->getResult();
 
-                    $db->select('order_details_view', 'sum(quantity) as total', NULL, 'orderId = "' . $res['orderId']  .'"');
-                    $res = $db->getResult(); $res = $res['0'];
+                    if (!empty($res)) {
+                       $res = $res['0'];
+                       $db->select('order_details_view', 'sum(quantity) as total', NULL, 'orderId = "' . $res['orderId']  .'"');
+                        $res = $db->getResult(); $res = $res['0'];
+                        $total = $res['total'];
+                    }
+                    else
+                    {
+                      $total = 0;
+                    }
+
+                    
+
+                    
 
                   ?>
                   <!-- USER BASKET -->
-                  <li> <a href="shopping-cart.php"><span class="c-no"><?php echo $res['total']; ?></span><i class="lnr lnr-cart"></i> </a> </li>
+                  <li> <a href="shopping-cart.php"><span class="c-no"><?php echo $total; ?></span><i class="lnr lnr-cart"></i> </a> </li>
        
 
                 </ul>

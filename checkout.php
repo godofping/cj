@@ -1,9 +1,13 @@
 <?php include('header.php'); ?>
 
-<?php if (!isset($_SESSION['customerId'])): ?>
+<?php if (!isset($_SESSION['customerId'])){ ?>
   <script type="text/javascript">window.location.replace("index.php");</script>
-<?php endif ?>
+<?php } else { 
 
+$db->select('customers_view','*',NULL,'customerId = "' . $_SESSION['customerId'] . '"', NULL); 
+$res = $db->getResult(); $res = $res[0];
+
+ } ?>
 
   <!-- SUB BANNER -->
   <section class="sub-bnr" data-stellar-background-ratio="0.5">
@@ -30,152 +34,103 @@
             <div class="row"> 
               
               <!-- ESTIMATE SHIPPING & TAX -->
-              <div class="col-sm-7">
+              <div class="col-sm-5">
                 <h6>Billing Information</h6>
-                <form>
-                  <ul class="row">
-                    
-                    <!-- Name -->
-                    <li class="col-md-6">
-                      <label> *FIRST NAME
-                        <input type="text" name="first-name" value="" placeholder="">
-                      </label>
-                    </li>
-                    <!-- LAST NAME -->
-                    <li class="col-md-6">
-                      <label> *LAST NAME
-                        <input type="text" name="last-name" value="" placeholder="">
-                      </label>
-                    </li>
-                    <li class="col-md-6"> 
-                      <!-- COMPANY NAME -->
-                      <label>COMPANY NAME
-                        <input type="text" name="company" value="" placeholder="">
-                      </label>
-                    </li>
-                    <li class="col-md-6"> 
-                      <!-- ADDRESS -->
-                      <label>*ADDRESS
-                        <input type="text" name="address" value="" placeholder="">
-                      </label>
-                    </li>
-                    <!-- TOWN/CITY -->
-                    <li class="col-md-6">
-                      <label>*TOWN/CITY
-                        <input type="text" name="town" value="" placeholder="">
-                      </label>
-                    </li>
-                    
-                    <!-- COUNTRY -->
-                    <li class="col-md-6">
-                      <label> COUNTRY
-                        <input type="text" name="contry-state" value="" placeholder="">
-                      </label>
-                    </li>
-                    
-                    <!-- EMAIL ADDRESS -->
-                    <li class="col-md-6">
-                      <label> *EMAIL ADDRESS
-                        <input type="text" name="contry-state" value="" placeholder="">
-                      </label>
-                    </li>
-                    <!-- PHONE -->
-                    <li class="col-md-6">
-                      <label> *PHONE
-                        <input type="text" name="postal-code" value="" placeholder="">
-                      </label>
-                    </li>
-                    
-                    <!-- PHONE -->
-                    <li class="col-md-6">
-                      <button type="submit" class="btn">continue</button>
-                    </li>
-                    
-                    <!-- CREATE AN ACCOUNT -->
-                    <li class="col-md-6">
-                      <div class="checkbox margin-0 ">
-                        <input id="checkbox1" class="styled" type="checkbox">
-                        <label for="checkbox1"> Ship to a different address </label>
-                      </div>
-                    </li>
-                  </ul>
-                </form>
+                <form role="form" id="contact_form" class="contact-form" method="post" action="controller.php?from=place-order" autocomplete="off">
+                <ul class="row">
+                  <li class="col-sm-6">
+                    <label>First name *
+                      <input type="text" class="form-control" name="billingFirstName" id="billingFirstName" placeholder="" required="" value="<?php echo $res['customerFirstName'] ?>">
+                    </label>
+                  </li>
+                  <li class="col-sm-6">
+                    <label>Last name *
+                      <input type="text" class="form-control" name="billingLastName" id="billingLastName" placeholder="" required="" value="<?php echo $res['customerLastName'] ?>">
+                    </label>
+                  </li>
+                  <li class="col-sm-12">
+                    <label>Address * <small>(building number, street name, city, province)</small>
+                      <input type="text" class="form-control" name="billingAddress" id="billingAddress" placeholder="" required="" value="<?php echo $res['customerAddress'] ?>">
+                    </label>
+                  </li>
+                  <li class="col-sm-6">
+                    <label>Phone Number *
+                      <input type="text" class="form-control" name="billingPhoneNumber" id="billingPhoneNumber" placeholder="" required="" value="<?php echo $res['customerPhoneNumber'] ?>">
+                    </label>
+                  </li>
+
+                  <li class="col-sm-6">
+                    <label>Email *
+                      <input type="text" class="form-control" name="billingEmail" id="billingEmail" placeholder="" required="" value="<?php echo $res['customerPhoneNumber'] ?>">
+                    </label>
+                  </li>
+
+          <!--         <li class="col-md-12">
+                    <div class="checkbox margin-0 ">
+                      <input id="checkbox1" class="styled" type="checkbox">
+                      <label for="checkbox1"> Ship to a different address </label>
+                    </div>
+                  </li>
+ -->
+
+            
+                </ul>
+          
                 
                 <!-- SHIPPING info -->
-                <h6 class="margin-top-50">Shipping information</h6>
-                <form>
-                  <ul class="row">
-                    
-                    <!-- Name -->
-                    <li class="col-md-6">
-                      <label> *FIRST NAME
-                        <input type="text" name="first-name" value="" placeholder="">
-                      </label>
-                    </li>
-                    <!-- LAST NAME -->
-                    <li class="col-md-6">
-                      <label> *LAST NAME
-                        <input type="text" name="last-name" value="" placeholder="">
-                      </label>
-                    </li>
-                    <li class="col-md-6"> 
-                      <!-- COMPANY NAME -->
-                      <label>COMPANY NAME
-                        <input type="text" name="company" value="" placeholder="">
-                      </label>
-                    </li>
-                    <li class="col-md-6"> 
-                      <!-- ADDRESS -->
-                      <label>*ADDRESS
-                        <input type="text" name="address" value="" placeholder="">
-                      </label>
-                    </li>
-                    <!-- TOWN/CITY -->
-                    <li class="col-md-6">
-                      <label>*TOWN/CITY
-                        <input type="text" name="town" value="" placeholder="">
-                      </label>
-                    </li>
-                    
-                    <!-- COUNTRY -->
-                    <li class="col-md-6">
-                      <label> COUNTRY
-                        <input type="text" name="contry-state" value="" placeholder="">
-                      </label>
-                    </li>
-                    
-                    <!-- EMAIL ADDRESS -->
-                    <li class="col-md-6">
-                      <label> *EMAIL ADDRESS
-                        <input type="text" name="contry-state" value="" placeholder="">
-                      </label>
-                    </li>
-                    <!-- PHONE -->
-                    <li class="col-md-6">
-                      <label> *PHONE
-                        <input type="text" name="postal-code" value="" placeholder="">
-                      </label>
-                    </li>
-                    
-                    <!-- PHONE -->
-                    <li class="col-md-6">
-                      <button type="submit" class="btn">SUBMIT</button>
-                    </li>
-                  </ul>
-                </form>
+                <h6 class="margin-top-50">Shipping Information</h6>
+ 
+                <ul class="row">
+                  <li class="col-sm-6">
+                    <label>First name *
+                      <input type="text" class="form-control" name="customerFirstName" id="customerFirstName" placeholder="" required="">
+                    </label>
+                  </li>
+                  <li class="col-sm-6">
+                    <label>Last name *
+                      <input type="text" class="form-control" name="customerLastName" id="customerLastName" placeholder="" required="">
+                    </label>
+                  </li>
+                  <li class="col-sm-12">
+                    <label>Address * <small>(building number, street name, city, province)</small>
+                      <input type="text" class="form-control" name="customerAddress" id="customerAddress" placeholder="" required="">
+                    </label>
+                  </li>
+                  <li class="col-sm-6">
+                    <label>Phone Number *
+                      <input type="text" class="form-control" name="customerPhoneNumber" id="customerPhoneNumber" placeholder="" required="">
+                    </label>
+                  </li>
+
+            
+                </ul>
+       
               </div>
               
               <!-- SUB TOTAL -->
-              <div class="col-sm-5">
+              <div class="col-sm-7">
                 <h6>Your Order</h6>
                 <div class="order-place">
                   <div class="order-detail">
-                    <p>Rise Skinny Jeans <span>$598 </span></p>
-                    <p>Shipping <span>$199 </span></p>
-                    <p>VAT <span> $139</span></p>
+
+                    <?php 
+                    $db->select('order_details_view','*',NULL,'customerId = "' . $_SESSION['customerId'] . '"', NULL); 
+                    $output = $db->getResult();
+                    $sum = 0;
+                    foreach ($output as $res) { ?>
+                    
+                    <p>
+                      <?php echo $res['productName']; ?> (<?php echo $res['productOption1']; ?> <?php echo $res['productOption2']; ?>) 
+
+                      <span>₱<?php echo number_format($res['quantity'] * $res['price'], 2); $sum = $sum + ($res['quantity'] * $res['price']); ?></span>
+                    </p>
+
+                  <?php } ?>
+
                     
                     <!-- SUB TOTAL -->
-                    <p class="all-total">TOTAL COST <span> $998</span></p>
+                    <p class="all-total">TOTAL COST <span> ₱<?php echo number_format($sum, 2); ?></span></p>
+
                   </div>
                   <div class="pay-meth">
                     <ul>

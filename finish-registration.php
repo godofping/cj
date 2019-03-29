@@ -9,7 +9,7 @@
     <section class="contact padding-top-100 padding-bottom-100">
       <div class="container">
         <div class="contact-form">
-          <h5>Thank you for registering your account. Please Fill up the form to finalize the registration.</h5>
+          <h5>Thank you for registering your account. Please fill up the profile/shipping form to proceed shopping.</h5>
           <div class="row">
             <div class="col-md-8"> 
               
@@ -54,7 +54,7 @@
                 <ul>
                   <li> <i class="icon-map-pin"></i> Bendero Bldg, Nat’l Highway, Tacurong City, Sultan Kudarat or Alunan Ave. near roundball/fronting RMMC school, Koronadal, South Cotabato</li>
                   <li> <i class="icon-call-end"></i> 0975 436 3955</li>
-                  <li> <i class="icon-envelope"></i> <a href="mailto:someone@example.com" target="_top">cjashley@gmail.com</a> </li>
+                  <li> <i class="icon-envelope"></i> <a href="mailto:cjashley@gmail.com" target="_top">cjashley@gmail.com</a> </li>
            
                 </ul>
               </div>
