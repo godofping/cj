@@ -138,7 +138,7 @@ $filename = basename($_SERVER["SCRIPT_FILENAME"], '.php');
               <?php if (isset($_SESSION['customerId'])): ?>
               <li class="dropdown <?php if ($filename == 'profile' or $filename == 'orders' or $filename == 'reviews'): ?>active<?php endif ?>"> <a href="#" class="dropdown-toggle" data-toggle="dropdown">My Account</a>
                 <ul class="dropdown-menu">
-                  <li> <a href="my-feedback.php">Cart</a> </li>
+                  <li> <a href="shopping-cart.php">Shopping Cart</a> </li>
                   <li> <a href="my-feedback.php">My Feedbacks</a> </li>
                   <li> <a href="my-feedback.php">Notifications</a> </li>
                   <li> <a href="orders.php">Orders </a> </li>

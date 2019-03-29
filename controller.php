@@ -240,16 +240,20 @@ if (isset($_GET['from']) and $_GET['from'] == 'add-cart') {
 		$res = $db->getResult();
 		$orderId =  $res[0];
 
+		echo "cart created with the orderId " . $orderId . " <br>";
+
 	}
 	else
 	{
 		$db->select('orders_table','*',NULL,'customerId = "' . $_SESSION['customerId'] . '" and orderStatus = "On Cart"', NULL); 
 		$res = $db->getResult(); $res = $res[0];
 		$orderId = $res['orderId'];
+
+		echo "cart is alreaedy created with the orderId " . $orderId . " <br>";
 	}
 
 
-	$db->select('order_details_view','*, count(*) as total',NULL,'productVariationId = "' . $productVariationId . '" and orderId = "' . $orderId .  '"', NULL); 
+		$db->select('order_details_view','*, count(*) as total',NULL,'productVariationId = "' . $productVariationId . '" and orderId = "' . $orderId .  '"', NULL); 
 		$res = $db->getResult(); $res = $res[0];
 	
 
@@ -267,6 +271,8 @@ if (isset($_GET['from']) and $_GET['from'] == 'add-cart') {
 		);
 
 		$res = $db->getResult();
+
+		echo "the item is already added. quantity is increased <br>";
 	}
 	else
 	{
@@ -275,11 +281,15 @@ if (isset($_GET['from']) and $_GET['from'] == 'add-cart') {
 			'quantity'=>$quantity,
 			'productVariationId'=>$productVariationId,
 			'price'=>$productPrice,
-			'orderId'=>$res['orderId'],
+			'orderId'=>$orderId,
 			)
 		);
 
 		$res = $db->getResult();
+
+		print_r($res);
+
+		echo "<br>the item is not yet exist in the card. so the item is inserted. <br>";
 	}
 
 	
@@ -296,6 +306,30 @@ if (isset($_GET['from']) and $_GET['from'] == 'remove-cart') {
 	header("Location: shopping-cart.php");
 	$_SESSION['toast'] = 'remove-cart';
 }
+
+
+if (isset($_GET['from']) and $_GET['from'] == 'update-cart') {
+
+	$quantity = $db->escapeString($_POST['quantity']);
+	$orderDetailId = $db->escapeString($_POST['orderDetailId']);
+	$productPrice = $db->escapeString($_POST['productPrice']);
+
+
+		$db->update('order_details_table',
+		array(
+			'quantity'=>$quantity,
+			'price'=>$productPrice,
+
+			),
+			'orderDetailId=' . $orderDetailId
+		);
+
+		$res = $db->getResult();
+
+	header("Location: shopping-cart.php");
+	$_SESSION['toast'] = 'update-cart';
+}
+
 
 
 ?>
