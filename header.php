@@ -60,44 +60,7 @@ $filename = basename($_SERVER["SCRIPT_FILENAME"], '.php');
       <p><i class="icon-envelope"></i> cjashley@gmail.com </p>
       <p class="call"> <i class="icon-call-in"></i> 0975 436 3955 </p>
       
-      <!-- Login Info -->
-      <div class="login-info">
-        <ul>
-
-          <?php if (isset($_SESSION['customerId'])): ?>
-          <!-- USER BASKET -->
-          <li class="dropdown user-basket"> <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true"> (2) Items <i class="icon-basket-loaded"></i> </a>
-            <ul class="dropdown-menu">
-              <li>
-                <div class="media-left">
-                  <div class="cart-img"> <a href="#"> <img class="media-object img-responsive" src="images/cart-img-1.jpg" alt="..."> </a> </div>
-                </div>
-                <div class="media-body">
-                  <h6 class="media-heading">Rise Skinny Jeans</h6>
-                  <span class="price">129.00 USD</span> <span class="qty">QTY: 01</span> </div>
-              </li>
-              <li>
-                <div class="media-left">
-                  <div class="cart-img"> <a href="#"> <img class="media-object img-responsive" src="images/cart-img-2.jpg" alt="..."> </a> </div>
-                </div>
-                <div class="media-body">
-                  <h6 class="media-heading">Mid Rise Skinny Jeans</h6>
-                  <span class="price">129.00 USD</span> <span class="qty">QTY: 01</span> </div>
-              </li>
-              <li>
-                <h5 class="text-left">SUBTOTAL: <small> 258.00 USD </small></h5>
-              </li>
-              <li class="margin-0">
-                <div class="row">
-                  <div class="col-sm-6"> <a href="shopping-cart.html" class="btn">VIEW CART</a></div>
-                  <div class="col-sm-6 "> <a href="checkout.html" class="btn">CHECK OUT</a></div>
-                </div>
-              </li>
-            </ul>
-          </li>
-          <?php endif ?>
-        </ul>
-      </div>
+ 
     </div>
   </div>
   
@@ -163,29 +126,26 @@ $filename = basename($_SERVER["SCRIPT_FILENAME"], '.php');
           </div>
 
 
-          <!-- Nav Right -->
-        <div class="nav-right">
-          <ul class="navbar-right">
-            <!-- USER INFO -->
-            <li> <a href="#"><i class="lnr lnr-user"></i> </a></li>
-            <!-- USER BASKET -->
-            <li> <a href="shopping-cart.html"><span class="c-no">2</span><i class="lnr lnr-cart"></i> </a> </li>
-            <!-- SEARCH BAR -->
-            <li> <a href="javascript:void(0);" class="search-open"><i class="lnr lnr-magnifier"></i></a>
-              <div class="search-inside animated bounceInUp"> <i class="icon-close search-close"></i>
-                <div class="search-overlay"></div>
-                <div class="position-center-center">
-                  <div class="search">
-                    <form>
-                      <input type="search" placeholder="Search Shop">
-                      <button type="submit"><i class="icon-check"></i></button>
-                    </form>
-                  </div>
-                </div>
-              </div>
-            </li>
-          </ul>
-        </div>
+          <?php if (isset($_SESSION['customerId'])): ?>
+            <!-- Nav Right -->
+            <div class="nav-right">
+                <ul class="navbar-right">
+
+                  <?php 
+                    $db->select('orders_view', '*', NULL, 'customerId = "' . $_SESSION['customerId']  .'" and orderStatus = "On Cart"');
+                    $res = $db->getResult(); $res = $res['0'];
+
+                    $db->select('order_details_view', 'sum(quantity) as total', NULL, 'orderId = "' . $res['orderId']  .'"');
+                    $res = $db->getResult(); $res = $res['0'];
+
+                  ?>
+                  <!-- USER BASKET -->
+                  <li> <a href="shopping-cart.php"><span class="c-no"><?php echo $res['total']; ?></span><i class="lnr lnr-cart"></i> </a> </li>
+       
+
+                </ul>
+            </div>
+          <?php endif ?>
 
 
         </nav>
