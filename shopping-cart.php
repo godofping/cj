@@ -129,7 +129,7 @@
                   <!-- SUB TOTAL -->
                   <p class="all-total">TOTAL COST <span> ₱<?php echo number_format($sum, 2); ?></span></p>
                 </div>
-                <a href="#" class="btn margin-top-20">Proceed to checkout</a> </div>
+                <a href="checkout.php" class="btn margin-top-20">Proceed to checkout</a> </div>
             </div>
           </div>
         </div>

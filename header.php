@@ -161,6 +161,33 @@ $filename = basename($_SERVER["SCRIPT_FILENAME"], '.php');
               
             </ul>
           </div>
+
+
+          <!-- Nav Right -->
+        <div class="nav-right">
+          <ul class="navbar-right">
+            <!-- USER INFO -->
+            <li> <a href="#"><i class="lnr lnr-user"></i> </a></li>
+            <!-- USER BASKET -->
+            <li> <a href="shopping-cart.html"><span class="c-no">2</span><i class="lnr lnr-cart"></i> </a> </li>
+            <!-- SEARCH BAR -->
+            <li> <a href="javascript:void(0);" class="search-open"><i class="lnr lnr-magnifier"></i></a>
+              <div class="search-inside animated bounceInUp"> <i class="icon-close search-close"></i>
+                <div class="search-overlay"></div>
+                <div class="position-center-center">
+                  <div class="search">
+                    <form>
+                      <input type="search" placeholder="Search Shop">
+                      <button type="submit"><i class="icon-check"></i></button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+
         </nav>
        
       </div>
