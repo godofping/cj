@@ -22,6 +22,8 @@ $res = $db->getResult(); $res = $res[0];
 	</div>
 </li>
 
+<input type="text" hidden name="productPrice" value="<?php echo $res['productPrice'] ?>">
+
 <!-- ADD TO CART -->
 <li class="col-md-12">
 	<button type="submit" class="btn" <?php if ($res['productStock'] == 0): ?>

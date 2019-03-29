@@ -21,9 +21,15 @@ $res = $db->getResult(); $res = $res[0];
               <h5 class="shop-tittle margin-bottom-30"><?php echo $res['productCategory']; ?> 
               <?php 
               if (!isset($_GET['productSubCategoryId'])) {
-               echo "(All)";
+                echo "(All)";
+              }else{
+
+                $db->select('product_sub_categories_view','*',NULL,'productSubCategoryId = "' . $_GET['productSubCategoryId'] . '"', NULL); 
+                $res2 = $db->getResult(); $res2 = $res2[0];
+                echo "(".$res2['productSubCategory'].")";
               }
                ?>
+              
             </h5>
               <ul class="shop-cate">
                 <?php 

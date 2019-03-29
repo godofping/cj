@@ -39,6 +39,7 @@ jQuery(document).ready(function($){
 
 	//open-close lateral menu clicking on the menu icon
 	$lateral_menu_trigger.on('click', function(event){
+
 		event.preventDefault();
 		
 		$lateral_menu_trigger.toggleClass('is-clicked');

@@ -206,23 +206,88 @@ if (isset($_GET['from']) and $_GET['from'] == 'add-feedback') {
 
 if (isset($_GET['from']) and $_GET['from'] == 'add-cart') {
 
-	echo $_POST['quantity'];
+	// orderStatus
+	// On Cart - if items still on cart
+	// To Pay - customer has not yet pay
+	// To Ship - customer paid the order and shop is preparing the orders
+	// To Recieve - order is delivered to the customer
+	// Completed - customer recieved the order and click completed
+	// Cancelled - admin cancelled the order
+
+	// orderType
+	// Online
+	// Walk-in
+
+	$quantity = $db->escapeString($_POST['quantity']);
+	$productVariationId = $db->escapeString($_POST['productVariationId']);
+	$productPrice = $db->escapeString($_POST['productPrice']);
+	
 
 
-	// $productStocksReorderPoint = $db->escapeString($_POST['productStocksReorderPoint']);
+	$db->select('orders_table','count(*) as total',NULL,'customerId = "' . $_SESSION['customerId'] . '" and orderStatus = "On Cart"', NULL); 
+	$res = $db->getResult(); $res = $res[0];
 
-	// $db->update('product_variations_table',
-	// array(
-	// 	'productStocksReorderPoint'=>$productStocksReorderPoint,
-	// 	),
-	// 	'productVariationId=' . $_POST['productVariationId']
-	// );
-	// $res = $db->getResult();
+	if ($res['total'] == 0) {
+
+		$db->insert('orders_table',
+		array(
+			'orderType'=>'Online',
+			'orderStatus'=>'On Cart',
+			'customerId'=>$_SESSION['customerId'],
+			)
+		);
+
+		$res = $db->getResult();
+		$orderId =  $res[0];
+
+	}
+	else
+	{
+		$db->select('orders_table','*',NULL,'customerId = "' . $_SESSION['customerId'] . '" and orderStatus = "On Cart"', NULL); 
+		$res = $db->getResult(); $res = $res[0];
+		$orderId = $res['orderId'];
+	}
 
 
-	// header("Location: shop.php?productId=".$_POST['productId']);
-	// $_SESSION['toast'] = 'reorder-point';
+	$db->select('order_details_view','*, count(*) as total',NULL,'productVariationId = "' . $productVariationId . '" and orderId = "' . $orderId .  '"', NULL); 
+		$res = $db->getResult(); $res = $res[0];
+	
 
+	if ($res['total'] > 0) {
+		$totalQuantity =  $res['quantity'] + $quantity;
+		$orderDetailId = $res['orderDetailId'];
+
+		$db->update('order_details_table',
+		array(
+			'quantity'=>$totalQuantity,
+			'price'=>$productPrice,
+
+			),
+			'orderDetailId=' . $orderDetailId
+		);
+
+		$res = $db->getResult();
+	}
+	else
+	{
+		$db->insert('order_details_table',
+		array(
+			'quantity'=>$quantity,
+			'productVariationId'=>$productVariationId,
+			'price'=>$productPrice,
+			'orderId'=>$res['orderId'],
+			)
+		);
+
+		$res = $db->getResult();
+	}
+
+	
+
+
+
+	header("Location: shopping-cart.php");
+	$_SESSION['toast'] = 'add-cart';
 }
 
 

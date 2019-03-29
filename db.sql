@@ -71,11 +71,11 @@ CREATE TABLE `inventory_logs_table` (
   PRIMARY KEY (`inventorylogId`),
   KEY `FK_inventory_logs_table` (`productVariationId`),
   CONSTRAINT `FK_inventory_logs_table` FOREIGN KEY (`productVariationId`) REFERENCES `product_variations_table` (`productVariationId`)
-) ENGINE=InnoDB AUTO_INCREMENT=60 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=62 DEFAULT CHARSET=latin1;
 
 /*Data for the table `inventory_logs_table` */
 
-insert  into `inventory_logs_table`(`inventorylogId`,`productVariationId`,`inOrOut`,`quantity`,`transactionDateTime`,`inventoryLogRemark`) values (1,9,'In',10,'2019-03-28 09:32:21','The stocks is increased by 10.'),(2,9,'Out',1,'2019-03-28 09:32:24','The stocks is decreased by 1 manually.'),(3,9,'In',1,'2019-03-28 09:40:23','The stocks is increased by 1.'),(4,9,'In',5,'2019-03-28 09:41:53','The stocks is increased by 5.'),(5,10,'In',20,'2019-03-28 09:51:55','The stocks is increased by 20.'),(6,11,'In',11,'2019-03-28 09:52:30','The stocks is increased by 11.'),(7,12,'In',12,'2019-03-28 09:52:32','The stocks is increased by 12.'),(8,13,'In',13,'2019-03-28 09:52:35','The stocks is increased by 13.'),(9,14,'In',15,'2019-03-28 09:52:38','The stocks is increased by 15.'),(10,15,'In',9,'2019-03-28 09:52:40','The stocks is increased by 9.'),(11,16,'In',8,'2019-03-28 09:52:42','The stocks is increased by 8.'),(12,17,'In',7,'2019-03-28 09:52:44','The stocks is increased by 7.'),(13,18,'In',5,'2019-03-28 09:52:45','The stocks is increased by 5.'),(14,19,'In',10,'2019-03-28 09:53:13','The stocks is increased by 10.'),(15,20,'In',13,'2019-03-28 09:53:15','The stocks is increased by 13.'),(16,21,'In',20,'2019-03-28 09:53:17','The stocks is increased by 20.'),(17,22,'In',14,'2019-03-28 09:53:19','The stocks is increased by 14.'),(18,23,'In',15,'2019-03-28 09:53:21','The stocks is increased by 15.'),(19,24,'In',16,'2019-03-28 09:53:29','The stocks is increased by 16.'),(20,25,'In',18,'2019-03-28 09:53:31','The stocks is increased by 18.'),(21,26,'In',20,'2019-03-28 09:53:34','The stocks is increased by 20.'),(22,27,'In',25,'2019-03-28 09:53:36','The stocks is increased by 25.'),(23,28,'In',25,'2019-03-28 09:53:38','The stocks is increased by 25.'),(24,29,'In',30,'2019-03-28 09:53:40','The stocks is increased by 30.'),(25,30,'In',40,'2019-03-28 09:53:42','The stocks is increased by 40.'),(26,31,'In',41,'2019-03-28 09:53:44','The stocks is increased by 41.'),(27,32,'In',10,'2019-03-28 09:53:47','The stocks is increased by 10.'),(28,33,'In',9,'2019-03-28 09:53:50','The stocks is increased by 9.'),(29,34,'In',16,'2019-03-28 09:53:52','The stocks is increased by 16.'),(30,35,'In',15,'2019-03-28 09:53:55','The stocks is increased by 15.'),(31,36,'In',10,'2019-03-28 09:53:57','The stocks is increased by 10.'),(32,37,'In',15,'2019-03-28 09:53:59','The stocks is increased by 15.'),(33,38,'In',20,'2019-03-28 09:54:01','The stocks is increased by 20.'),(34,11,'In',10,'2019-03-28 09:54:15','The stocks is increased by 10.'),(35,12,'In',10,'2019-03-28 09:54:18','The stocks is increased by 10.'),(36,13,'In',10,'2019-03-28 09:54:20','The stocks is increased by 10.'),(37,14,'In',10,'2019-03-28 09:54:22','The stocks is increased by 10.'),(38,15,'In',10,'2019-03-28 09:54:24','The stocks is increased by 10.'),(39,16,'In',10,'2019-03-28 09:54:27','The stocks is increased by 10.'),(40,17,'In',10,'2019-03-28 09:54:29','The stocks is increased by 10.'),(41,18,'In',15,'2019-03-28 09:54:32','The stocks is increased by 15.'),(42,19,'In',16,'2019-03-28 09:54:35','The stocks is increased by 16.'),(43,20,'In',5,'2019-03-28 09:54:37','The stocks is increased by 5.'),(44,39,'In',10,'2019-03-28 09:55:15','The stocks is increased by 10.'),(45,40,'In',15,'2019-03-28 09:55:17','The stocks is increased by 15.'),(46,41,'In',11,'2019-03-28 09:55:19','The stocks is increased by 11.'),(47,42,'In',12,'2019-03-28 09:55:21','The stocks is increased by 12.'),(48,43,'In',13,'2019-03-28 09:55:23','The stocks is increased by 13.'),(49,44,'In',14,'2019-03-28 09:55:24','The stocks is increased by 14.'),(50,45,'In',15,'2019-03-28 09:55:26','The stocks is increased by 15.'),(51,46,'In',15,'2019-03-28 09:55:28','The stocks is increased by 15.'),(52,2,'In',20,'2019-03-28 09:55:30','The stocks is increased by 20.'),(53,4,'In',21,'2019-03-28 09:55:32','The stocks is increased by 21.'),(54,5,'In',10,'2019-03-28 09:55:48','The stocks is increased by 10.'),(55,6,'In',11,'2019-03-28 09:55:49','The stocks is increased by 11.'),(56,8,'In',12,'2019-03-28 09:55:51','The stocks is increased by 12.'),(57,33,'In',12,'2019-03-28 09:55:53','The stocks is increased by 12.'),(58,32,'In',14,'2019-03-28 09:55:55','The stocks is increased by 14.'),(59,36,'In',123,'2019-03-28 09:56:02','The stocks is increased by 123.');
+insert  into `inventory_logs_table`(`inventorylogId`,`productVariationId`,`inOrOut`,`quantity`,`transactionDateTime`,`inventoryLogRemark`) values (1,9,'In',10,'2019-03-28 09:32:21','The stocks is increased by 10.'),(2,9,'Out',1,'2019-03-28 09:32:24','The stocks is decreased by 1 manually.'),(3,9,'In',1,'2019-03-28 09:40:23','The stocks is increased by 1.'),(4,9,'In',5,'2019-03-28 09:41:53','The stocks is increased by 5.'),(5,10,'In',20,'2019-03-28 09:51:55','The stocks is increased by 20.'),(6,11,'In',11,'2019-03-28 09:52:30','The stocks is increased by 11.'),(7,12,'In',12,'2019-03-28 09:52:32','The stocks is increased by 12.'),(8,13,'In',13,'2019-03-28 09:52:35','The stocks is increased by 13.'),(9,14,'In',15,'2019-03-28 09:52:38','The stocks is increased by 15.'),(10,15,'In',9,'2019-03-28 09:52:40','The stocks is increased by 9.'),(11,16,'In',8,'2019-03-28 09:52:42','The stocks is increased by 8.'),(12,17,'In',7,'2019-03-28 09:52:44','The stocks is increased by 7.'),(13,18,'In',5,'2019-03-28 09:52:45','The stocks is increased by 5.'),(14,19,'In',10,'2019-03-28 09:53:13','The stocks is increased by 10.'),(15,20,'In',13,'2019-03-28 09:53:15','The stocks is increased by 13.'),(16,21,'In',20,'2019-03-28 09:53:17','The stocks is increased by 20.'),(17,22,'In',14,'2019-03-28 09:53:19','The stocks is increased by 14.'),(18,23,'In',15,'2019-03-28 09:53:21','The stocks is increased by 15.'),(19,24,'In',16,'2019-03-28 09:53:29','The stocks is increased by 16.'),(20,25,'In',18,'2019-03-28 09:53:31','The stocks is increased by 18.'),(21,26,'In',20,'2019-03-28 09:53:34','The stocks is increased by 20.'),(22,27,'In',25,'2019-03-28 09:53:36','The stocks is increased by 25.'),(23,28,'In',25,'2019-03-28 09:53:38','The stocks is increased by 25.'),(24,29,'In',30,'2019-03-28 09:53:40','The stocks is increased by 30.'),(25,30,'In',40,'2019-03-28 09:53:42','The stocks is increased by 40.'),(26,31,'In',41,'2019-03-28 09:53:44','The stocks is increased by 41.'),(27,32,'In',10,'2019-03-28 09:53:47','The stocks is increased by 10.'),(28,33,'In',9,'2019-03-28 09:53:50','The stocks is increased by 9.'),(29,34,'In',16,'2019-03-28 09:53:52','The stocks is increased by 16.'),(30,35,'In',15,'2019-03-28 09:53:55','The stocks is increased by 15.'),(31,36,'In',10,'2019-03-28 09:53:57','The stocks is increased by 10.'),(32,37,'In',15,'2019-03-28 09:53:59','The stocks is increased by 15.'),(33,38,'In',20,'2019-03-28 09:54:01','The stocks is increased by 20.'),(34,11,'In',10,'2019-03-28 09:54:15','The stocks is increased by 10.'),(35,12,'In',10,'2019-03-28 09:54:18','The stocks is increased by 10.'),(36,13,'In',10,'2019-03-28 09:54:20','The stocks is increased by 10.'),(37,14,'In',10,'2019-03-28 09:54:22','The stocks is increased by 10.'),(38,15,'In',10,'2019-03-28 09:54:24','The stocks is increased by 10.'),(39,16,'In',10,'2019-03-28 09:54:27','The stocks is increased by 10.'),(40,17,'In',10,'2019-03-28 09:54:29','The stocks is increased by 10.'),(41,18,'In',15,'2019-03-28 09:54:32','The stocks is increased by 15.'),(42,19,'In',16,'2019-03-28 09:54:35','The stocks is increased by 16.'),(43,20,'In',5,'2019-03-28 09:54:37','The stocks is increased by 5.'),(44,39,'In',10,'2019-03-28 09:55:15','The stocks is increased by 10.'),(45,40,'In',15,'2019-03-28 09:55:17','The stocks is increased by 15.'),(46,41,'In',11,'2019-03-28 09:55:19','The stocks is increased by 11.'),(47,42,'In',12,'2019-03-28 09:55:21','The stocks is increased by 12.'),(48,43,'In',13,'2019-03-28 09:55:23','The stocks is increased by 13.'),(49,44,'In',14,'2019-03-28 09:55:24','The stocks is increased by 14.'),(50,45,'In',15,'2019-03-28 09:55:26','The stocks is increased by 15.'),(51,46,'In',15,'2019-03-28 09:55:28','The stocks is increased by 15.'),(52,2,'In',20,'2019-03-28 09:55:30','The stocks is increased by 20.'),(53,4,'In',21,'2019-03-28 09:55:32','The stocks is increased by 21.'),(54,5,'In',10,'2019-03-28 09:55:48','The stocks is increased by 10.'),(55,6,'In',11,'2019-03-28 09:55:49','The stocks is increased by 11.'),(56,8,'In',12,'2019-03-28 09:55:51','The stocks is increased by 12.'),(57,33,'In',12,'2019-03-28 09:55:53','The stocks is increased by 12.'),(58,32,'In',14,'2019-03-28 09:55:55','The stocks is increased by 14.'),(59,36,'In',123,'2019-03-28 09:56:02','The stocks is increased by 123.'),(60,9,'Out',15,'2019-03-29 01:09:37','The stocks is decreased by 15 manually.'),(61,9,'In',10,'2019-03-29 01:09:56','The stocks is increased by 10.');
 
 /*Table structure for table `order_details_table` */
 
@@ -91,16 +91,18 @@ CREATE TABLE `order_details_table` (
   KEY `FK_order_details_table2` (`orderId`),
   KEY `FK_order_details_table1` (`productVariationId`),
   CONSTRAINT `FK_order_details_table1` FOREIGN KEY (`productVariationId`) REFERENCES `product_variations_table` (`productVariationId`),
-  CONSTRAINT `FK_order_details_table2` FOREIGN KEY (`orderId`) REFERENCES `orders` (`orderId`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  CONSTRAINT `FK_order_details_table2` FOREIGN KEY (`orderId`) REFERENCES `orders_table` (`orderId`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
 /*Data for the table `order_details_table` */
 
-/*Table structure for table `orders` */
+insert  into `order_details_table`(`orderDetailId`,`productVariationId`,`orderId`,`quantity`,`price`) values (4,10,2,1,159),(5,10,2,1,159),(6,9,2,3,159);
 
-DROP TABLE IF EXISTS `orders`;
+/*Table structure for table `orders_table` */
 
-CREATE TABLE `orders` (
+DROP TABLE IF EXISTS `orders_table`;
+
+CREATE TABLE `orders_table` (
   `orderId` int(6) NOT NULL AUTO_INCREMENT,
   `orderDate` date DEFAULT NULL,
   `shippingAddress` text,
@@ -117,9 +119,11 @@ CREATE TABLE `orders` (
   PRIMARY KEY (`orderId`),
   KEY `FK_order_details_table` (`customerId`),
   CONSTRAINT `FK_order_details_table` FOREIGN KEY (`customerId`) REFERENCES `customers_table` (`customerId`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
-/*Data for the table `orders` */
+/*Data for the table `orders_table` */
+
+insert  into `orders_table`(`orderId`,`orderDate`,`shippingAddress`,`orderType`,`orderShipFirstName`,`orderShipLastName`,`orderShipEmail`,`orderShipPhoneNumber`,`orderTrackingNumber`,`orderStatus`,`orderTotalAmount`,`customerId`,`request`) values (2,NULL,NULL,'Online',NULL,NULL,NULL,NULL,NULL,'On Cart',NULL,6,NULL),(3,NULL,NULL,'Online',NULL,NULL,NULL,NULL,NULL,'On Cart',NULL,6,NULL),(4,NULL,NULL,'Online',NULL,NULL,NULL,NULL,NULL,'On Cart',NULL,6,NULL);
 
 /*Table structure for table `payment_table` */
 
@@ -135,7 +139,7 @@ CREATE TABLE `payment_table` (
   `paymentStatus` varchar(60) DEFAULT NULL,
   PRIMARY KEY (`paymentId`),
   KEY `FK_payment_table` (`orderId`),
-  CONSTRAINT `FK_payment_table` FOREIGN KEY (`orderId`) REFERENCES `orders` (`orderId`)
+  CONSTRAINT `FK_payment_table` FOREIGN KEY (`orderId`) REFERENCES `orders_table` (`orderId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*Data for the table `payment_table` */
@@ -228,7 +232,7 @@ CREATE TABLE `product_variations_table` (
 
 /*Data for the table `product_variations_table` */
 
-insert  into `product_variations_table`(`productVariationId`,`productId`,`productStock`,`productStocksReorderPoint`,`productOption1`,`productOption2`,`productVariationIsDeleted`,`productPrice`) values (2,23,20,0,'250ml','',0,179),(3,23,0,0,'tae1','tae',1,1),(4,26,21,0,'620ml','',0,399),(5,26,10,0,'tae1','',0,123123),(6,21,11,0,'32GB ROM','3gb RAM',0,6990),(7,21,0,0,'1','1',1,1),(8,21,12,0,'16GB ROM','2gb RAM',0,4990),(9,28,15,5,'XS','',0,159),(10,28,20,1,'S','',0,159),(11,28,21,0,'M','',0,159),(12,28,22,0,'L','',0,159),(13,28,23,0,'XL','',0,159),(14,29,25,0,'S','',0,159),(15,29,19,0,'M','',0,159),(16,29,18,0,'L','',0,159),(17,29,17,0,'XL','',0,159),(18,30,20,0,'CHECK','M',0,89),(19,30,26,0,'KELLY','M',0,89),(20,30,18,0,'NIKE','M',0,89),(21,31,20,0,'XS','',0,199),(22,31,14,0,'S','',0,199),(23,31,15,0,'M','',0,199),(24,31,16,0,'L','',0,199),(25,31,18,0,'XL','',0,199),(26,32,20,0,'BLUE','S',0,149),(27,32,25,0,'BLUE','M',0,149),(28,32,25,0,'BLUE','L',0,149),(29,32,30,0,'GRAY','S',0,159),(30,32,40,0,'GRAY','M',0,159),(31,32,41,0,'GRAY','L',0,159),(32,32,24,0,'RED','S',0,169),(33,32,21,0,'RED','M',0,169),(34,32,16,0,'RED','L',0,169),(35,33,15,0,'M','',0,398),(36,33,133,0,'L','',0,398),(37,33,15,0,'XL','',0,398),(38,33,20,0,'XXL','',0,398),(39,34,10,0,'BLACK','40',0,299),(40,34,15,0,'BLACK','42',0,299),(41,34,11,0,'BLACK','44',0,299),(42,35,12,0,'BLACK','38',0,251.75),(43,35,13,0,'BLACK','40',0,251.75),(44,35,14,0,'BLACK','42',0,251.75),(45,35,15,0,'BLACK','44',0,251.75),(46,36,15,0,'SAND','39',0,1455);
+insert  into `product_variations_table`(`productVariationId`,`productId`,`productStock`,`productStocksReorderPoint`,`productOption1`,`productOption2`,`productVariationIsDeleted`,`productPrice`) values (2,23,20,0,'250ml','',0,179),(3,23,0,0,'tae1','tae',1,1),(4,26,21,0,'620ml','',0,399),(5,26,10,0,'tae1','',0,123123),(6,21,11,0,'32GB ROM','3gb RAM',0,6990),(7,21,0,0,'1','1',1,1),(8,21,12,0,'16GB ROM','2gb RAM',0,4990),(9,28,10,5,'XS','',0,159),(10,28,20,1,'S','',0,159),(11,28,21,0,'M','',0,159),(12,28,22,0,'L','',0,159),(13,28,23,0,'XL','',0,159),(14,29,25,0,'S','',0,159),(15,29,19,0,'M','',0,159),(16,29,18,0,'L','',0,159),(17,29,17,0,'XL','',0,159),(18,30,20,0,'CHECK','M',0,89),(19,30,26,0,'KELLY','M',0,89),(20,30,18,0,'NIKE','M',0,89),(21,31,20,0,'XS','',0,199),(22,31,14,0,'S','',0,199),(23,31,15,0,'M','',0,199),(24,31,16,0,'L','',0,199),(25,31,18,0,'XL','',0,199),(26,32,20,0,'BLUE','S',0,149),(27,32,25,0,'BLUE','M',0,149),(28,32,25,0,'BLUE','L',0,149),(29,32,30,0,'GRAY','S',0,159),(30,32,40,0,'GRAY','M',0,159),(31,32,41,0,'GRAY','L',0,159),(32,32,24,0,'RED','S',0,169),(33,32,21,0,'RED','M',0,169),(34,32,16,0,'RED','L',0,169),(35,33,15,0,'M','',0,398),(36,33,133,0,'L','',0,398),(37,33,15,0,'XL','',0,398),(38,33,20,0,'XXL','',0,398),(39,34,10,0,'BLACK','40',0,299),(40,34,15,0,'BLACK','42',0,299),(41,34,11,0,'BLACK','44',0,299),(42,35,12,0,'BLACK','38',0,251.75),(43,35,13,0,'BLACK','40',0,251.75),(44,35,14,0,'BLACK','42',0,251.75),(45,35,15,0,'BLACK','44',0,251.75),(46,36,15,0,'SAND','39',0,1455);
 
 /*Table structure for table `products_table` */
 
@@ -334,6 +338,86 @@ DROP TABLE IF EXISTS `inventory_logs_view`;
  `productOption2` varchar(60) ,
  `productVariationIsDeleted` tinyint(1) ,
  `productPrice` float 
+)*/;
+
+/*Table structure for table `order_details_view` */
+
+DROP TABLE IF EXISTS `order_details_view`;
+
+/*!50001 DROP VIEW IF EXISTS `order_details_view` */;
+/*!50001 DROP TABLE IF EXISTS `order_details_view` */;
+
+/*!50001 CREATE TABLE  `order_details_view`(
+ `orderDetailId` int(6) ,
+ `productVariationId` int(6) ,
+ `orderId` int(6) ,
+ `quantity` int(11) ,
+ `price` float ,
+ `orderDate` date ,
+ `shippingAddress` text ,
+ `orderType` varchar(60) ,
+ `orderShipFirstName` varchar(60) ,
+ `orderShipLastName` varchar(60) ,
+ `orderShipEmail` varchar(60) ,
+ `orderShipPhoneNumber` varchar(60) ,
+ `orderTrackingNumber` varchar(60) ,
+ `orderStatus` varchar(60) ,
+ `orderTotalAmount` float ,
+ `customerId` int(6) ,
+ `request` text ,
+ `customerEmail` varchar(60) ,
+ `customerPassword` varchar(60) ,
+ `customerFirstName` varchar(60) ,
+ `customerLastName` varchar(60) ,
+ `customerAddress` varchar(60) ,
+ `customerRegistrationDate` date ,
+ `customerPhoneNumber` varchar(60) ,
+ `customerType` varchar(60) ,
+ `customerIsBlocked` tinyint(1) ,
+ `productId` int(6) ,
+ `productStock` int(6) ,
+ `productStocksReorderPoint` int(6) ,
+ `productOption1` varchar(60) ,
+ `productOption2` varchar(60) ,
+ `productVariationIsDeleted` tinyint(1) ,
+ `productPrice` float ,
+ `productName` varchar(60) ,
+ `productSubCategoryId` int(6) ,
+ `productDetails` text ,
+ `productUpdateDate` datetime ,
+ `productIsDeleted` tinyint(1) 
+)*/;
+
+/*Table structure for table `orders_view` */
+
+DROP TABLE IF EXISTS `orders_view`;
+
+/*!50001 DROP VIEW IF EXISTS `orders_view` */;
+/*!50001 DROP TABLE IF EXISTS `orders_view` */;
+
+/*!50001 CREATE TABLE  `orders_view`(
+ `orderId` int(6) ,
+ `orderDate` date ,
+ `shippingAddress` text ,
+ `orderType` varchar(60) ,
+ `orderShipFirstName` varchar(60) ,
+ `orderShipLastName` varchar(60) ,
+ `orderShipEmail` varchar(60) ,
+ `orderShipPhoneNumber` varchar(60) ,
+ `orderTrackingNumber` varchar(60) ,
+ `orderStatus` varchar(60) ,
+ `orderTotalAmount` float ,
+ `customerId` int(6) ,
+ `request` text ,
+ `customerEmail` varchar(60) ,
+ `customerPassword` varchar(60) ,
+ `customerFirstName` varchar(60) ,
+ `customerLastName` varchar(60) ,
+ `customerAddress` varchar(60) ,
+ `customerRegistrationDate` date ,
+ `customerPhoneNumber` varchar(60) ,
+ `customerType` varchar(60) ,
+ `customerIsBlocked` tinyint(1) 
 )*/;
 
 /*Table structure for table `product_categories_view` */
@@ -492,6 +576,20 @@ DROP TABLE IF EXISTS `users_view`;
 /*!50001 DROP VIEW IF EXISTS `inventory_logs_view` */;
 
 /*!50001 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `inventory_logs_view` AS select `inventory_logs_table`.`inventorylogId` AS `inventorylogId`,`inventory_logs_table`.`productVariationId` AS `productVariationId`,`inventory_logs_table`.`inOrOut` AS `inOrOut`,`inventory_logs_table`.`quantity` AS `quantity`,`inventory_logs_table`.`transactionDateTime` AS `transactionDateTime`,`inventory_logs_table`.`inventoryLogRemark` AS `inventoryLogRemark`,`product_variations_table`.`productId` AS `productId`,`product_variations_table`.`productStock` AS `productStock`,`product_variations_table`.`productStocksReorderPoint` AS `productStocksReorderPoint`,`product_variations_table`.`productOption1` AS `productOption1`,`product_variations_table`.`productOption2` AS `productOption2`,`product_variations_table`.`productVariationIsDeleted` AS `productVariationIsDeleted`,`product_variations_table`.`productPrice` AS `productPrice` from (`inventory_logs_table` join `product_variations_table` on((`inventory_logs_table`.`productVariationId` = `product_variations_table`.`productVariationId`))) */;
+
+/*View structure for view order_details_view */
+
+/*!50001 DROP TABLE IF EXISTS `order_details_view` */;
+/*!50001 DROP VIEW IF EXISTS `order_details_view` */;
+
+/*!50001 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `order_details_view` AS select `order_details_table`.`orderDetailId` AS `orderDetailId`,`order_details_table`.`productVariationId` AS `productVariationId`,`order_details_table`.`orderId` AS `orderId`,`order_details_table`.`quantity` AS `quantity`,`order_details_table`.`price` AS `price`,`orders_table`.`orderDate` AS `orderDate`,`orders_table`.`shippingAddress` AS `shippingAddress`,`orders_table`.`orderType` AS `orderType`,`orders_table`.`orderShipFirstName` AS `orderShipFirstName`,`orders_table`.`orderShipLastName` AS `orderShipLastName`,`orders_table`.`orderShipEmail` AS `orderShipEmail`,`orders_table`.`orderShipPhoneNumber` AS `orderShipPhoneNumber`,`orders_table`.`orderTrackingNumber` AS `orderTrackingNumber`,`orders_table`.`orderStatus` AS `orderStatus`,`orders_table`.`orderTotalAmount` AS `orderTotalAmount`,`orders_table`.`customerId` AS `customerId`,`orders_table`.`request` AS `request`,`customers_table`.`customerEmail` AS `customerEmail`,`customers_table`.`customerPassword` AS `customerPassword`,`customers_table`.`customerFirstName` AS `customerFirstName`,`customers_table`.`customerLastName` AS `customerLastName`,`customers_table`.`customerAddress` AS `customerAddress`,`customers_table`.`customerRegistrationDate` AS `customerRegistrationDate`,`customers_table`.`customerPhoneNumber` AS `customerPhoneNumber`,`customers_table`.`customerType` AS `customerType`,`customers_table`.`customerIsBlocked` AS `customerIsBlocked`,`product_variations_table`.`productId` AS `productId`,`product_variations_table`.`productStock` AS `productStock`,`product_variations_table`.`productStocksReorderPoint` AS `productStocksReorderPoint`,`product_variations_table`.`productOption1` AS `productOption1`,`product_variations_table`.`productOption2` AS `productOption2`,`product_variations_table`.`productVariationIsDeleted` AS `productVariationIsDeleted`,`product_variations_table`.`productPrice` AS `productPrice`,`products_table`.`productName` AS `productName`,`products_table`.`productSubCategoryId` AS `productSubCategoryId`,`products_table`.`productDetails` AS `productDetails`,`products_table`.`productUpdateDate` AS `productUpdateDate`,`products_table`.`productIsDeleted` AS `productIsDeleted` from ((((`order_details_table` join `orders_table` on((`order_details_table`.`orderId` = `orders_table`.`orderId`))) join `customers_table` on((`orders_table`.`customerId` = `customers_table`.`customerId`))) join `product_variations_table` on((`order_details_table`.`productVariationId` = `product_variations_table`.`productVariationId`))) join `products_table` on((`product_variations_table`.`productId` = `products_table`.`productId`))) where ((`products_table`.`productIsDeleted` = 0) and (`customers_table`.`customerIsBlocked` = 0)) */;
+
+/*View structure for view orders_view */
+
+/*!50001 DROP TABLE IF EXISTS `orders_view` */;
+/*!50001 DROP VIEW IF EXISTS `orders_view` */;
+
+/*!50001 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `orders_view` AS select `orders_table`.`orderId` AS `orderId`,`orders_table`.`orderDate` AS `orderDate`,`orders_table`.`shippingAddress` AS `shippingAddress`,`orders_table`.`orderType` AS `orderType`,`orders_table`.`orderShipFirstName` AS `orderShipFirstName`,`orders_table`.`orderShipLastName` AS `orderShipLastName`,`orders_table`.`orderShipEmail` AS `orderShipEmail`,`orders_table`.`orderShipPhoneNumber` AS `orderShipPhoneNumber`,`orders_table`.`orderTrackingNumber` AS `orderTrackingNumber`,`orders_table`.`orderStatus` AS `orderStatus`,`orders_table`.`orderTotalAmount` AS `orderTotalAmount`,`orders_table`.`customerId` AS `customerId`,`orders_table`.`request` AS `request`,`customers_table`.`customerEmail` AS `customerEmail`,`customers_table`.`customerPassword` AS `customerPassword`,`customers_table`.`customerFirstName` AS `customerFirstName`,`customers_table`.`customerLastName` AS `customerLastName`,`customers_table`.`customerAddress` AS `customerAddress`,`customers_table`.`customerRegistrationDate` AS `customerRegistrationDate`,`customers_table`.`customerPhoneNumber` AS `customerPhoneNumber`,`customers_table`.`customerType` AS `customerType`,`customers_table`.`customerIsBlocked` AS `customerIsBlocked` from (`orders_table` join `customers_table` on((`orders_table`.`customerId` = `customers_table`.`customerId`))) */;
 
 /*View structure for view product_categories_view */
 
