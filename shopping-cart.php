@@ -55,7 +55,7 @@
                   <a href="#." class="item-img"> <img class="media-object" src="dashboard/images/<?php echo $imgoutput['productImageLocation'] ?>" alt=""> </a> 
                   <!-- Item Name -->
                   <div class="media-body">
-                    <span><?php echo $res['productName']; ?> (<?php echo $res['productOption1']; ?> <?php echo $res['productOption2']; ?>)</span>
+                    <h6 class="pt-4"><?php echo $res['productName']; ?> (<?php echo $res['productOption1']; ?> <?php echo $res['productOption2']; ?>)</h6>
                   </div>
                 </th>
                 <td><span class="price"><small>₱</small><?php echo number_format($res['productPrice'], 2); ?></span></td>
@@ -65,7 +65,7 @@
                         </div>
                 </td>
                 <td><span class="price"><small>₱</small><?php echo number_format($res['quantity'] * $res['price'], 2); ?></span></td>
-                <td><a href="#."><i class="icon-close"></i></a></td>
+                <td><a href="controller.php?from=remove-cart&productVariationId=<?php echo $res['productVariationId'] ?>"><i class="icon-close"></i></a></td>
               </tr>
 
             <?php } ?>
@@ -87,9 +87,14 @@
             
             <!-- DISCOUNT CODE -->
             <div class="col-sm-7">
-              <h6>Discound Code</h6>
+       
+              <?php 
+              $db->select('product_categories_table'); 
+              $res = $db->getResult();
+              $res = $res[0];
+              ?>
            
-              <div class="coupn-btn"> <a href="#." class="btn">continue shopping</a> <a href="#." class="btn">update cart</a> </div>
+              <div class="coupn-btn"> <a href="shop.php?productCategoryId=<?php echo $res['productCategoryId'] ?>" class="btn">continue shopping</a></div>
             </div>
             
             <!-- SUB TOTAL -->
@@ -104,7 +109,7 @@
                   <!-- SUB TOTAL -->
                   <p class="all-total">TOTAL COST <span> $998</span></p>
                 </div>
-                <a href="#." class="btn margin-top-20">Proceed to checkout</a> </div>
+                <a href="#" class="btn margin-top-20">Proceed to checkout</a> </div>
             </div>
           </div>
         </div>

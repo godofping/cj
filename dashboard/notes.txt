@@ -13,3 +13,15 @@ s3 - color - red - capacity - 64
 
 -add all
 <p>* indicates required fields</p>
+
+
+rework carts.
+
+
+--add cart pseudocode
+if no vacant order
+	create order
+	add order details
+	
+else	
+	add order details	

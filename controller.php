@@ -284,10 +284,17 @@ if (isset($_GET['from']) and $_GET['from'] == 'add-cart') {
 
 	
 
-
-
 	header("Location: shopping-cart.php");
 	$_SESSION['toast'] = 'add-cart';
+}
+
+
+if (isset($_GET['from']) and $_GET['from'] == 'remove-cart') {
+
+	$db->delete('order_details_table','productVariationId=' . $_GET['productVariationId']);
+	$res = $db->getResult();
+	header("Location: shopping-cart.php");
+	$_SESSION['toast'] = 'remove-cart';
 }
 
 

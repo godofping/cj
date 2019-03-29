@@ -92,11 +92,9 @@ CREATE TABLE `order_details_table` (
   KEY `FK_order_details_table1` (`productVariationId`),
   CONSTRAINT `FK_order_details_table1` FOREIGN KEY (`productVariationId`) REFERENCES `product_variations_table` (`productVariationId`),
   CONSTRAINT `FK_order_details_table2` FOREIGN KEY (`orderId`) REFERENCES `orders_table` (`orderId`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 
 /*Data for the table `order_details_table` */
-
-insert  into `order_details_table`(`orderDetailId`,`productVariationId`,`orderId`,`quantity`,`price`) values (4,10,2,1,159),(5,10,2,1,159),(6,9,2,3,159);
 
 /*Table structure for table `orders_table` */
 
@@ -119,7 +117,7 @@ CREATE TABLE `orders_table` (
   PRIMARY KEY (`orderId`),
   KEY `FK_order_details_table` (`customerId`),
   CONSTRAINT `FK_order_details_table` FOREIGN KEY (`customerId`) REFERENCES `customers_table` (`customerId`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
 /*Data for the table `orders_table` */
 

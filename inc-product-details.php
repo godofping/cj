@@ -26,7 +26,11 @@ $res = $db->getResult(); $res = $res[0];
 
 <!-- ADD TO CART -->
 <li class="col-md-12">
-	<button type="submit" class="btn" <?php if ($res['productStock'] == 0): ?>
+	<button <?php if (!isset($_SESSION['customerId'])): ?>
+		data-toggle="tooltip" title="Please login first to add this item to the cart." type="button"
+	<?php endif ?> <?php if (isset($_SESSION['customerId'])): ?>
+		type="submit"
+	<?php endif ?>  class="btn" <?php if ($res['productStock'] == 0): ?>
 		disabled
 	<?php endif ?>>ADD TO CART</button>
 </li>
@@ -57,5 +61,11 @@ $('.quantity-left-minus').click(function(e){
             if(quantity>0){
             $('#quantity').val(quantity - 1);
             }
+});
+</script>
+
+<script>
+$(document).ready(function(){
+  $('[data-toggle="tooltip"]').tooltip(); 
 });
 </script>
