@@ -77,33 +77,10 @@ $res = $db->getResult(); $res = $res[0];
                 </ul>
           
                 
-                <!-- SHIPPING info -->
-                <h6 class="margin-top-50">Shipping Information</h6>
- 
-                <ul class="row">
-                  <li class="col-sm-6">
-                    <label>First name *
-                      <input type="text" class="form-control" name="customerFirstName" id="customerFirstName" placeholder="" required="">
-                    </label>
-                  </li>
-                  <li class="col-sm-6">
-                    <label>Last name *
-                      <input type="text" class="form-control" name="customerLastName" id="customerLastName" placeholder="" required="">
-                    </label>
-                  </li>
-                  <li class="col-sm-12">
-                    <label>Address * <small>(building number, street name, city, province)</small>
-                      <input type="text" class="form-control" name="customerAddress" id="customerAddress" placeholder="" required="">
-                    </label>
-                  </li>
-                  <li class="col-sm-6">
-                    <label>Phone Number *
-                      <input type="text" class="form-control" name="customerPhoneNumber" id="customerPhoneNumber" placeholder="" required="">
-                    </label>
-                  </li>
+               <div id="shippingInformation">
+        
+               </div>
 
-            
-                </ul>
        
               </div>
               
@@ -114,7 +91,7 @@ $res = $db->getResult(); $res = $res[0];
                   <div class="order-detail">
 
                     <?php 
-                    $db->select('order_details_view','*',NULL,'customerId = "' . $_SESSION['customerId'] . '"', NULL); 
+                    $db->select('order_details_view','*',NULL,'customerId = "' . $_SESSION['customerId'] . '" and orderStatus = "On Cart"', NULL); 
                     $output = $db->getResult();
                     $sum = 0;
                     foreach ($output as $res) { ?>
@@ -134,41 +111,43 @@ $res = $db->getResult(); $res = $res[0];
                   </div>
                   <div class="pay-meth">
                     <ul>
+
+                      <li>
+                        <label>Mode of Payment</label>
+                        
+                      </li>
+
                       <li>
                         <div class="radio">
                           <input type="radio" name="radio1" id="radio1" value="option1" checked>
-                          <label for="radio1"> DIRECT BANK TRANSFER </label>
+                          <label for="radio1"> REMITTANCE </label>
                         </div>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam erat turpis, pellentesque non leo eget, pulvinar pretium arcu. Mauris porta elit non.</p>
+                        <p>If you choose this option, you are obligated to send your payments after placing this order.</p>
                       </li>
                       <li>
                         <div class="radio">
                           <input type="radio" name="radio1" id="radio2" value="option2">
-                          <label for="radio2"> CASH ON DELIVERY</label>
+                          <label for="radio2"> WALK IN</label>
                         </div>
                       </li>
-                      <li>
-                        <div class="radio">
-                          <input type="radio" name="radio1" id="radio3" value="option3">
-                          <label for="radio3"> CHEQUE PAYMENT </label>
-                        </div>
-                      </li>
-                      <li>
-                        <div class="radio">
-                          <input type="radio" name="radio1" id="radio4" value="option4">
-                          <label for="radio4"> PAYPAL </label>
-                        </div>
-                      </li>
-                      <li>
-                        <div class="checkbox">
-                          <input id="checkbox3-4" class="styled" type="checkbox">
-                          <label for="checkbox3-4"> I’VE READ AND ACCEPT THE <span class="color"> TERMS & CONDITIONS </span> </label>
-                        </div>
-                      </li>
+
+
+                      <li class="mt-3">
+                      <label>Delivery Type * </label>
+                        <select class="form-control" required="" name="deliveryType" id="deliveryType">
+                          <option>Pick Up</option>
+                          <option>Shipping</option>
+                        </select>
+                      
+                    </li>
+
                     </ul>
-                    <a href="#." class="btn  btn-dark pull-right margin-top-30">PLACE ORDER</a> </div>
+                    <button type="submit" class="btn  btn-dark pull-right margin-top-30">PLACE ORDER</button> </div>
                 </div>
               </div>
+
+            </form>
+
             </div>
           </div>
         </div>
@@ -177,10 +156,27 @@ $res = $db->getResult(); $res = $res[0];
     
   </div>
 
-
-
-
   
+<?php include('footer.php'); ?>
 
-  <?php include('footer.php'); ?>
+<script type="text/javascript">
 
+  $('#deliveryType').change(function(){
+
+    var deliveryType = $(this).children("option:selected").val();
+
+    if (deliveryType == 'Shipping') {
+        $.post("inc-shipping-information.php", { deliveryType:deliveryType, } , function(data, status){
+
+        $('#shippingInformation').html(data);
+
+        });
+
+    }else if(deliveryType == 'Pick Up'){
+      $('#shippingInformation').html("");
+    }
+
+    
+    
+  });
+</script>

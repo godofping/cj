@@ -147,18 +147,25 @@ if ($filename != "finish-registration" and isset($_SESSION['customerId'])) {
 
                     if (!empty($res)) {
                        $res = $res['0'];
-                       $db->select('order_details_view', 'sum(quantity) as total', NULL, 'orderId = "' . $res['orderId']  .'"');
+                       $db->select('order_details_view', 'sum(quantity) as total', NULL, 'orderId = "' . $res['orderId']  . '" and orderStatus = "On Cart"');
                         $res = $db->getResult(); $res = $res['0'];
-                        $total = $res['total'];
+
+                        if ($res['total'] == '') {
+                          $total = 0;
+                        }
+                        else
+                        {
+                          $total = $res['total'];
+
+                        }
                     }
                     else
                     {
                       $total = 0;
                     }
 
-                    
 
-                    
+
 
                   ?>
                   <!-- USER BASKET -->

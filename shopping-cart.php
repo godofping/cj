@@ -13,7 +13,7 @@
 
 
 <?php 
-  $db->select('order_details_view','count(*) as total',NULL,'customerId = "' . $_SESSION['customerId'] . '"', NULL); 
+  $db->select('order_details_view','count(*) as total',NULL,'customerId = "' . $_SESSION['customerId'] . '" and orderStatus = "On Cart"', NULL); 
   $res = $db->getResult(); $res = $res[0];
 
   if ($res['total'] > 0) { ?>
@@ -39,9 +39,12 @@
             <tbody>
 
               <?php 
-              $db->select('order_details_view','*',NULL,'customerId = "' . $_SESSION['customerId'] . '"', NULL); 
+              $db->select('order_details_view','*',NULL,'customerId = "' . $_SESSION['customerId'] . '" and orderStatus = "On Cart"', NULL); 
               $output = $db->getResult();
-              foreach ($output as $res) { ?>
+              foreach ($output as $res) { 
+
+                $orderId = $res['orderId'];
+                ?>
               <form method="POST" action="controller.php?from=update-cart" autocomplete="off">
                 <tr>
                     <th class="text-left"> <!-- Media Image --> 
@@ -96,7 +99,11 @@
               $res = $db->getResult();
               $res = $res[0];
               ?>
-              <div class="coupn-btn text-center mt-5"> <a href="shop.php?productCategoryId=<?php echo $res['productCategoryId'] ?>" class="btn">continue shopping</a></div>
+              <div class="coupn-btn text-right mt-5"> 
+                <a href="controller.php?from=empty-cart&orderId=<?php echo $orderId; ?>" class="btn float-left">Empty Cart</a> 
+
+                <a href="shop.php?productCategoryId=<?php echo $res['productCategoryId'] ?>" class="btn btn-inverse">continue shopping</a>
+              </div>
             </div>
           </div>
 
@@ -118,7 +125,7 @@
               <div class="grand-total">
                 <div class="order-detail">
                 <?php 
-                  $db->select('order_details_view','*',NULL,'customerId = "' . $_SESSION['customerId'] . '"', NULL); 
+                  $db->select('order_details_view','*',NULL,'customerId = "' . $_SESSION['customerId'] . '" and orderStatus = "On Cart"', NULL); 
                   $output = $db->getResult();
                   $sum = 0;
                   foreach ($output as $res) { ?>
@@ -142,7 +149,7 @@ $db->select('product_categories_table');
 $res = $db->getResult(); $res = $res[0];
 
  ?>
-<section class="padding-top-100 padding-bottom-100 light-gray-bg shopping-cart small-cart">
+<section class="padding-bottom-100 light-gray-bg shopping-cart small-cart text-center">
       <div class="container"> 
         
         <!-- SHOPPING INFORMATION -->
@@ -153,7 +160,7 @@ $res = $db->getResult(); $res = $res[0];
             <div class="col-sm-12">
               <h6>No items in your cart.</h6>
             
-              <div class="coupn-btn"> <a href="shop.php?productCategoryId=<?php echo $res['productCategoryId'] ?>" class="btn btn-inverse margin-top-40" class="btn">continue shopping</a> </div>
+              <div class="coupn-btn"> <a href="shop.php?productCategoryId=<?php echo $res['productCategoryId'] ?>" class="btn btn-inverse ">continue shopping</a> </div>
             </div>
             
  
@@ -162,6 +169,7 @@ $res = $db->getResult(); $res = $res[0];
       </div>
     </section>
 <?php } ?>
+
 
   
 

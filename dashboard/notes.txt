@@ -25,3 +25,11 @@ if no vacant order
 	
 else	
 	add order details	
+
+
+
+
+	bugs
+
+	error on cart finish registration.
+	transfer to another page if not yet finish

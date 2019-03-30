@@ -330,6 +330,15 @@ if (isset($_GET['from']) and $_GET['from'] == 'update-cart') {
 	$_SESSION['toast'] = 'update-cart';
 }
 
+if (isset($_GET['from']) and $_GET['from'] == 'empty-cart') {
+
+	$db->delete('order_details_table','orderId=' . $_GET['orderId']);
+	$res = $db->getResult();
+	header("Location: shopping-cart.php");
+	$_SESSION['toast'] = 'empty-cart';
+}
+
+
 
 
 ?>
