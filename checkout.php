@@ -22,6 +22,7 @@ $res = $db->getResult(); $res = $res[0];
 <!-- Content -->
   <div id="content"> 
     
+    <form role="form" id="contact_form" class="contact-form" method="post" action="controller.php?from=place-order" autocomplete="off">
     <!--======= PAGES INNER =========-->
     <section class="chart-page padding-top-100 padding-bottom-100">
       <div class="container"> 
@@ -36,7 +37,7 @@ $res = $db->getResult(); $res = $res[0];
               <!-- ESTIMATE SHIPPING & TAX -->
               <div class="col-sm-5">
                 <h6>Billing Information</h6>
-                <form role="form" id="contact_form" class="contact-form" method="post" action="controller.php?from=place-order" autocomplete="off">
+                
                 <ul class="row">
                   <li class="col-sm-6">
                     <label>First name *
@@ -61,28 +62,18 @@ $res = $db->getResult(); $res = $res[0];
 
                   <li class="col-sm-6">
                     <label>Email *
-                      <input type="text" class="form-control" name="billingEmail" id="billingEmail" placeholder="" required="" value="<?php echo $res['customerPhoneNumber'] ?>">
+                      <input type="text" class="form-control" name="billingEmail" id="billingEmail" placeholder="" required="" value="<?php echo $res['customerEmail'] ?>">
                     </label>
                   </li>
 
-          <!--         <li class="col-md-12">
-                    <div class="checkbox margin-0 ">
-                      <input id="checkbox1" class="styled" type="checkbox">
-                      <label for="checkbox1"> Ship to a different address </label>
-                    </div>
-                  </li>
- -->
-
-            
                 </ul>
           
                 
-               <div id="shippingInformation">
-        
-               </div>
+               <div id="shippingInformation"></div>
 
        
               </div>
+
               
               <!-- SUB TOTAL -->
               <div class="col-sm-7">
@@ -124,6 +115,7 @@ $res = $db->getResult(); $res = $res[0];
                         </div>
                         <p>If you choose this option, you are obligated to send your payments after placing this order.</p>
                       </li>
+
                       <li>
                         <div class="radio">
                           <input type="radio" name="radio1" id="radio2" value="option2">
@@ -133,26 +125,37 @@ $res = $db->getResult(); $res = $res[0];
 
 
                       <li class="mt-3">
-                      <label>Delivery Type * </label>
-                        <select class="form-control" required="" name="deliveryType" id="deliveryType">
-                          <option>Pick Up</option>
-                          <option>Shipping</option>
-                        </select>
-                      
-                    </li>
+                        <label>Delivery Method </label>
+                          <select class="form-control" required="" name="deliveryMethod" id="deliveryMethod">
+                            <option>Pick Up</option>
+                            <option>Shipping</option>
+                          </select>
+                      </li>
+
+                      <li class="mt-3">
+                        <div class="form-group">
+                          <label>Shipping or Pickup Date *</label>
+                          <input class="form-control" type="date" required name="orderShippingArrivalOrPickupDate" id="orderShippingArrivalOrPickupDate" min="<?php echo date('Y-m-d') ?>">
+                        </div>
+                      </li>
+
+
+
+
 
                     </ul>
                     <button type="submit" class="btn  btn-dark pull-right margin-top-30">PLACE ORDER</button> </div>
                 </div>
               </div>
 
-            </form>
+            
 
             </div>
           </div>
         </div>
       </div>
     </section>
+    </form>
     
   </div>
 
@@ -161,22 +164,25 @@ $res = $db->getResult(); $res = $res[0];
 
 <script type="text/javascript">
 
-  $('#deliveryType').change(function(){
+  $('#deliveryMethod').change(function(){
 
-    var deliveryType = $(this).children("option:selected").val();
+    var deliveryMethod = $(this).children("option:selected").val();
 
-    if (deliveryType == 'Shipping') {
-        $.post("inc-shipping-information.php", { deliveryType:deliveryType, } , function(data, status){
+    if (deliveryMethod == 'Shipping') {
+        $.post("inc-shipping-information.php", { deliveryMethod:deliveryMethod, } , function(data, status){
 
         $('#shippingInformation').html(data);
 
         });
 
-    }else if(deliveryType == 'Pick Up'){
+    }else if(deliveryMethod == 'Pick Up'){
       $('#shippingInformation').html("");
     }
 
     
     
   });
+
+
+
 </script>
