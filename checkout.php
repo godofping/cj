@@ -135,7 +135,7 @@ $res = $db->getResult(); $res = $res[0];
                       <li class="mt-3">
                         <div class="form-group">
                           <label>Shipping or Pickup Date *</label>
-                          <input class="form-control" type="date" required name="orderShippingArrivalOrPickupDate" id="orderShippingArrivalOrPickupDate" min="<?php echo date('Y-m-d') ?>">
+                          <input style="height: 45px !important;" class="form-control" type="date" required name="orderShippingArrivalOrPickupDate" id="orderShippingArrivalOrPickupDate" min="<?php echo date('Y-m-d') ?>">
                         </div>
                       </li>
 
