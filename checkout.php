@@ -23,6 +23,9 @@ $res = $db->getResult(); $res = $res[0];
   <div id="content"> 
     
     <form role="form" id="contact_form" class="contact-form" method="post" action="controller.php?from=place-order" autocomplete="off" enctype="multipart/form-data">
+
+      <input type="text" name="orderId" hidden="" value="<?php echo $orderId ?>">
+
     <!--======= PAGES INNER =========-->
     <section class="chart-page padding-top-100 padding-bottom-100">
       <div class="container"> 
@@ -114,6 +117,8 @@ $res = $db->getResult(); $res = $res[0];
                           </select>
                       </li>
 
+                      <div id="pickUpDateDiv"></div>
+
                       <li>
                         <label>Mode of Payment</label>
                         
@@ -134,21 +139,8 @@ $res = $db->getResult(); $res = $res[0];
                         </div>
                       </li>
 
-                      <div id="paymentForm"></div>
-
-
+                      <div id="paymentFormDiv"></div>
                       
-
-                      <li class="mt-3" id="orderShippingArrivalOrPickupDateLI">
-                        <div class="form-group">
-                          <label>Pick Up Date *</label>
-                          <input style="height: 45px !important;" class="form-control" type="date" required name="orderShippingArrivalOrPickupDate" id="orderShippingArrivalOrPickupDate" min="<?php echo date('Y-m-d') ?>">
-                        </div>
-                      </li>
-
-
-
-
 
                     </ul>
                     <button type="submit" class="btn  btn-dark pull-right margin-top-30">PLACE ORDER</button> </div>
@@ -186,13 +178,21 @@ $res = $db->getResult(); $res = $res[0];
     if (deliveryMethod == 'Shipping') {
       $.post("inc-shipping-information.php", { deliveryMethod:deliveryMethod, } , function(data, status){
           $('#shippingInformation').html(data);
-          $('#orderShippingArrivalOrPickupDateLI').hide();
+          $('#pickUpDateDiv').html("");
+          
+          
           
         });
       }
       else if (deliveryMethod == 'Pick Up'){
           $('#shippingInformation').html("");
-          $('#orderShippingArrivalOrPickupDateLI').show();
+
+          $.post("inc-pick-up-date.php", function(data, status){
+            $('#pickUpDateDiv').html(data);
+          });
+
+
+    
       }
   }
 
@@ -212,10 +212,10 @@ $res = $db->getResult(); $res = $res[0];
   function modeOfPaymentMethod(orderModeOfPayment){
     if (orderModeOfPayment == 'Remittance') {
       $.post("inc-payment-form.php", { orderModeOfPayment:orderModeOfPayment, } , function(data, status){
-          $('#paymentForm').html(data);          
+          $('#paymentFormDiv').html(data);          
         });
     }else{
-        $('#paymentForm').html("");   
+        $('#paymentFormDiv').html("");   
     }
   }
 

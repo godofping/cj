@@ -339,6 +339,27 @@ if (isset($_GET['from']) and $_GET['from'] == 'empty-cart') {
 }
 
 
+if (isset($_GET['from']) and $_GET['from'] == 'place-order') {
+
+	//billing information
+	$billingFirstName = $db->escapeString($_POST['billingFirstName']);
+	$billingLastName = $db->escapeString($_POST['billingLastName']);
+	$billingAddress = $db->escapeString($_POST['billingAddress']);
+	$billingPhoneNumber = $db->escapeString($_POST['billingPhoneNumber']);
+	$billingEmail = $db->escapeString($_POST['billingEmail']);
+
+
+	$deliveryMethod = $db->escapeString($_POST['deliveryMethod']);
+
+	if ($deliveryMethod == 'Shipping') {
+		//shipping information
+		$billingFirstName = $db->escapeString($_POST['billingFirstName']);
+		$billingLastName = $db->escapeString($_POST['billingLastName']);
+		$billingAddress = $db->escapeString($_POST['billingAddress']);
+		$billingPhoneNumber = $db->escapeString($_POST['billingPhoneNumber']);
+		$billingEmail = $db->escapeString($_POST['billingEmail']);
+	}
+}
 
 
 ?>
