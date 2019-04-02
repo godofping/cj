@@ -4,6 +4,14 @@
   <script type="text/javascript">window.location.replace("index.php");</script>
 <?php } else { 
 
+
+$db->select('orders_view', '*', NULL, 'customerId = "' . $_SESSION['customerId']  .'" and orderStatus = "On Cart"');
+$res = $db->getResult();
+
+if (empty($res)) { ?>
+    <script type="text/javascript">window.location.replace("index.php");</script>
+<?php }
+
 $db->select('customers_view','*',NULL,'customerId = "' . $_SESSION['customerId'] . '"', NULL); 
 $res = $db->getResult(); $res = $res[0];
 
@@ -100,7 +108,9 @@ $res = $db->getResult(); $res = $res[0];
 
                     
                     <!-- SUB TOTAL -->
-                    <p class="all-total">TOTAL COST <span> ₱<?php echo number_format($sum, 2); ?></span></p>
+                    <p class="all-total">Total <span> ₱<?php echo number_format($sum, 2); ?></span></p>
+
+                    <input type="text" name="sum" value="<?php echo $sum ?>" hidden>
 
                   </div>
                   <div class="pay-meth">

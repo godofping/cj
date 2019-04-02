@@ -46,3 +46,24 @@ if eh ship madula ang shipping date kay si admin man mag hulog sang item. ok
 tapos sa mode of payment kuys 
 if pilion ni customer remittance pd ma disable na ang function sang walk in tapos mag appear dayun ang pag type niya sang name sang remmitance center, control number and uploading sang pic sang resibo sang remittance center.
 tapos pd kuya eh disbale niya anay button sa check out if ma comply niya requirements maka proceed na siya sa pag check out.
+
+
+// orderStatus
+	// On Cart - if items still on cart
+	// Pending Approval - waiting for admin approval
+	// To Ship - customer paid the order and shop is preparing the orders
+	// To Recieve - order is delivered to the customer
+	// Completed - customer recieved the order and click completed
+	// Cancelled - admin cancelled the order
+
+// orderType
+	// Online
+	// Walk-in
+//paymentStatus
+	//Pending Approval - payment not yet confirmed
+	//Confirmed - payment recieved and confirmed
+
+
+
+deduct quantity
+insert into inventory_logs_table

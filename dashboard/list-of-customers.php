@@ -2,13 +2,13 @@
 <?php include('header.php'); ?>
 <div class="row page-titles">
     <div class="col-md-5 align-self-center">
-        <h3 class="text-themecolor">Feedbacks</h3>
+        <h3 class="text-themecolor">List of Customers</h3>
     </div>
     <div class="col-md-7 align-self-center">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="javascript:void(0)">Reports</a></li>
 <!--             <li class="breadcrumb-item">pages</li> -->
-            <li class="breadcrumb-item active">Feedbacks</li>
+            <li class="breadcrumb-item active">List of Customers</li>
         </ol>
     </div>
    
@@ -29,16 +29,15 @@
 
             <div class="card">
                 <div class="card-body">
- 					
                     <div class="table-responsive m-t-40">
                         <table id="datable" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
-                                    <th>Customer Name</th>
-                                    <th>Feedback</th>
-                                    <th>Date Submitted</th>
-                                    <th>Status</th>
-                                    <th class="noExport">Actions</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Phone Number</th>
+                                    <th>Address</th>
+                                    <th>Registration Date</th>
 
                                 </tr>
                             </thead>
@@ -58,7 +57,7 @@
 <?php include('footer.php'); ?>
 
 <script type="text/javascript">
-	var title = "";
+	var title = "List of Customers";
     var dataTable = $('#datable').DataTable({
         // "processing":true,
         // "serverSide":true,
@@ -66,30 +65,17 @@
         "order":[],
         "ajax": {
                     "type": 'POST',
-                    "url": 'load-feedbacks.php',
+                    "url": 'load-list-of-customers.php',
                     
                 },
         "columnDefs":[
             {
-                "targets":[4],
+                "targets":[],
                 "orderable":false,
             },
         ],
          buttons: [
-        {
-            extend: 'excel',
-            title: title,
-            exportOptions: {
-                columns: "thead th:not(.noExport)"
-            }
-        },
-        {
-            extend: 'csv',
-            title: title,
-            exportOptions: {
-                columns: "thead th:not(.noExport)"
-            }
-        },
+       
         {
             extend: 'print',
             title: title,
@@ -99,7 +85,7 @@
         }
 
     ],
-        // dom: 'Bfrltip',
+        dom: 'Bfrltip',
         language: { search: "",searchPlaceholder: "Search" },
 
         "info":     true,

@@ -47,12 +47,12 @@
                             </ul>
                         </li>
 
-                        <li class="<?php if ($filename == 'view-match-sanctioning' or $filename == 'edit-match-sanctioning'): ?>
+                        <li class="<?php if ($filename == 'orders'): ?>
                             active
                         <?php endif ?>"> 
                             <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-cart"></i><span class="hide-menu">Orders</span></a>
                             <ul aria-expanded="false" class="collapse">
-                                <li><a href="all-match-sanctioning.php" class="<?php if ($filename == 'view-match-sanctioning' or $filename == 'edit-match-sanctioning'): ?>active<?php endif ?>">View All</a></li>
+                                <li><a href="orders.php" class="<?php if ($filename == 'orders' or $filename == 'edit-match-sanctioning'): ?>active<?php endif ?>">View All</a></li>
                                 
                             </ul>
                         </li>
@@ -67,18 +67,6 @@
                             </ul>
                         </li>
 
-                        <li class="<?php if ($filename == 'customers' or $filename == 'feedbacks'): ?>
-                            active
-                        <?php endif ?>"> 
-                            <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-account"></i><span class="hide-menu">Customers</span></a>
-                            <ul aria-expanded="false" class="collapse">
-                                <li><a href="manage-users.php" class="<?php if ($filename == 'add-user' or $filename == 'update-user'): ?>active<?php endif ?>">Manage</a></li>
-                                <li><a href="feedbacks.php" class="<?php if ($filename == 'feedback'): ?>active<?php endif ?>">Feedbacks</a></li>
-                                
-                            </ul>
-                        </li>
-
-
 
                         <li class="<?php if ($filename == 'add-user' or $filename == 'update-user'): ?>
                             active
@@ -86,6 +74,29 @@
                             <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-account-settings-variant"></i><span class="hide-menu">Users</span></a>
                             <ul aria-expanded="false" class="collapse">
                                 <li><a href="manage-users.php" class="<?php if ($filename == 'add-user' or $filename == 'update-user'): ?>active<?php endif ?>">Manage</a></li>
+                                
+                            </ul>
+                        </li>
+
+
+                        <li class="<?php if ($filename == 'list-of-customers' or $filename == 'feedbacks'): ?>
+                            active
+                        <?php endif ?>"> 
+                            <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-note-text"></i><span class="hide-menu">Reports</span></a>
+                            <ul aria-expanded="false" class="collapse">
+                                <li><a href="list-of-customers.php" class="<?php if ($filename == 'list-of-customers'): ?>active<?php endif ?>">List of Customers</a></li>
+                                <li><a href="#.php" class="<?php if ($filename == 's'): ?>active<?php endif ?>">List of Collection</a></li>
+                                <li><a href="#.php" class="<?php if ($filename == 's'): ?>active<?php endif ?>">List of Orders</a></li>
+                                <li><a href="#.php" class="<?php if ($filename == 's'): ?>active<?php endif ?>">List of Cancelled Orders</a></li>
+                                <li><a href="#.php" class="<?php if ($filename == 's'): ?>active<?php endif ?>">List of Over Due</a></li>
+                                <li><a href="#.php" class="<?php if ($filename == 's'): ?>active<?php endif ?>">List of Customer Pending Payments</a></li>
+                                <li><a href="#.php" class="<?php if ($filename == 's'): ?>active<?php endif ?>">List of Available Stocks</a></li>
+                                <li><a href="#.php" class="<?php if ($filename == 's'): ?>active<?php endif ?>">List of Re-order Point</a></li>
+                                <li><a href="#.php" class="<?php if ($filename == 's'): ?>active<?php endif ?>">List of Stock-in</a></li>
+                                <li><a href="#.php" class="<?php if ($filename == 's'): ?>active<?php endif ?>">List of Stock-out</a></li>
+                                <li><a href="#.php" class="<?php if ($filename == 's'): ?>active<?php endif ?>">List of Acknowledgement Reciept</a></li>
+                                <li><a href="#.php" class="<?php if ($filename == 's'): ?>active<?php endif ?>">Reviews</a></li>
+                                <li><a href="feedbacks.php" class="<?php if ($filename == 'feedbacks'): ?>active<?php endif ?>">Feedbacks</a></li>
                                 
                             </ul>
                         </li>

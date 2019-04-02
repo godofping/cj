@@ -2,13 +2,13 @@
 <?php include('header.php'); ?>
 <div class="row page-titles">
     <div class="col-md-5 align-self-center">
-        <h3 class="text-themecolor">Feedbacks</h3>
+        <h3 class="text-themecolor">Pending</h3>
     </div>
     <div class="col-md-7 align-self-center">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="javascript:void(0)">Reports</a></li>
+            <li class="breadcrumb-item"><a href="javascript:void(0)">Orders</a></li>
 <!--             <li class="breadcrumb-item">pages</li> -->
-            <li class="breadcrumb-item active">Feedbacks</li>
+            <li class="breadcrumb-item active">Pending</li>
         </ol>
     </div>
    
@@ -29,15 +29,12 @@
 
             <div class="card">
                 <div class="card-body">
- 					
+ 					<a href="add-category.php"><button class="btn btn-info pull-right">Add Category</button></a>
                     <div class="table-responsive m-t-40">
                         <table id="datable" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
-                                    <th>Customer Name</th>
-                                    <th>Feedback</th>
-                                    <th>Date Submitted</th>
-                                    <th>Status</th>
+                                    <th>Category Name</th>
                                     <th class="noExport">Actions</th>
 
                                 </tr>
@@ -66,12 +63,12 @@
         "order":[],
         "ajax": {
                     "type": 'POST',
-                    "url": 'load-feedbacks.php',
+                    "url": 'load-orders.php',
                     
                 },
         "columnDefs":[
             {
-                "targets":[4],
+                "targets":[1],
                 "orderable":false,
             },
         ],

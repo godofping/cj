@@ -206,18 +206,6 @@ if (isset($_GET['from']) and $_GET['from'] == 'add-feedback') {
 
 if (isset($_GET['from']) and $_GET['from'] == 'add-cart') {
 
-	// orderStatus
-	// On Cart - if items still on cart
-	// To Pay - customer has not yet pay
-	// To Ship - customer paid the order and shop is preparing the orders
-	// To Recieve - order is delivered to the customer
-	// Completed - customer recieved the order and click completed
-	// Cancelled - admin cancelled the order
-
-	// orderType
-	// Online
-	// Walk-in
-
 	$quantity = $db->escapeString($_POST['quantity']);
 	$productVariationId = $db->escapeString($_POST['productVariationId']);
 	$productPrice = $db->escapeString($_POST['productPrice']);
@@ -341,6 +329,12 @@ if (isset($_GET['from']) and $_GET['from'] == 'empty-cart') {
 
 if (isset($_GET['from']) and $_GET['from'] == 'place-order') {
 
+	$orderId = $db->escapeString($_POST['orderId']);
+	$orderPlacedDate = $db->escapeString(date('Y-m-d'));
+	$orderStatus = $db->escapeString("Pending Approval");
+	$orderTotalAmount = $db->escapeString($_POST['sum']);
+	
+
 	//billing information
 	$billingFirstName = $db->escapeString($_POST['billingFirstName']);
 	$billingLastName = $db->escapeString($_POST['billingLastName']);
@@ -348,17 +342,159 @@ if (isset($_GET['from']) and $_GET['from'] == 'place-order') {
 	$billingPhoneNumber = $db->escapeString($_POST['billingPhoneNumber']);
 	$billingEmail = $db->escapeString($_POST['billingEmail']);
 
+	$orderModeOfPayment = $db->escapeString($_POST['orderModeOfPayment']);
+
+	$db->update('orders_table',
+		array(
+			'orderPlacedDate'=>$orderPlacedDate,
+			'orderStatus'=>$orderStatus,
+			'orderTotalAmount'=>$orderTotalAmount,
+			'billingFirstName'=>$billingFirstName,
+			'billingLastName'=>$billingLastName,
+			'billingAddress'=>$billingAddress,
+			'billingPhoneNumber'=>$billingPhoneNumber,
+			'billingEmail'=>$billingEmail,
+			'orderModeOfPayment'=>$orderModeOfPayment,
+			
+
+			),
+			'orderId=' . $orderId
+		);
+
+	$res = $db->getResult();
+
+
 
 	$deliveryMethod = $db->escapeString($_POST['deliveryMethod']);
 
 	if ($deliveryMethod == 'Shipping') {
 		//shipping information
-		$billingFirstName = $db->escapeString($_POST['billingFirstName']);
-		$billingLastName = $db->escapeString($_POST['billingLastName']);
-		$billingAddress = $db->escapeString($_POST['billingAddress']);
-		$billingPhoneNumber = $db->escapeString($_POST['billingPhoneNumber']);
-		$billingEmail = $db->escapeString($_POST['billingEmail']);
+		$orderShipFirstName = $db->escapeString($_POST['orderShipFirstName']);
+		$orderShipLastName = $db->escapeString($_POST['orderShipLastName']);
+		$orderShippingAddress = $db->escapeString($_POST['orderShippingAddress']);
+		$orderShipPhoneNumber = $db->escapeString($_POST['orderShipPhoneNumber']);
+		$orderShipEmail = $db->escapeString($_POST['orderShipEmail']);
+
+
+		$db->update('orders_table',
+		array(
+			'deliveryMethod'=>$deliveryMethod,
+
+			'orderShipFirstName'=>$orderShipFirstName,
+			'orderShipLastName'=>$orderShipLastName,
+			'orderShippingAddress'=>$orderShippingAddress,
+			'orderShipPhoneNumber'=>$orderShipPhoneNumber,
+			'orderShipEmail'=>$orderShipEmail,
+			),
+			'orderId=' . $orderId
+		);
+
+		$res = $db->getResult();
+
+
+	} elseif ($deliveryMethod == 'Pick Up') {
+		$orderShippingArrivalOrPickupDate = $db->escapeString($_POST['orderShippingArrivalOrPickupDate']);
+
+		$db->update('orders_table',
+		array(
+			'deliveryMethod'=>$deliveryMethod,
+			'orderShippingArrivalOrPickupDate'=>$orderShippingArrivalOrPickupDate,
+
+			),
+			'orderId=' . $orderId
+		);
+
+		$res = $db->getResult();
+
 	}
+
+	
+	if ($orderModeOfPayment == 'Remittance') {
+		//payment information
+		$paymentAmount = $db->escapeString($_POST['paymentAmount']);
+		$nameOfRemmitanceCenter = $db->escapeString($_POST['nameOfRemmitanceCenter']);
+		$controlNumber = $db->escapeString($_POST['controlNumber']);
+		$paymentStatus = $db->escapeString("Pending Approval");
+		$paymentTransactionDate = $db->escapeString(date('Y-m-d'));
+
+
+		// $paymentRecieptImage = $db->escapeString($_POST['paymentRecieptImage']);
+
+		$db->delete('payments_table','orderId=' . $orderId);
+		$res = $db->getResult();
+
+
+		$db->insert('payments_table',
+		array(
+			'paymentAmount'=>$paymentAmount,
+			'nameOfRemmitanceCenter'=>$nameOfRemmitanceCenter,
+			'controlNumber'=>$controlNumber,
+			'paymentStatus'=>$deliveryMethod,
+			'paymentTransactionDate'=>$paymentTransactionDate,
+			'orderId'=>$orderId,
+
+			)
+		);
+
+		$res = $db->getResult();
+	
+
+
+	} elseif ($orderModeOfPayment == 'Walk In') {
+		
+	}
+
+
+		$db->select('order_details_view','*',NULL,'customerId = "' . $_SESSION['customerId'] . '" and orderId = "' . $orderId . '" ', NULL); 
+	    $output = $db->getResult();
+	    
+	    
+	    foreach ($output as $res) { 
+
+
+	    	$productVariationId = $db->escapeString($res['productVariationId']);
+	    	$inOrOut = $db->escapeString("Out");
+	    	$quantity = $db->escapeString($res['quantity']);
+	    	$transactionDateTime = $db->escapeString(date('Y-m-d H:i:s'));
+			$inventoryLogRemark = $db->escapeString("The stocks is decreased by " . $quantity . " because of Order ID " . $orderId);
+
+			$currentStocks = $res['productStock'] - $quantity;
+
+	    	
+
+	    	$db->insert('inventory_logs_table',
+			array(
+				'productVariationId'=>$productVariationId,
+				'inOrOut'=>$inOrOut,
+				'quantity'=>$quantity,
+				'transactionDateTime'=>$transactionDateTime,
+				'inventoryLogRemark'=>$inventoryLogRemark,
+				)
+			);
+
+			$res = $db->getResult();
+
+
+
+			$db->update('product_variations_table',
+			array(
+				'productStock'=>$currentStocks,
+
+				),
+				'productVariationId=' . $productVariationId
+			);
+
+			$res = $db->getResult();
+
+
+
+
+
+	    }
+
+
+	header("Location: thank-you.php?orderId=".base64_encode($orderId));
+	$_SESSION['toast'] = 'order-placed';
 }
 
 
