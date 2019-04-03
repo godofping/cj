@@ -25,13 +25,13 @@
     <!-- Start Page Content -->
     <!-- ============================================================== -->
     <div class="row">
-        <div class="col-12">
+        <div class="col-md-12">
             <div class="card">
                 <div class="card-body">
                 	<form autocomplete="off" class="form-material m-t-40" method="POST" action="controller.php?from=add-category">
 
                         <div class="row">
-                        	<div class="col-12">
+                        	<div class="col-md-12">
                         		<div class="form-group">
 		                            <label>Category:</label>
 		                            <input type="text" class="form-control form-control-line" required="" name="productCategory"> 

@@ -46,7 +46,7 @@ $columns = array(
         return  $status;
     } ),
     array( 'db' => 'customerFeedbackId', 'dt' => 4,'formatter' => function( $d, $row ) {
-        return '<a class = "btn btn-success btn-xs" href="controller.php?from=confirm-feedback&customerFeedbackId=' . $row['customerFeedbackId'] . '">confirm</a> <a class = "btn btn-danger btn-xs" onclick = "return confirm('."'Are you sure want to delete this record?'".')" href="controller.php?from=delete-feedback&customerFeedbackId=' . $row['customerFeedbackId'] . '">Delete</a>';
+        return '<a class = "btn btn-success btn-xs" href="controller.php?from=confirm-feedback&customerFeedbackId=' . $row['customerFeedbackId'] . '">Confirm</a> <a class = "btn btn-danger btn-xs" onclick = "return confirm('."'Are you sure want to delete this record?'".')" href="controller.php?from=delete-feedback&customerFeedbackId=' . $row['customerFeedbackId'] . '">Delete</a>';
     } ),
     
   

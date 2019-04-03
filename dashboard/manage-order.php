@@ -1,14 +1,18 @@
+<?php 
+include('header.php');
 
-<?php include('header.php'); ?>
+$db->select('orders_view','*',NULL,'orderId = "' . $_GET['orderId'] . '"', NULL); 
+$res = $db->getResult(); $res = $res[0];
+?>
 <div class="row page-titles">
     <div class="col-md-5 align-self-center">
-        <h3 class="text-themecolor">All Orders</h3>
+        <h3 class="text-themecolor">Manage Order</h3>
     </div>
     <div class="col-md-7 align-self-center">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="javascript:void(0)">Orders</a></li>
-<!--             <li class="breadcrumb-item">pages</li> -->
-            <li class="breadcrumb-item active">All Orders</li>
+            <li class="breadcrumb-item">All Orders</li>
+            <li class="breadcrumb-item active">Manage Order</li>
         </ol>
     </div>
    
@@ -25,21 +29,28 @@
     <!-- Start Page Content -->
     <!-- ============================================================== -->
     <div class="row">
-        <div class="col-12">
+        <div class="col-md-6">
 
             <div class="card">
                 <div class="card-body">
+
+                    <h4 class="card-title">Manage the <b>Order ID <?php echo $res['orderId']; ?></b>.</h4>
+
+
+
+
+                    <hr class="mt-5 mb-5">
+
+                    <h4 class="card-title">Inventory History</b></h4>
                     <div class="table-responsive m-t-40">
                         <table id="datable" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
-                                    <th>Order ID</th>
-                                    <th>Customer</th>
-                                    <th>Delivery Method</th>
-                                    <th>Mode of Payment</th>
-                                    <th>Date Placed</th>
-                                    <th>Status</th>
-                                    <th class="noExport">Actions</th>
+                                    <th>Transaction Date Time</th>
+                                    <th>In/Out</th>
+                                    <th>Quantity</th>
+                                    <th>Remarks</th>
+ 
 
                                 </tr>
                             </thead>
@@ -59,7 +70,7 @@
 <?php include('footer.php'); ?>
 
 <script type="text/javascript">
-	var title = "";
+    var title = "";
     var dataTable = $('#datable').DataTable({
         // "processing":true,
         // "serverSide":true,
@@ -67,12 +78,15 @@
         "order":[],
         "ajax": {
                     "type": 'POST',
-                    "url": 'load-orders.php',
+                    "url": 'load-manage-stocks.php',
+                    "data":{
+                        "productVariationId": "<?php echo $res['productVariationId']; ?>",
+                    },
                     
                 },
         "columnDefs":[
             {
-                "targets":[6],
+                "targets":[],
                 "orderable":false,
             },
         ],

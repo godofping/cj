@@ -19,10 +19,10 @@
  */
  
 // DB table to use
-$table = 'product_categories_table';
+$table = 'orders_view';
  
 // Table's primary key
-$primaryKey = 'productCategoryId';
+$primaryKey = 'orderId';
  
 // Array of database columns which should be read and sent back to DataTables.
 // The `db` parameter represents the column name in the database, while the `dt`
@@ -32,9 +32,14 @@ $primaryKey = 'productCategoryId';
 
 $columns = array(
 
-    array( 'db' => 'productCategory',   'dt' => 0 ),
-    array( 'db' => 'productCategoryId', 'dt' => 1,'formatter' => function( $d, $row ) {
-        return '<a class = "btn btn-info btn-xs" href="update-category.php?productCategoryId=' . $row['productCategoryId'] . '">Update</a> <a class = "btn btn-danger btn-xs" onclick = "return confirm('."'Are you sure want to delete this record?'".')" href="controller.php?from=delete-category&productCategoryId=' . $row['productCategoryId'] . '">Delete</a>';
+    array( 'db' => 'orderId',   'dt' => 0 ),
+    array( 'db' => 'fullName',   'dt' => 1 ),
+    array( 'db' => 'deliveryMethod',   'dt' => 2 ),
+    array( 'db' => 'orderModeOfPayment',   'dt' => 3 ),
+    array( 'db' => 'orderPlacedDate',   'dt' => 4 ),
+    array( 'db' => 'orderStatus',   'dt' => 5 ),
+    array( 'db' => 'orderId', 'dt' => 6,'formatter' => function( $d, $row ) {
+        return '<a class = "btn btn-info btn-xs" href="manage-order.php?orderId=' . $row['orderId'] . '">Manage Order</a>';
     } ),
     
   
