@@ -498,4 +498,59 @@ if (isset($_GET['from']) and $_GET['from'] == 'place-order') {
 }
 
 
+if (isset($_GET['from']) and $_GET['from'] == 'update-profile') {
+
+	$customerFirstName = $db->escapeString($_POST['customerFirstName']);
+	$customerLastName = $db->escapeString($_POST['customerLastName']);
+	$customerAddress = $db->escapeString($_POST['customerAddress']);
+	$customerPhoneNumber = $db->escapeString($_POST['customerPhoneNumber']);
+
+		$db->update('customers_table',
+		array(
+			'customerFirstName'=>$customerFirstName,
+			'customerLastName'=>$customerLastName,
+			'customerAddress'=>$customerAddress,
+			'customerPhoneNumber'=>$customerPhoneNumber,
+
+			),
+			'customerId=' . $_SESSION['customerId']
+		);
+
+		$res = $db->getResult();
+
+	header("Location: my-profile.php");
+	$_SESSION['toast'] = 'update-profile';
+}
+
+if (isset($_GET['from']) and $_GET['from'] == 'update-password') {
+
+	$oldPassword = $db->escapeString(md5($_POST['oldPassword']));
+	$newPasssword = $db->escapeString(md5($_POST['newPasssword']));
+	$confirmNewPassword = $db->escapeString(md5($_POST['confirmNewPassword']));
+	$customerPassword = $db->escapeString($_POST['customerPassword']);
+
+	if (($oldPassword == $customerPassword) and ($newPasssword == $confirmNewPassword)) {
+		$db->update('customers_table',
+		array(
+			'customerPassword'=>$newPasssword,
+
+			),
+			'customerId=' . $_SESSION['customerId']
+		);
+
+		$res = $db->getResult();
+		$_SESSION['toast'] = 'update-password';
+	}
+	else
+	{
+		$_SESSION['toast'] = 'update-password-failed';
+	}
+
+
+		
+
+	header("Location: my-profile.php");
+	
+}
+
 ?>

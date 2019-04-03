@@ -109,14 +109,14 @@ if ($filename != "finish-registration" and isset($_SESSION['customerId'])) {
                 </ul>
               </li>
               <?php if (isset($_SESSION['customerId'])): ?>
-              <li class="dropdown <?php if ($filename == 'profile' or $filename == 'orders' or $filename == 'reviews'): ?>active<?php endif ?>"> <a href="#" class="dropdown-toggle" data-toggle="dropdown">My Account</a>
+              <li class="dropdown <?php if ($filename == 'my-profile' or $filename == 'orders' or $filename == 'reviews' or $filename == 'shopping-cart'): ?>active<?php endif ?>"> <a href="#" class="dropdown-toggle" data-toggle="dropdown">My Account</a>
                 <ul class="dropdown-menu">
                   <li> <a href="shopping-cart.php">Shopping Cart</a> </li>
                   <li> <a href="my-feedback.php">My Feedbacks</a> </li>
                   <li> <a href="my-feedback.php">Notifications</a> </li>
-                  <li> <a href="orders.php">Orders </a> </li>
-                  <li> <a href="profile.php">Profile </a> </li>
-                  <li> <a href="reviews.php">Reviews </a> </li>
+                  <li> <a href="my-orders.php">My Orders </a> </li>
+                  <li> <a href="my-profile.php">My Profile </a> </li>
+                  <li> <a href="my-reviews.php">My Reviews </a> </li>
                 </ul>
               </li>
               <?php endif ?>
