@@ -119,7 +119,7 @@ $res = $db->getResult(); $res = $res[0];
 
                       <li class="mb-3">
                         <label>Delivery Method </label>
-                          <select class="form-control" required="" name="deliveryMethod" id="deliveryMethod">
+                          <select class="form-control" required="" name="orderDeliveryMethod" id="orderDeliveryMethod">
                             <option selected="" disabled="" value="">Please select option.</option>
                             <option>Shipping</option>
                             <option>Pick Up</option>
@@ -131,23 +131,19 @@ $res = $db->getResult(); $res = $res[0];
 
                       <li>
                         <label>Mode of Payment</label>
-                        
-                      </li>
 
-                      <li>
                         <div class="radio">
                           <input type="radio" name="orderModeOfPayment" id="radio1" value="Remittance" checked>
                           <label for="radio1"> Remittance </label>
                         </div>
-                        <p>If you choose this option, you are obligated to fill up the payment form.</p>
-                      </li>
 
-                      <li>
                         <div class="radio">
                           <input type="radio" name="orderModeOfPayment" id="radio2" value="Walk In">
                           <label for="radio2"> Walk In</label>
                         </div>
+
                       </li>
+
 
                       <div id="paymentFormDiv"></div>
                       
@@ -175,18 +171,18 @@ $res = $db->getResult(); $res = $res[0];
 
   $('#orderShippingArrivalOrPickupDateLI').hide();
 
-  $('#deliveryMethod').change(function(){
+  $('#orderDeliveryMethod').change(function(){
 
-    var deliveryMethod = $(this).children("option:selected").val();
-    deliveryMethodFunction(deliveryMethod);
+    var orderDeliveryMethod = $(this).children("option:selected").val();
+    deliveryMethodFunction(orderDeliveryMethod);
     
   });
 
 
-  function deliveryMethodFunction(deliveryMethod)
+  function deliveryMethodFunction(orderDeliveryMethod)
   {
-    if (deliveryMethod == 'Shipping') {
-      $.post("inc-shipping-information.php", { deliveryMethod:deliveryMethod, } , function(data, status){
+    if (orderDeliveryMethod == 'Shipping') {
+      $.post("inc-shipping-information.php", { orderDeliveryMethod:orderDeliveryMethod, } , function(data, status){
           $('#shippingInformation').html(data);
           $('#pickUpDateDiv').html("");
           
@@ -194,7 +190,7 @@ $res = $db->getResult(); $res = $res[0];
           
         });
       }
-      else if (deliveryMethod == 'Pick Up'){
+      else if (orderDeliveryMethod == 'Pick Up'){
           $('#shippingInformation').html("");
 
           $.post("inc-pick-up-date.php", function(data, status){
@@ -222,7 +218,7 @@ $res = $db->getResult(); $res = $res[0];
   function modeOfPaymentMethod(orderModeOfPayment){
     if (orderModeOfPayment == 'Remittance') {
       $.post("inc-payment-form.php", { orderModeOfPayment:orderModeOfPayment, } , function(data, status){
-          $('#paymentFormDiv').html(data);          
+          // $('#paymentFormDiv').html(data);          
         });
     }else{
         $('#paymentFormDiv').html("");   

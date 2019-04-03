@@ -38,33 +38,48 @@ $res = $db->getResult(); $res = $res[0];
 
                     <hr class="mt-1 mb-3">
 
-                    <h2>Customer: <b><?php echo $res['fullName']; ?></b></h2>
+                    <p>Customer: <b><?php echo $res['fullName']; ?></b></p>
 
-                    <h2>Delivery Method: <b><?php echo $res['deliveryMethod']; ?></b></h2>
+                    <p>Delivery Method: <b><?php echo $res['orderDeliveryMethod']; ?></b></p>
 
-                    <h2>Mode of Payment: <b><?php echo $res['orderModeOfPayment']; ?></b></h2>
+                    <p>Mode of Payment: <b><?php echo $res['orderModeOfPayment']; ?></b></p>
 
-                    <h2>Date Placed: <b><?php echo $res['orderPlacedDate']; ?></b></h2>
+                    <p>Date Placed: <b><?php echo date('F d, Y', strtotime($res['orderPlacedDate'])); ?></b></p>
 
-                    <h2>Status: <b><?php echo $res['orderStatus']; ?></b></h2>
+                    <p>Status: <b><?php echo $res['orderStatus']; ?></b></p>
 
                   
-                    <div class="table-responsive m-t-40">
+                    
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+
+            <div class="card">
+                <div class="card-body">
+
+                    <h4 class="card-title">Products Ordered</h4>
+
+                  
+                    <div class="table-responsive m-t-10">
                         <table id="datable" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
-                                    <th>Transaction Date Time</th>
-                                    <th>In/Out</th>
+                                    <th>Product</th>
                                     <th>Quantity</th>
-                                    <th>Remarks</th>
+                                    <th>Price (₱)</th>
+                                    <th>Amount (₱)</th>
  
-
                                 </tr>
                             </thead>
                             <tbody>
                             </tbody>
                         </table>
                     </div>
+
+                    <h3 class="float-right">Total:<b> ₱<?php echo number_format($res['orderTotalAmount'], 2); ?></b></h3>
+
                 </div>
             </div>
         </div>
@@ -75,6 +90,64 @@ $res = $db->getResult(); $res = $res[0];
 <!-- ============================================================== -->
          
 <?php include('footer.php'); ?>
+
+<script type="text/javascript">
+    var title = "";
+    var dataTable = $('#datable').DataTable({
+        // "processing":true,
+        // "serverSide":true,
+        deferRender: true,
+        "pageLength": -1,
+        "order":[],
+        "ajax": {
+                    "type": 'POST',
+                    "url": 'load-items-ordered.php',
+                    "data":{
+                        orderId: "<?php echo $res['orderId'] ?>",
+                    }
+                    
+                },
+        "columnDefs":[
+            {
+                "targets":[0,1,2,3],
+                "orderable":false,
+            },
+        ],
+         buttons: [
+        {
+            extend: 'excel',
+            title: title,
+            exportOptions: {
+                columns: "thead th:not(.noExport)"
+            }
+        },
+        {
+            extend: 'csv',
+            title: title,
+            exportOptions: {
+                columns: "thead th:not(.noExport)"
+            }
+        },
+        {
+            extend: 'print',
+            title: title,
+            exportOptions: {
+                columns: "thead th:not(.noExport)"
+            }
+        }
+
+    ],
+        dom: '',
+        language: { search: "",searchPlaceholder: "Search" },
+
+        "info":     true,
+        "bFilter":     true,
+        responsive: true,
+        autoWidth: false,
+    });
+
+
+</script>
 
 
 

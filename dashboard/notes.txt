@@ -38,14 +38,14 @@ else
 if	
 
 -------------
-Sa Pick-up or shipping date kuys pd tangalon lang siya? ok
+Sa Pick-up or shipping date  pd tangalon lang siya? ok
 
 if eh pilion ni customer ang pick up mag apear dayun ang pick-update. ok
 if eh ship madula ang shipping date kay si admin man mag hulog sang item. ok
 
-tapos sa mode of payment kuys 
+tapos sa mode of payment  
 if pilion ni customer remittance pd ma disable na ang function sang walk in tapos mag appear dayun ang pag type niya sang name sang remmitance center, control number and uploading sang pic sang resibo sang remittance center.
-tapos pd kuya eh disbale niya anay button sa check out if ma comply niya requirements maka proceed na siya sa pag check out.
+tapos pd  eh disbale niya anay button sa check out if ma comply niya requirements maka proceed na siya sa pag check out.
 
 
 // orderStatus
@@ -67,3 +67,7 @@ tapos pd kuya eh disbale niya anay button sa check out if ma comply niya require
 
 deduct quantity
 insert into inventory_logs_table
+
+
+on checkout . when shipping is selected.
+	user can only send payment when the shipping fee is added.

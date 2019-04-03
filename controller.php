@@ -365,9 +365,9 @@ if (isset($_GET['from']) and $_GET['from'] == 'place-order') {
 
 
 
-	$deliveryMethod = $db->escapeString($_POST['deliveryMethod']);
+	$orderDeliveryMethod = $db->escapeString($_POST['orderDeliveryMethod']);
 
-	if ($deliveryMethod == 'Shipping') {
+	if ($orderDeliveryMethod == 'Shipping') {
 		//shipping information
 		$orderShipFirstName = $db->escapeString($_POST['orderShipFirstName']);
 		$orderShipLastName = $db->escapeString($_POST['orderShipLastName']);
@@ -378,7 +378,7 @@ if (isset($_GET['from']) and $_GET['from'] == 'place-order') {
 
 		$db->update('orders_table',
 		array(
-			'deliveryMethod'=>$deliveryMethod,
+			'orderDeliveryMethod'=>$orderDeliveryMethod,
 
 			'orderShipFirstName'=>$orderShipFirstName,
 			'orderShipLastName'=>$orderShipLastName,
@@ -392,12 +392,12 @@ if (isset($_GET['from']) and $_GET['from'] == 'place-order') {
 		$res = $db->getResult();
 
 
-	} elseif ($deliveryMethod == 'Pick Up') {
+	} elseif ($orderDeliveryMethod == 'Pick Up') {
 		$orderShippingArrivalOrPickupDate = $db->escapeString($_POST['orderShippingArrivalOrPickupDate']);
 
 		$db->update('orders_table',
 		array(
-			'deliveryMethod'=>$deliveryMethod,
+			'orderDeliveryMethod'=>$orderDeliveryMethod,
 			'orderShippingArrivalOrPickupDate'=>$orderShippingArrivalOrPickupDate,
 
 			),
@@ -410,33 +410,33 @@ if (isset($_GET['from']) and $_GET['from'] == 'place-order') {
 
 	
 	if ($orderModeOfPayment == 'Remittance') {
-		//payment information
-		$paymentAmount = $db->escapeString($_POST['paymentAmount']);
-		$nameOfRemmitanceCenter = $db->escapeString($_POST['nameOfRemmitanceCenter']);
-		$controlNumber = $db->escapeString($_POST['controlNumber']);
-		$paymentStatus = $db->escapeString("Pending Approval");
-		$paymentTransactionDate = $db->escapeString(date('Y-m-d'));
+		// //payment information
+		// $paymentAmount = $db->escapeString($_POST['paymentAmount']);
+		// $nameOfRemmitanceCenter = $db->escapeString($_POST['nameOfRemmitanceCenter']);
+		// $controlNumber = $db->escapeString($_POST['controlNumber']);
+		// $paymentStatus = $db->escapeString("Pending Approval");
+		// $paymentTransactionDate = $db->escapeString(date('Y-m-d'));
 
 
-		// $paymentRecieptImage = $db->escapeString($_POST['paymentRecieptImage']);
+		// // $paymentRecieptImage = $db->escapeString($_POST['paymentRecieptImage']);
 
-		$db->delete('payments_table','orderId=' . $orderId);
-		$res = $db->getResult();
+		// $db->delete('payments_table','orderId=' . $orderId);
+		// $res = $db->getResult();
 
 
-		$db->insert('payments_table',
-		array(
-			'paymentAmount'=>$paymentAmount,
-			'nameOfRemmitanceCenter'=>$nameOfRemmitanceCenter,
-			'controlNumber'=>$controlNumber,
-			'paymentStatus'=>$deliveryMethod,
-			'paymentTransactionDate'=>$paymentTransactionDate,
-			'orderId'=>$orderId,
+		// $db->insert('payments_table',
+		// array(
+		// 	'paymentAmount'=>$paymentAmount,
+		// 	'nameOfRemmitanceCenter'=>$nameOfRemmitanceCenter,
+		// 	'controlNumber'=>$controlNumber,
+		// 	'paymentStatus'=>$orderDeliveryMethod,
+		// 	'paymentTransactionDate'=>$paymentTransactionDate,
+		// 	'orderId'=>$orderId,
 
-			)
-		);
+		// 	)
+		// );
 
-		$res = $db->getResult();
+		// $res = $db->getResult();
 	
 
 
