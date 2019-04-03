@@ -29,7 +29,7 @@ $res = $db->getResult(); $res = $res[0];
     <!-- Start Page Content -->
     <!-- ============================================================== -->
     <div class="row">
-        <div class="col-12">
+        <div class="col-md-12">
 
             <div class="card">
                 <div class="card-body">
@@ -60,7 +60,7 @@ $res = $db->getResult(); $res = $res[0];
                         <div class="col-md-4">
                             <form autocomplete="off" class="form-material m-t-40" method="POST" action="controller.php?from=stock-in">
                                 <div class="row">
-                                    <div class="col-12">
+                                    <div class="col-md-12">
                                         <div class="form-group">
                                             <label>Stock In:</label>
                                             <input type="number" min="1" class="form-control form-control-line" required="" name="quantity"> 
@@ -75,7 +75,7 @@ $res = $db->getResult(); $res = $res[0];
                         <div class="col-md-4">
                             <form autocomplete="off" class="form-material m-t-40" method="POST" action="controller.php?from=stock-out">
                                 <div class="row">
-                                    <div class="col-12">
+                                    <div class="col-md-12">
                                         <div class="form-group">
                                             <label>Stock Out: <?php if ($res['productStock'] == 0) {
                                                 echo "<small>(Can't stock out because you have 0 stocks left in this product.)</small>";
@@ -99,7 +99,7 @@ $res = $db->getResult(); $res = $res[0];
                         <div class="col-md-4">
                             <form autocomplete="off" class="form-material m-t-40" method="POST" action="controller.php?from=reorder-point">
                                 <div class="row">
-                                    <div class="col-12">
+                                    <div class="col-md-12">
                                         <div class="form-group">
                                             <label>Reorder Point:</label>
                                             

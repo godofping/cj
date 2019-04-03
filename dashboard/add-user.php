@@ -25,13 +25,13 @@
     <!-- Start Page Content -->
     <!-- ============================================================== -->
     <div class="row">
-        <div class="col-12">
+        <div class="col-md-12">
             <div class="card">
                 <div class="card-body">
                 	<form autocomplete="off" class="form-material m-t-40" method="POST" action="controller.php?from=add-user">
 
                         <div class="row">
-                        	<div class="col-12">
+                        	<div class="col-md-12">
                         		<div class="form-group">
 		                            <label>Username:</label>
 		                            <input type="text" class="form-control form-control-line" required="" name="userName"> 
@@ -40,7 +40,7 @@
                         </div>
 
                         <div class="row">
-                            <div class="col-12">
+                            <div class="col-md-12">
                                 <div class="form-group">
                                     <label>Password:</label>
                                     <input type="password" class="form-control form-control-line" required="" name="userPassword"> 
@@ -49,7 +49,7 @@
                         </div>
 
                         <div class="row">
-                            <div class="col-12">
+                            <div class="col-md-12">
                                 <div class="form-group">
                                     <label>Full Name:</label>
                                     <input type="text" class="form-control form-control-line" required="" name="fullName"> 

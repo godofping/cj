@@ -54,7 +54,7 @@ include('connection.php');
                     <form class="form-horizontal form-material" id="loginform" action="controller.php?from=login" method="POST" autocomplete="off">
                     	
                     	<div class="form-row text-center">
-						 	<div class="col-12">
+						 	<div class="col-md-12">
 						        <img class="mb-3" src="etc/logo.jpg" width="300">
 						    </div>
 						 </div>

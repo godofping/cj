@@ -18,13 +18,13 @@
     <!-- Start Page Content -->
     <!-- ============================================================== -->
     <div class="row">
-        <div class="col-12">
+        <div class="col-md-12">
             <div class="card">
                 <div class="card-body">
                 	<form autocomplete="off" class="form-material m-t-40" method="POST" action="controller.php?from=change-password">
 
                         <div class="row">
-                        	<div class="col-12">
+                        	<div class="col-md-12">
                         		<div class="form-group">
 		                            <label>New Password:</label>
 		                            <input type="password" class="form-control form-control-line" required="" name="password"> 

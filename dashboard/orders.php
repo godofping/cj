@@ -25,7 +25,7 @@
     <!-- Start Page Content -->
     <!-- ============================================================== -->
     <div class="row">
-        <div class="col-12">
+        <div class="col-md-12">
 
             <div class="card">
                 <div class="card-body">
@@ -33,7 +33,7 @@
                         <table id="datable" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
-                                    <th>Order ID</th>
+                                    <th>Order Number</th>
                                     <th>Customer</th>
                                     <th>Delivery Method</th>
                                     <th>Mode of Payment</th>

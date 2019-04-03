@@ -29,13 +29,13 @@ $res = $db->getResult(); $res = $res[0];
     <!-- Start Page Content -->
     <!-- ============================================================== -->
     <div class="row">
-        <div class="col-12">
+        <div class="col-md-12">
             <div class="card">
                 <div class="card-body">
                     <form autocomplete="off" class="form-material m-t-40" method="POST" action="controller.php?from=update-user">
 
                         <div class="row">
-                            <div class="col-12">
+                            <div class="col-md-12">
                                 <div class="form-group">
                                     <label>Username:</label>
                                     <input type="text" class="form-control form-control-line" required="" name="userName" value="<?php echo $res['userName'] ?>"> 
@@ -44,7 +44,7 @@ $res = $db->getResult(); $res = $res[0];
                         </div>
 
                         <div class="row">
-                            <div class="col-12">
+                            <div class="col-md-12">
                                 <div class="form-group">
                                     <label>Password:</label>
                                     <input type="password" class="form-control form-control-line" required="" name="userPassword" value="<?php echo $res['userPassword'] ?>"> 
@@ -53,7 +53,7 @@ $res = $db->getResult(); $res = $res[0];
                         </div>
 
                         <div class="row">
-                            <div class="col-12">
+                            <div class="col-md-12">
                                 <div class="form-group">
                                     <label>Full Name:</label>
                                     <input type="text" class="form-control form-control-line" required="" name="fullName" value="<?php echo $res['fullName'] ?>"> 

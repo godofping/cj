@@ -28,13 +28,13 @@ $res = $db->getResult(); $res = $res[0];
     <!-- Start Page Content -->
     <!-- ============================================================== -->
     <div class="row">
-        <div class="col-12">
+        <div class="col-md-12">
             <div class="card">
                 <div class="card-body">
                 	<form autocomplete="off" class="form-material m-t-40" method="POST" action="controller.php?from=update-sub-category">
 
                         <div class="row">
-                            <div class="col-12">
+                            <div class="col-md-12">
                                 <div class="form-group">
                                     <label>Category</label>
                                     <select class="form-control" required="" name="productCategoryId">
@@ -52,7 +52,7 @@ $res = $db->getResult(); $res = $res[0];
                         </div> 
 
                         <div class="row">
-                        	<div class="col-12">
+                        	<div class="col-md-12">
                         		<div class="form-group">
 		                            <label>Sub Category:</label>
 		                            <input type="text" class="form-control form-control-line" required="" name="productSubCategory" value="<?php echo $res['productSubCategory'] ?>"> 

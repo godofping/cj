@@ -29,12 +29,12 @@ $res = $db->getResult(); $res = $res[0];
     <!-- Start Page Content -->
     <!-- ============================================================== -->
     <div class="row">
-        <div class="col-12">
+        <div class="col-md-12">
             <div class="card">
                 <div class="card-body">
 
                         <div class="row">
-                            <div class="col-12">
+                            <div class="col-md-12">
                                 <div class="form-group">
                                     <label>Name of Gun Club:</label>
                                     <p><?php echo $res['nameOfGunClub']; ?></p>
@@ -43,7 +43,7 @@ $res = $db->getResult(); $res = $res[0];
                         </div>
 
                         <div class="row">
-                            <div class="col-12">
+                            <div class="col-md-12">
                                 <div class="form-group">
                                     <label>Office Address:</label>
                                     <p><?php echo $res['officeAddress']; ?></p>
@@ -53,7 +53,7 @@ $res = $db->getResult(); $res = $res[0];
                         </div>
 
                         <div class="row">
-                            <div class="col-12">
+                            <div class="col-md-12">
                                 <div class="form-group">
                                     <label>Firing Range Location:</label>
                                     <p><?php echo $res['firingRangeLocation']; ?></p>
@@ -65,14 +65,14 @@ $res = $db->getResult(); $res = $res[0];
 
 
                         <div class="row">
-                            <div class="col-6">
+                            <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Landline No.:</label>
                                     <p><?php echo $res['landlineNo']; ?></p>
                                 </div>
                             </div>
 
-                            <div class="col-6">
+                            <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Mobile No.:</label>
                                     <p><?php echo $res['mobileNo']; ?></p>
@@ -81,7 +81,7 @@ $res = $db->getResult(); $res = $res[0];
                         </div>
 
                         <div class="row">
-                            <div class="col-12">
+                            <div class="col-md-12">
                                 <div class="form-group">
                                     <label>Contact Person:</label>
                                     <p><?php echo $res['contactPerson']; ?></p>
@@ -91,7 +91,7 @@ $res = $db->getResult(); $res = $res[0];
 
 
                         <div class="row">
-                            <div class="col-12">
+                            <div class="col-md-12">
                                 <div class="form-group">
                                     <label>Email Address:</label>
                                     <p><?php echo $res['emailAddress']; ?></p>
@@ -100,7 +100,7 @@ $res = $db->getResult(); $res = $res[0];
                         </div>
 
                         <div class="row">
-                            <div class="col-12">
+                            <div class="col-md-12">
                                 <div class="form-group">
                                     <label>SEC Registration No.:</label>
                                     <p><?php echo $res['secRegistrationNo']; ?></p>
@@ -109,7 +109,7 @@ $res = $db->getResult(); $res = $res[0];
                         </div>
 
                         <div class="row">
-                            <div class="col-12">
+                            <div class="col-md-12">
                                 <div class="form-group">
                                     <label>Name of Gun Club Secretary:</label>
                                     <p><?php echo $res['nameOfGunClubSecretary']; ?></p>
@@ -118,7 +118,7 @@ $res = $db->getResult(); $res = $res[0];
                         </div>
 
                         <div class="row">
-                            <div class="col-12">
+                            <div class="col-md-12">
                                 <div class="form-group">
                                     <label>Name of Gun Club President:</label>
                                     <p><?php echo $res['nameOfGunClubPresident']; ?></p>
@@ -128,7 +128,7 @@ $res = $db->getResult(); $res = $res[0];
 
 
                         <div class="row">
-                            <div class="col-12">
+                            <div class="col-md-12">
                                 <div class="form-group">
                                     <label>PSMOC District Manager:</label>
                                     <p><?php echo $res['psmocDistrictManager']; ?></p>
@@ -137,7 +137,7 @@ $res = $db->getResult(); $res = $res[0];
                         </div>
 
                         <div class="row">
-                            <div class="col-12">
+                            <div class="col-md-12">
                                 <div class="form-group">
                                     <label>PSMOC Zone Director:</label>
                                     <p><?php echo $res['psmocZoneDirector']; ?></p> 
@@ -147,7 +147,7 @@ $res = $db->getResult(); $res = $res[0];
 
 
                         <div class="row">
-                            <div class="col-12">
+                            <div class="col-md-12">
                                 <div class="form-group">
                                     <label>PSMOC Secretary:</label>
                                     <p><?php echo $res['psmocSecretary']; ?></p> 
@@ -156,7 +156,7 @@ $res = $db->getResult(); $res = $res[0];
                         </div>
 
                         <div class="row">
-                            <div class="col-12">
+                            <div class="col-md-12">
                                 <div class="form-group">
                                     <label>PSMOC President:</label>
                                     <p><?php echo $res['psmocPresident']; ?></p>

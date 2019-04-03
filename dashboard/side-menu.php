@@ -47,12 +47,12 @@
                             </ul>
                         </li>
 
-                        <li class="<?php if ($filename == 'orders'): ?>
+                        <li class="<?php if ($filename == 'orders' or $filename == 'manage-order'): ?>
                             active
                         <?php endif ?>"> 
                             <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-cart"></i><span class="hide-menu">Orders</span></a>
                             <ul aria-expanded="false" class="collapse">
-                                <li><a href="orders.php" class="<?php if ($filename == 'orders' or $filename == 'edit-match-sanctioning'): ?>active<?php endif ?>">All Orders</a></li>
+                                <li><a href="orders.php" class="<?php if ($filename == 'orders' or $filename == 'manage-order'): ?>active<?php endif ?>">All Orders</a></li>
                                 
                             </ul>
                         </li>

@@ -34,14 +34,21 @@ $res = $db->getResult(); $res = $res[0];
             <div class="card">
                 <div class="card-body">
 
-                    <h4 class="card-title">Manage the <b>Order ID <?php echo $res['orderId']; ?></b>.</h4>
+                    <h4 class="card-title">Order details of <b>Order Number <?php echo $res['orderId']; ?></b>.</h4>
 
+                    <hr class="mt-1 mb-3">
 
+                    <h2>Customer: <b><?php echo $res['fullName']; ?></b></h2>
 
+                    <h2>Delivery Method: <b><?php echo $res['deliveryMethod']; ?></b></h2>
 
-                    <hr class="mt-5 mb-5">
+                    <h2>Mode of Payment: <b><?php echo $res['orderModeOfPayment']; ?></b></h2>
 
-                    <h4 class="card-title">Inventory History</b></h4>
+                    <h2>Date Placed: <b><?php echo $res['orderPlacedDate']; ?></b></h2>
+
+                    <h2>Status: <b><?php echo $res['orderStatus']; ?></b></h2>
+
+                  
                     <div class="table-responsive m-t-40">
                         <table id="datable" class="table table-bordered table-striped">
                             <thead>
@@ -69,61 +76,6 @@ $res = $db->getResult(); $res = $res[0];
          
 <?php include('footer.php'); ?>
 
-<script type="text/javascript">
-    var title = "";
-    var dataTable = $('#datable').DataTable({
-        // "processing":true,
-        // "serverSide":true,
-        deferRender: true,
-        "order":[],
-        "ajax": {
-                    "type": 'POST',
-                    "url": 'load-manage-stocks.php',
-                    "data":{
-                        "productVariationId": "<?php echo $res['productVariationId']; ?>",
-                    },
-                    
-                },
-        "columnDefs":[
-            {
-                "targets":[],
-                "orderable":false,
-            },
-        ],
-         buttons: [
-        {
-            extend: 'excel',
-            title: title,
-            exportOptions: {
-                columns: "thead th:not(.noExport)"
-            }
-        },
-        {
-            extend: 'csv',
-            title: title,
-            exportOptions: {
-                columns: "thead th:not(.noExport)"
-            }
-        },
-        {
-            extend: 'print',
-            title: title,
-            exportOptions: {
-                columns: "thead th:not(.noExport)"
-            }
-        }
-
-    ],
-        // dom: 'Bfrltip',
-        language: { search: "",searchPlaceholder: "Search" },
-
-        "info":     true,
-        "bFilter":     true,
-        responsive: true,
-        autoWidth: false,
-    });
-
-</script>
 
 
 

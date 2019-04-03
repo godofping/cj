@@ -25,7 +25,7 @@
     <!-- Start Page Content -->
     <!-- ============================================================== -->
     <div class="row">
-        <div class="col-12">
+        <div class="col-md-12">
             <div class="card">
                             <div class="card-body">
                             <a href="add-product.php"><button class="btn btn-info pull-right">Add Product</button></a>

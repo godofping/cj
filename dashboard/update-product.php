@@ -30,14 +30,14 @@ $res = $db->getResult(); $res = $res[0];
     <!-- Start Page Content -->
     <!-- ============================================================== -->
     <div class="row">
-        <div class="col-12">
+        <div class="col-md-12">
             <div class="card">
                 <div class="card-body">
                     <p>* indicates required fields</p>
                 	<form autocomplete="off" class="form-material m-t-40" method="POST" action="controller.php?from=update-product">
 
                         <div class="row">
-                        	<div class="col-12">
+                        	<div class="col-md-12">
                         		<div class="form-group">
 		                            <label>Product Name *</label>
 		                            <input type="text" class="form-control form-control-line" required="" name="productName" value="<?php echo $res['productName'] ?>">
@@ -46,7 +46,7 @@ $res = $db->getResult(); $res = $res[0];
                         </div>
 
                         <div class="row">
-                        	<div class="col-12">
+                        	<div class="col-md-12">
                         		<div class="form-group">
 		                            <label>Product Category *</label>
 		                            <select class="form-control" id="productCategoryId" required="" name="productCategoryId">
@@ -64,13 +64,13 @@ $res = $db->getResult(); $res = $res[0];
                         </div>
 
                         <div class="row">
-                            <div class="col-12">
+                            <div class="col-md-12">
                                 <div id="subCategoriesDiv"></div>
                             </div>
                         </div>
 
                         <div class="row">
-                        	<div class="col-12">
+                        	<div class="col-md-12">
                         		<div class="form-group">
 		                            <label>Product Details *</label>
 		                            <textarea id="mymce" name="productDetails"><?php echo $res['productDetails']; ?></textarea>
