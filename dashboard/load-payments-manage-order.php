@@ -19,10 +19,10 @@
  */
  
 // DB table to use
-$table = 'orders_view';
+$table = 'payments_view';
  
 // Table's primary key
-$primaryKey = 'orderId';
+$primaryKey = 'paymentId';
  
 // Array of database columns which should be read and sent back to DataTables.
 // The `db` parameter represents the column name in the database, while the `dt`
@@ -32,18 +32,22 @@ $primaryKey = 'orderId';
 
 $columns = array(
 
-    array( 'db' => 'orderId',   'dt' => 0 ),
-    array( 'db' => 'fullName',   'dt' => 1 ),
-    array( 'db' => 'orderDeliveryMethod',   'dt' => 2 ),
-    array( 'db' => 'orderModeOfPayment',   'dt' => 3 ),
-    array( 'db' => 'orderPlacedDate',   'dt' => 4,'formatter' => function( $d, $row ) {
-        return date('F d, Y g:i A', strtotime($d));
-    }),
-    array( 'db' => 'orderStatus',   'dt' => 5 ),
-    array( 'db' => 'orderId', 'dt' => 6,'formatter' => function( $d, $row ) {
-        return '<a class = "btn btn-info btn-xs" href="manage-order.php?orderId=' . $row['orderId'] . '">Manage Order</a>';
+    array( 'db' => 'paymentAmount',   'dt' => 0 ),
+    array( 'db' => 'paymentRecieptImage',   'dt' => 1, 'formatter' => function( $d, $row ) {
+        return '<img src="paymentImages/test.jpg" class="img-thumbnail" alt="">';
     } ),
+    array( 'db' => 'nameOfRemmitanceCenter',   'dt' => 2 ),
+    array( 'db' => 'controlNumber',   'dt' => 3 ),
+    array( 'db' => 'paymentTransactionDate',   'dt' => 4, 'formatter' => function( $d, $row ) {
+        return date('F d, Y g:i A', strtotime($d));
+    } ),
+    array( 'db' => 'paymentStatus',   'dt' => 5 ),
+    array( 'db' => 'paymentTransactionDate',   'dt' => 6, 'formatter' => function( $d, $row ) {
+        return date('F d, Y g:i A', strtotime($d));
+    } ),
+
     
+    // <a class = "btn btn-warning btn-xs" href="view-product.php?paymentId=' . $row['paymentId'] . '">View</a>
   
 );
  
@@ -62,7 +66,7 @@ $sql_details = array(
 
    require( 'ssp.class.php' );
     echo json_encode(
-    SSP::complex( $_POST, $sql_details, $table, $primaryKey, $columns, 'orderStatus <> "On Cart"' )
+    SSP::complex( $_POST, $sql_details, $table, $primaryKey, $columns, 'orderId = "' . $_POST['orderId'] . '"')
 );
 
 

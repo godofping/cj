@@ -48,13 +48,41 @@ if pilion ni customer remittance pd ma disable na ang function sang walk in tapo
 tapos pd  eh disbale niya anay button sa check out if ma comply niya requirements maka proceed na siya sa pag check out.
 
 
-// orderStatus
+// orderStatus - proposal
+
+--DM - Shipping
 	// On Cart - if items still on cart
+
 	// Pending Approval - waiting for admin approval
 	// To Ship - customer paid the order and shop is preparing the orders
 	// To Recieve - order is delivered to the customer
 	// Completed - customer recieved the order and click completed
 	// Cancelled - admin cancelled the order
+
+--DM - Pick Up
+	// On Cart
+
+	// Pending Approval
+	// Completed
+	// Cancelled
+---------------
+
+--DM - Shipping
+	// On Cart - if items still on cart
+
+	// Pending Approval - waiting for admin approval
+	// Finished - admin cancelled the order
+	// Cancelled
+
+--DM - Pick Up
+	// On Cart
+
+	// Pending Approval
+	// Finished
+	// Cancelled
+
+
+
 
 // orderType
 	// Online
@@ -71,3 +99,10 @@ insert into inventory_logs_table
 
 on checkout . when shipping is selected.
 	user can only send payment when the shipping fee is added.
+
+
+	----
+	add remarks sa client my orders
+
+
+if orders are cancelled. return the items

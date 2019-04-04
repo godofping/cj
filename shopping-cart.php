@@ -56,7 +56,7 @@
                       <a href="#." class="item-img"> <img class="media-object" src="dashboard/images/<?php echo $imgoutput['productImageLocation'] ?>" alt=""> </a> 
                       <!-- Item Name -->
                       <div class="media-body">
-                        <h6 class="pt-4"><?php echo $res['productName']; ?> (<?php echo $res['productOption1']; ?> <?php echo $res['productOption2']; ?>)</h6>
+                        <p class="pt-4"><?php echo $res['productName']; ?> (<?php echo $res['productOption1']; ?> <?php echo $res['productOption2']; ?>)</p>
                       </div>
                     </th>
 
@@ -75,8 +75,10 @@
                     </td>
 
                     <td>
-                        <button class="btn btn-sm" type="submit">update</button>
-                       <a href="controller.php?from=remove-cart&productVariationId=<?php echo $res['productVariationId'] ?>" class = "btn btn-sm">remove</a>
+                      <ol>
+                        <li><button class="btn btn-sm mb-2" type="submit">update</button></li>
+                        <li><a href="controller.php?from=remove-cart&productVariationId=<?php echo $res['productVariationId'] ?>"><button class="btn btn-sm mb-2" type="button">remove</button></a></li>
+                      </ol>
                     </td>
 
                 </tr>

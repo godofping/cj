@@ -330,7 +330,7 @@ if (isset($_GET['from']) and $_GET['from'] == 'empty-cart') {
 if (isset($_GET['from']) and $_GET['from'] == 'place-order') {
 
 	$orderId = $db->escapeString($_POST['orderId']);
-	$orderPlacedDate = $db->escapeString(date('Y-m-d'));
+	$orderPlacedDate = $db->escapeString(date('Y-m-d H:i:s'));
 	$orderStatus = $db->escapeString("Pending Approval");
 	$orderTotalAmount = $db->escapeString($_POST['sum']);
 	
@@ -415,7 +415,7 @@ if (isset($_GET['from']) and $_GET['from'] == 'place-order') {
 		// $nameOfRemmitanceCenter = $db->escapeString($_POST['nameOfRemmitanceCenter']);
 		// $controlNumber = $db->escapeString($_POST['controlNumber']);
 		// $paymentStatus = $db->escapeString("Pending Approval");
-		// $paymentTransactionDate = $db->escapeString(date('Y-m-d'));
+		// $paymentTransactionDate = $db->escapeString(date('Y-m-d H:i:s'));
 
 
 		// // $paymentRecieptImage = $db->escapeString($_POST['paymentRecieptImage']);

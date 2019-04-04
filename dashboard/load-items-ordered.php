@@ -34,11 +34,11 @@ $columns = array(
 
     array( 'db' => 'productName',   'dt' => 0 ),
     array( 'db' => 'quantity',   'dt' => 1 ),
-    array( 'db' => 'productPrice',   'dt' => 2, 'formatter' => function( $d, $row ) {
+    array( 'db' => 'price',   'dt' => 2, 'formatter' => function( $d, $row ) {
         return number_format($d, 2);
     } ),
 
-    array( 'db' => 'productPrice', 'dt' => 3,'formatter' => function( $d, $row ) {
+    array( 'db' => 'price', 'dt' => 3,'formatter' => function( $d, $row ) {
        return number_format($d * $row['quantity'], 2);
     } ),
     // <a class = "btn btn-warning btn-xs" href="view-product.php?orderDetailId=' . $row['orderDetailId'] . '">View</a>

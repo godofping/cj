@@ -34,7 +34,9 @@ $columns = array(
 
     array( 'db' => 'customerFullName',   'dt' => 0 ),
     array( 'db' => 'customerFeedback',   'dt' => 1 ),
-    array( 'db' => 'customerFeedbackDate',   'dt' => 2 ),
+    array( 'db' => 'customerFeedbackDate',   'dt' => 2, 'formatter' => function( $d, $row ) {
+        return  date('F d, Y', strtotime($d));
+    }  ),
     array( 'db' => 'customerFeedbackStatus', 'dt' => 3,'formatter' => function( $d, $row ) {
 
         if ($d == 0) {
@@ -46,7 +48,15 @@ $columns = array(
         return  $status;
     } ),
     array( 'db' => 'customerFeedbackId', 'dt' => 4,'formatter' => function( $d, $row ) {
-        return '<a class = "btn btn-success btn-xs" href="controller.php?from=confirm-feedback&customerFeedbackId=' . $row['customerFeedbackId'] . '">Confirm</a> <a class = "btn btn-danger btn-xs" onclick = "return confirm('."'Are you sure want to delete this record?'".')" href="controller.php?from=delete-feedback&customerFeedbackId=' . $row['customerFeedbackId'] . '">Delete</a>';
+
+        if ($row['customerFeedbackStatus'] == 0) {
+            return '<a class = "btn btn-success btn-xs" href="controller.php?from=confirm-feedback&customerFeedbackId=' . $row['customerFeedbackId'] . '">Confirm</a> <a class = "btn btn-danger btn-xs" onclick = "return confirm('."'Are you sure want to delete this record?'".')" href="controller.php?from=delete-feedback&customerFeedbackId=' . $row['customerFeedbackId'] . '">Delete</a>';
+        }
+        else
+        {
+            return '<a class = "btn btn-danger btn-xs" onclick = "return confirm('."'Are you sure want to delete this record?'".')" href="controller.php?from=delete-feedback&customerFeedbackId=' . $row['customerFeedbackId'] . '">Delete</a>';
+        }
+        
     } ),
     
   
