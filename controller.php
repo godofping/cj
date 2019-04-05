@@ -344,6 +344,7 @@ if (isset($_GET['from']) and $_GET['from'] == 'place-order') {
 	$orderPlacedDate = $db->escapeString(date('Y-m-d H:i:s'));
 	$orderStatus = $db->escapeString("Pending Approval");
 	$orderTotalAmount = $db->escapeString($_POST['sum']);
+	$orderPaymentStatus = $db->escapeString("Unpaid");
 	
 
 	//billing information
@@ -366,6 +367,7 @@ if (isset($_GET['from']) and $_GET['from'] == 'place-order') {
 			'billingPhoneNumber'=>$billingPhoneNumber,
 			'billingEmail'=>$billingEmail,
 			'orderModeOfPayment'=>$orderModeOfPayment,
+			'orderPaymentStatus'=>$orderPaymentStatus,
 			
 
 			),

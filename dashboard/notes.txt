@@ -68,11 +68,11 @@ tapos pd  eh disbale niya anay button sa check out if ma comply niya requirement
 ---------------
 
 --DM - Shipping
-	// On Cart - if items still on cart
-
-	// Pending Approval - waiting for admin approval
-	// Finished - admin cancelled the order
-	// Cancelled
+	// On Cart - if items still on cart and not yet placed by the customer
+	// Pending Approval - when the order is placed and waiting for admin confirmation
+	// Confirmed - when confirmed is clicked by the admin in manage order
+	// Finished - when then order is finished
+	// Cancelled - when the order is cancelled by the customer or admin
 
 --DM - Pick Up
 	// On Cart
@@ -81,15 +81,20 @@ tapos pd  eh disbale niya anay button sa check out if ma comply niya requirement
 	// Finished
 	// Cancelled
 
+----------------------------
 
-
+// orderPaymentStatus
+	// Unpaid
+	// Paid
 
 // orderType
 	// Online
 	// Walk-in
+
 //paymentStatus
-	//Pending Approval - payment not yet confirmed
-	//Confirmed - payment recieved and confirmed
+	//Pending - payment not yet confirmed
+	//Recieved - payment recieved and confirmed
+	//Invalid - payment is invalid
 
 
 

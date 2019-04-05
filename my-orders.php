@@ -34,7 +34,8 @@ $res = $db->getResult(); $res = $res[0];
                     <th scope="col">Delivery Method</th>
                     <th scope="col">Items ordered</th>
                     <th scope="col">Total</th>
-                    <th scope="col">Status</th>
+                    <th scope="col">Payment Status</th>
+                    <th scope="col">Order Status</th>
                     <th></th>
                   </tr>
                 </thead>
@@ -45,7 +46,7 @@ $res = $db->getResult(); $res = $res[0];
                   foreach ($output as $res) { ?>     
 
                   <tr>
-                    <th scope="row"><?php echo $res['orderId']; ?></th>
+                    <th><?php echo $res['orderId']; ?></th>
                     <td><?php echo date('F d, Y g:i A',strtotime($res['orderPlacedDate'])); ?></td>
                     <td><?php echo $res['orderModeOfPayment']; ?></td>
                     <td><?php echo $res['orderDeliveryMethod']; ?></td>
@@ -69,7 +70,9 @@ $res = $db->getResult(); $res = $res[0];
                         </ul>
                       </td>
                     <td><b>₱<?php echo number_format($res['orderTotalAmount'], 2); ?></b></td>
+                    <td><?php echo $res['orderPaymentStatus']; ?></td>
                     <td><?php echo $res['orderStatus']; ?></td>
+
                     <td><button type="submit" value="submit" class="btn" id="btn_submit" >View Details</button></td>
                   </tr>
 

@@ -738,4 +738,84 @@ if (isset($_GET['from']) and $_GET['from'] == 'unblock-customer') {
 }
 
 
+if (isset($_GET['from']) and $_GET['from'] == 'confirm-order') {
+
+	$orderStatus = $db->escapeString("Confirmed");
+
+	$db->update('orders_table',
+	array(
+		'orderStatus'=>$orderStatus,
+		),
+		'orderId=' . $_GET['orderId']
+	);
+
+	$res = $db->getResult();
+
+
+	header("Location: manage-order.php?orderId=".$_GET['orderId']);
+	$_SESSION['toast'] = 'confirm-order';
+
+}
+
+
+if (isset($_GET['from']) and $_GET['from'] == 'cancel-order') {
+
+	$orderStatus = $db->escapeString("Cancelled");
+
+	$db->update('orders_table',
+	array(
+		'orderStatus'=>$orderStatus,
+		),
+		'orderId=' . $_GET['orderId']
+	);
+
+	$res = $db->getResult();
+
+
+	header("Location: manage-order.php?orderId=".$_GET['orderId']);
+	$_SESSION['toast'] = 'cancel-order';
+
+}
+
+
+if (isset($_GET['from']) and $_GET['from'] == 'finish-order') {
+
+	$orderStatus = $db->escapeString("Finished");
+
+	$db->update('orders_table',
+	array(
+		'orderStatus'=>$orderStatus,
+		),
+		'orderId=' . $_GET['orderId']
+	);
+
+	$res = $db->getResult();
+
+
+	header("Location: manage-order.php?orderId=".$_GET['orderId']);
+	$_SESSION['toast'] = 'finish-order';
+
+}
+
+
+if (isset($_GET['from']) and $_GET['from'] == 'save-remark') {
+
+	$orderRemarks = $db->escapeString($_POST['orderRemarks']);
+
+	$db->update('orders_table',
+	array(
+		'orderRemarks'=>$orderRemarks,
+		),
+		'orderId=' . $_GET['orderId']
+	);
+
+	$res = $db->getResult();
+
+
+	header("Location: manage-order.php?orderId=".$_GET['orderId']);
+	$_SESSION['toast'] = 'save-remark';
+
+}
+
+
 ?>

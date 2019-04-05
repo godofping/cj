@@ -399,6 +399,56 @@
           });
       <?php endif?>
 
+      <?php if (isset($_SESSION['toast']) and $_SESSION['toast'] == 'confirm-order'): ?>
+          $.toast({
+            heading: 'SUCCESSFULLY UPDATED',
+            text: 'Order Confirmed!',
+            position: 'top-center',
+            loaderBg:'#ff6849',
+            icon: 'success',
+            hideAfter: 5000, 
+            stack: 6
+          });
+      <?php endif?>
+
+
+      <?php if (isset($_SESSION['toast']) and $_SESSION['toast'] == 'cancel-order'): ?>
+          $.toast({
+            heading: 'SUCCESSFULLY UPDATED',
+            text: 'Customer Cancelled!',
+            position: 'top-center',
+            loaderBg:'#ff6849',
+            icon: 'error',
+            hideAfter: 5000, 
+            stack: 6
+          });
+      <?php endif?>
+
+
+      <?php if (isset($_SESSION['toast']) and $_SESSION['toast'] == 'finish-order'): ?>
+          $.toast({
+            heading: 'SUCCESSFULLY UPDATED',
+            text: 'Order Finished!',
+            position: 'top-center',
+            loaderBg:'#ff6849',
+            icon: 'success',
+            hideAfter: 5000, 
+            stack: 6
+          });
+      <?php endif?>
+
+
+      <?php if (isset($_SESSION['toast']) and $_SESSION['toast'] == 'save-remark'): ?>
+          $.toast({
+            heading: 'SUCCESSFULLY UPDATED',
+            text: 'Order Remark Updated!',
+            position: 'top-center',
+            loaderBg:'#ff6849',
+            icon: 'success',
+            hideAfter: 5000, 
+            stack: 6
+          });
+      <?php endif?>
 
 
 
