@@ -38,6 +38,10 @@ $res = $db->getResult(); $res = $res[0];
 
                     <hr class="mt-1 mb-3">
 
+                    <?php if ($res['customerIsBlocked'] == 1): ?>
+                        <h1>THIS CUSTOMER IS BLOCKED.</h1>
+                    <?php endif ?>
+
                     <p>Customer: <b><?php echo $res['fullName']; ?></b></p>
 
                     <p>Delivery Method: <b><?php echo $res['orderDeliveryMethod']; ?></b></p>
@@ -56,9 +60,16 @@ $res = $db->getResult(); $res = $res[0];
 
                     <hr class="mt-1 mb-3">
 
+                    <?php if ($res['orderStatus'] == 'Pending Approval' and $res['customerIsBlocked'] == 0): ?>
+
+                    <button type="button" class="btn btn-success waves-effect waves-light m-r-10 pull-right">Approve Order</button>
+                    <button type="button" class="btn btn-warning waves-effect waves-light m-r-10 pull-right">Cancel Order</button>
+                    
+
+                    <?php endif ?>
+
+                    <?php if ($res['orderStatus'] != 'Pending Approval' and $res['customerIsBlocked'] == 0): ?>
                     <form>
-
-
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
@@ -88,6 +99,17 @@ $res = $db->getResult(); $res = $res[0];
                     <button type="submit" class="btn btn-success waves-effect waves-light m-r-10 pull-right">Save Changes</button>
                     
                     </form>
+                    <?php endif ?>
+
+
+                    <?php if ($res['customerIsBlocked'] == 0): ?>
+                    <a onclick = "return confirm('Are you sure want to block this customer?')" href="controller.php?from=block-customer&customerId=<?php echo $res['customerId'] ?>&orderId=<?php echo $res['orderId'] ?>"><button  type="button" class="btn btn-danger waves-effect waves-light m-r-10 pull-right">Block Customer</button></a>  
+                    <?php endif ?>
+
+                    <?php if ($res['customerIsBlocked'] == 1): ?>
+                    <a onclick = "return confirm('Are you sure want to block this customer?')" href="controller.php?from=unblock-customer&customerId=<?php echo $res['customerId'] ?>&orderId=<?php echo $res['orderId'] ?>"><button  type="button" class="btn btn-info waves-effect waves-light m-r-10 pull-right">Unblock Customer</button></a>  
+                    <?php endif ?>
+                    
                     
                 </div>
             </div>
@@ -300,7 +322,7 @@ $res = $db->getResult(); $res = $res[0];
                 },
         "columnDefs":[
             {
-                "targets":[0,1,2,3],
+                "targets":[0,1,2,3,4,5,6],
                 "orderable":false,
             },
         ],

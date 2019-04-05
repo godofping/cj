@@ -7,12 +7,12 @@ if (isset($_GET['from']) and $_GET['from'] == 'login') {
 	$customerEmail = $db->escapeString($_POST['customerEmail']);
 	$customerPassword = $db->escapeString(md5($_POST['customerPassword']));
 
-	$db->select('customers_view', '*', NULL, 'customerEmail = "' . $customerEmail  .'" and customerPassword = "' . $customerPassword . '"');
+	$db->select('customers_table', '*', NULL, 'customerEmail = "' . $customerEmail  .'" and customerPassword = "' . $customerPassword . '"');
 	$res = $db->getResult();
 
 	if (count($res) > 0) {
 		$res = $res[0];
-		$_SESSION['customerId'] = $res['customerId'];
+		
 		$_SESSION['customerType'] = $res['customerType'];
 		$_SESSION['customerEmail'] = $res['customerEmail'];
 		$_SESSION['customerFirstName'] = $res['customerFirstName'];
@@ -21,12 +21,23 @@ if (isset($_GET['from']) and $_GET['from'] == 'login') {
 
 	
 
-		if ($res['customerFirstName'] == '' and $res['customerLastName'] == '' and $res['customerAddress'] == '' and $res['customerPhoneNumber'] == '') {
+		if ($res['customerFirstName'] == '' and $res['customerLastName'] == '' and $res['customerAddress'] == '' and $res['customerPhoneNumber'] == '' and $res['customerIsBlocked'] == 0) {
+
+			$_SESSION['customerId'] = $res['customerId'];
 			header("Location: finish-registration.php");
+
 		}
 		else
 		{
-			header("Location: index.php");
+			if ($res['customerIsBlocked'] == 1) {
+				$_SESSION['toast'] = 'customer-block';
+				header("Location: login.php?show=login");
+			}
+			else
+			{
+				$_SESSION['customerId'] = $res['customerId'];
+				header("Location: index.php");
+			}
 		}
 
 	}
@@ -545,9 +556,6 @@ if (isset($_GET['from']) and $_GET['from'] == 'update-password') {
 	{
 		$_SESSION['toast'] = 'update-password-failed';
 	}
-
-
-		
 
 	header("Location: my-profile.php");
 	

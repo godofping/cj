@@ -1,5 +1,7 @@
 <?php include('header.php'); 
-
+if (!isset($_SESSION['customerId'])) {
+  echo '<script type="text/javascript">window.location.replace("index.php");</script>';
+}
 ?>
   
   <!-- Content -->

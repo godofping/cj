@@ -702,5 +702,40 @@ if (isset($_GET['from']) and $_GET['from'] == 'reorder-point') {
 }
 
 
+if (isset($_GET['from']) and $_GET['from'] == 'block-customer') {
+
+	$db->update('customers_table',
+	array(
+		'customerIsBlocked'=>1,
+		),
+		'customerId=' . $_GET['customerId']
+	);
+
+	$res = $db->getResult();
+
+
+	header("Location: manage-order.php?orderId=".$_GET['orderId']);
+	$_SESSION['toast'] = 'block-customer';
+
+}
+
+
+if (isset($_GET['from']) and $_GET['from'] == 'unblock-customer') {
+
+	$db->update('customers_table',
+	array(
+		'customerIsBlocked'=>0,
+		),
+		'customerId=' . $_GET['customerId']
+	);
+
+	$res = $db->getResult();
+
+
+	header("Location: manage-order.php?orderId=".$_GET['orderId']);
+	$_SESSION['toast'] = 'unblock-customer';
+
+}
+
 
 ?>

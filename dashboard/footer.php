@@ -374,6 +374,30 @@
           });
       <?php endif?>
 
+      <?php if (isset($_SESSION['toast']) and $_SESSION['toast'] == 'block-customer'): ?>
+          $.toast({
+            heading: 'SUCCESSFULLY BLOCKED',
+            text: 'Customer Blocked!',
+            position: 'top-center',
+            loaderBg:'#ff6849',
+            icon: 'error',
+            hideAfter: 5000, 
+            stack: 6
+          });
+      <?php endif?>
+
+
+      <?php if (isset($_SESSION['toast']) and $_SESSION['toast'] == 'unblock-customer'): ?>
+          $.toast({
+            heading: 'SUCCESSFULLY UNBLOCKED',
+            text: 'Customer Unblocked!',
+            position: 'top-center',
+            loaderBg:'#ff6849',
+            icon: 'success',
+            hideAfter: 5000, 
+            stack: 6
+          });
+      <?php endif?>
 
 
 
