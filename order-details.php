@@ -9,6 +9,7 @@ $db->select('orders_view', '*', NULL, 'orderId = "' . base64_decode($_GET['order
 $res = $db->getResult(); $res = $res[0];
 
 $orderTotalAmount = $res['orderTotalAmount'];
+$orderPaymentStatus = $res['orderPaymentStatus'];
 
 }
 ?>
@@ -40,7 +41,15 @@ $orderTotalAmount = $res['orderTotalAmount'];
           <div class="cart-ship-info">
 
             <div class="row"> 
-              
+
+              <?php if ($res['orderStatus'] == 'Pending Approval'): ?>
+                
+              <div class="col-md-12">
+                <a href="controller.php?from=cancel-order&orderId=<?php echo $res['orderId'] ?>"><button type="button" class="btn btn-dark pull-left margin-bottom-30">Cancel Order</button></a>
+              </div>
+
+   
+            <?php endif ?>
 
               <div class="col-sm-5">
 
@@ -211,6 +220,7 @@ $orderTotalAmount = $res['orderTotalAmount'];
 
                       <div class="pay-meth">
 
+                      <?php if ($orderPaymentStatus == 'Unpaid'): ?>
                       <label class="margin-top-50">Payment Form</label>
 
                       <?php if (isset($_SESSION['toast']) and $_SESSION['toast'] == 'payment-sent'): ?>
@@ -219,7 +229,7 @@ $orderTotalAmount = $res['orderTotalAmount'];
                         </div>
                       <?php endif ?>
 
-        
+                      
                         <ul class="row">
                           <li class="col-sm-6">
                             <label>Amount (Please pay ₱<?php echo number_format($balance, 2); ?>)*
@@ -248,6 +258,7 @@ $orderTotalAmount = $res['orderTotalAmount'];
 
                         <button type="submit" class="btn  btn-dark pull-right margin-top-30">SEND PAYMENT</button>
 
+                        <?php endif ?>
                      
 
                       </div>
@@ -324,4 +335,3 @@ $orderTotalAmount = $res['orderTotalAmount'];
 
   
 <?php include('footer.php'); ?>
-

@@ -5,6 +5,10 @@ $db->select('customers_view','*',NULL,'customerId = "' . $_SESSION['customerId']
 $res = $db->getResult(); $res = $res[0];
 ?>
 
+<?php if (!isset($_SESSION['customerId'])): ?>
+  <script type="text/javascript">window.location.replace("index.php");</script>
+<?php endif ?>
+
   <section class="sub-bnr" data-stellar-background-ratio="0.5">
     <div class="position-center-center">
       <div class="container">
@@ -24,7 +28,28 @@ $res = $db->getResult(); $res = $res[0];
         <div class="contact-form">
           
           <div class="row">
+            <div class="col-md-3">
+
+              <form role="form" id="contact_form" class="contact-form" method="post" action="controller.php?from=place-order" autocomplete="off" enctype="multipart/form-data">
+
+              <div class="form-group">
+      
+                <select id="filter" class="form-control">
+                  <option readonly selected value="<?php echo $_GET['selected']; ?>"><?php echo $_GET['selected']; ?></option>
+                  <option value="All">All</option>
+                  <option value="Pending Approval">Pending Approval</option>
+                  <option value="Confirmed">Confirmed</option>
+                  <option value="Finished">Finished</option>
+                  <option value="Cancelled">Cancelled</option>
+                </select>
+                
+              </div>
+
+              </form>
+            </div>
+
             <div class="col-md-12"> 
+          
               <div class="table-responsive">
                 <table class="table">
                 <thead>
@@ -42,7 +67,25 @@ $res = $db->getResult(); $res = $res[0];
                 </thead>
                 <tbody>
                 <?php
-                  $db->select('orders_view','*',NULL,'customerId = "' . $_SESSION['customerId'] . '" and orderStatus <> "On Cart"', "orderId DESC"); 
+
+                  if ($_GET['selected'] == 'All') {
+                    $db->select('orders_view','*',NULL,'customerId = "' . $_SESSION['customerId'] . '" and orderStatus <> "On Cart"', "orderId DESC"); 
+                  }
+                  elseif ($_GET['selected'] == 'Pending Approval') {
+                    $db->select('orders_view','*',NULL,'customerId = "' . $_SESSION['customerId'] . '" and orderStatus = "Pending Approval"', "orderId DESC"); 
+                  }
+                  elseif ($_GET['selected'] == 'Confirmed') {
+                    $db->select('orders_view','*',NULL,'customerId = "' . $_SESSION['customerId'] . '" and orderStatus = "Confirmed"', "orderId DESC"); 
+                  }
+                  elseif ($_GET['selected'] == 'Finished') {
+                    $db->select('orders_view','*',NULL,'customerId = "' . $_SESSION['customerId'] . '" and orderStatus = "Finished"', "orderId DESC"); 
+                  }
+                  elseif ($_GET['selected'] == 'Cancelled') {
+                    $db->select('orders_view','*',NULL,'customerId = "' . $_SESSION['customerId'] . '" and orderStatus = "Cancelled"', "orderId DESC"); 
+                  }
+
+                  
+
                   $output = $db->getResult();
                   foreach ($output as $res) { ?>     
 
@@ -73,3 +116,12 @@ $res = $db->getResult(); $res = $res[0];
 
   </div>
   <?php include('footer.php'); ?>
+
+<script type="text/javascript">
+  
+$( "#filter" ).change(function() {
+  var selectedValue = $( "#filter option:selected" ).text();
+  window.location.replace("my-orders.php?selected="+selectedValue);
+});
+
+</script>

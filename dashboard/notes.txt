@@ -67,7 +67,7 @@ tapos pd  eh disbale niya anay button sa check out if ma comply niya requirement
 	// Cancelled
 ---------------
 
---DM - Shipping
+--DM - Shipping - follow this
 	// On Cart - if items still on cart and not yet placed by the customer
 	// Pending Approval - when the order is placed and waiting for admin confirmation
 	// Confirmed - when confirmed is clicked by the admin in manage order

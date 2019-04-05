@@ -4,6 +4,10 @@ include('header.php');
 $db->select('customers_view','*',NULL,'customerId = "' . $_SESSION['customerId'] . '"', NULL); 
 $res = $db->getResult(); $res = $res[0];
 ?>
+
+<?php if (!isset($_SESSION['customerId'])): ?>
+  <script type="text/javascript">window.location.replace("index.php");</script>
+<?php endif ?>
   
 
   <section class="sub-bnr" data-stellar-background-ratio="0.5">

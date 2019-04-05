@@ -822,6 +822,7 @@ if (isset($_GET['from']) and $_GET['from'] == 'recieve-payment') {
 	$orderId = $db->escapeString($_GET['orderId']);
 	$paymentId = $db->escapeString($_GET['paymentId']);
 	$paymentStatus = $db->escapeString("Recieved");
+	$orderPaymentStatus = $db->escapeString("Paid");
 
 
 	$db->update('payments_table',
@@ -829,6 +830,15 @@ if (isset($_GET['from']) and $_GET['from'] == 'recieve-payment') {
 		'paymentStatus'=>$paymentStatus,
 		),
 		'paymentId=' . $paymentId
+	);
+
+	$res = $db->getResult();
+
+	$db->update('orders_table',
+	array(
+		'orderPaymentStatus'=>$orderPaymentStatus,
+		),
+		'orderId=' . $orderId
 	);
 
 	$res = $db->getResult();

@@ -464,10 +464,6 @@ if (isset($_GET['from']) and $_GET['from'] == 'place-order') {
 
 			$res = $db->getResult();
 
-
-
-
-
 	    }
 
 
@@ -565,6 +561,26 @@ if (isset($_GET['from']) and $_GET['from'] == 'payment-form') {
 	$_SESSION['toast'] = 'payment-sent';
 	header("Location: order-details.php?orderId=". base64_encode($orderId));
 
+
+}
+
+if (isset($_GET['from']) and $_GET['from'] == 'cancel-order') {
+
+	$orderId = $db->escapeString($_GET['orderId']);
+	$orderStatus = $db->escapeString("Cancelled");
+	
+
+	$db->update('orders_table',
+	array(
+		'orderStatus'=>$orderStatus,
+		),
+		'orderId=' . $orderId
+	);
+
+	$res = $db->getResult();
+
+	header("Location: order-details.php?orderId=".base64_encode($orderId));
+	$_SESSION['toast'] = 'cancel-order';
 
 }
 
