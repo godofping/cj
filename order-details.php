@@ -8,6 +8,8 @@
 $db->select('orders_view', '*', NULL, 'orderId = "' . base64_decode($_GET['orderId']) . '"');
 $res = $db->getResult(); $res = $res[0];
 
+$orderTotalAmount = $res['orderTotalAmount'];
+
 }
 ?>
 	
@@ -24,9 +26,8 @@ $res = $db->getResult(); $res = $res[0];
 
 	<div id="content"> 
     
-    <form role="form" id="contact_form" class="contact-form" method="post" action="controller.php?from=place-order" autocomplete="off" enctype="multipart/form-data">
+  <form role="form" id="contact_form" class="contact-form" method="post" action="controller.php?from=payment-form&orderId=<?php echo base64_decode($_GET['orderId']); ?>" autocomplete="off" enctype="multipart/form-data">
 
-      <input type="text" name="orderId" hidden="" value="<?php echo $orderId ?>">
 
   
     <section class="chart-page padding-top-100 padding-bottom-100">
@@ -45,38 +46,34 @@ $res = $db->getResult(); $res = $res[0];
 
               	<h6>Order Information</h6>
 
-      			<h5>Order Number: <b><?php echo $res['orderId'] ?></b></h5>
+          			<h5>Order Number: <b><?php echo $res['orderId'] ?></b></h5>
 
-      			<h5>Delivery Method: <b><?php echo $res['orderDeliveryMethod'] ?></b></h5>
+          			<h5>Delivery Method: <b><?php echo $res['orderDeliveryMethod'] ?></b></h5>
 
-      			<?php if ($res['orderDeliveryMethod'] == 'Pick Up'): ?>
+          			<?php if ($res['orderDeliveryMethod'] == 'Pick Up'): ?>
 
-                <h5>Schedule of Pick Up: <b><?php echo date('F d, Y', strtotime($res['orderShippingArrivalOrPickupDate'])); ?></b></h5>
-                
+                  <h5>Schedule of Pick Up: <b><?php echo date('F d, Y', strtotime($res['orderShippingArrivalOrPickupDate'])); ?></b></h5>
+                    
                 <?php endif ?>
 
-      			<h5>Mode of Payment: <b><?php echo $res['orderModeOfPayment'] ?></b></h5>
+          			<h5>Mode of Payment: <b><?php echo $res['orderModeOfPayment'] ?></b></h5>
 
-      			<h5>Date Placed: <b><?php echo date('F d, Y g:i A', strtotime($res['orderPlacedDate'])) ?></b></h5>
+          			<h5>Date Placed: <b><?php echo date('F d, Y g:i A', strtotime($res['orderPlacedDate'])) ?></b></h5>
 
-      			<h5>Order Payment Status: <b><?php echo $res['orderPaymentStatus'] ?></b></h5>
+          			<h5>Order Payment Status: <b><?php echo $res['orderPaymentStatus'] ?></b></h5>
 
-      			<h5>Order Status: <b><?php echo $res['orderStatus'] ?></b></h5>
+          			<h5>Order Status: <b><?php echo $res['orderStatus'] ?></b></h5>
 
-            <h5>Remark:</h5>
+                <h5>Remark:</h5>
 
       
-
-
-            <ul class="row">
-                <li class="col-sm-12">
-                 
-                    <textarea class="form-control" readonly="" name="orderRemarks" id="orderRemarks" rows="5" placeholder=""><?php echo $res['orderRemarks'] ?></textarea>
-                 
-
-                </li>
-            </ul>
-
+                <ul class="row">
+                    <li class="col-sm-12">
+                     
+                        <textarea class="form-control" readonly="" name="orderRemarks" id="orderRemarks" rows="5" placeholder=""><?php echo $res['orderRemarks'] ?></textarea>
+                     
+                    </li>
+                </ul>
 
 
                 <h6 class="padding-top-30">Billing Information</h6>
@@ -191,40 +188,126 @@ $res = $db->getResult(); $res = $res[0];
 
 
                   
-                  <div class="pay-meth">
+                  <div class="row">
+                    <div class="col-md-12">
 
-                  <label class="margin-top-50">Payment Form</label>
+                      <?php
 
-                    <ul class="row">
-                      <li class="col-sm-4">
-                        <label>Amount *
-                          <input  style="height: 45px !important;" type="number" step="0.01" min="1" class="form-control" name="paymentAmount" id="paymentAmount" placeholder="" required="" >
-                        </label>
-                      </li>
+                      
+                      $db->select('payments_view', 'coalesce(sum(paymentAmount),0) as totalAmountPaid', NULL, 'orderId = "' . $res['orderId'] . '" and paymentStatus = "Recieved"');
 
-                      <li class="col-sm-8">
-                        <label>Name of Remittance Center *
-                          <input  style="height: 45px !important;" type="text" class="form-control" name="nameOfRemmitanceCenter" id="nameOfRemmitanceCenter" placeholder="" required="" >
-                        </label>
-                      </li>
+                      $res = $db->getResult(); $res = $res[0];
 
-                      <li class="col-sm-6">
-                        <label>Control Number *
-                          <input  style="height: 45px !important;" type="text" class="form-control" name="controlNumber" id="controlNumber" placeholder="" required="" >
-                        </label>
-                      </li>
+                      $totalAmountPaid = $res['totalAmountPaid'];
 
-                      <li class="col-sm-6">
-                        <label>Reciept Image *
-                          <input  style="border:none;" type="file" class="form-control" name="paymentRecieptImage" id="paymentRecieptImage" placeholder="" required="" >
-                        </label>
-                      </li>
-                    </ul>
+                      $balance = $orderTotalAmount - $totalAmountPaid;
 
-                    <button type="submit" class="btn  btn-dark pull-right margin-top-30">SEND PAYMENT</button>
+                      ?>
+
+
+
+                      <h5>Total Amoun Paid: ₱<?php echo number_format($totalAmountPaid, 2); ?></h5>
+                      <h5>Balance: ₱<?php echo number_format($balance, 2); ?></h5>
+
+                      <div class="pay-meth">
+
+                      <label class="margin-top-50">Payment Form</label>
+
+                      <?php if (isset($_SESSION['toast']) and $_SESSION['toast'] == 'payment-sent'): ?>
+                        <div class="alert alert-success" role="alert">
+                        Payment sent.
+                        </div>
+                      <?php endif ?>
+
+        
+                        <ul class="row">
+                          <li class="col-sm-6">
+                            <label>Amount (Please pay ₱<?php echo number_format($balance, 2); ?>)*
+                              <input  style="height: 45px !important;" type="number" step="0.01" min="<?php echo $balance; ?>" max="<?php echo $balance; ?>" class="form-control" name="paymentAmount" id="paymentAmount" placeholder="" required="" >
+                            </label>
+                          </li>
+
+                          <li class="col-sm-6">
+                            <label>Name of Remittance Center *
+                              <input  style="height: 45px !important;" type="text" class="form-control" name="nameOfRemmitanceCenter" id="nameOfRemmitanceCenter" placeholder="" required="" >
+                            </label>
+                          </li>
+
+                          <li class="col-sm-6">
+                            <label>Control Number *
+                              <input  style="height: 45px !important;" type="text" class="form-control" name="controlNumber" id="controlNumber" placeholder="" required="" >
+                            </label>
+                          </li>
+
+                          <li class="col-sm-6">
+                            <label>Reciept Image *
+                              <input  style="border:none;" type="file" class="form-control" name="paymentRecieptImage" id="paymentRecieptImage" placeholder="" required="" >
+                            </label>
+                          </li>
+                        </ul>
+
+                        <button type="submit" class="btn  btn-dark pull-right margin-top-30">SEND PAYMENT</button>
+
+                     
+
+                      </div>
+                    </div>
 
                   </div>
 
+                  <div class="row mt-5">
+                    <div class="col-md-12"> 
+                      <div class="table-responsive">
+                        <table class="table">
+                        <thead>
+
+                          <tr>
+
+                            <th scope="col">Amount</th>
+                            <th scope="col">Reciept</th>
+                            <th></th>
+                            <th scope="col">Remittance Center</th>
+                            <th scope="col">Control Number</th>
+                            <th scope="col">Transaction Date</th>
+                            <th></th>
+                            <th scope="col">Status</th>
+                    
+
+                          </tr>
+
+                        </thead>
+                        <tbody>
+                        <?php
+                          $db->select('payments_view','*',NULL,'orderId = "' . base64_decode($_GET['orderId']) . '"'); 
+                          $output = $db->getResult();
+                          foreach ($output as $res) { ?>     
+
+                          <tr>
+
+                            <td>₱<?php echo number_format($res['paymentAmount'], 2); ?></td>
+                            <td><a target="_blank" href="paymentImages/<?php echo $res['paymentRecieptImage']; ?>"><img src="paymentImages/<?php echo $res['paymentRecieptImage']; ?>" class="img-thumbnail"></a></td>
+                            <td></td>
+                            <td><?php echo $res['nameOfRemmitanceCenter']; ?></td>
+                            <td><?php echo $res['controlNumber']; ?></td>
+                            <td><?php echo date('F d, Y g:i A',strtotime($res['paymentTransactionDate'])); ?></td>
+                            <td></td>
+                            <td><?php echo $res['paymentStatus']; ?></td>
+                            
+                      
+
+                          </tr>
+
+                        <?php } ?>
+
+                        </tbody>
+                      </table>
+                      </div>
+
+                     
+                    </div>
+                  </div>
+
+ 
                 </div>
               </div>
 

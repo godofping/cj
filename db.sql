@@ -168,9 +168,11 @@ CREATE TABLE `payments_table` (
   KEY `FK_payments_table` (`orderId`),
   CONSTRAINT `FK_payments_table` FOREIGN KEY (`orderId`) REFERENCES `orders_table` (`orderId`),
   CONSTRAINT `FK_payments_table1` FOREIGN KEY (`orderId`) REFERENCES `orders_table` (`orderId`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 /*Data for the table `payments_table` */
+
+insert  into `payments_table`(`paymentId`,`paymentAmount`,`orderId`,`paymentRecieptImage`,`paymentStatus`,`nameOfRemmitanceCenter`,`controlNumber`,`paymentTransactionDate`) values (1,'318',19,'0c011f55ccc606501a6566b30369b524Adidas_Logo_Flower__83153.1337144903.380.380.jpg','Pending','palawan','6a5sd-as65d4','2019-04-05 22:33:46');
 
 /*Table structure for table `product_categories_table` */
 

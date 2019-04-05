@@ -817,5 +817,50 @@ if (isset($_GET['from']) and $_GET['from'] == 'save-remark') {
 
 }
 
+if (isset($_GET['from']) and $_GET['from'] == 'recieve-payment') {
+
+	$orderId = $db->escapeString($_GET['orderId']);
+	$paymentId = $db->escapeString($_GET['paymentId']);
+	$paymentStatus = $db->escapeString("Recieved");
+
+
+	$db->update('payments_table',
+	array(
+		'paymentStatus'=>$paymentStatus,
+		),
+		'paymentId=' . $paymentId
+	);
+
+	$res = $db->getResult();
+
+
+	header("Location: manage-order.php?orderId=".$orderId);
+	$_SESSION['toast'] = 'recieve-payment';
+
+}
+
+if (isset($_GET['from']) and $_GET['from'] == 'invalid-payment') {
+
+	$orderId = $db->escapeString($_GET['orderId']);
+	$paymentId = $db->escapeString($_GET['paymentId']);
+	$paymentStatus = $db->escapeString("Invalid");
+
+
+	$db->update('payments_table',
+	array(
+		'paymentStatus'=>$paymentStatus,
+		),
+		'paymentId=' . $paymentId
+	);
+
+	$res = $db->getResult();
+
+
+	header("Location: manage-order.php?orderId=".$orderId);
+	$_SESSION['toast'] = 'invalid-payment';
+
+}
+
+
 
 ?>

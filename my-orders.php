@@ -64,12 +64,8 @@ $res = $db->getResult(); $res = $res[0];
 
              
             </div>
-
-
-        
-
-            
           </div>
+          
         </div>
       </div>
     </section>

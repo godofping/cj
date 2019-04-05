@@ -32,9 +32,11 @@ $primaryKey = 'paymentId';
 
 $columns = array(
 
-    array( 'db' => 'paymentAmount',   'dt' => 0 ),
+    array( 'db' => 'paymentAmount',   'dt' => 0, 'formatter' => function( $d, $row ) {
+        return '₱' . number_format($d, 2);
+    } ),
     array( 'db' => 'paymentRecieptImage',   'dt' => 1, 'formatter' => function( $d, $row ) {
-        return '<img src="paymentImages/test.jpg" class="img-thumbnail" alt="">';
+        return '<a target="_blank" href="../paymentImages/'. $d .'"><img src="../paymentImages/' . $d . '" class="img-thumbnail"></a>';
     } ),
     array( 'db' => 'nameOfRemmitanceCenter',   'dt' => 2 ),
     array( 'db' => 'controlNumber',   'dt' => 3 ),
@@ -42,12 +44,21 @@ $columns = array(
         return date('F d, Y g:i A', strtotime($d));
     } ),
     array( 'db' => 'paymentStatus',   'dt' => 5 ),
-    array( 'db' => 'paymentTransactionDate',   'dt' => 6, 'formatter' => function( $d, $row ) {
-        return date('F d, Y g:i A', strtotime($d));
+    array( 'db' => 'paymentId', 'dt' => 6,'formatter' => function( $d, $row ) {
+
+        if ($row['paymentStatus'] == 'Pending') {
+        return '<a onclick = "return confirm('."'Are you sure want to update this record?'".')" class = "btn btn-info btn-xs" href="controller.php?from=recieve-payment&paymentId=' . $row['paymentId'] . '&orderId='.$_POST['orderId'].'">Recieved</a> 
+        <a onclick = "return confirm('."'Are you sure want to update this record?'".')" class = "btn btn-warning btn-xs" href="controller.php?from=invalid-payment&paymentId=' . $row['paymentId'] . '&orderId='.$_POST['orderId'].'">Invalid</a>';
+        }
+        else
+        {
+            return '';
+        }
     } ),
+    
 
     
-    // <a class = "btn btn-warning btn-xs" href="view-product.php?paymentId=' . $row['paymentId'] . '">View</a>
+
   
 );
  

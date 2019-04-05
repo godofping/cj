@@ -450,6 +450,18 @@
           });
       <?php endif?>
 
+      <?php if (isset($_SESSION['toast']) and ($_SESSION['toast'] == 'recieve-payment' or $_SESSION['toast'] == 'invalid-payment')): ?>
+          $.toast({
+            heading: 'SUCCESSFULLY UPDATED',
+            text: 'Payment Status Updated!',
+            position: 'top-center',
+            loaderBg:'#ff6849',
+            icon: 'success',
+            hideAfter: 5000, 
+            stack: 6
+          });
+      <?php endif?>
+
 
 
     </script>

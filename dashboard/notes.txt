@@ -111,3 +111,11 @@ on checkout . when shipping is selected.
 
 
 if orders are cancelled. return the items
+
+----
+notifications
+reciepts
+reports
+about
+contact
+reviews

@@ -421,41 +421,6 @@ if (isset($_GET['from']) and $_GET['from'] == 'place-order') {
 
 	}
 
-	
-	if ($orderModeOfPayment == 'Remittance') {
-		// //payment information
-		// $paymentAmount = $db->escapeString($_POST['paymentAmount']);
-		// $nameOfRemmitanceCenter = $db->escapeString($_POST['nameOfRemmitanceCenter']);
-		// $controlNumber = $db->escapeString($_POST['controlNumber']);
-		// $paymentStatus = $db->escapeString("Pending Approval");
-		// $paymentTransactionDate = $db->escapeString(date('Y-m-d H:i:s'));
-
-
-		// // $paymentRecieptImage = $db->escapeString($_POST['paymentRecieptImage']);
-
-		// $db->delete('payments_table','orderId=' . $orderId);
-		// $res = $db->getResult();
-
-
-		// $db->insert('payments_table',
-		// array(
-		// 	'paymentAmount'=>$paymentAmount,
-		// 	'nameOfRemmitanceCenter'=>$nameOfRemmitanceCenter,
-		// 	'controlNumber'=>$controlNumber,
-		// 	'paymentStatus'=>$orderDeliveryMethod,
-		// 	'paymentTransactionDate'=>$paymentTransactionDate,
-		// 	'orderId'=>$orderId,
-
-		// 	)
-		// );
-
-		// $res = $db->getResult();
-	
-
-
-	} elseif ($orderModeOfPayment == 'Walk In') {
-		
-	}
 
 
 		$db->select('order_details_view','*',NULL,'customerId = "' . $_SESSION['customerId'] . '" and orderId = "' . $orderId . '" ', NULL); 
@@ -562,5 +527,48 @@ if (isset($_GET['from']) and $_GET['from'] == 'update-password') {
 	header("Location: my-profile.php");
 	
 }
+
+
+if (isset($_GET['from']) and $_GET['from'] == 'payment-form') {
+
+	$filename = basename($_FILES["paymentRecieptImage"]["name"]);
+	$filename = md5(date("Y-m-d H:i:s") . "1") . $filename;
+	$target_dir = "paymentImages/";
+	$target_file = $target_dir . $filename;
+	$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+    move_uploaded_file($_FILES["paymentRecieptImage"]["tmp_name"], $target_file);
+
+	$paymentAmount = $db->escapeString($_POST['paymentAmount']);
+	$orderId = $db->escapeString($_GET['orderId']);
+	$paymentStatus = $db->escapeString("Pending");
+	$nameOfRemmitanceCenter = $db->escapeString($_POST['nameOfRemmitanceCenter']);
+	$controlNumber = $db->escapeString($_POST['controlNumber']);
+	$paymentTransactionDate = $db->escapeString(date('Y-m-d H:i:s'));
+	$paymentRecieptImage = $db->escapeString($filename);
+
+
+	$db->insert('payments_table',
+	array(
+		'paymentAmount'=>$paymentAmount,
+		'orderId'=>$orderId,
+		'paymentRecieptImage'=>$paymentRecieptImage,
+		'paymentStatus'=>$paymentStatus,
+		'nameOfRemmitanceCenter'=>$nameOfRemmitanceCenter,
+		'controlNumber'=>$controlNumber,
+		'paymentTransactionDate'=>$paymentTransactionDate,
+
+		)
+	);
+
+	$res = $db->getResult();
+
+	$_SESSION['toast'] = 'payment-sent';
+	header("Location: order-details.php?orderId=". base64_encode($orderId));
+
+
+}
+
+
+
 
 ?>
