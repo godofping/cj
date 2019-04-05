@@ -17,35 +17,37 @@ $res = $db->getResult(); $res = $res[0];
 
  } ?>
 
-  <!-- SUB BANNER -->
   <section class="sub-bnr" data-stellar-background-ratio="0.5">
     <div class="position-center-center">
       <div class="container">
-        <h4>Checkout your order</h4>
+        <div class="heading text-center">
+          <h4>Checkout Your Order</h4>
+          <hr>
+        </div>
       </div>
     </div>
-  </section>
+  </section> 
 
 
-<!-- Content -->
+
   <div id="content"> 
     
     <form role="form" id="contact_form" class="contact-form" method="post" action="controller.php?from=place-order" autocomplete="off" enctype="multipart/form-data">
 
       <input type="text" name="orderId" hidden="" value="<?php echo $orderId ?>">
 
-    <!--======= PAGES INNER =========-->
+
     <section class="chart-page padding-top-100 padding-bottom-100">
       <div class="container"> 
         
-        <!-- Payments Steps -->
+
         <div class="shopping-cart"> 
           
-          <!-- SHOPPING INFORMATION -->
+
           <div class="cart-ship-info">
             <div class="row"> 
               
-              <!-- ESTIMATE SHIPPING & TAX -->
+      
               <div class="col-sm-5">
                 <h6>Billing Information</h6>
                 
@@ -86,7 +88,7 @@ $res = $db->getResult(); $res = $res[0];
               </div>
 
               
-              <!-- SUB TOTAL -->
+       
               <div class="col-sm-7">
                 <h6>Your Order</h6>
                 <div class="order-place">
@@ -99,15 +101,20 @@ $res = $db->getResult(); $res = $res[0];
                     foreach ($output as $res) { ?>
                     
                     <p>
-                      <?php echo $res['productName']; ?> (<?php echo $res['productOption1']; ?> <?php echo $res['productOption2']; ?>) 
 
-                      <span>₱<?php echo number_format($res['quantity'] * $res['price'], 2); $sum = $sum + ($res['quantity'] * $res['price']); ?></span>
+                      <span>₱<?php echo number_format($res['quantity'] * $res['price'], 2); $sum = $sum + ($res['quantity'] * $res['price']); ?> </span>
+
+                      <?php echo $res['productName']; ?> (<?php echo $res['productOption1']; ?> <?php echo $res['productOption2']; ?>) <br>
+                      Quantity: <?php echo $res['quantity']; ?> <br>
+                      Price: ₱<?php echo number_format($res['price'], 2); ?> each <br>
+
+                      
                     </p>
 
                   <?php } ?>
 
                     
-                    <!-- SUB TOTAL -->
+                
                     <p class="all-total">Total <span> ₱<?php echo number_format($sum, 2); ?></span></p>
 
                     <input type="text" name="sum" value="<?php echo $sum ?>" hidden>

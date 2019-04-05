@@ -2,14 +2,18 @@
 
 ?>
 
-  <!-- SUB BANNER -->
+
   <section class="sub-bnr" data-stellar-background-ratio="0.5">
     <div class="position-center-center">
       <div class="container">
-        <h4>Shopping Cart</h4>
+        <div class="heading text-center">
+          <h4>Shopping Cart</h4>
+          <hr>
+        </div>
       </div>
     </div>
-  </section>
+  </section>  
+  
 
 
 <?php 
@@ -31,7 +35,7 @@
               <tr>
                 <th scope="col" class="text-left">Items</th>
                 <th scope="col">Price</th>
-                <th scope="col">Qty</th>
+                <th scope="col">Quantity</th>
                 <th scope="col">Total</th>
                 <th scope="col">&nbsp;</th>
               </tr>
@@ -131,8 +135,19 @@
                   $output = $db->getResult();
                   $sum = 0;
                   foreach ($output as $res) { ?>
-                  <p><?php echo $res['productName']; ?> (<?php echo $res['productOption1']; ?> <?php echo $res['productOption2']; ?>) <span>₱<?php echo number_format($res['quantity'] * $res['price'], 2); $sum = $sum + ($res['quantity'] * $res['price']); ?> </span></p>
-                <?php } ?>
+
+                    <p>
+
+                      <span>₱<?php echo number_format($res['quantity'] * $res['price'], 2); $sum = $sum + ($res['quantity'] * $res['price']); ?> </span>
+
+                      <?php echo $res['productName']; ?> (<?php echo $res['productOption1']; ?> <?php echo $res['productOption2']; ?>) <br>
+                      Quantity: <?php echo $res['quantity']; ?> <br>
+                      Price: ₱<?php echo number_format($res['price'], 2); ?> each <br>
+
+                      
+                    </p>
+                  
+                  <?php } ?>
 
                   
                   <!-- SUB TOTAL -->

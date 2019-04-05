@@ -2,22 +2,29 @@
 
 ?>
   
-  <!-- Content -->
+
+  <section class="sub-bnr" data-stellar-background-ratio="0.5">
+    <div class="position-center-center">
+      <div class="container">
+        <div class="heading text-center">
+          <h4>Our Customer Feedback</h4>
+          <hr>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+
+
   <div id="content"> 
     
-    <!-- PAGES INNER -->
+   
     <section class="contact padding-top-100 padding-bottom-100">
       <div class="container">
         <div class="contact-form">
           
           <div class="row">
-            <div class="col-md-12">
-              <div class="heading text-center margin-bottom-60">
-                <h4>Our Customers Feedback</h4>
-                <hr>
-              </div>
-            </div>
-            
+
             <div class="col-md-8">
               <?php
               $db->select('customer_feedbacks_view','*',NULL,'customerFeedbackStatus = 1', "customerFeedbackId DESC LIMIT 10"); 
@@ -50,7 +57,7 @@
                   </div>
               <?php endif ?>
 
-              <!--======= FORM  =========-->
+           
               <form role="form" id="contact_form" class="contact-form" method="post" action="controller.php?from=add-feedback" autocomplete="off">
                 <ul class="row">
                   <li class="col-sm-12">
