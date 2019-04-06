@@ -95,7 +95,7 @@ if ($res['customerIsBlocked'] == 1 and isset($_SESSION['customerId']) and $filen
             
             <ul class="nav">
               <li class="<?php if ($filename == 'index'): ?>active<?php endif ?>"> <a href="index.php"> Home</a> </li>
-              <li class="dropdown <?php if ($filename == 'shop'): ?>active<?php endif ?>""> <a href="#." class="dropdown-toggle" data-toggle="dropdown">Categories</a>
+              <li class="dropdown <?php if ($filename == 'shop' or $filename == 'product-details'): ?>active<?php endif ?>""> <a href="#." class="dropdown-toggle" data-toggle="dropdown">Categories</a>
                 <ul class="dropdown-menu">
                 <?php 
                 $db->select('product_categories_view'); 
@@ -117,7 +117,7 @@ if ($res['customerIsBlocked'] == 1 and isset($_SESSION['customerId']) and $filen
                 </ul>
               </li>
               <?php if (isset($_SESSION['customerId'])): ?>
-              <li class="dropdown <?php if ($filename == 'my-profile' or $filename == 'my-orders' or $filename == 'reviews' or $filename == 'shopping-cart' or $filename == 'my-reviews'): ?>active<?php endif ?>"> <a href="#" class="dropdown-toggle" data-toggle="dropdown">My Account</a>
+              <li class="dropdown <?php if ($filename == 'my-profile' or $filename == 'my-orders' or $filename == 'reviews' or $filename == 'shopping-cart' or $filename == 'my-reviews' or $filename == 'review'): ?>active<?php endif ?>"> <a href="#" class="dropdown-toggle" data-toggle="dropdown">My Account</a>
                 <ul class="dropdown-menu">
                   <li> <a href="shopping-cart.php">Shopping Cart</a> </li>
                   <li> <a href="my-feedbacks.php">My Feedbacks</a> </li>

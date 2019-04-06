@@ -27,8 +27,6 @@ else
 	add order details	
 
 
-
-
 	bugs
 
 	error on cart finish registration.
@@ -116,7 +114,4 @@ if orders are cancelled. return the items
 notifications
 reciepts
 reports
-about
-contact
-reviews
 if cancelled ibalik ang items sa may inventory

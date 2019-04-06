@@ -4,10 +4,10 @@ if (!isset($_SESSION['customerId'])) {
 }
 ?>
   
-  <!-- Content -->
+ 
   <div id="content"> 
     
-    <!-- PAGES INNER -->
+ 
     <section class="contact padding-top-100 padding-bottom-100">
       <div class="container">
         <div class="contact-form">
@@ -15,10 +15,10 @@ if (!isset($_SESSION['customerId'])) {
           <div class="row">
             <div class="col-md-8"> 
               
-              <!--======= Success Msg =========-->
-              <div id="contact_message" class="success-msg"> <i class="fa fa-paper-plane-o"></i>Thank You. Your Message has been Submitted</div>
-              
-              <!--======= FORM  =========-->
+
+            
+       
+
               <form role="form" id="contact_form" class="contact-form" method="post" action="controller.php?from=finish-registration" autocomplete="off">
                 <ul class="row">
                   <li class="col-sm-6">
@@ -49,7 +49,7 @@ if (!isset($_SESSION['customerId'])) {
               </form>
             </div>
             
-            <!--======= ADDRESS INFO  =========-->
+
             <div class="col-md-4">
               <div class="contact-info">
                 <h6>You can also buy on us through walkin. Just go to our store or contact us.</h6>
