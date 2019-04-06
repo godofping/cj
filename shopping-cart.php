@@ -20,14 +20,46 @@
   $db->select('order_details_view','count(*) as total',NULL,'customerId = "' . $_SESSION['customerId'] . '" and orderStatus = "On Cart"', NULL); 
   $res = $db->getResult(); $res = $res[0];
 
-  if ($res['total'] > 0) { ?>
+  if ($res['total'] > 0) { 
+
+  $counter = 0;
+  $string = "";
+
+  $db->select('order_details_view','*',NULL,'customerId = "' . $_SESSION['customerId'] . '" and orderStatus = "On Cart"', NULL); 
+  $output = $db->getResult();
+
+  foreach ($output as $res) {
+
+    if ($res['productStock'] < $res['quantity']) {
+      $string = $res['productName'] . " (" . $res['productOption1'] . " " . $res['productOption2'] . ") is removed automatically from your cart because the stocks is low.<br>";
+      $counter++;
+
+      $db->delete('order_details_table','productVariationId=' . $res['productVariationId']);
+      $res = $db->getResult();
+
+
+    }
+
+    
+  }
+
+
+
+
+  ?>
     <!-- Content -->
   <div id="content"> 
     
     <!-- PAGES INNER -->
     <section class="padding-top-100 padding-bottom-100 pages-in chart-page">
       <div class="container"> 
-        
+
+        <?php if ($counter > 0): ?>
+        <div class="alert alert-danger" role="alert">
+          <?php echo $string; ?>
+        </div>
+        <?php endif ?>
+
         <!-- Payments Steps -->
         <div class="shopping-cart text-center">
           <table class="table">

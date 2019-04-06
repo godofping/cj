@@ -4,12 +4,33 @@ include('dashboard/connection.php');
 $db->select('product_variations_view','*',NULL,'productVariationId = "' . $_POST['productVariationId'] . '"', NULL); 
 $res = $db->getResult(); $res = $res[0];
 
+$onCartQuantity = 0;
+$additionalString = "";
+
+if (isset($_SESSION['customerId'])) {
+
+$db->select('orders_view', '*', NULL, 'customerId = "' . $_SESSION['customerId']  .'" and orderStatus = "On Cart"');
+$res1 = $db->getResult(); $res1 = $res1[0];
+
+$db->select('order_details_view', '*', NULL, 'orderId = "' . $res1['orderId']  .'"');
+$res1 = $db->getResult();
+
+if (!empty($res1)) {
+$res1 = $res1[0];
+$onCartQuantity = $res1['quantity'];
+$additionalString = $onCartQuantity . " piece(s) is already on your cart.";
+
+}
+
+}
+
+
 ?>
 
-<li class="col-md-6">     
+<li class="col-md-12">     
   <span class="price" style="margin-top: -5px;"><small>₱</small><?php echo number_format($res['productPrice'],2); ?></span>
   <br>
-<p><?php echo $res['productStock']; ?> piece(s) available</p>
+<p><?php echo $res['productStock']; ?> piece(s) available. <?php echo $additionalString; ?></p>
 
 </li>
 
@@ -46,7 +67,7 @@ $('.quantity-right-plus').click(function(e){
        // If is not undefined
 
 
-       if (quantity < <?php echo $res['productStock']; ?>) {
+       if (quantity < <?php echo ($res['productStock'] - $onCartQuantity); ?>) {
           $('#quantity').val(quantity + 1);
        }  
 

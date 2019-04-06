@@ -111,7 +111,14 @@ on checkout . when shipping is selected.
 if orders are cancelled. return the items
 
 ----
+order confirm pickup date
 notifications
 reciepts
 reports
 if cancelled ibalik ang items sa may inventory
+walk in payment
+----
+
+fix review filter
+
+
