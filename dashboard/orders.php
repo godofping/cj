@@ -35,6 +35,7 @@
                                 <tr>
                                     <th>Order Number</th>
                                     <th>Customer</th>
+                                    <th>Customer Type</th>
                                     <th>Delivery Method</th>
                                     <th>Mode of Payment</th>
                                     <th>Date Placed</th>
@@ -64,7 +65,7 @@
         // "processing":true,
         // "serverSide":true,
         deferRender: true,
-        "order":[],
+        "order":[0,"ASC"],
         "ajax": {
                     "type": 'POST',
                     "url": 'load-orders.php',
@@ -72,7 +73,7 @@
                 },
         "columnDefs":[
             {
-                "targets":[6],
+                "targets":[7],
                 "orderable":false,
             },
         ],

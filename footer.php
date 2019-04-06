@@ -36,10 +36,10 @@
             <?php if (isset($_SESSION['customerId'])): ?>
             <h6>My Account</h6>
             <ul class="link">
-              <li><a href="#."> Profile</a></li>
-              <li><a href="#."> Orders</a></li>
-              <li><a href="#."> Reviews</a></li>
-              <li><a href="#."> Feedbacks</a></li>
+              <li><a href="my-profile.php">My Profile</a></li>
+              <li><a href="my-orders.php?selected=All">My Orders</a></li>
+              <li><a href="my-reviews.php">My Reviews</a></li>
+              <li><a href="my-feedbacks.php">My Feedbacks</a></li>
             </ul>
             <?php endif ?>
           </div>

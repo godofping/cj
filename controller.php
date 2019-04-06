@@ -89,7 +89,7 @@ if (isset($_GET['from']) and $_GET['from'] == 'customer-registration') {
 		array(
 			'customerEmail'=>$customerEmail,
 			'customerPassword'=>$customerPassword,
-			'customerType'=>'online',
+			'customerType'=>'Online',
 			'customerIsBlocked'=>'0',
 			'customerRegistrationDate'=>date('Y-m-d'),
 			)
@@ -584,6 +584,33 @@ if (isset($_GET['from']) and $_GET['from'] == 'cancel-order') {
 
 }
 
+
+if (isset($_GET['from']) and $_GET['from'] == 'add-review') {
+
+	$productVariationId = $db->escapeString($_GET['productVariationId']);
+	$productReview = $db->escapeString($_POST['productReview']);
+	$productReviewDate = $db->escapeString(date('Y-m-d'));
+	$customerId = $db->escapeString($_SESSION['customerId']);
+
+
+	$db->insert('product_reviews_table',
+	array(
+		'productVariationId'=>$productVariationId,
+		'productReview'=>$productReview,
+		'productReviewDate'=>$productReviewDate,
+		'customerId'=>$customerId,
+		)
+	);
+
+	$res = $db->getResult();
+
+
+
+	$_SESSION['toast'] = 'add-review';
+	header("Location: review.php?productVariationId=". $productVariationId);
+
+
+}
 
 
 

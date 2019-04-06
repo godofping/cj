@@ -91,7 +91,7 @@ $res = $db->getResult(); $res = $res[0];
 
                   <tr>
 
-                    <th><?php echo $res['orderId']; ?></th>
+                    <td><?php echo $res['orderId']; ?></td>
                     <td><?php echo date('F d, Y g:i A',strtotime($res['orderPlacedDate'])); ?></td>
                     <td><?php echo $res['orderPaymentStatus']; ?></td>
                     <td><?php echo $res['orderStatus']; ?></td>

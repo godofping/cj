@@ -221,9 +221,11 @@ CREATE TABLE `product_reviews_table` (
   KEY `FK_product_reviews_table1` (`customerId`),
   CONSTRAINT `FK_product_reviews_table` FOREIGN KEY (`productVariationId`) REFERENCES `product_variations_table` (`productVariationId`),
   CONSTRAINT `FK_product_reviews_table1` FOREIGN KEY (`customerId`) REFERENCES `customers_table` (`customerId`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 /*Data for the table `product_reviews_table` */
+
+insert  into `product_reviews_table`(`productReviewId`,`productVariationId`,`productReview`,`productReviewDate`,`customerId`) values (1,9,'nice product','2019-04-06',6);
 
 /*Table structure for table `product_sub_categories_table` */
 
@@ -543,6 +545,35 @@ DROP TABLE IF EXISTS `product_images_view`;
  `productCategory` varchar(60) 
 )*/;
 
+/*Table structure for table `product_reviews_view` */
+
+DROP TABLE IF EXISTS `product_reviews_view`;
+
+/*!50001 DROP VIEW IF EXISTS `product_reviews_view` */;
+/*!50001 DROP TABLE IF EXISTS `product_reviews_view` */;
+
+/*!50001 CREATE TABLE  `product_reviews_view`(
+ `productReviewId` int(6) ,
+ `productVariationId` int(6) ,
+ `productReview` text ,
+ `productReviewDate` date ,
+ `customerId` int(6) ,
+ `productId` int(6) ,
+ `productStock` int(6) ,
+ `productStocksReorderPoint` int(6) ,
+ `productOption1` varchar(60) ,
+ `productOption2` varchar(60) ,
+ `productVariationIsDeleted` tinyint(1) ,
+ `productPrice` float ,
+ `productName` varchar(60) ,
+ `productSubCategoryId` int(6) ,
+ `productDetails` text ,
+ `productUpdateDate` datetime ,
+ `productIsDeleted` tinyint(1) ,
+ `productSubCategory` varchar(60) ,
+ `productCategory` varchar(60) 
+)*/;
+
 /*Table structure for table `product_sub_categories_view` */
 
 DROP TABLE IF EXISTS `product_sub_categories_view`;
@@ -700,6 +731,13 @@ DROP TABLE IF EXISTS `users_view`;
 /*!50001 DROP VIEW IF EXISTS `product_images_view` */;
 
 /*!50001 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `product_images_view` AS select `product_images_table`.`productImageId` AS `productImageId`,`product_images_table`.`productImageLocation` AS `productImageLocation`,`product_images_table`.`isThumbnail` AS `isThumbnail`,`product_images_table`.`productId` AS `productId`,`products_table`.`productName` AS `productName`,`products_table`.`productSubCategoryId` AS `productSubCategoryId`,`products_table`.`productDetails` AS `productDetails`,`products_table`.`productUpdateDate` AS `productUpdateDate`,`products_table`.`productIsDeleted` AS `productIsDeleted`,`product_sub_categories_table`.`productSubCategory` AS `productSubCategory`,`product_sub_categories_table`.`productCategoryId` AS `productCategoryId`,`product_categories_table`.`productCategory` AS `productCategory` from (((`product_images_table` join `products_table` on((`product_images_table`.`productId` = `products_table`.`productId`))) join `product_sub_categories_table` on((`products_table`.`productSubCategoryId` = `product_sub_categories_table`.`productSubCategoryId`))) join `product_categories_table` on((`product_sub_categories_table`.`productCategoryId` = `product_categories_table`.`productCategoryId`))) */;
+
+/*View structure for view product_reviews_view */
+
+/*!50001 DROP TABLE IF EXISTS `product_reviews_view` */;
+/*!50001 DROP VIEW IF EXISTS `product_reviews_view` */;
+
+/*!50001 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `product_reviews_view` AS select `product_reviews_table`.`productReviewId` AS `productReviewId`,`product_reviews_table`.`productVariationId` AS `productVariationId`,`product_reviews_table`.`productReview` AS `productReview`,`product_reviews_table`.`productReviewDate` AS `productReviewDate`,`product_reviews_table`.`customerId` AS `customerId`,`product_variations_table`.`productId` AS `productId`,`product_variations_table`.`productStock` AS `productStock`,`product_variations_table`.`productStocksReorderPoint` AS `productStocksReorderPoint`,`product_variations_table`.`productOption1` AS `productOption1`,`product_variations_table`.`productOption2` AS `productOption2`,`product_variations_table`.`productVariationIsDeleted` AS `productVariationIsDeleted`,`product_variations_table`.`productPrice` AS `productPrice`,`products_table`.`productName` AS `productName`,`products_table`.`productSubCategoryId` AS `productSubCategoryId`,`products_table`.`productDetails` AS `productDetails`,`products_table`.`productUpdateDate` AS `productUpdateDate`,`products_table`.`productIsDeleted` AS `productIsDeleted`,`product_sub_categories_table`.`productSubCategory` AS `productSubCategory`,`product_categories_table`.`productCategory` AS `productCategory` from ((((`product_reviews_table` join `product_variations_table` on((`product_reviews_table`.`productVariationId` = `product_variations_table`.`productVariationId`))) join `products_table` on((`product_variations_table`.`productId` = `products_table`.`productId`))) join `product_sub_categories_table` on((`products_table`.`productSubCategoryId` = `product_sub_categories_table`.`productSubCategoryId`))) join `product_categories_table` on((`product_sub_categories_table`.`productCategoryId` = `product_categories_table`.`productCategoryId`))) */;
 
 /*View structure for view product_sub_categories_view */
 

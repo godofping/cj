@@ -57,7 +57,7 @@ $sql_details = array(
 
    require( 'ssp.class.php' );
     echo json_encode(
-    SSP::complex( $_POST, $sql_details, $table, $primaryKey, $columns, 'customerType = "online"' )
+    SSP::complex( $_POST, $sql_details, $table, $primaryKey, $columns, 'customerType = "Online"' )
 );
 
 

@@ -117,7 +117,7 @@ if ($res['customerIsBlocked'] == 1 and isset($_SESSION['customerId']) and $filen
                 </ul>
               </li>
               <?php if (isset($_SESSION['customerId'])): ?>
-              <li class="dropdown <?php if ($filename == 'my-profile' or $filename == 'my-orders' or $filename == 'reviews' or $filename == 'shopping-cart'): ?>active<?php endif ?>"> <a href="#" class="dropdown-toggle" data-toggle="dropdown">My Account</a>
+              <li class="dropdown <?php if ($filename == 'my-profile' or $filename == 'my-orders' or $filename == 'reviews' or $filename == 'shopping-cart' or $filename == 'my-reviews'): ?>active<?php endif ?>"> <a href="#" class="dropdown-toggle" data-toggle="dropdown">My Account</a>
                 <ul class="dropdown-menu">
                   <li> <a href="shopping-cart.php">Shopping Cart</a> </li>
                   <li> <a href="my-feedbacks.php">My Feedbacks</a> </li>

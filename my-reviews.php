@@ -1,0 +1,107 @@
+<?php 
+include('header.php');
+
+$db->select('customers_view','*',NULL,'customerId = "' . $_SESSION['customerId'] . '"', NULL); 
+$res = $db->getResult(); $res = $res[0];
+?>
+
+<?php if (!isset($_SESSION['customerId'])): ?>
+  <script type="text/javascript">window.location.replace("index.php");</script>
+<?php endif ?>
+
+  <section class="sub-bnr" data-stellar-background-ratio="0.5">
+    <div class="position-center-center">
+      <div class="container">
+        <div class="heading text-center">
+          <h4>My Reviews</h4>
+          <hr>
+        </div>
+      </div>
+    </div>
+  </section>  
+  
+
+  <div id="content"> 
+    
+    <section class="contact padding-top-100 padding-bottom-100">
+      <div class="container">
+        <div class="contact-form">
+          
+          <div class="row">
+            <div class="col-md-12"> 
+          
+              <div class="table-responsive">
+                <table class="table">
+                <thead>
+
+                  <tr>
+
+                    <th scope="col"></th>
+                    <th scope="col">Product</th>
+                    <th>Status</th>
+                    <th scope="col">Actions</th>
+
+                  </tr>
+
+                </thead>
+                <tbody>
+                <?php
+
+                  $db->select('order_details_view','*',NULL,'customerId = "' . $_SESSION['customerId'] . '" and orderStatus = "Finished" GROUP BY productVariationId', NULL); 
+                  $output = $db->getResult();
+                  foreach ($output as $res) { 
+
+                  $db->select('product_images_view','*',NULL,'productId = "' . $res['productId'] . '" and isThumbnail = 1', NULL); 
+                  $imgres = $db->getResult(); $imgres = $imgres[0];
+
+                  ?>     
+
+                  <tr>
+                    <td><img style="height: 100px;" src="dashboard/images/<?php echo $imgres['productImageLocation'] ?>" class="img-thumbnail"></td>
+                    <td><?php echo $res['productName']; ?> (<?php echo $res['productOption1']; ?> <?php echo $res['productOption2']; ?>)</td>
+                    <td>
+                      <?php
+                      $db->select('product_reviews_view','count(*) as total',NULL,'productVariationId = "' . $res['productVariationId'] . '" and customerId = "' . $_SESSION['customerId'] . '"', NULL); 
+                      $output1 = $db->getResult(); $res1 = $output1[0];
+                      if ($res1['total'] > 0) {
+                        echo "Already reviewed";
+                      }
+                      else
+                      {
+                        echo "Not yet reviewed";
+                      }
+                      ?>
+
+                    </td>
+                    <td><a href="review.php?productVariationId=<?php echo $res['productVariationId'] ?>"><button type="submit" value="submit" class="btn" id="btn_submit" >Review</button></a></td>
+
+  
+
+                  </tr>
+
+                <?php } ?>
+
+                </tbody>
+              </table>
+              </div>
+
+             
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    </section>
+    
+
+  </div>
+  <?php include('footer.php'); ?>
+
+<script type="text/javascript">
+  
+$( "#filter" ).change(function() {
+  var selectedValue = $( "#filter option:selected" ).text();
+  window.location.replace("my-orders.php?selected="+selectedValue);
+});
+
+</script>
