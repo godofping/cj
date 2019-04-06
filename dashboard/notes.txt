@@ -29,16 +29,26 @@ s3 - color - red - capacity - 64
 
 
 ----kulang----
-if orders are cancelled. return the items
 order confirm pickup date
 notifications
 reciepts
 reports
+	list of customers
+	list of collection
+	list of orders
+	list of cancelled orders
+	list of over due
+	list of customer pending payments
+	list of available stocks
+	list of re-order point
+	list of stock-in
+	list of stock-out
+	list of acknowledgement reciept
+	reviews
+	feedback
 if cancelled ibalik ang items sa may inventory
-walk in payment
-
-fix review filter
-add payment for walkin
-add confirm pickup date
+add confirm pickup date, resched
+backup and restore
+over due
 
 

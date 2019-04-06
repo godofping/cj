@@ -75,30 +75,31 @@ $res = $db->getResult(); $res = $res[0];
                   $db->select('product_images_view','*',NULL,'productId = "' . $res['productId'] . '" and isThumbnail = 1', NULL); 
                   $imgres = $db->getResult(); $imgres = $imgres[0];
 
+                  ?>
+
+                  <?php
+                  $db->select('product_reviews_view','count(*) as total',NULL,'productVariationId = "' . $res['productVariationId'] . '" and customerId = "' . $_SESSION['customerId'] . '"', NULL); 
+                  $output1 = $db->getResult(); $res1 = $output1[0];
+                  if ($res1['total'] > 0) {
+                    $string = "Already reviewed";
+                  }
+                  else
+                  {
+                    $string = "Not yet reviewed";
+                  }
+
+                  $selected = $_GET['selected'];
+
+                  if ($selected == $string or $selected == 'All') {
                   ?>     
 
                   <tr>
                     <td><img style="height: 100px;" src="dashboard/images/<?php echo $imgres['productImageLocation'] ?>" class="img-thumbnail"></td>
                     <td><?php echo $res['productName']; ?> (<?php echo $res['productOption1']; ?> <?php echo $res['productOption2']; ?>)</td>
-                    <td>
-                      <?php
-                      $db->select('product_reviews_view','count(*) as total',NULL,'productVariationId = "' . $res['productVariationId'] . '" and customerId = "' . $_SESSION['customerId'] . '"', NULL); 
-                      $output1 = $db->getResult(); $res1 = $output1[0];
-                      if ($res1['total'] > 0) {
-                        echo "Already reviewed";
-                      }
-                      else
-                      {
-                        echo "Not yet reviewed";
-                      }
-                      ?>
-
-                    </td>
+                    <td><?php echo $string; ?></td>
                     <td><a href="review.php?productVariationId=<?php echo $res['productVariationId'] ?>"><button type="submit" value="submit" class="btn" id="btn_submit" >Review</button></a></td>
-
-  
-
                   </tr>
+                <?php } ?>
 
                 <?php } ?>
 
