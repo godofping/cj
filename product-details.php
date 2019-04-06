@@ -108,8 +108,13 @@ $res = $db->getResult(); $res = $res[0];
         <div class="item-decribe"> 
       
           <ul class="nav nav-pills" role="tablist">
+
+            <?php
+            $db->select('product_reviews_view','count(*) as total',NULL,'productId = "' . $_GET['productId'] . '"', NULL); 
+            $res = $db->getResult(); $res = $res[0];
+            ?>
      
-            <li class="nav-item"><a class="active nav-link" href="#review" role="tab" data-toggle="pill">REVIEW (03)</a></li>
+            <li class="nav-item"><a class="active nav-link" href="#review" role="tab" data-toggle="pill">REVIEW (<?php echo $res['total']; ?>)</a></li>
       
           </ul>
           
@@ -118,22 +123,18 @@ $res = $db->getResult(); $res = $res[0];
 
    
             <div role="tabpanel" class="tab-pane active" id="review">
-              <h6>3 REVIEWS FOR SHIP YOUR IDEA</h6>
-              
 
+              <?php
+            $db->select('product_reviews_view','*',NULL,'productId = "' . $_GET['productId'] . '"', NULL); 
+            $output = $db->getResult();
+            foreach ($output as $res) { ?>
               <div class="media">
-                <div class="media-left"> 
-                  <!--  Image -->
-                  <div class="avatar"> <a href="#"> <img class="media-object" src="images/avatar-1.jpg" alt=""> </a> </div>
-                </div>
-            
                 <div class="media-body">
-                  <p>“Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
-                    labore et dolore magna aliqua.”</p>
-                  <h6>TYRION LANNISTER <span class="pull-right">MAY 10, 2016</span> </h6>
+                  <p>“<?php echo $res['productReview']; ?>”</p>
+                  <h6><?php echo $res['customerFirstName'] . " " . $res['customerLastName'] ; ?> ordered "<?php echo $res['productName']; ?> (<?php echo $res['productOption1']; ?> <?php echo $res['productOption2']; ?>)"  <span class="pull-right"><?php echo date('F d, Y', strtotime($res['productReviewDate'])); ?></span> </h6>
                 </div>
               </div>
-
+            <?php } ?>
 
             </div>
             
