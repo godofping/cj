@@ -205,21 +205,34 @@ if (isset($_GET['from']) and $_GET['from'] == 'delete-user') {
 
 if (isset($_GET['from']) and $_GET['from'] == 'change-password') {
 
-	$password = $db->escapeString(md5($_POST['password']));
+	$oldPassword = $db->escapeString(md5($_POST['oldPassword']));
+	$newPassword = $db->escapeString(md5($_POST['newPassword']));
+	$confirmNewPassword = $db->escapeString(md5($_POST['confirmNewPassword']));
 
+	$db->select('users_view','*',NULL,'userId = "' . $_SESSION['userId'] . '"', NULL); 
+	$res = $db->getResult(); $res = $res[0];
 
+	$userPassword = $res['userPassword'];
 
-	$db->update('users_table',
-	array(
-		'password'=>$password,
-		),
+	if ($oldPassword == $userPassword and $newPassword == $confirmNewPassword) {
+
+		$db->update('users_table',
+		array(
+			'userPassword'=>$userPassword,
+			),
 			'userId=' . $_SESSION['userId']
-	);
+		);
 
-	$res = $db->getResult();
+		$res = $db->getResult();
+		$_SESSION['toast'] = 'change-password';
+	}
+	else
+	{
+		$_SESSION['toast'] = 'change-password-failed';
+	}
 
 	header("Location: change-password.php");
-	$_SESSION['toast'] = 'change-password';
+	
 }
 
 
@@ -869,6 +882,43 @@ if (isset($_GET['from']) and $_GET['from'] == 'invalid-payment') {
 	header("Location: manage-order.php?orderId=".$orderId);
 	$_SESSION['toast'] = 'invalid-payment';
 
+}
+
+
+if (isset($_GET['from']) and $_GET['from'] == 'add-payment') {
+
+	$paymentAmount = $db->escapeString($_POST['paymentAmount']);
+	$orderId = $db->escapeString($_GET['orderId']);
+	$paymentTransactionDate = $db->escapeString(date('Y-m-d H:i:s'));
+	$paymentStatus = $db->escapeString("Recieved");
+
+	$orderPaymentStatus = $db->escapeString("Paid");
+	
+
+	$db->insert('payments_table',
+	array(
+		'paymentAmount'=>$paymentAmount,
+		'orderId'=>$orderId,
+		'paymentTransactionDate'=>$paymentTransactionDate,
+		'paymentStatus'=>$paymentStatus,
+		
+		)
+	);
+
+	$res = $db->getResult();
+
+
+	$db->update('orders_table',
+	array(
+		'orderPaymentStatus'=>$orderPaymentStatus,
+		),
+		'orderId=' . $orderId
+	);
+
+	$res = $db->getResult();
+
+	header("Location: manage-order.php?orderId=".$orderId);
+	$_SESSION['toast'] = 'add-payment';
 }
 
 

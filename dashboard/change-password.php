@@ -21,15 +21,34 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-body">
+                    <p>* indicates required fields</p>
                 	<form autocomplete="off" class="form-material m-t-40" method="POST" action="controller.php?from=change-password">
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Old Password *</label>
+                                    <input type="password" class="form-control form-control-line" required="" name="oldPassword"> 
+                                </div>
+                            </div>
+                        </div>
 
                         <div class="row">
                         	<div class="col-md-12">
                         		<div class="form-group">
-		                            <label>New Password:</label>
-		                            <input type="password" class="form-control form-control-line" required="" name="password"> 
+		                            <label>New Password *</label>
+		                            <input type="password" class="form-control form-control-line" required="" name="newPassword"> 
 		                        </div>
                         	</div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Confirm New Password *</label>
+                                    <input type="password" class="form-control form-control-line" required="" name="confirmNewPassword"> 
+                                </div>
+                            </div>
                         </div>
 
 

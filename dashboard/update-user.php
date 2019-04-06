@@ -32,12 +32,13 @@ $res = $db->getResult(); $res = $res[0];
         <div class="col-md-12">
             <div class="card">
                 <div class="card-body">
+                    <p>* indicates required fields</p>
                     <form autocomplete="off" class="form-material m-t-40" method="POST" action="controller.php?from=update-user">
 
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label>Username:</label>
+                                    <label>Username *</label>
                                     <input type="text" class="form-control form-control-line" required="" name="userName" value="<?php echo $res['userName'] ?>"> 
                                 </div>
                             </div>
@@ -46,8 +47,8 @@ $res = $db->getResult(); $res = $res[0];
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label>Password:</label>
-                                    <input type="password" class="form-control form-control-line" required="" name="userPassword" value="<?php echo $res['userPassword'] ?>"> 
+                                    <label>Password *</label>
+                                    <input type="password" class="form-control form-control-line" required="" name="userPassword" value=""> 
                                 </div>
                             </div>
                         </div>
@@ -55,7 +56,7 @@ $res = $db->getResult(); $res = $res[0];
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label>Full Name:</label>
+                                    <label>Full Name *</label>
                                     <input type="text" class="form-control form-control-line" required="" name="fullName" value="<?php echo $res['fullName'] ?>"> 
                                 </div>
                             </div>

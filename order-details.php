@@ -10,7 +10,8 @@ $res = $db->getResult(); $res = $res[0];
 
 $orderTotalAmount = $res['orderTotalAmount'];
 $orderPaymentStatus = $res['orderPaymentStatus'];
-
+$orderModeOfPayment = $res['orderModeOfPayment'];
+$orderStatus = $res['orderStatus'];
 }
 ?>
 	
@@ -215,12 +216,12 @@ $orderPaymentStatus = $res['orderPaymentStatus'];
 
 
 
-                      <h5>Total Amoun Paid: ₱<?php echo number_format($totalAmountPaid, 2); ?></h5>
+                      <h5>Total Amount Paid: ₱<?php echo number_format($totalAmountPaid, 2); ?></h5>
                       <h5>Balance: ₱<?php echo number_format($balance, 2); ?></h5>
 
                       <div class="pay-meth">
 
-                      <?php if ($orderPaymentStatus == 'Unpaid'): ?>
+                      <?php if ($orderPaymentStatus == 'Unpaid' and $orderModeOfPayment == 'Remittance' and $orderStatus == 'Confirmed'): ?>
                       <label class="margin-top-50">Payment Form</label>
 
                       <?php if (isset($_SESSION['toast']) and $_SESSION['toast'] == 'payment-sent'): ?>
@@ -296,7 +297,15 @@ $orderPaymentStatus = $res['orderPaymentStatus'];
                           <tr>
 
                             <td>₱<?php echo number_format($res['paymentAmount'], 2); ?></td>
-                            <td><a target="_blank" href="paymentImages/<?php echo $res['paymentRecieptImage']; ?>"><img src="paymentImages/<?php echo $res['paymentRecieptImage']; ?>" class="img-thumbnail"></a></td>
+                            <td>
+                              <?php if ($res['paymentRecieptImage'] == ''): ?>
+                                
+                              <?php endif ?>
+                              <?php if ($res['paymentRecieptImage'] != ''): ?>
+                                 <a target="_blank" href="paymentImages/<?php echo $res['paymentRecieptImage']; ?>"><img src="paymentImages/<?php echo $res['paymentRecieptImage']; ?>" class="img-thumbnail"></a>
+                              <?php endif ?>
+                             
+                            </td>
                             <td></td>
                             <td><?php echo $res['nameOfRemmitanceCenter']; ?></td>
                             <td><?php echo $res['controlNumber']; ?></td>

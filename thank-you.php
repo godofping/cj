@@ -24,7 +24,7 @@
             <div class="col-md-12">
 
               <h4>Order number <u><?php echo base64_decode($_GET['orderId']); ?></u></h4>
-              <h5>has been placed. Click <a href="my-orders.php"><b>here</b></a> to view your orders.</h5>
+              <h5>has been placed. Click <a href="my-orders.php?selected=All"><b>here</b></a> to view your orders.</h5>
               <h3>PRINT RECIEPT</h3>
             </div>
             

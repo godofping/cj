@@ -124,7 +124,7 @@ if ($res['customerIsBlocked'] == 1 and isset($_SESSION['customerId']) and $filen
                   <li> <a href="my-notifications.php">Notifications</a> </li>
                   <li> <a href="my-orders.php?selected=All">My Orders </a> </li>
                   <li> <a href="my-profile.php">My Profile </a> </li>
-                  <li> <a href="my-reviews.php">My Reviews </a> </li>
+                  <li> <a href="my-reviews.php?selected=All">My Reviews </a> </li>
                 </ul>
               </li>
               <?php endif ?>

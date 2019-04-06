@@ -10,12 +10,14 @@ $additionalString = "";
 if (isset($_SESSION['customerId'])) {
 
 $db->select('orders_view', '*', NULL, 'customerId = "' . $_SESSION['customerId']  .'" and orderStatus = "On Cart"');
-$res1 = $db->getResult(); $res1 = $res1[0];
+$res1 = $db->getResult(); 
 
+if (!empty($res1)) {
+
+$res1 = $res1[0];
 $db->select('order_details_view', '*', NULL, 'orderId = "' . $res1['orderId']  .'"');
 $res1 = $db->getResult();
 
-if (!empty($res1)) {
 $res1 = $res1[0];
 $onCartQuantity = $res1['quantity'];
 $additionalString = $onCartQuantity . " piece(s) is already on your cart.";

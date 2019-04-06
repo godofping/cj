@@ -5,66 +5,6 @@ product name - group
 
 s3 - color - red - capacity - 64
 
-
-
--may pa pm pm pa kayong nalalaman. ano ung pinaguusapan niyo sa pm
-
--sa delete show message if hindi na delete.
-
--add all
-<p>* indicates required fields</p>
-
-
-rework carts.
-
-
---add cart pseudocode
-if no vacant order
-	create order
-	add order details
-	
-else	
-	add order details	
-
-
-	bugs
-
-	error on cart finish registration.
-	transfer to another page if not yet finish
-
-
-if	
-
--------------
-Sa Pick-up or shipping date  pd tangalon lang siya? ok
-
-if eh pilion ni customer ang pick up mag apear dayun ang pick-update. ok
-if eh ship madula ang shipping date kay si admin man mag hulog sang item. ok
-
-tapos sa mode of payment  
-if pilion ni customer remittance pd ma disable na ang function sang walk in tapos mag appear dayun ang pag type niya sang name sang remmitance center, control number and uploading sang pic sang resibo sang remittance center.
-tapos pd  eh disbale niya anay button sa check out if ma comply niya requirements maka proceed na siya sa pag check out.
-
-
-// orderStatus - proposal
-
---DM - Shipping
-	// On Cart - if items still on cart
-
-	// Pending Approval - waiting for admin approval
-	// To Ship - customer paid the order and shop is preparing the orders
-	// To Recieve - order is delivered to the customer
-	// Completed - customer recieved the order and click completed
-	// Cancelled - admin cancelled the order
-
---DM - Pick Up
-	// On Cart
-
-	// Pending Approval
-	// Completed
-	// Cancelled
----------------
-
 --DM - Shipping - follow this
 	// On Cart - if items still on cart and not yet placed by the customer
 	// Pending Approval - when the order is placed and waiting for admin confirmation
@@ -72,14 +12,6 @@ tapos pd  eh disbale niya anay button sa check out if ma comply niya requirement
 	// Finished - when then order is finished
 	// Cancelled - when the order is cancelled by the customer or admin
 
---DM - Pick Up
-	// On Cart
-
-	// Pending Approval
-	// Finished
-	// Cancelled
-
-----------------------------
 
 // orderPaymentStatus
 	// Unpaid
@@ -96,29 +28,17 @@ tapos pd  eh disbale niya anay button sa check out if ma comply niya requirement
 
 
 
-deduct quantity
-insert into inventory_logs_table
-
-
-on checkout . when shipping is selected.
-	user can only send payment when the shipping fee is added.
-
-
-	----
-	add remarks sa client my orders
-
-
+----kulang----
 if orders are cancelled. return the items
-
-----
 order confirm pickup date
 notifications
 reciepts
 reports
 if cancelled ibalik ang items sa may inventory
 walk in payment
-----
 
 fix review filter
+add payment for walkin
+add confirm pickup date
 
 

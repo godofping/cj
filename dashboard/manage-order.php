@@ -29,221 +29,286 @@ $res = $db->getResult(); $res = $res[0];
     <!-- Start Page Content -->
     <!-- ============================================================== -->
     <div class="row">
+
+        <!-- left -->
         <div class="col-md-6">
 
-            <div class="card">
-                <div class="card-body">
+            <div class="row">
+            <div class="col-md-12">
+            
+                <div class="card">
+                    <div class="card-body">
 
-                    <h4 class="card-title">Order details of <b>Order Number <?php echo $res['orderId']; ?></b>.</h4>
+                        <h4 class="card-title">Order details of <b>Order Number <?php echo $res['orderId']; ?></b>.</h4>
 
-                    <hr class="mt-1 mb-3">
+                        <hr class="mt-1 mb-3">
 
-                    <?php if ($res['customerIsBlocked'] == 1): ?>
-                        <h1>THIS CUSTOMER IS BLOCKED.</h1>
-                    <?php endif ?>
+                        <?php if ($res['customerIsBlocked'] == 1): ?>
+                            <h1>THIS CUSTOMER IS BLOCKED.</h1>
+                        <?php endif ?>
 
-                    <p>Customer: <b><?php echo $res['fullName']; ?></b></p>
+                        <p>Customer: <b><?php echo $res['fullName']; ?></b></p>
 
-                    <p>Delivery Method: <b><?php echo $res['orderDeliveryMethod']; ?></b></p>
+                        <p>Delivery Method: <b><?php echo $res['orderDeliveryMethod']; ?></b></p>
 
-                    <?php if ($res['orderDeliveryMethod'] == 'Pick Up'): ?>
+                        <?php if ($res['orderDeliveryMethod'] == 'Pick Up'): ?>
 
-                    <p>Schedule of Pick Up: <b><?php echo date('F d, Y', strtotime($res['orderShippingArrivalOrPickupDate'])); ?></b></p>
-                    
-                    <?php endif ?>
+                        <p>Schedule of Pick Up: <b><?php echo date('F d, Y', strtotime($res['orderShippingArrivalOrPickupDate'])); ?></b></p>
+                        
+                        <?php endif ?>
 
-                    <p>Mode of Payment: <b><?php echo $res['orderModeOfPayment']; ?></b></p>
+                        <p>Mode of Payment: <b><?php echo $res['orderModeOfPayment']; ?></b></p>
 
-                    <p>Date Placed: <b><?php echo date('F d, Y g:i A', strtotime($res['orderPlacedDate'])); ?></b></p>
+                        <p>Date Placed: <b><?php echo date('F d, Y g:i A', strtotime($res['orderPlacedDate'])); ?></b></p>
 
-                    <p>Order Payment Status: <b><?php echo $res['orderPaymentStatus']; ?></b></p>
+                        <p>Order Payment Status: <b><?php echo $res['orderPaymentStatus']; ?></b></p>
 
-                    <p>Order Status: <b><?php echo $res['orderStatus']; ?></b></p>
+                        <p>Order Status: <b><?php echo $res['orderStatus']; ?></b></p>
 
-                    <hr class="mt-1 mb-3">
+                        <hr class="mt-1 mb-3">
 
-                    <?php if ($res['orderStatus'] == 'Pending Approval' and $res['customerIsBlocked'] == 0): ?>
+                        <?php if ($res['orderStatus'] == 'Pending Approval' and $res['customerIsBlocked'] == 0): ?>
 
-                    <a onclick = "return confirm('Are you sure want to confirm this order?')" href="controller.php?from=confirm-order&orderId=<?php echo $res['orderId'] ?>"><button type="button" class="btn btn-info waves-effect waves-light m-r-10 pull-right">Confirm Order</button></a>  
-                    
-                    <a onclick = "return confirm('Are you sure want to cancel this order?')" href="controller.php?from=cancel-order&orderId=<?php echo $res['orderId'] ?>"><button  type="button" class="btn btn-warning waves-effect waves-light m-r-10 pull-right">Cancel Order</button></a>  
-                    
+                        <a onclick = "return confirm('Are you sure want to confirm this order?')" href="controller.php?from=confirm-order&orderId=<?php echo $res['orderId'] ?>"><button type="button" class="btn btn-info waves-effect waves-light m-r-10 pull-right">Confirm Order</button></a>  
+                        
+                        <a onclick = "return confirm('Are you sure want to cancel this order?')" href="controller.php?from=cancel-order&orderId=<?php echo $res['orderId'] ?>"><button  type="button" class="btn btn-warning waves-effect waves-light m-r-10 pull-right">Cancel Order</button></a>  
+                        
 
-                    <?php endif ?>
+                        <?php endif ?>
 
-                    <?php if ($res['orderStatus'] != 'Pending Approval' and $res['customerIsBlocked'] == 0): ?>
-                    
-                    <form method="POST" autocomplete="off" action="controller.php?from=save-remark&orderId=<?php echo $res['orderId'] ?>">
+                        <?php if ($res['orderStatus'] != 'Pending Approval' and $res['customerIsBlocked'] == 0): ?>
+                        
+                        <form method="POST" autocomplete="off" action="controller.php?from=save-remark&orderId=<?php echo $res['orderId'] ?>">
 
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label>Remark: </label>
-                                <textarea class="form-control" name="orderRemarks" id="orderRemarks" rows="5"><?php echo $res['orderRemarks']; ?></textarea>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Remark: </label>
+                                    <textarea class="form-control" name="orderRemarks" id="orderRemarks" rows="5"><?php echo $res['orderRemarks']; ?></textarea>
+                                </div>
                             </div>
                         </div>
+
+                        <button type="submit" class="btn btn-success waves-effect waves-light m-r-10 pull-right">Save Remarks</button>
+
+                        </form>
+
+                        <?php if ($res['orderStatus'] == 'Confirmed'): ?>
+
+                            <?php if ($res['orderPaymentStatus'] == 'Unpaid'): ?>
+                                <button type="button" class="btn btn-info waves-effect waves-light m-r-10 pull-right" data-toggle="tooltip" title="You can't finish the order unless the customer full paid the order.">Finish Order</button>
+                            <?php endif ?>
+
+                            <?php if ($res['orderPaymentStatus'] == 'Paid'): ?>
+                                <a onclick = "return confirm('Are you sure want to finish this order?')" href="controller.php?from=finish-order&orderId=<?php echo $res['orderId'] ?>"><button type="button" class="btn btn-info waves-effect waves-light m-r-10 pull-right">Finish Order</button></a>
+                            <?php endif ?>
+
+                        
+                        <?php endif ?>
+                        
+                        
+                        
+                        <?php endif ?>
+
+
+                        <?php if ($res['customerIsBlocked'] == 0): ?>
+
+                        <a onclick = "return confirm('Are you sure want to block this customer?')" href="controller.php?from=block-customer&customerId=<?php echo $res['customerId'] ?>&orderId=<?php echo $res['orderId'] ?>"><button  type="button" class="btn btn-danger waves-effect waves-light m-r-10 pull-left">Block Customer</button></a>  
+                        
+                        <?php endif ?>
+
+                        <?php if ($res['customerIsBlocked'] == 1): ?>
+                        
+                        <a onclick = "return confirm('Are you sure want to block this customer?')" href="controller.php?from=unblock-customer&customerId=<?php echo $res['customerId'] ?>&orderId=<?php echo $res['orderId'] ?>"><button  type="button" class="btn btn-info waves-effect waves-light m-r-10 pull-left">Unblock Customer</button></a>  
+                        
+                        <?php endif ?>
+                        
+                        
                     </div>
+                </div>
 
-                    <button type="submit" class="btn btn-success waves-effect waves-light m-r-10 pull-right">Save Remarks</button>
+            </div>
+            </div>
 
-                    </form>
 
-                    <?php if ($res['orderStatus'] == 'Confirmed'): ?>
+            <div class="row">
+            <div class="col-md-12">
+
+                <div class="card">
+                    <div class="card-body">
+
+                        <?php
+
+                        $db->select('payments_view', 'coalesce(sum(paymentAmount),0) as totalAmountPaid', NULL, 'orderId = "' . $res['orderId'] . '" and paymentStatus = "Recieved"');
+
+                        $res1 = $db->getResult(); $res1 = $res1[0];
+
+                        $totalAmountPaid = $res1['totalAmountPaid'];
+
+                        $orderTotalAmount = $res['orderTotalAmount'];
+
+                        $balance = $orderTotalAmount - $totalAmountPaid;
+
+                        ?>
+
+                        <h4 class="card-title">Payments</h4>
+
+                        <hr class="mt-1 mb-3">
+
+                        <p>Total Amount Paid: <b>₱<?php echo number_format($totalAmountPaid, 2); ?></b></p>
+                        <p>Balance: <b>₱<?php echo number_format($balance, 2); ?></b></p>
 
                         <?php if ($res['orderPaymentStatus'] == 'Unpaid'): ?>
-                            <button type="button" class="btn btn-info waves-effect waves-light m-r-10 pull-right" data-toggle="tooltip" title="You can't finish the order unless the customer full paid the order.">Finish Order</button>
+
+                        <hr>
+
+                        <p>* indicates required fields</p>
+
+                        <form autocomplete="off" class="form-material m-t-40" method="POST" action="controller.php?from=add-payment&orderId=<?php echo $_GET['orderId'] ?>">
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Amount *</label>
+                                    <input type="number" step="0.1" class="form-control form-control-line" min="<?php echo $balance ?>" max="<?php echo $balance ?>" required="" name="paymentAmount"> 
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <button type="submit" class="btn btn-success waves-effect waves-light m-r-10 pull-right">Save Payment</button>
+                            </div>
+                        </div>
+
+                        </form>
+
+                        <hr>
+                            
                         <?php endif ?>
 
-                        <?php if ($res['orderPaymentStatus'] == 'Paid'): ?>
-                            <a onclick = "return confirm('Are you sure want to finish this order?')" href="controller.php?from=finish-order&orderId=<?php echo $res['orderId'] ?>"><button type="button" class="btn btn-info waves-effect waves-light m-r-10 pull-right">Finish Order</button></a>
-                        <?php endif ?>
+                        
+                        <div class="table-responsive m-t-10">
+                            <table id="datablePayments" class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Amount (₱)</th>
+                                        <th>Reciept</th>
+                                        <th>Remittance Center</th>
+                                        <th>Control Number</th>
+                                        <th>Transaction Date</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
+     
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
 
-                    
-                    <?php endif ?>
-                    
-                    
-                    
-                    <?php endif ?>
-
-
-                    <?php if ($res['customerIsBlocked'] == 0): ?>
-
-                    <a onclick = "return confirm('Are you sure want to block this customer?')" href="controller.php?from=block-customer&customerId=<?php echo $res['customerId'] ?>&orderId=<?php echo $res['orderId'] ?>"><button  type="button" class="btn btn-danger waves-effect waves-light m-r-10 pull-left">Block Customer</button></a>  
-                    
-                    <?php endif ?>
-
-                    <?php if ($res['customerIsBlocked'] == 1): ?>
-                    
-                    <a onclick = "return confirm('Are you sure want to block this customer?')" href="controller.php?from=unblock-customer&customerId=<?php echo $res['customerId'] ?>&orderId=<?php echo $res['orderId'] ?>"><button  type="button" class="btn btn-info waves-effect waves-light m-r-10 pull-left">Unblock Customer</button></a>  
-                    
-                    <?php endif ?>
-                    
-                    
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-6">
-
-            <div class="card">
-                <div class="card-body">
-
-                    <h4 class="card-title">Products Ordered</h4>
-
-                    <hr class="mt-1 mb-3">
-                    
-                    <div class="table-responsive m-t-10">
-                        <table id="datable" class="table table-bordered table-striped">
-                            <thead>
-                                <tr>
-                                    <th>Product</th>
-                                    <th>Quantity</th>
-                                    <th>Price (₱)</th>
-                                    <th>Amount (₱)</th>
- 
-                                </tr>
-                            </thead>
-                            <tbody>
-                            </tbody>
-                        </table>
                     </div>
-
-                    <h3 class="float-right">Total:<b> ₱<?php echo number_format($res['orderTotalAmount'], 2); ?></b></h3>
-
                 </div>
             </div>
+            </div>
+            
         </div>
 
-
+        <!-- right -->
         <div class="col-md-6">
 
-            <div class="card">
-                <div class="card-body">
+            <div class="row">
+            <div class="col-md-12">
+                
+                <div class="card">
+                    <div class="card-body">
 
-                    <h4 class="card-title">Payments</h4>
+                        <h4 class="card-title">Products Ordered</h4>
 
-                    <hr class="mt-1 mb-3">
-                    
-                    <div class="table-responsive m-t-10">
-                        <table id="datablePayments" class="table table-bordered table-striped">
-                            <thead>
-                                <tr>
-                                    <th>Amount (₱)</th>
-                                    <th>Reciept</th>
-                                    <th>Remittance Center</th>
-                                    <th>Control Number</th>
-                                    <th>Transaction Date</th>
-                                    <th>Status</th>
-                                    <th>Actions</th>
- 
-                                </tr>
-                            </thead>
-                            <tbody>
-                            </tbody>
-                        </table>
+                        <hr class="mt-1 mb-3">
+                        
+                        <div class="table-responsive m-t-10">
+                            <table id="datable" class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Product</th>
+                                        <th>Quantity</th>
+                                        <th>Price (₱)</th>
+                                        <th>Amount (₱)</th>
+     
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <h3 class="float-right">Total:<b> ₱<?php echo number_format($res['orderTotalAmount'], 2); ?></b></h3>
+
                     </div>
+                </div>
 
+            </div>
+            </div>
+
+            <div class="row">
+            <div class="col-md-12">
+                
+                <div class="card">
+                    <div class="card-body">
+
+                        <h4 class="card-title">Billing Information</h4>
+
+                        <hr class="mt-1 mb-3">
+
+                        <p>First Name: <b><?php echo $res['billingFirstName']; ?></b></p>
+
+                        <p>Last Name: <b><?php echo $res['billingLastName']; ?></b></p>
+
+                        <p>Address: <b><?php echo $res['billingAddress']; ?></b></p>
+
+                        <p>Phone Number: <b><?php echo $res['billingPhoneNumber']; ?></b></p>
+
+                        <p>Email: <b><?php echo $res['billingEmail']; ?></b></p>
+
+                      
+                        
+                    </div>
+                </div>
+
+            </div>
+            </div>
+
+            <?php if ($res['orderDeliveryMethod'] == 'Shipping'): ?>
+            <div class="row">
+            <div class="col-md-12">
+
+                <div class="card">
+                    <div class="card-body">
+
+                        <h4 class="card-title">Shipping Information</h4>
+
+                        <hr class="mt-1 mb-3">
+
+                        <p>First Name: <b><?php echo $res['orderShipFirstName']; ?></b></p>
+
+                        <p>Last Name: <b><?php echo $res['orderShipLastName']; ?></b></p>
+
+                        <p>Address: <b><?php echo $res['orderShippingAddress']; ?></b></p>
+
+                        <p>Phone Number: <b><?php echo $res['orderShipPhoneNumber']; ?></b></p>
+
+                        <p>Email: <b><?php echo $res['orderShipEmail']; ?></b></p>
+                        
+                    </div>
                 </div>
             </div>
-        </div>
-
-        <div class="col-md-6">
-
-            <div class="card">
-                <div class="card-body">
-
-                    <h4 class="card-title">Billing Information</h4>
-
-                    <hr class="mt-1 mb-3">
-
-                    <p>First Name: <b><?php echo $res['billingFirstName']; ?></b></p>
-
-                    <p>Last Name: <b><?php echo $res['billingLastName']; ?></b></p>
-
-                    <p>Address: <b><?php echo $res['billingAddress']; ?></b></p>
-
-                    <p>Phone Number: <b><?php echo $res['billingPhoneNumber']; ?></b></p>
-
-                    <p>Email: <b><?php echo $res['billingEmail']; ?></b></p>
-
-                  
-                    
-                </div>
             </div>
+            <?php endif ?>
+                
         </div>
-
-        <?php if ($res['orderDeliveryMethod'] == 'Shipping'): ?>
-        <div class="col-md-6">
-            <div class="card">
-                <div class="card-body">
-
-                    <h4 class="card-title">Shipping Information</h4>
-
-                    <hr class="mt-1 mb-3">
-
-                    <p>First Name: <b><?php echo $res['orderShipFirstName']; ?></b></p>
-
-                    <p>Last Name: <b><?php echo $res['orderShipLastName']; ?></b></p>
-
-                    <p>Address: <b><?php echo $res['orderShippingAddress']; ?></b></p>
-
-                    <p>Phone Number: <b><?php echo $res['orderShipPhoneNumber']; ?></b></p>
-
-                    <p>Email: <b><?php echo $res['orderShipEmail']; ?></b></p>
-
-                  
-                    
-                </div>
-            </div>
-        </div>
-        <?php endif ?>
-
     </div>
-
-
-
-
-
 
 
 <!-- ============================================================== -->

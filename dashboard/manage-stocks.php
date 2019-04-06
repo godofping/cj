@@ -33,6 +33,7 @@ $res = $db->getResult(); $res = $res[0];
 
             <div class="card">
                 <div class="card-body">
+                    <p>* indicates required fields</p>
 
                     <h4 class="card-title">Current stocks, reorder point and inventory history of <b>"<?php echo $res['productName']; ?> (<?php echo $res['productOption1']; ?>  <?php echo $res['productOption2']; ?>)".</b></h4>
 
@@ -62,7 +63,7 @@ $res = $db->getResult(); $res = $res[0];
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <label>Stock In:</label>
+                                            <label>Stock In *</label>
                                             <input type="number" min="1" class="form-control form-control-line" required="" name="quantity"> 
                                         </div>
                                     </div>
@@ -77,7 +78,7 @@ $res = $db->getResult(); $res = $res[0];
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <label>Stock Out: <?php if ($res['productStock'] == 0) {
+                                            <label>Stock Out * <?php if ($res['productStock'] == 0) {
                                                 echo "<small>(Can't stock out because you have 0 stocks left in this product.)</small>";
                                             }else
                                             {
@@ -101,7 +102,7 @@ $res = $db->getResult(); $res = $res[0];
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <label>Reorder Point:</label>
+                                            <label>Reorder Point *</label>
                                             
                                             <input type="number" min="0" class="form-control form-control-line" required="" name="productStocksReorderPoint"> 
                                         </div>

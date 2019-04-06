@@ -28,12 +28,13 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-body">
+                    <p>* indicates required fields</p>
                 	<form autocomplete="off" class="form-material m-t-40" method="POST" action="controller.php?from=add-user">
 
                         <div class="row">
                         	<div class="col-md-12">
                         		<div class="form-group">
-		                            <label>Username:</label>
+		                            <label>Username *</label>
 		                            <input type="text" class="form-control form-control-line" required="" name="userName"> 
 		                        </div>
                         	</div>
@@ -42,7 +43,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label>Password:</label>
+                                    <label>Password *</label>
                                     <input type="password" class="form-control form-control-line" required="" name="userPassword"> 
                                 </div>
                             </div>
@@ -51,7 +52,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label>Full Name:</label>
+                                    <label>Full Name *</label>
                                     <input type="text" class="form-control form-control-line" required="" name="fullName"> 
                                 </div>
                             </div>

@@ -36,7 +36,12 @@ $columns = array(
         return '₱' . number_format($d, 2);
     } ),
     array( 'db' => 'paymentRecieptImage',   'dt' => 1, 'formatter' => function( $d, $row ) {
+
+        if ($d == '') {
+            return '';
+        }else{
         return '<a target="_blank" href="../paymentImages/'. $d .'"><img src="../paymentImages/' . $d . '" class="img-thumbnail"></a>';
+        }
     } ),
     array( 'db' => 'nameOfRemmitanceCenter',   'dt' => 2 ),
     array( 'db' => 'controlNumber',   'dt' => 3 ),

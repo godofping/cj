@@ -28,6 +28,27 @@ $res = $db->getResult(); $res = $res[0];
         <div class="contact-form">
           
           <div class="row">
+
+
+            <div class="col-md-3">
+
+              <form role="form" id="contact_form" class="contact-form" method="post" action="controller.php?from=place-order" autocomplete="off" enctype="multipart/form-data">
+
+              <div class="form-group">
+      
+                <select id="filter" class="form-control">
+                  <option readonly selected value="<?php echo $_GET['selected']; ?>"><?php echo $_GET['selected']; ?></option>
+                  <option value="All">All</option>
+                  <option value="Already reviewed">Already reviewed</option>
+                  <option value="Not yet reviewed">Not yet reviewed</option>
+
+                </select>
+                
+              </div>
+
+              </form>
+            </div>
+
             <div class="col-md-12"> 
           
               <div class="table-responsive">
@@ -101,7 +122,7 @@ $res = $db->getResult(); $res = $res[0];
   
 $( "#filter" ).change(function() {
   var selectedValue = $( "#filter option:selected" ).text();
-  window.location.replace("my-orders.php?selected="+selectedValue);
+  window.location.replace("my-reviews.php?selected="+selectedValue);
 });
 
 </script>

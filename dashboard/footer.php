@@ -462,6 +462,30 @@
           });
       <?php endif?>
 
+      <?php if (isset($_SESSION['toast']) and $_SESSION['toast'] == 'change-password-failed'): ?>
+          $.toast({
+            heading: 'PASSWORD CHANGE FAILED',
+            text: 'Incorrect old password or new password and confirm password does not match!',
+            position: 'top-center',
+            loaderBg:'#ff6849',
+            icon: 'error',
+            hideAfter: 5000, 
+            stack: 6
+          });
+      <?php endif?>
+
+      <?php if (isset($_SESSION['toast']) and $_SESSION['toast'] == 'add-payment'): ?>
+            $.toast({
+              heading: 'SUCCESSFULLY SAVED',
+              text: 'Payment Saved!',
+              position: 'top-center',
+              loaderBg:'#ff6849',
+              icon: 'success',
+              hideAfter: 5000, 
+              stack: 6
+            });
+        <?php endif?>
+
 
 
     </script>
