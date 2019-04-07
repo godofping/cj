@@ -1,11 +1,11 @@
 <?php 
 include('header.php');
 
-$db->select('customers_view','*',NULL,'customerId = "' . $_SESSION['customerId'] . '"', NULL); 
+$db->select('users_view','*',NULL,'userId = "' . $_SESSION['userId'] . '"', NULL); 
 $res = $db->getResult(); $res = $res[0];
 ?>
 
-<?php if (!isset($_SESSION['customerId'])): ?>
+<?php if (!isset($_SESSION['userId'])): ?>
   <script type="text/javascript">window.location.replace("index.php");</script>
 <?php endif ?>
   
@@ -41,16 +41,16 @@ $res = $db->getResult(); $res = $res[0];
                 </thead>
                 <tbody>
                 <?php
-                  $db->select('customer_feedbacks_view','*',NULL,'customerId = "' . $_SESSION['customerId'] . '"', "customerFeedbackId ASC"); 
+                  $db->select('customer_feedbacks_view','*',NULL,'userId = "' . $_SESSION['userId'] . '"', "userFeedbackId ASC"); 
                   $output = $db->getResult();
                   foreach ($output as $res) { ?>     
 
                   <tr>
           
-                    <td><?php echo date('F d, Y',strtotime($res['customerFeedbackDate'])); ?></td>
-                    <td><?php echo $res['customerFeedback']; ?></td>
+                    <td><?php echo date('F d, Y',strtotime($res['userFeedbackDate'])); ?></td>
+                    <td><?php echo $res['userFeedback']; ?></td>
                     <td><?php
-                      $d = $res['customerFeedbackStatus']; 
+                      $d = $res['userFeedbackStatus']; 
                     if ($d == 0) {
                         $status =  "Pending";
                     }elseif ($d == 1) {

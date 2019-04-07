@@ -20,11 +20,11 @@
               <li><a href="about.php"> About</a></li>
               <li><a href="feedbacks.php"> Feedbacks</a></li>
               <li><a href="contact.php"> Contact</a></li>
-              <?php if (!isset($_SESSION['customerId'])): ?>
+              <?php if (!isset($_SESSION['userId'])): ?>
                 <li><a href="login.php?show=login"> Login</a></li>
                 <li><a href="login.php?show=registration"> Register</a></li>
               <?php endif ?>
-              <?php if (isset($_SESSION['customerId'])): ?>
+              <?php if (isset($_SESSION['userId'])): ?>
                 <li><a href="controller.php?from=logout"> Logout</a></li>
               <?php endif ?>
 
@@ -33,7 +33,7 @@
           
    
           <div class="col-md-3">
-            <?php if (isset($_SESSION['customerId'])): ?>
+            <?php if (isset($_SESSION['userId'])): ?>
             <h6>My Account</h6>
             <ul class="link">
               <li><a href="my-profile.php">My Profile</a></li>

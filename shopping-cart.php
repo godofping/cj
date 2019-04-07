@@ -17,7 +17,7 @@
 
 
 <?php 
-  $db->select('order_details_view','count(*) as total',NULL,'customerId = "' . $_SESSION['customerId'] . '" and orderStatus = "On Cart"', NULL); 
+  $db->select('order_details_view','count(*) as total',NULL,'userId = "' . $_SESSION['userId'] . '" and orderStatus = "On Cart"', NULL); 
   $res = $db->getResult(); $res = $res[0];
 
   if ($res['total'] > 0) { 
@@ -25,7 +25,7 @@
   $counter = 0;
   $string = "";
 
-  $db->select('order_details_view','*',NULL,'customerId = "' . $_SESSION['customerId'] . '" and orderStatus = "On Cart"', NULL); 
+  $db->select('order_details_view','*',NULL,'userId = "' . $_SESSION['userId'] . '" and orderStatus = "On Cart"', NULL); 
   $output = $db->getResult();
 
   foreach ($output as $res) {
@@ -75,7 +75,7 @@
             <tbody>
 
               <?php 
-              $db->select('order_details_view','*',NULL,'customerId = "' . $_SESSION['customerId'] . '" and orderStatus = "On Cart"', NULL); 
+              $db->select('order_details_view','*',NULL,'userId = "' . $_SESSION['userId'] . '" and orderStatus = "On Cart"', NULL); 
               $output = $db->getResult();
               foreach ($output as $res) { 
 
@@ -163,7 +163,7 @@
               <div class="grand-total">
                 <div class="order-detail">
                 <?php 
-                  $db->select('order_details_view','*',NULL,'customerId = "' . $_SESSION['customerId'] . '" and orderStatus = "On Cart"', NULL); 
+                  $db->select('order_details_view','*',NULL,'userId = "' . $_SESSION['userId'] . '" and orderStatus = "On Cart"', NULL); 
                   $output = $db->getResult();
                   $sum = 0;
                   foreach ($output as $res) { ?>

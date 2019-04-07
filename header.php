@@ -2,17 +2,17 @@
 include('dashboard/connection.php');
 $filename = basename($_SERVER["SCRIPT_FILENAME"], '.php');
 
-if ($filename != "finish-registration" and isset($_SESSION['customerId'])) {
-  $db->select('customers_table','*',NULL,'customerId = "' . $_SESSION['customerId'] . '"', NULL); 
+if ($filename != "finish-registration" and isset($_SESSION['userId'])) {
+  $db->select('users_table','*',NULL,'userId = "' . $_SESSION['userId'] . '"', NULL); 
   $res = $db->getResult(); $res = $res[0];
 
-  if ($res['customerFirstName'] == '' and $res['customerLastName'] == '' and $res['customerAddress'] == '' and $res['customerPhoneNumber'] == '') { ?>
+  if ($res['userFirstName'] == '' and $res['userLastName'] == '' and $res['userAddress'] == '' and $res['userPhoneNumber'] == '') { ?>
      <script type="text/javascript">window.location.replace("finish-registration.php");</script>
   <?php }
 
 
 
-if ($res['customerIsBlocked'] == 1 and isset($_SESSION['customerId']) and $filename <> "login") {
+if ($res['userIsBlocked'] == 1 and isset($_SESSION['userId']) and $filename <> "login") {
   echo '<script type="text/javascript">window.location.replace("controller.php?from=logout");</script>';
 }
 }
@@ -110,12 +110,11 @@ if ($res['customerIsBlocked'] == 1 and isset($_SESSION['customerId']) and $filen
 
                 </ul>
               </li>
-              <?php if (isset($_SESSION['customerId'])): ?>
+              <?php if (isset($_SESSION['userId'])): ?>
               <li class="dropdown <?php if ($filename == 'my-profile' or $filename == 'my-orders' or $filename == 'reviews' or $filename == 'shopping-cart' or $filename == 'my-reviews' or $filename == 'review'): ?>active<?php endif ?>"> <a href="#" class="dropdown-toggle" data-toggle="dropdown">My Account</a>
                 <ul class="dropdown-menu">
                   <li> <a href="shopping-cart.php">Shopping Cart</a> </li>
                   <li> <a href="my-feedbacks.php">My Feedbacks</a> </li>
-                  <li> <a href="my-notifications.php">Notifications</a> </li>
                   <li> <a href="my-orders.php?selected=All">My Orders </a> </li>
                   <li> <a href="my-profile.php">My Profile </a> </li>
                   <li> <a href="my-reviews.php?selected=All">My Reviews </a> </li>
@@ -126,10 +125,10 @@ if ($res['customerIsBlocked'] == 1 and isset($_SESSION['customerId']) and $filen
               <li class="<?php if ($filename == 'feedbacks'): ?>active<?php endif ?>"> <a href="feedbacks.php">Feedbacks </a> </li>
               <li class="<?php if ($filename == 'about'): ?>active<?php endif ?>"> <a href="about.php">About </a> </li>
               <li class="<?php if ($filename == 'contact'): ?>active<?php endif ?>"> <a href="contact.php">Contact </a> </li>
-              <?php if (!isset($_SESSION['customerId'])): ?>
+              <?php if (!isset($_SESSION['userId'])): ?>
               <li class="<?php if ($filename == 'login'): ?>active<?php endif ?>"> <a href="login.php?show=login">Login/Register </a> </li>
               <?php endif ?>
-              <?php if (isset($_SESSION['customerId'])): ?>
+              <?php if (isset($_SESSION['userId'])): ?>
               <li class="<?php if ($filename == 'login'): ?>active<?php endif ?>"> <a href="controller.php?from=logout">Logout </a> </li>
               <?php endif ?>
 
@@ -138,13 +137,13 @@ if ($res['customerIsBlocked'] == 1 and isset($_SESSION['customerId']) and $filen
           </div>
 
 
-          <?php if (isset($_SESSION['customerId'])): ?>
+          <?php if (isset($_SESSION['userId'])): ?>
     
             <div class="nav-right">
                 <ul class="navbar-right">
 
                   <?php 
-                    $db->select('orders_view', '*', NULL, 'customerId = "' . $_SESSION['customerId']  .'" and orderStatus = "On Cart"');
+                    $db->select('orders_view', '*', NULL, 'userId = "' . $_SESSION['userId']  .'" and orderStatus = "On Cart"');
                     $res = $db->getResult();
 
                     if (!empty($res)) {
@@ -169,7 +168,7 @@ if ($res['customerIsBlocked'] == 1 and isset($_SESSION['customerId']) and $filen
                   ?>
         
                   <li> <a href="shopping-cart.php"><span class="c-no"><?php echo $total; ?></span><i class="lnr lnr-cart"></i> </a> </li>
-       
+                  <li> <a href="my-notifications.php"><span class="c-no">0</span><i class="lnr lnr-alarm"></i> </a> </li>
 
                 </ul>
             </div>

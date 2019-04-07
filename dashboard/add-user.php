@@ -35,7 +35,7 @@
                         	<div class="col-md-12">
                         		<div class="form-group">
 		                            <label>Username *</label>
-		                            <input type="text" class="form-control form-control-line" required="" name="userName"> 
+		                            <input type="text" class="form-control form-control-line" required="" name="administratorUserName"> 
 		                        </div>
                         	</div>
                         </div>
@@ -44,7 +44,7 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label>Password *</label>
-                                    <input type="password" class="form-control form-control-line" required="" name="userPassword"> 
+                                    <input type="password" class="form-control form-control-line" required="" name="administratorUserPassword"> 
                                 </div>
                             </div>
                         </div>
@@ -53,7 +53,7 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label>Full Name *</label>
-                                    <input type="text" class="form-control form-control-line" required="" name="fullName"> 
+                                    <input type="text" class="form-control form-control-line" required="" name="administratorfullName"> 
                                 </div>
                             </div>
                         </div>                        

@@ -26,7 +26,7 @@
                 <!-- Login Register Inside -->
                 <div class="tab-content" id="myTabContent"> 
 
-                  <?php if (isset($_SESSION['toast']) and $_SESSION['toast'] == 'customerEmail-taken'): ?>
+                  <?php if (isset($_SESSION['toast']) and $_SESSION['toast'] == 'userEmail-taken'): ?>
                     <div class="alert alert-danger" role="alert">
                     Username is already taken! Please change a new one.
                   </div>
@@ -55,13 +55,13 @@
                         <!-- Name -->
                         <li class="col-md-12">
                           <label> Email Address
-                            <input type="email" name="customerEmail" required="" value="" placeholder="" class="form-control">
+                            <input type="email" name="userEmail" required="" value="" placeholder="" class="form-control">
                           </label>
                         </li>
                         <!-- LAST NAME -->
                         <li class="col-md-12">
                           <label> Password
-                            <input type="password" name="customerPassword" required="" value="" placeholder="" class="form-control">
+                            <input type="password" name="userPassword" required="" value="" placeholder="" class="form-control">
                           </label>
                         </li>
                         
@@ -85,13 +85,13 @@
                         <!-- Name -->
                         <li class="col-md-12">
                           <label> Email Address *
-                            <input type="email" required="" name="customerEmail" value="" placeholder="" class="form-control">
+                            <input type="email" required="" name="userEmail" value="" placeholder="" class="form-control">
                           </label>
                         </li>
                         <!-- LAST NAME -->
                         <li class="col-md-12">
                           <label> Password *
-                            <input type="password" required="" name="customerPassword" value="" placeholder="" class="form-control">
+                            <input type="password" required="" name="userPassword" value="" placeholder="" class="form-control">
                           </label>
                         </li>
                         

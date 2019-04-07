@@ -5,7 +5,7 @@ $db->select('product_variations_view','*',NULL,'productVariationId = "' . $_GET[
 $res = $db->getResult(); $res = $res[0];
 ?>
 
-<?php if (!isset($_SESSION['customerId'])): ?>
+<?php if (!isset($_SESSION['userId'])): ?>
   <script type="text/javascript">window.location.replace("index.php");</script>
 <?php endif ?>
 
@@ -56,12 +56,12 @@ $res = $db->getResult(); $res = $res[0];
 
               <?php 
 
-              $db->select('product_reviews_view','count(*) as total',NULL,'productVariationId = "' . $_GET['productVariationId'] . '" and customerId = "' . $_SESSION['customerId'] . '"', NULL); 
+              $db->select('product_reviews_view','count(*) as total',NULL,'productVariationId = "' . $_GET['productVariationId'] . '" and userId = "' . $_SESSION['userId'] . '"', NULL); 
               $output = $db->getResult(); $res = $output[0];
 
               if ($res['total'] > 0): 
 
-              $db->select('product_reviews_view','*',NULL,'productVariationId = "' . $_GET['productVariationId'] . '" and customerId = "' . $_SESSION['customerId'] . '"', NULL); 
+              $db->select('product_reviews_view','*',NULL,'productVariationId = "' . $_GET['productVariationId'] . '" and userId = "' . $_SESSION['userId'] . '"', NULL); 
               $output = $db->getResult(); $res1 = $output[0];
 
               ?>

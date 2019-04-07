@@ -1,11 +1,11 @@
 <?php 
 include('header.php');
 
-$db->select('customers_view','*',NULL,'customerId = "' . $_SESSION['customerId'] . '"', NULL); 
+$db->select('users_view','*',NULL,'userId = "' . $_SESSION['userId'] . '"', NULL); 
 $res = $db->getResult(); $res = $res[0];
 ?>
 
-<?php if (!isset($_SESSION['customerId'])): ?>
+<?php if (!isset($_SESSION['userId'])): ?>
   <script type="text/javascript">window.location.replace("index.php");</script>
 <?php endif ?>
 
@@ -69,19 +69,19 @@ $res = $db->getResult(); $res = $res[0];
                 <?php
 
                   if ($_GET['selected'] == 'All') {
-                    $db->select('orders_view','*',NULL,'customerId = "' . $_SESSION['customerId'] . '" and orderStatus <> "On Cart"', "orderId DESC"); 
+                    $db->select('orders_view','*',NULL,'userId = "' . $_SESSION['userId'] . '" and orderStatus <> "On Cart"', "orderId DESC"); 
                   }
                   elseif ($_GET['selected'] == 'Pending Approval') {
-                    $db->select('orders_view','*',NULL,'customerId = "' . $_SESSION['customerId'] . '" and orderStatus = "Pending Approval"', "orderId DESC"); 
+                    $db->select('orders_view','*',NULL,'userId = "' . $_SESSION['userId'] . '" and orderStatus = "Pending Approval"', "orderId DESC"); 
                   }
                   elseif ($_GET['selected'] == 'Confirmed') {
-                    $db->select('orders_view','*',NULL,'customerId = "' . $_SESSION['customerId'] . '" and orderStatus = "Confirmed"', "orderId DESC"); 
+                    $db->select('orders_view','*',NULL,'userId = "' . $_SESSION['userId'] . '" and orderStatus = "Confirmed"', "orderId DESC"); 
                   }
                   elseif ($_GET['selected'] == 'Finished') {
-                    $db->select('orders_view','*',NULL,'customerId = "' . $_SESSION['customerId'] . '" and orderStatus = "Finished"', "orderId DESC"); 
+                    $db->select('orders_view','*',NULL,'userId = "' . $_SESSION['userId'] . '" and orderStatus = "Finished"', "orderId DESC"); 
                   }
                   elseif ($_GET['selected'] == 'Cancelled') {
-                    $db->select('orders_view','*',NULL,'customerId = "' . $_SESSION['customerId'] . '" and orderStatus = "Cancelled"', "orderId DESC"); 
+                    $db->select('orders_view','*',NULL,'userId = "' . $_SESSION['userId'] . '" and orderStatus = "Cancelled"', "orderId DESC"); 
                   }
 
                   

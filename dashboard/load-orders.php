@@ -33,8 +33,8 @@ $primaryKey = 'orderId';
 $columns = array(
 
     array( 'db' => 'orderId',   'dt' => 0 ),
-    array( 'db' => 'fullName',   'dt' => 1 ),
-    array( 'db' => 'customerType',   'dt' => 2 ),
+    array( 'db' => 'administratorfullName',   'dt' => 1 ),
+    array( 'db' => 'userType',   'dt' => 2 ),
     array( 'db' => 'orderDeliveryMethod',   'dt' => 3 ),
     array( 'db' => 'orderModeOfPayment',   'dt' => 4 ),
     array( 'db' => 'orderPlacedDate',   'dt' => 5,'formatter' => function( $d, $row ) {

@@ -27,7 +27,7 @@
 
             <div class="col-md-8">
               <?php
-              $db->select('customer_feedbacks_view','*',NULL,'customerFeedbackStatus = 1', "customerFeedbackId DESC LIMIT 10"); 
+              $db->select('customer_feedbacks_view','*',NULL,'userFeedbackStatus = 1', "userFeedbackId DESC LIMIT 10"); 
               $output = $db->getResult();
               foreach ($output as $res) { ?>              
 
@@ -36,9 +36,9 @@
                   <div class="testimonial">
                     <div class="testi-in text-left"> 
                       <i class="fa fa-quote-left"></i>
-                        <p><?php echo $res['customerFeedback']; ?></p>
+                        <p><?php echo $res['userFeedback']; ?></p>
                         <h5><?php echo $res['customerFullName'] ?></h5>
-                        <span><?php echo date('F d, Y',strtotime($res['customerFeedbackDate'])); ?></span>
+                        <span><?php echo date('F d, Y',strtotime($res['userFeedbackDate'])); ?></span>
                     </div>
                   </div>
                 </div>
@@ -47,7 +47,7 @@
               <?php } ?>
 
             </div>
-            <?php if (isset($_SESSION['customerId'])): ?>
+            <?php if (isset($_SESSION['userId'])): ?>
             <div class="col-md-4"> 
               <h5>Submit a feedback.</h5>
 
@@ -62,7 +62,7 @@
                 <ul class="row">
                   <li class="col-sm-12">
                     <label>Message
-                      <textarea class="form-control" required="" name="customerFeedback" id="customerFeedback" rows="5" placeholder=""></textarea>
+                      <textarea class="form-control" required="" name="userFeedback" id="userFeedback" rows="5" placeholder=""></textarea>
                     </label>
 
                   </li>

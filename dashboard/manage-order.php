@@ -43,52 +43,19 @@ $res = $db->getResult(); $res = $res[0];
 
                         <hr class="mt-1 mb-3">
 
-                        <?php if ($res['customerIsBlocked'] == 1): ?>
+                        <?php if ($res['userIsBlocked'] == 1){ ?>
                             <h1>THIS CUSTOMER IS BLOCKED.</h1>
-                        <?php endif ?>
+                        <?php } ?>
 
-                        <p>Customer: <b><?php echo $res['fullName']; ?></b></p>
+                        <p>Customer: <b><?php echo $res['administratorfullName']; ?></b></p>
 
                         <p>Delivery Method: <b><?php echo $res['orderDeliveryMethod']; ?></b></p>
 
-                        <?php if ($res['orderDeliveryMethod'] == 'Pick Up'): ?>
+                        <?php if ($res['orderDeliveryMethod'] == 'Pick Up'){ ?>
 
                         <p>Schedule of Pick Up: <b><?php echo date('F d, Y', strtotime($res['orderPickupDate'])); ?></b></p>
-
-                        <?php if ($res['orderStatus'] == 'Confirmed' and $res['orderIsReschedule'] == 0): ?>
-
-                        <hr>
-
                         
-                        <form class="form-material" method="POST" action="controller.php?from=reschedule-pick-up-date&orderId=<?php echo $res['orderId'] ?>" autocomplete="off">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label>Reschedule Date</label>
-                                    <input class="form-control" required="" type="date" name="orderPickupDate" min="<?php echo date('Y-m-d') ?>" value="">
-                                </div>
-
-                            </div>
-                        </div>
-                        
-
-                        <div class="row">
-                            <div class="col-md-12">
-
-                                <button onclick = "return confirm('Are you sure want to reschedule the pick up date of this order?')" type="submit" class="btn btn-warning waves-effect waves-light m-r-10 pull-left">Reschedule Pick Up Date</button> 
-
-                                <a onclick = "return confirm('Are you sure want to confirm the pick up date of this order?')" href="controller.php?from=confirm-pick-up-date-order&orderId=<?php echo $res['orderId'] ?>"><button type="button" class="btn btn-info waves-effect waves-light m-r-10 pull-right">Confirm Pick Up Date</button></a>
-
-                            </div>
-                        </div>
-
-                        </form>
-
-                        <hr>
-
-                        <?php endif ?>
-                        
-                        <?php endif ?>
+                        <?php } ?>
 
                         <p>Mode of Payment: <b><?php echo $res['orderModeOfPayment']; ?></b></p>
 
@@ -100,79 +67,132 @@ $res = $db->getResult(); $res = $res[0];
 
                         <hr class="mt-1 mb-3">
 
-                        <?php if ($res['orderStatus'] == 'Pending Approval' and $res['customerIsBlocked'] == 0): ?>
-
-                        <?php if ($res['orderPaymentStatus'] == 'Paid'): ?>
-
-                        <a onclick = "return confirm('Are you sure want to confirm this order?')" href="controller.php?from=confirm-order&orderId=<?php echo $res['orderId'] ?>"><button type="button" class="btn btn-info waves-effect waves-light m-r-10 pull-right">Confirm Order</button></a>  
-                       
-                        <?php endif ?>
-
-                        <?php if ($res['orderPaymentStatus'] == 'Unpaid'): ?>
-
-                        <button type="button" class="btn btn-info waves-effect waves-light m-r-10 pull-right" data-toggle="tooltip" title="Order payment status is unpaid. Please make sure it is paid before confirming the order.">Confirm Order</button>  
-                       
-                        <?php endif ?>
+                        <?php if ( $res['userIsBlocked'] == 0){ ?>
                         
-                        <a onclick = "return confirm('Are you sure want to cancel this order?')" href="controller.php?from=cancel-order&orderId=<?php echo $res['orderId'] ?>"><button  type="button" class="btn btn-warning waves-effect waves-light m-r-10 pull-right">Cancel Order</button></a>  
-                        
+                            <form method="POST" class="form-material" autocomplete="off" action="controller.php?from=save-remark&orderId=<?php echo $res['orderId'] ?>">
 
-                        <?php endif ?>
-
-                        <?php if ($res['orderStatus'] != 'Pending Approval' and $res['customerIsBlocked'] == 0): ?>
-                        
-                        <form method="POST" class="form-material" autocomplete="off" action="controller.php?from=save-remark&orderId=<?php echo $res['orderId'] ?>">
-
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label>Remark: </label>
-                                    <textarea class="form-control" name="orderRemarks" id="orderRemarks" rows="5"><?php echo $res['orderRemarks']; ?></textarea>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Remark </label>
+                                        <textarea class="form-control" name="orderRemarks" id="orderRemarks" rows="5"><?php echo $res['orderRemarks']; ?></textarea>
+                                    </div>
                                 </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <button type="submit" class="btn btn-success waves-effect waves-light m-r-10 pull-right">Save Remarks</button>
+                                </div>
+                            </div>
+
+                            </form>
+
+                            <?php if ($res['orderStatus'] == 'Confirmed' and $res['orderIsReschedule'] == 0){ ?>
+
+
+                            <form class="form-material mb-3" method="POST" action="controller.php?from=reschedule-pick-up-date&orderId=<?php echo $res['orderId'] ?>" autocomplete="off">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Reschedule Date</label>
+                                        <input class="form-control" required="" type="date" name="orderPickupDate" min="<?php echo date('Y-m-d') ?>" value="">
+                                    </div>
+
+                                </div>
+                            </div>
+                            
+
+                            <div class="row">
+                                <div class="col-md-12">
+
+                                    <button onclick = "return confirm('Are you sure want to reschedule the pick up date of this order?')" type="submit" class="btn btn-warning waves-effect waves-light m-r-10 pull-left">Reschedule Pick Up Date</button> 
+
+                                    <a onclick = "return confirm('Are you sure want to confirm the pick up date of this order?')" href="controller.php?from=confirm-pick-up-date-order&orderId=<?php echo $res['orderId'] ?>"><button type="button" class="btn btn-info waves-effect waves-light m-r-10 pull-right">Confirm Pick Up Date</button></a>
+
+                                </div>
+                            </div>
+
+                            </form>
+
+                        <?php } ?>
+
+                            <?php if ($res['orderStatus'] == 'Confirmed'){ ?>
+
+                    
+
+                                <div class="row mt-3">
+                                    <div class="col-md-12">
+
+                                    <?php if ($res['orderPaymentStatus'] == 'Unpaid' and $res['orderIsReschedule'] == 0){ ?>
+                                        <button type="button" class="btn btn-info waves-effect waves-light m-r-10 pull-right" data-toggle="tooltip" title="You can't finish the order unless the pick up date is confirmed or rescheduled and the customer full paid the order.">Finish Order</button>
+                                    <?php } ?>
+
+                                    <?php if ($res['orderPaymentStatus'] == 'Unpaid' and $res['orderIsReschedule'] != 0){ ?>
+                                        <button type="button" class="btn btn-info waves-effect waves-light m-r-10 pull-right" data-toggle="tooltip" title="You can't finish the order unless the customer full paid the order.">Finish Order</button>
+                                    <?php } ?>
+
+                                    <?php if ($res['orderPaymentStatus'] == 'Paid' and $res['orderIsReschedule'] == 0){ ?>
+                                        <button type="button" class="btn btn-info waves-effect waves-light m-r-10 pull-right" data-toggle="tooltip" title="You can't finish the order unless the pick up date is confirmed or rescheduled.">Finish Order</button>
+                                    <?php } ?>
+
+                                    <?php if ($res['orderPaymentStatus'] == 'Paid' and $res['orderIsReschedule'] != 0){ ?>
+                                        <a onclick = "return confirm('Are you sure want to finish this order?')" href="controller.php?from=finish-order&orderId=<?php echo $res['orderId'] ?>"><button type="button" class="btn btn-info waves-effect waves-light m-r-10 pull-right">Finish Order</button></a>
+                                    <?php } ?>
+
+                                    </div>
+                                </div>
+
+                            
+                            <?php } ?>
+                            
+                        
+                        
+                        <?php } ?>
+
+
+
+                        <?php if ($res['orderStatus'] == 'Pending Approval' and $res['userIsBlocked'] == 0){ ?>
+                        <div class="row mt-3">
+                            <div class="col-md-12">
+                                
+                            <?php if ($res['orderPaymentStatus'] == 'Paid'){ ?>
+
+                                <a onclick = "return confirm('Are you sure want to confirm this order?')" href="controller.php?from=confirm-order&orderId=<?php echo $res['orderId'] ?>"><button type="button" class="btn btn-info waves-effect waves-light m-r-10 pull-right">Confirm Order</button></a>  
+                     
+                            <?php } ?>
+
+                            <?php if ($res['orderPaymentStatus'] == 'Unpaid'){ ?>
+
+                                <button type="button" class="btn btn-info waves-effect waves-light m-r-10 pull-right" data-toggle="tooltip" title="Order payment status is unpaid. Please make sure it is paid before confirming the order.">Confirm Order</button> 
+                             
+                            <?php } ?>
+                            
+             
+                            <a onclick = "return confirm('Are you sure want to cancel this order?')" href="controller.php?from=cancel-order&orderId=<?php echo $res['orderId'] ?>"><button  type="button" class="btn btn-warning waves-effect waves-light m-r-10 pull-right">Cancel Order</button></a>  
+             
                             </div>
                         </div>
 
-                        <button type="submit" class="btn btn-success waves-effect waves-light m-r-10 pull-right">Save Remarks</button>
+                        <?php } ?>
 
-                        </form>
+                        <div class="row mt-3">
+                            <div class="col-md-12">
 
-                        <?php if ($res['orderStatus'] == 'Confirmed'): ?>
+                        <?php if ($res['userIsBlocked'] == 0){ ?>
 
-                            <?php if ($res['orderPaymentStatus'] == 'Unpaid' and $res['orderIsReschedule'] == 0): ?>
-                                <button type="button" class="btn btn-info waves-effect waves-light m-r-10 pull-right" data-toggle="tooltip" title="You can't finish the order unless the pick up date is confirmed or rescheduled and the customer full paid the order.">Finish Order</button>
-                            <?php endif ?>
+                            <a onclick = "return confirm('Are you sure want to block this customer?')" href="controller.php?from=block-customer&userId=<?php echo $res['userId'] ?>&orderId=<?php echo $res['orderId'] ?>"><button  type="button" class="btn btn-danger waves-effect waves-light m-r-10 pull-right">Block Customer</button></a> 
+               
+                        <?php } ?>
 
-                            <?php if ($res['orderPaymentStatus'] == 'Unpaid' and $res['orderIsReschedule'] != 0): ?>
-                                <button type="button" class="btn btn-info waves-effect waves-light m-r-10 pull-right" data-toggle="tooltip" title="You can't finish the order unless the customer full paid the order.">Finish Order</button>
-                            <?php endif ?>
-
-                            <?php if ($res['orderPaymentStatus'] == 'Paid' and $res['orderIsReschedule'] == 0): ?>
-                                <button type="button" class="btn btn-info waves-effect waves-light m-r-10 pull-right" data-toggle="tooltip" title="You can't finish the order unless the pick up date is confirmed or rescheduled.">Finish Order</button>
-                            <?php endif ?>
-
-                            <?php if ($res['orderPaymentStatus'] == 'Paid' and $res['orderIsReschedule'] != 0): ?>
-                                <a onclick = "return confirm('Are you sure want to finish this order?')" href="controller.php?from=finish-order&orderId=<?php echo $res['orderId'] ?>"><button type="button" class="btn btn-info waves-effect waves-light m-r-10 pull-right">Finish Order</button></a>
-                            <?php endif ?>
-
+                        <?php if ($res['userIsBlocked'] == 1){ ?>
                         
-                        <?php endif ?>
+                            <a onclick = "return confirm('Are you sure want to block this customer?')" href="controller.php?from=unblock-customer&userId=<?php echo $res['userId'] ?>&orderId=<?php echo $res['orderId'] ?>"><button  type="button" class="btn btn-info waves-effect waves-light m-r-10 pull-right">Unblock Customer</button></a> 
+                                
+                        <?php } ?>
+                            </div>
+                        </div> 
                         
-                        
-                        
-                        <?php endif ?>
-
-
-                        <?php if ($res['customerIsBlocked'] == 0): ?>
-
-                        <a onclick = "return confirm('Are you sure want to block this customer?')" href="controller.php?from=block-customer&customerId=<?php echo $res['customerId'] ?>&orderId=<?php echo $res['orderId'] ?>"><button  type="button" class="btn btn-danger waves-effect waves-light m-r-10 pull-left">Block Customer</button></a>  
-                        
-                        <?php endif ?>
-
-                        <?php if ($res['customerIsBlocked'] == 1): ?>
-                        
-                        <a onclick = "return confirm('Are you sure want to block this customer?')" href="controller.php?from=unblock-customer&customerId=<?php echo $res['customerId'] ?>&orderId=<?php echo $res['orderId'] ?>"><button  type="button" class="btn btn-info waves-effect waves-light m-r-10 pull-left">Unblock Customer</button></a>  
-                        
-                        <?php endif ?>
                         
                         
                     </div>
@@ -209,7 +229,7 @@ $res = $db->getResult(); $res = $res[0];
                         <p>Total Amount Paid: <b>₱<?php echo number_format($totalAmountPaid, 2); ?></b></p>
                         <p>Balance: <b>₱<?php echo number_format($balance, 2); ?></b></p>
 
-                        <?php if ($res['orderPaymentStatus'] == 'Unpaid'): ?>
+                        <?php if ($res['orderPaymentStatus'] == 'Unpaid' and $res['userIsBlocked'] == 0 and $res['orderStatus'] != 'Cancelled'){ ?>
 
                         <hr>
 
@@ -237,7 +257,7 @@ $res = $db->getResult(); $res = $res[0];
 
                         <hr>
                             
-                        <?php endif ?>
+                        <?php } ?>
 
                         
                         <div class="table-responsive m-t-10">
@@ -304,7 +324,7 @@ $res = $db->getResult(); $res = $res[0];
 
                         <div class="row">
                             <div class="col-md-12">
-                                <a target="_blank" href="../print-acknowledgement-receipt.php?orderId=<?php echo base64_encode($res['orderId']); ?>&customerId=<?php echo $res['customerId'] ?>&admin=yes"><button type="button" class="btn btn-dark pull-right ">Print Acknowledgement Receipt</button></a>
+                                <a target="_blank" href="../print-acknowledgement-receipt.php?orderId=<?php echo base64_encode($res['orderId']); ?>&userId=<?php echo $res['userId'] ?>&admin=yes"><button type="button" class="btn btn-dark pull-right ">Print Acknowledgement Receipt</button></a>
                             </div>
                         </div>
 
@@ -343,7 +363,7 @@ $res = $db->getResult(); $res = $res[0];
             </div>
             </div>
 
-            <?php if ($res['orderDeliveryMethod'] == 'Shipping'): ?>
+            <?php if ($res['orderDeliveryMethod'] == 'Shipping'){ ?>
             <div class="row">
             <div class="col-md-12">
 
@@ -368,7 +388,7 @@ $res = $db->getResult(); $res = $res[0];
                 </div>
             </div>
             </div>
-            <?php endif ?>
+            <?php } ?>
                 
         </div>
     </div>

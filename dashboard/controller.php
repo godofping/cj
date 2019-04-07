@@ -4,17 +4,16 @@ include('connection.php');
 
 if (isset($_GET['from']) and $_GET['from'] == 'login') {
 	
-	$userName = $db->escapeString($_POST['userName']);
-	$userPassword = $db->escapeString(md5($_POST['userPassword']));
+	$administratorUserName = $db->escapeString($_POST['administratorUserName']);
+	$administratorUserPassword = $db->escapeString(md5($_POST['administratorUserPassword']));
 
-	$db->select('users_table', '*', NULL, 'userName = "' . $userName  .'" and userPassword = "' . $userPassword . '"');
+	$db->select('administrators_table', '*', NULL, 'administratorUserName = "' . $administratorUserName  .'" and administratorUserPassword = "' . $administratorUserPassword . '"');
 	$res = $db->getResult();
 
 	if (count($res) > 0) {
 		$res = $res[0];
-		$_SESSION['userLevel'] = $res['userLevel'];
-		$_SESSION['userId'] = $res['userId'];
-		$_SESSION['userName'] = $res['userName'];
+		$_SESSION['administratorUserId'] = $res['administratorUserId'];
+		$_SESSION['administratorUserName'] = $res['administratorUserName'];
 		$_SESSION['toast'] = 'login-successful';
 		header("Location: dashboard.php");
 	}
@@ -34,13 +33,13 @@ if (isset($_GET['from']) and $_GET['from'] == 'logout') {
 
 if (isset($_GET['from']) and $_GET['from'] == 'update-profile') {
 
-	$fullName = $db->escapeString($_POST['fullName']);
+	$administratorfullName = $db->escapeString($_POST['administratorfullName']);
 
-	$db->update('users_table',
+	$db->update('administrators_table',
 	array(
-		'fullName'=>$fullName,
+		'administratorfullName'=>$administratorfullName,
 		),
-		'userId=' . $_SESSION['userId']
+		'administratorUserId=' . $_SESSION['administratorUserId']
 	);
 
 	$res = $db->getResult();
@@ -95,20 +94,19 @@ if (isset($_GET['from']) and $_GET['from'] == 'delete-category') {
 
 if (isset($_GET['from']) and $_GET['from'] == 'add-user') {
 
-	$db->select('users_table','*',NULL,'userName = "' . $_POST['userName'] . '"', NULL); 
+	$db->select('administrators_table','*',NULL,'administratorUserName = "' . $_POST['administratorUserName'] . '"', NULL); 
 	$res = $db->getResult();
 	
 	if (count($res) == 0) {
-		$userName = $db->escapeString($_POST['userName']);
-		$userPassword = $db->escapeString(md5($_POST['userPassword']));
-		$fullName = $db->escapeString($_POST['fullName']);
+		$administratorUserName = $db->escapeString($_POST['administratorUserName']);
+		$administratorUserPassword = $db->escapeString(md5($_POST['administratorUserPassword']));
+		$administratorfullName = $db->escapeString($_POST['administratorfullName']);
 
-		$db->insert('users_table',
+		$db->insert('administrators_table',
 		array(
-			'userName'=>$userName,
-			'userPassword'=>$userPassword,
-			'fullName'=>$fullName,
-			'userLevel'=>'2',
+			'administratorUserName'=>$administratorUserName,
+			'administratorUserPassword'=>$administratorUserPassword,
+			'administratorfullName'=>$administratorfullName,
 			'isDeleted'=>'0',
 			)
 		);
@@ -120,7 +118,7 @@ if (isset($_GET['from']) and $_GET['from'] == 'add-user') {
 	}
 	else
 	{
-		$_SESSION['toast'] = 'userName-taken';
+		$_SESSION['toast'] = 'administratorUserName-taken';
 
 	}
 	header("Location: add-user.php");
@@ -130,26 +128,26 @@ if (isset($_GET['from']) and $_GET['from'] == 'add-user') {
 
 if (isset($_GET['from']) and $_GET['from'] == 'update-user') {
 
-	$userName = $db->escapeString($_POST['userName']);
-	$userPassword = $db->escapeString(md5($_POST['userPassword']));
-	$fullName = $db->escapeString($_POST['fullName']);
+	$administratorUserName = $db->escapeString($_POST['administratorUserName']);
+	$administratorUserPassword = $db->escapeString(md5($_POST['administratorUserPassword']));
+	$administratorfullName = $db->escapeString($_POST['administratorfullName']);
 
-	$db->select('users_table','*',NULL,'userId = "' . $_POST['userId'] . '"', NULL); 
+	$db->select('administrators_table','*',NULL,'administratorUserId = "' . $_POST['administratorUserId'] . '"', NULL); 
 	$res = $db->getResult(); $res = $res[0];
 
-	if ($userName != $res['userName']) {
+	if ($administratorUserName != $res['administratorUserName']) {
 
-		$db->select('users_table','*',NULL,'userName = "' . $_POST['userName'] . '"', NULL); 
+		$db->select('administrators_table','*',NULL,'administratorUserName = "' . $_POST['administratorUserName'] . '"', NULL); 
 		$res = $db->getResult();
 		
 		if (count($res) == 0) {
-			$db->update('users_table',
+			$db->update('administrators_table',
 			array(
-				'userName'=>$userName,
-				'userPassword'=>$userPassword,
-				'fullName'=>$fullName,
+				'administratorUserName'=>$administratorUserName,
+				'administratorUserPassword'=>$administratorUserPassword,
+				'administratorfullName'=>$administratorfullName,
 				),
-				'userId=' . $_POST['userId']
+				'administratorUserId=' . $_POST['administratorUserId']
 			);
 
 			$res = $db->getResult();
@@ -159,38 +157,38 @@ if (isset($_GET['from']) and $_GET['from'] == 'update-user') {
 		}
 		else
 		{
-			$_SESSION['toast'] = 'userName-taken';
+			$_SESSION['toast'] = 'administratorUserName-taken';
 		}
 
 	}
 	else
 	{
-		$db->update('users_table',
+		$db->update('administrators_table',
 		array(
-			'userPassword'=>$userPassword,
-			'fullName'=>$fullName,
+			'administratorUserPassword'=>$administratorUserPassword,
+			'administratorfullName'=>$administratorfullName,
 			),
-			'userId=' . $_POST['userId']
+			'administratorUserId=' . $_POST['administratorUserId']
 		);
 
 		$res = $db->getResult();
 		$_SESSION['toast'] = 'update-user';
 	}
 
-	header("Location: update-user.php?userId=".$_POST['userId']."");
+	header("Location: update-user.php?administratorUserId=".$_POST['administratorUserId']."");
 		
 }
 
 
 if (isset($_GET['from']) and $_GET['from'] == 'delete-user') {
 
-	$userId = $db->escapeString($_GET['userId']);
+	$administratorUserId = $db->escapeString($_GET['administratorUserId']);
 
-	$db->update('users_table',
+	$db->update('administrators_table',
 	array(
 		'isDeleted'=>'1',
 		),
-		'userId=' . $_GET['userId']
+		'administratorUserId=' . $_GET['administratorUserId']
 	);
 
 	$res = $db->getResult();
@@ -209,18 +207,18 @@ if (isset($_GET['from']) and $_GET['from'] == 'change-password') {
 	$newPassword = $db->escapeString(md5($_POST['newPassword']));
 	$confirmNewPassword = $db->escapeString(md5($_POST['confirmNewPassword']));
 
-	$db->select('users_view','*',NULL,'userId = "' . $_SESSION['userId'] . '"', NULL); 
+	$db->select('administrators_view','*',NULL,'administratorUserId = "' . $_SESSION['administratorUserId'] . '"', NULL); 
 	$res = $db->getResult(); $res = $res[0];
 
-	$userPassword = $res['userPassword'];
+	$administratorUserPassword = $res['administratorUserPassword'];
 
-	if ($oldPassword == $userPassword and $newPassword == $confirmNewPassword) {
+	if ($oldPassword == $administratorUserPassword and $newPassword == $confirmNewPassword) {
 
-		$db->update('users_table',
+		$db->update('administrators_table',
 		array(
-			'userPassword'=>$userPassword,
+			'administratorUserPassword'=>$administratorUserPassword,
 			),
-			'userId=' . $_SESSION['userId']
+			'administratorUserId=' . $_SESSION['administratorUserId']
 		);
 
 		$res = $db->getResult();
@@ -586,11 +584,11 @@ if (isset($_GET['from']) and $_GET['from'] == 'confirm-feedback') {
 
 
 
-	$db->update('customer_feedbacks_table',
+	$db->update('user_feedbacks_table',
 	array(
-		'customerFeedbackStatus'=>1,
+		'userFeedbackStatus'=>1,
 		),
-		'customerFeedbackId=' . $_GET['customerFeedbackId']
+		'userFeedbackId=' . $_GET['userFeedbackId']
 	);
 
 	$res = $db->getResult();
@@ -606,11 +604,11 @@ if (isset($_GET['from']) and $_GET['from'] == 'delete-feedback') {
 
 
 
-	$db->update('customer_feedbacks_table',
+	$db->update('user_feedbacks_table',
 	array(
-		'customerFeedbackStatus'=>2,
+		'userFeedbackStatus'=>2,
 		),
-		'customerFeedbackId=' . $_GET['customerFeedbackId']
+		'userFeedbackId=' . $_GET['userFeedbackId']
 	);
 
 	$res = $db->getResult();
@@ -717,11 +715,11 @@ if (isset($_GET['from']) and $_GET['from'] == 'reorder-point') {
 
 if (isset($_GET['from']) and $_GET['from'] == 'block-customer') {
 
-	$db->update('customers_table',
+	$db->update('users_table',
 	array(
-		'customerIsBlocked'=>1,
+		'userIsBlocked'=>1,
 		),
-		'customerId=' . $_GET['customerId']
+		'userId=' . $_GET['userId']
 	);
 
 	$res = $db->getResult();
@@ -735,11 +733,11 @@ if (isset($_GET['from']) and $_GET['from'] == 'block-customer') {
 
 if (isset($_GET['from']) and $_GET['from'] == 'unblock-customer') {
 
-	$db->update('customers_table',
+	$db->update('users_table',
 	array(
-		'customerIsBlocked'=>0,
+		'userIsBlocked'=>0,
 		),
-		'customerId=' . $_GET['customerId']
+		'userId=' . $_GET['userId']
 	);
 
 	$res = $db->getResult();

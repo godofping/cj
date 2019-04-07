@@ -22,7 +22,7 @@
 $table = 'customer_feedbacks_view';
  
 // Table's primary key
-$primaryKey = 'customerFeedbackId';
+$primaryKey = 'userFeedbackId';
  
 // Array of database columns which should be read and sent back to DataTables.
 // The `db` parameter represents the column name in the database, while the `dt`
@@ -33,11 +33,11 @@ $primaryKey = 'customerFeedbackId';
 $columns = array(
 
     array( 'db' => 'customerFullName',   'dt' => 0 ),
-    array( 'db' => 'customerFeedback',   'dt' => 1 ),
-    array( 'db' => 'customerFeedbackDate',   'dt' => 2, 'formatter' => function( $d, $row ) {
+    array( 'db' => 'userFeedback',   'dt' => 1 ),
+    array( 'db' => 'userFeedbackDate',   'dt' => 2, 'formatter' => function( $d, $row ) {
         return  date('F d, Y', strtotime($d));
     }  ),
-    array( 'db' => 'customerFeedbackStatus', 'dt' => 3,'formatter' => function( $d, $row ) {
+    array( 'db' => 'userFeedbackStatus', 'dt' => 3,'formatter' => function( $d, $row ) {
 
         if ($d == 0) {
             $status =  "Pending";
@@ -47,14 +47,14 @@ $columns = array(
 
         return  $status;
     } ),
-    array( 'db' => 'customerFeedbackId', 'dt' => 4,'formatter' => function( $d, $row ) {
+    array( 'db' => 'userFeedbackId', 'dt' => 4,'formatter' => function( $d, $row ) {
 
-        if ($row['customerFeedbackStatus'] == 0) {
-            return '<a class = "btn btn-success btn-xs" href="controller.php?from=confirm-feedback&customerFeedbackId=' . $row['customerFeedbackId'] . '">Confirm</a> <a class = "btn btn-danger btn-xs" onclick = "return confirm('."'Are you sure want to delete this record?'".')" href="controller.php?from=delete-feedback&customerFeedbackId=' . $row['customerFeedbackId'] . '">Delete</a>';
+        if ($row['userFeedbackStatus'] == 0) {
+            return '<a class = "btn btn-success btn-xs" href="controller.php?from=confirm-feedback&userFeedbackId=' . $row['userFeedbackId'] . '">Confirm</a> <a class = "btn btn-danger btn-xs" onclick = "return confirm('."'Are you sure want to delete this record?'".')" href="controller.php?from=delete-feedback&userFeedbackId=' . $row['userFeedbackId'] . '">Delete</a>';
         }
         else
         {
-            return '<a class = "btn btn-danger btn-xs" onclick = "return confirm('."'Are you sure want to delete this record?'".')" href="controller.php?from=delete-feedback&customerFeedbackId=' . $row['customerFeedbackId'] . '">Delete</a>';
+            return '<a class = "btn btn-danger btn-xs" onclick = "return confirm('."'Are you sure want to delete this record?'".')" href="controller.php?from=delete-feedback&userFeedbackId=' . $row['userFeedbackId'] . '">Delete</a>';
         }
         
     } ),

@@ -1,7 +1,7 @@
 <?php 
 include('header.php');
 
-$db->select('users_table','*',NULL,'userId = "' . $_SESSION['userId'] . '"', NULL); 
+$db->select('administrators_table','*',NULL,'administratorUserId = "' . $_SESSION['administratorUserId'] . '"', NULL); 
 $res = $db->getResult(); $res = $res[0];
 ?>
 
@@ -33,7 +33,7 @@ $res = $db->getResult(); $res = $res[0];
                         	<div class="col-md-12">
                         		<div class="form-group">
 		                            <label>Full Name *</label>
-		                            <input type="text" class="form-control form-control-line" required="" name="fullName" value="<?php echo $res['fullName'] ?>"> 
+		                            <input type="text" class="form-control form-control-line" required="" name="administratorfullName" value="<?php echo $res['administratorfullName'] ?>"> 
 		                        </div>
                         	</div>
                         </div>

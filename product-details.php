@@ -131,7 +131,7 @@ $res = $db->getResult(); $res = $res[0];
               <div class="media">
                 <div class="media-body">
                   <p>“<?php echo $res['productReview']; ?>”</p>
-                  <h6><?php echo $res['customerFirstName'] . " " . $res['customerLastName'] ; ?> ordered "<?php echo $res['productName']; ?> (<?php echo $res['productOption1']; ?> <?php echo $res['productOption2']; ?>)"  <span class="pull-right"><?php echo date('F d, Y', strtotime($res['productReviewDate'])); ?></span> </h6>
+                  <h6><?php echo $res['userFirstName'] . " " . $res['userLastName'] ; ?> ordered "<?php echo $res['productName']; ?> (<?php echo $res['productOption1']; ?> <?php echo $res['productOption2']; ?>)"  <span class="pull-right"><?php echo date('F d, Y', strtotime($res['productReviewDate'])); ?></span> </h6>
                 </div>
               </div>
             <?php } ?>

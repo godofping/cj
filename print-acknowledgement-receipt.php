@@ -4,21 +4,21 @@ include('dashboard/connection.php');
 
 if (!isset($_GET['admin'])) {
 	$filename = basename($_SERVER["SCRIPT_FILENAME"], '.php');
-	if ($filename != "finish-registration" and isset($_SESSION['customerId'])) {
-	  $db->select('customers_table','*',NULL,'customerId = "' . $_SESSION['customerId'] . '"', NULL); 
+	if ($filename != "finish-registration" and isset($_SESSION['userId'])) {
+	  $db->select('users_table','*',NULL,'userId = "' . $_SESSION['userId'] . '"', NULL); 
 	  $res = $db->getResult(); $res = $res[0];
 
-	  if ($res['customerFirstName'] == '' and $res['customerLastName'] == '' and $res['customerAddress'] == '' and $res['customerPhoneNumber'] == '') { ?>
+	  if ($res['userFirstName'] == '' and $res['userLastName'] == '' and $res['userAddress'] == '' and $res['userPhoneNumber'] == '') { ?>
 	     <script type="text/javascript">window.location.replace("finish-registration.php");</script>
 	<?php }
 
 
 
-	if ($res['customerIsBlocked'] == 1 and isset($_SESSION['customerId']) and $filename <> "login") {
+	if ($res['userIsBlocked'] == 1 and isset($_SESSION['userId']) and $filename <> "login") {
 	  echo '<script type="text/javascript">window.location.replace("controller.php?from=logout");</script>';
 	}
 	else{
-		$db->select('customers_table','*',NULL,'customerId = "' . $_SESSION['customerId'] . '"', NULL); 
+		$db->select('users_table','*',NULL,'userId = "' . $_SESSION['userId'] . '"', NULL); 
 	  	$res = $db->getResult(); $res = $res[0];
 
 	}
@@ -26,7 +26,7 @@ if (!isset($_GET['admin'])) {
 }
 else
 {
-	$db->select('customers_table','*',NULL,'customerId = "' . $_GET['customerId'] . '"', NULL); 
+	$db->select('users_table','*',NULL,'userId = "' . $_GET['userId'] . '"', NULL); 
 	$res = $db->getResult(); $res = $res[0];
 }
 
@@ -96,13 +96,13 @@ else
 
       <div class="row mt-5">
      	<div class="col-md-12">
-     		<h5 class="text-left">Customer: <b><?php echo $res['customerFirstName']; ?> <?php echo $res['customerLastName']; ?></b></h5>
+     		<h5 class="text-left">Customer: <b><?php echo $res['userFirstName']; ?> <?php echo $res['userLastName']; ?></b></h5>
      	</div>
       </div>
 
       <div class="row">
      	<div class="col-md-12">
-     		<h5 class="text-left">Address: <b><?php echo $res['customerAddress']; ?></b></h5>
+     		<h5 class="text-left">Address: <b><?php echo $res['userAddress']; ?></b></h5>
      	</div>
       </div>
 

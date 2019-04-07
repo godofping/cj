@@ -19,10 +19,10 @@
  */
  
 // DB table to use
-$table = 'users_view';
+$table = 'administrators_view';
  
 // Table's primary key
-$primaryKey = 'userId';
+$primaryKey = 'administratorUserId';
  
 // Array of database columns which should be read and sent back to DataTables.
 // The `db` parameter represents the column name in the database, while the `dt`
@@ -32,10 +32,10 @@ $primaryKey = 'userId';
 
 $columns = array(
 
-    array( 'db' => 'userName',   'dt' => 0 ),
-    array( 'db' => 'fullName',   'dt' => 1 ),
-    array( 'db' => 'userId', 'dt' => 2,'formatter' => function( $d, $row ) {
-        return '<a class = "btn btn-info btn-xs" href="update-user.php?userId=' . $row['userId'] . '">Update</a> <a class = "btn btn-danger btn-xs" onclick = "return confirm('."'Are you sure want to delete this record?'".')" href="controller.php?from=delete-user&userId=' . $row['userId'] . '">Delete</a>';
+    array( 'db' => 'administratorUserName',   'dt' => 0 ),
+    array( 'db' => 'administratorfullName',   'dt' => 1 ),
+    array( 'db' => 'administratorUserId', 'dt' => 2,'formatter' => function( $d, $row ) {
+        return '<a class = "btn btn-info btn-xs" href="update-user.php?administratorUserId=' . $row['administratorUserId'] . '">Update</a> <a class = "btn btn-danger btn-xs" onclick = "return confirm('."'Are you sure want to delete this record?'".')" href="controller.php?from=delete-user&administratorUserId=' . $row['administratorUserId'] . '">Delete</a>';
     } ),
 
 );
@@ -55,7 +55,7 @@ $sql_details = array(
 
    require( 'ssp.class.php' );
     echo json_encode(
-    SSP::complex( $_POST, $sql_details, $table, $primaryKey, $columns,'userLevel = 2 and isDeleted = 0' )
+    SSP::complex( $_POST, $sql_details, $table, $primaryKey, $columns,'isDeleted = 0' )
 );
 
 

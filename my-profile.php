@@ -1,11 +1,11 @@
 <?php 
 include('header.php');
 
-$db->select('customers_view','*',NULL,'customerId = "' . $_SESSION['customerId'] . '"', NULL); 
+$db->select('users_view','*',NULL,'userId = "' . $_SESSION['userId'] . '"', NULL); 
 $res = $db->getResult(); $res = $res[0];
 ?>
 
-<?php if (!isset($_SESSION['customerId'])): ?>
+<?php if (!isset($_SESSION['userId'])): ?>
   <script type="text/javascript">window.location.replace("index.php");</script>
 <?php endif ?>
   
@@ -43,28 +43,28 @@ $res = $db->getResult(); $res = $res[0];
                 <ul class="row">
                   <li class="col-sm-12">
                     <label>Email Address (You cannot change the email address)
-                      <input type="text" class="form-control" name="customerEmail" id="customerEmail" placeholder="" required="" readonly="" value="<?php echo $res['customerEmail'] ?>">
+                      <input type="text" class="form-control" name="userEmail" id="userEmail" placeholder="" required="" readonly="" value="<?php echo $res['userEmail'] ?>">
                     </label>
                   </li>
                 
                   <li class="col-sm-6">
                     <label>First name *
-                      <input type="text" class="form-control" name="customerFirstName" id="customerFirstName" placeholder="" required="" value="<?php echo $res['customerFirstName'] ?>" >
+                      <input type="text" class="form-control" name="userFirstName" id="userFirstName" placeholder="" required="" value="<?php echo $res['userFirstName'] ?>" >
                     </label>
                   </li>
                   <li class="col-sm-6">
                     <label>Last name *
-                      <input type="text" class="form-control" name="customerLastName" id="customerLastName" placeholder="" required="" value="<?php echo $res['customerLastName'] ?>">
+                      <input type="text" class="form-control" name="userLastName" id="userLastName" placeholder="" required="" value="<?php echo $res['userLastName'] ?>">
                     </label>
                   </li>
                   <li class="col-sm-12">
                     <label>Address * <small>(building number, street name, city, province)</small>
-                      <input type="text" class="form-control" name="customerAddress" id="customerAddress" placeholder="" required="" value="<?php echo $res['customerAddress'] ?>">
+                      <input type="text" class="form-control" name="userAddress" id="userAddress" placeholder="" required="" value="<?php echo $res['userAddress'] ?>">
                     </label>
                   </li>
                   <li class="col-sm-6">
                     <label>Phone Number *
-                      <input type="text" class="form-control" name="customerPhoneNumber" id="customerPhoneNumber" placeholder="" required="" value="<?php echo $res['customerPhoneNumber'] ?>">
+                      <input type="text" class="form-control" name="userPhoneNumber" id="userPhoneNumber" placeholder="" required="" value="<?php echo $res['userPhoneNumber'] ?>">
                     </label>
                   </li>
 
@@ -112,7 +112,7 @@ $res = $db->getResult(); $res = $res[0];
                     </label>
                   </li>
 
-                  <input type="text" name="customerPassword" hidden value="<?php echo $res['customerPassword'] ?>">
+                  <input type="text" name="userPassword" hidden value="<?php echo $res['userPassword'] ?>">
 
                   <li class="col-sm-12">
                     <button type="submit" value="submit" class="btn" id="btn_submit" >update</button>

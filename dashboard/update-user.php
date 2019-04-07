@@ -1,7 +1,7 @@
 <?php 
 include('header.php');
 
-$db->select('users_table','*',NULL,'userId = "' . $_GET['userId'] . '"', NULL); 
+$db->select('administrators_table','*',NULL,'administratorUserId = "' . $_GET['administratorUserId'] . '"', NULL); 
 $res = $db->getResult(); $res = $res[0];
 ?>
 <div class="row page-titles">
@@ -39,7 +39,7 @@ $res = $db->getResult(); $res = $res[0];
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label>Username *</label>
-                                    <input type="text" class="form-control form-control-line" required="" name="userName" value="<?php echo $res['userName'] ?>"> 
+                                    <input type="text" class="form-control form-control-line" required="" name="administratorUserName" value="<?php echo $res['administratorUserName'] ?>"> 
                                 </div>
                             </div>
                         </div>
@@ -48,7 +48,7 @@ $res = $db->getResult(); $res = $res[0];
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label>Password *</label>
-                                    <input type="password" class="form-control form-control-line" required="" name="userPassword" value=""> 
+                                    <input type="password" class="form-control form-control-line" required="" name="administratorUserPassword" value=""> 
                                 </div>
                             </div>
                         </div>
@@ -57,14 +57,14 @@ $res = $db->getResult(); $res = $res[0];
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label>Full Name *</label>
-                                    <input type="text" class="form-control form-control-line" required="" name="fullName" value="<?php echo $res['fullName'] ?>"> 
+                                    <input type="text" class="form-control form-control-line" required="" name="administratorfullName" value="<?php echo $res['administratorfullName'] ?>"> 
                                 </div>
                             </div>
                         </div>
 
                     <button type="submit" class="btn btn-success waves-effect waves-light m-r-10 pull-right">Save Changes</button>
 
-                    <input type="text" name="userId" value="<?php echo $res['userId'] ?>" hidden>
+                    <input type="text" name="administratorUserId" value="<?php echo $res['administratorUserId'] ?>" hidden>
 
 
                     </form>

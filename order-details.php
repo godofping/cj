@@ -1,6 +1,6 @@
 <?php include('header.php'); ?>
 
-<?php if (!isset($_SESSION['customerId'])){ ?>
+<?php if (!isset($_SESSION['userId'])){ ?>
   <script type="text/javascript">window.location.replace("index.php");</script>
 <?php } else { 
 

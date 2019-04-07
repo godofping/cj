@@ -149,7 +149,7 @@
             });
         <?php endif?>
 
-        <?php if (isset($_SESSION['toast']) and $_SESSION['toast'] == 'userName-taken'): ?>
+        <?php if (isset($_SESSION['toast']) and $_SESSION['toast'] == 'administratorUserName-taken'): ?>
             $.toast({
               heading: 'USERNAME TAKEN',
               text: 'Please use another Username!',

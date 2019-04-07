@@ -1,5 +1,5 @@
 <?php include('header.php'); 
-if (!isset($_SESSION['customerId'])) {
+if (!isset($_SESSION['userId'])) {
   echo '<script type="text/javascript">window.location.replace("index.php");</script>';
 }
 ?>
@@ -23,22 +23,22 @@ if (!isset($_SESSION['customerId'])) {
                 <ul class="row">
                   <li class="col-sm-6">
                     <label>First name *
-                      <input type="text" class="form-control" name="customerFirstName" id="customerFirstName" placeholder="" required="">
+                      <input type="text" class="form-control" name="userFirstName" id="userFirstName" placeholder="" required="">
                     </label>
                   </li>
                   <li class="col-sm-6">
                     <label>Last name *
-                      <input type="text" class="form-control" name="customerLastName" id="customerLastName" placeholder="" required="">
+                      <input type="text" class="form-control" name="userLastName" id="userLastName" placeholder="" required="">
                     </label>
                   </li>
                   <li class="col-sm-12">
                     <label>Address * <small>(building number, street name, city, province)</small>
-                      <input type="text" class="form-control" name="customerAddress" id="customerAddress" placeholder="" required="">
+                      <input type="text" class="form-control" name="userAddress" id="userAddress" placeholder="" required="">
                     </label>
                   </li>
                   <li class="col-sm-6">
                     <label>Phone Number *
-                      <input type="text" class="form-control" name="customerPhoneNumber" id="customerPhoneNumber" placeholder="" required="">
+                      <input type="text" class="form-control" name="userPhoneNumber" id="userPhoneNumber" placeholder="" required="">
                     </label>
                   </li>
 

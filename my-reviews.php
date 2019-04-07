@@ -1,11 +1,11 @@
 <?php 
 include('header.php');
 
-$db->select('customers_view','*',NULL,'customerId = "' . $_SESSION['customerId'] . '"', NULL); 
+$db->select('users_view','*',NULL,'userId = "' . $_SESSION['userId'] . '"', NULL); 
 $res = $db->getResult(); $res = $res[0];
 ?>
 
-<?php if (!isset($_SESSION['customerId'])): ?>
+<?php if (!isset($_SESSION['userId'])): ?>
   <script type="text/javascript">window.location.replace("index.php");</script>
 <?php endif ?>
 
@@ -68,7 +68,7 @@ $res = $db->getResult(); $res = $res[0];
                 <tbody>
                 <?php
 
-                  $db->select('order_details_view','*',NULL,'customerId = "' . $_SESSION['customerId'] . '" and orderStatus = "Finished" GROUP BY productVariationId', NULL); 
+                  $db->select('order_details_view','*',NULL,'userId = "' . $_SESSION['userId'] . '" and orderStatus = "Finished" GROUP BY productVariationId', NULL); 
                   $output = $db->getResult();
                   foreach ($output as $res) { 
 
@@ -78,7 +78,7 @@ $res = $db->getResult(); $res = $res[0];
                   ?>
 
                   <?php
-                  $db->select('product_reviews_view','count(*) as total',NULL,'productVariationId = "' . $res['productVariationId'] . '" and customerId = "' . $_SESSION['customerId'] . '"', NULL); 
+                  $db->select('product_reviews_view','count(*) as total',NULL,'productVariationId = "' . $res['productVariationId'] . '" and userId = "' . $_SESSION['userId'] . '"', NULL); 
                   $output1 = $db->getResult(); $res1 = $output1[0];
                   if ($res1['total'] > 0) {
                     $string = "Already reviewed";

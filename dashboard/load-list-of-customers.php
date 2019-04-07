@@ -19,10 +19,10 @@
  */
  
 // DB table to use
-$table = 'customers_view';
+$table = 'users_view';
  
 // Table's primary key
-$primaryKey = 'customerId';
+$primaryKey = 'userId';
  
 // Array of database columns which should be read and sent back to DataTables.
 // The `db` parameter represents the column name in the database, while the `dt`
@@ -32,15 +32,15 @@ $primaryKey = 'customerId';
 
 $columns = array(
 
-    array( 'db' => 'customerId',   'dt' => 0 ),
-    array( 'db' => 'customerEmail',   'dt' => 1 ),
-    array( 'db' => 'customerPhoneNumber',   'dt' => 2 ),
-    array( 'db' => 'customerAddress',   'dt' => 3 ),
-    array( 'db' => 'customerRegistrationDate',   'dt' => 4,'formatter' => function( $d, $row ) {
+    array( 'db' => 'userId',   'dt' => 0 ),
+    array( 'db' => 'userEmail',   'dt' => 1 ),
+    array( 'db' => 'userPhoneNumber',   'dt' => 2 ),
+    array( 'db' => 'userAddress',   'dt' => 3 ),
+    array( 'db' => 'userRegistrationDate',   'dt' => 4,'formatter' => function( $d, $row ) {
         return date('F d, Y', strtotime($d));
     } ),
 
-    // <a class = "btn btn-warning btn-xs" href="view-product.php?customerId=' . $row['customerId'] . '">View</a>
+    // <a class = "btn btn-warning btn-xs" href="view-product.php?userId=' . $row['userId'] . '">View</a>
   
 );
  
@@ -59,7 +59,7 @@ $sql_details = array(
 
    require( 'ssp.class.php' );
     echo json_encode(
-    SSP::complex( $_POST, $sql_details, $table, $primaryKey, $columns, 'customerType = "Online"' )
+    SSP::complex( $_POST, $sql_details, $table, $primaryKey, $columns, 'userType = "Online"' )
 );
 
 

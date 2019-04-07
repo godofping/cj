@@ -1,7 +1,7 @@
 <?php
 include('connection.php');
 
- if (!isset($_SESSION['userId'])){
+ if (!isset($_SESSION['administratorUserId'])){
     $_SESSION['toast'] = 'session-expired';
     header("Location: index.php");
 }

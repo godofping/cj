@@ -1,7 +1,7 @@
 <?php
 include('connection.php');
 
- if (isset($_SESSION['userId'])){
+ if (isset($_SESSION['administratorUserId'])){
     header("Location: dashboard.php");
 }
 
@@ -61,12 +61,12 @@ include('connection.php');
                         <h3 class="box-title m-b-20">Sign In</h3>
                         <div class="form-group ">
                             <div class="col-xs-12">
-                                <input class="form-control" type="text" required="" placeholder="Username" name="userName">
+                                <input class="form-control" type="text" required="" placeholder="Username" name="administratorUserName">
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="col-xs-12">
-                                <input class="form-control" type="password" required="" placeholder="Password" name="userPassword">
+                                <input class="form-control" type="password" required="" placeholder="Password" name="administratorUserPassword">
                             </div>
                         </div>
     

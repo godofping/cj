@@ -7,9 +7,9 @@ $res = $db->getResult(); $res = $res[0];
 $onCartQuantity = 0;
 $additionalString = "";
 
-if (isset($_SESSION['customerId'])) {
+if (isset($_SESSION['userId'])) {
 
-$db->select('orders_view', '*', NULL, 'customerId = "' . $_SESSION['customerId']  .'" and orderStatus = "On Cart"');
+$db->select('orders_view', '*', NULL, 'userId = "' . $_SESSION['userId']  .'" and orderStatus = "On Cart"');
 $res1 = $db->getResult(); 
 
 if (!empty($res1)) {
@@ -18,10 +18,14 @@ $res1 = $res1[0];
 $db->select('order_details_view', '*', NULL, 'orderId = "' . $res1['orderId']  .'"');
 $res1 = $db->getResult();
 
+if (!empty($res1)) {
+
 $res1 = $res1[0];
 $onCartQuantity = $res1['quantity'];
 $additionalString = $onCartQuantity . " piece(s) is already on your cart.";
 
+
+}
 }
 
 }
@@ -49,9 +53,9 @@ $additionalString = $onCartQuantity . " piece(s) is already on your cart.";
 
 <!-- ADD TO CART -->
 <li class="col-md-12">
-	<button <?php if (!isset($_SESSION['customerId'])): ?>
+	<button <?php if (!isset($_SESSION['userId'])): ?>
 		data-toggle="tooltip" title="Please login first to add this item to the cart." type="button"
-	<?php endif ?> <?php if (isset($_SESSION['customerId'])): ?>
+	<?php endif ?> <?php if (isset($_SESSION['userId'])): ?>
 		type="submit"
 	<?php endif ?>  class="btn" <?php if ($res['productStock'] == 0): ?>
 		disabled

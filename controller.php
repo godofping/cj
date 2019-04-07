@@ -4,38 +4,38 @@ include('dashboard/connection.php');
 
 if (isset($_GET['from']) and $_GET['from'] == 'login') {
 	
-	$customerEmail = $db->escapeString($_POST['customerEmail']);
-	$customerPassword = $db->escapeString(md5($_POST['customerPassword']));
+	$userEmail = $db->escapeString($_POST['userEmail']);
+	$userPassword = $db->escapeString(md5($_POST['userPassword']));
 
-	$db->select('customers_table', '*', NULL, 'customerEmail = "' . $customerEmail  .'" and customerPassword = "' . $customerPassword . '"');
+	$db->select('users_table', '*', NULL, 'userEmail = "' . $userEmail  .'" and userPassword = "' . $userPassword . '"');
 	$res = $db->getResult();
 
 	if (count($res) > 0) {
 		$res = $res[0];
 		
-		$_SESSION['customerType'] = $res['customerType'];
-		$_SESSION['customerEmail'] = $res['customerEmail'];
-		$_SESSION['customerFirstName'] = $res['customerFirstName'];
-		$_SESSION['customerLastName'] = $res['customerLastName'];
+		$_SESSION['userType'] = $res['userType'];
+		$_SESSION['userEmail'] = $res['userEmail'];
+		$_SESSION['userFirstName'] = $res['userFirstName'];
+		$_SESSION['userLastName'] = $res['userLastName'];
 		$_SESSION['toast'] = 'login-successful';
 
 	
 
-		if ($res['customerFirstName'] == '' and $res['customerLastName'] == '' and $res['customerAddress'] == '' and $res['customerPhoneNumber'] == '' and $res['customerIsBlocked'] == 0) {
+		if ($res['userFirstName'] == '' and $res['userLastName'] == '' and $res['userAddress'] == '' and $res['userPhoneNumber'] == '' and $res['userIsBlocked'] == 0) {
 
-			$_SESSION['customerId'] = $res['customerId'];
+			$_SESSION['userId'] = $res['userId'];
 			header("Location: finish-registration.php");
 
 		}
 		else
 		{
-			if ($res['customerIsBlocked'] == 1) {
+			if ($res['userIsBlocked'] == 1) {
 				$_SESSION['toast'] = 'customer-block';
 				header("Location: login.php?show=login");
 			}
 			else
 			{
-				$_SESSION['customerId'] = $res['customerId'];
+				$_SESSION['userId'] = $res['userId'];
 				header("Location: index.php");
 			}
 		}
@@ -57,13 +57,13 @@ if (isset($_GET['from']) and $_GET['from'] == 'logout') {
 
 if (isset($_GET['from']) and $_GET['from'] == 'update-profile') {
 
-	$fullName = $db->escapeString($_POST['fullName']);
+	$administratorfullName = $db->escapeString($_POST['administratorfullName']);
 
-	$db->update('users_table',
+	$db->update('administrators_table',
 	array(
-		'fullName'=>$fullName,
+		'administratorfullName'=>$administratorfullName,
 		),
-		'userId=' . $_SESSION['userId']
+		'administratorUserId=' . $_SESSION['administratorUserId']
 	);
 
 	$res = $db->getResult();
@@ -77,21 +77,21 @@ if (isset($_GET['from']) and $_GET['from'] == 'update-profile') {
 
 if (isset($_GET['from']) and $_GET['from'] == 'customer-registration') {
 
-	$db->select('customers_view','*',NULL,'customerEmail = "' . $_POST['customerEmail'] . '"', NULL); 
+	$db->select('users_view','*',NULL,'userEmail = "' . $_POST['userEmail'] . '"', NULL); 
 	$res = $db->getResult();
 	
 	if (count($res) == 0) {
-		$customerEmail = $db->escapeString($_POST['customerEmail']);
-		$customerPassword = $db->escapeString(md5($_POST['customerPassword']));
+		$userEmail = $db->escapeString($_POST['userEmail']);
+		$userPassword = $db->escapeString(md5($_POST['userPassword']));
 
 
-		$db->insert('customers_table',
+		$db->insert('users_table',
 		array(
-			'customerEmail'=>$customerEmail,
-			'customerPassword'=>$customerPassword,
-			'customerType'=>'Online',
-			'customerIsBlocked'=>'0',
-			'customerRegistrationDate'=>date('Y-m-d'),
+			'userEmail'=>$userEmail,
+			'userPassword'=>$userPassword,
+			'userType'=>'Online',
+			'userIsBlocked'=>'0',
+			'userRegistrationDate'=>date('Y-m-d'),
 			)
 		);
 
@@ -99,13 +99,13 @@ if (isset($_GET['from']) and $_GET['from'] == 'customer-registration') {
 
 
 		
-		$_SESSION['customerId'] = $res[0];
+		$_SESSION['userId'] = $res[0];
 		$_SESSION['toast'] = 'customer-registration';
 		header("Location: finish-registration.php");
 	}
 	else
 	{
-		$_SESSION['toast'] = 'customerEmail-taken';
+		$_SESSION['toast'] = 'userEmail-taken';
 		header("Location: login.php?show=registration");
 
 	}
@@ -116,26 +116,26 @@ if (isset($_GET['from']) and $_GET['from'] == 'customer-registration') {
 
 if (isset($_GET['from']) and $_GET['from'] == 'update-user') {
 
-	$userName = $db->escapeString($_POST['userName']);
-	$userPassword = $db->escapeString(md5($_POST['userPassword']));
-	$fullName = $db->escapeString($_POST['fullName']);
+	$administratorUserName = $db->escapeString($_POST['administratorUserName']);
+	$administratorUserPassword = $db->escapeString(md5($_POST['administratorUserPassword']));
+	$administratorfullName = $db->escapeString($_POST['administratorfullName']);
 
-	$db->select('users_table','*',NULL,'userId = "' . $_POST['userId'] . '"', NULL); 
+	$db->select('administrators_table','*',NULL,'administratorUserId = "' . $_POST['administratorUserId'] . '"', NULL); 
 	$res = $db->getResult(); $res = $res[0];
 
-	if ($userName != $res['userName']) {
+	if ($administratorUserName != $res['administratorUserName']) {
 
-		$db->select('users_table','*',NULL,'userName = "' . $_POST['userName'] . '"', NULL); 
+		$db->select('administrators_table','*',NULL,'administratorUserName = "' . $_POST['administratorUserName'] . '"', NULL); 
 		$res = $db->getResult();
 		
 		if (count($res) == 0) {
-			$db->update('users_table',
+			$db->update('administrators_table',
 			array(
-				'userName'=>$userName,
-				'userPassword'=>$userPassword,
-				'fullName'=>$fullName,
+				'administratorUserName'=>$administratorUserName,
+				'administratorUserPassword'=>$administratorUserPassword,
+				'administratorfullName'=>$administratorfullName,
 				),
-				'userId=' . $_POST['userId']
+				'administratorUserId=' . $_POST['administratorUserId']
 			);
 
 			$res = $db->getResult();
@@ -145,44 +145,44 @@ if (isset($_GET['from']) and $_GET['from'] == 'update-user') {
 		}
 		else
 		{
-			$_SESSION['toast'] = 'userName-taken';
+			$_SESSION['toast'] = 'administratorUserName-taken';
 		}
 
 	}
 	else
 	{
-		$db->update('users_table',
+		$db->update('administrators_table',
 		array(
-			'userPassword'=>$userPassword,
-			'fullName'=>$fullName,
+			'administratorUserPassword'=>$administratorUserPassword,
+			'administratorfullName'=>$administratorfullName,
 			),
-			'userId=' . $_POST['userId']
+			'administratorUserId=' . $_POST['administratorUserId']
 		);
 
 		$res = $db->getResult();
 		$_SESSION['toast'] = 'update-user';
 	}
 
-	header("Location: update-user.php?userId=".$_POST['userId']."");
+	header("Location: update-user.php?administratorUserId=".$_POST['administratorUserId']."");
 		
 }
 
 
 if (isset($_GET['from']) and $_GET['from'] == 'finish-registration') {
 
-	$customerFirstName = $db->escapeString($_POST['customerFirstName']);
-	$customerLastName = $db->escapeString($_POST['customerLastName']);
-	$customerAddress = $db->escapeString($_POST['customerAddress']);
-	$customerPhoneNumber = $db->escapeString($_POST['customerPhoneNumber']);
+	$userFirstName = $db->escapeString($_POST['userFirstName']);
+	$userLastName = $db->escapeString($_POST['userLastName']);
+	$userAddress = $db->escapeString($_POST['userAddress']);
+	$userPhoneNumber = $db->escapeString($_POST['userPhoneNumber']);
 
-	$db->update('customers_table',
+	$db->update('users_table',
 	array(
-		'customerFirstName'=>$customerFirstName,
-		'customerLastName'=>$customerLastName,
-		'customerAddress'=>$customerAddress,
-		'customerPhoneNumber'=>$customerPhoneNumber,
+		'userFirstName'=>$userFirstName,
+		'userLastName'=>$userLastName,
+		'userAddress'=>$userAddress,
+		'userPhoneNumber'=>$userPhoneNumber,
 		),
-		'customerId=' . $_SESSION['customerId']
+		'userId=' . $_SESSION['userId']
 	);
 
 	$res = $db->getResult();
@@ -195,14 +195,14 @@ if (isset($_GET['from']) and $_GET['from'] == 'finish-registration') {
 
 if (isset($_GET['from']) and $_GET['from'] == 'add-feedback') {
 
-	$customerFeedback = $db->escapeString($_POST['customerFeedback']);
+	$userFeedback = $db->escapeString($_POST['userFeedback']);
 
-	$db->insert('customer_feedbacks_table',
+	$db->insert('user_feedbacks_table',
 	array(
-		'customerFeedback'=>$customerFeedback,
-		'customerFeedbackDate'=>date('Y-m-d'),
-		'customerFeedbackStatus'=>0,
-		'customerId'=>$_SESSION['customerId'],
+		'userFeedback'=>$userFeedback,
+		'userFeedbackDate'=>date('Y-m-d'),
+		'userFeedbackStatus'=>0,
+		'userId'=>$_SESSION['userId'],
 		
 
 		)
@@ -223,7 +223,7 @@ if (isset($_GET['from']) and $_GET['from'] == 'add-cart') {
 	
 
 
-	$db->select('orders_table','count(*) as total',NULL,'customerId = "' . $_SESSION['customerId'] . '" and orderStatus = "On Cart"', NULL); 
+	$db->select('orders_table','count(*) as total',NULL,'userId = "' . $_SESSION['userId'] . '" and orderStatus = "On Cart"', NULL); 
 	$res = $db->getResult(); $res = $res[0];
 
 	if ($res['total'] == 0) {
@@ -232,7 +232,7 @@ if (isset($_GET['from']) and $_GET['from'] == 'add-cart') {
 		array(
 			'orderType'=>'Online',
 			'orderStatus'=>'On Cart',
-			'customerId'=>$_SESSION['customerId'],
+			'userId'=>$_SESSION['userId'],
 			)
 		);
 
@@ -244,7 +244,7 @@ if (isset($_GET['from']) and $_GET['from'] == 'add-cart') {
 	}
 	else
 	{
-		$db->select('orders_table','*',NULL,'customerId = "' . $_SESSION['customerId'] . '" and orderStatus = "On Cart"', NULL); 
+		$db->select('orders_table','*',NULL,'userId = "' . $_SESSION['userId'] . '" and orderStatus = "On Cart"', NULL); 
 		$res = $db->getResult(); $res = $res[0];
 		$orderId = $res['orderId'];
 
@@ -423,7 +423,7 @@ if (isset($_GET['from']) and $_GET['from'] == 'place-order') {
 
 
 
-		$db->select('order_details_view','*',NULL,'customerId = "' . $_SESSION['customerId'] . '" and orderId = "' . $orderId . '" ', NULL); 
+		$db->select('order_details_view','*',NULL,'userId = "' . $_SESSION['userId'] . '" and orderId = "' . $orderId . '" ', NULL); 
 	    $output = $db->getResult();
 	    
 	    
@@ -474,20 +474,20 @@ if (isset($_GET['from']) and $_GET['from'] == 'place-order') {
 
 if (isset($_GET['from']) and $_GET['from'] == 'update-profile') {
 
-	$customerFirstName = $db->escapeString($_POST['customerFirstName']);
-	$customerLastName = $db->escapeString($_POST['customerLastName']);
-	$customerAddress = $db->escapeString($_POST['customerAddress']);
-	$customerPhoneNumber = $db->escapeString($_POST['customerPhoneNumber']);
+	$userFirstName = $db->escapeString($_POST['userFirstName']);
+	$userLastName = $db->escapeString($_POST['userLastName']);
+	$userAddress = $db->escapeString($_POST['userAddress']);
+	$userPhoneNumber = $db->escapeString($_POST['userPhoneNumber']);
 
-		$db->update('customers_table',
+		$db->update('users_table',
 		array(
-			'customerFirstName'=>$customerFirstName,
-			'customerLastName'=>$customerLastName,
-			'customerAddress'=>$customerAddress,
-			'customerPhoneNumber'=>$customerPhoneNumber,
+			'userFirstName'=>$userFirstName,
+			'userLastName'=>$userLastName,
+			'userAddress'=>$userAddress,
+			'userPhoneNumber'=>$userPhoneNumber,
 
 			),
-			'customerId=' . $_SESSION['customerId']
+			'userId=' . $_SESSION['userId']
 		);
 
 		$res = $db->getResult();
@@ -501,15 +501,15 @@ if (isset($_GET['from']) and $_GET['from'] == 'update-password') {
 	$oldPassword = $db->escapeString(md5($_POST['oldPassword']));
 	$newPasssword = $db->escapeString(md5($_POST['newPasssword']));
 	$confirmNewPassword = $db->escapeString(md5($_POST['confirmNewPassword']));
-	$customerPassword = $db->escapeString($_POST['customerPassword']);
+	$userPassword = $db->escapeString($_POST['userPassword']);
 
-	if (($oldPassword == $customerPassword) and ($newPasssword == $confirmNewPassword)) {
-		$db->update('customers_table',
+	if (($oldPassword == $userPassword) and ($newPasssword == $confirmNewPassword)) {
+		$db->update('users_table',
 		array(
-			'customerPassword'=>$newPasssword,
+			'userPassword'=>$newPasssword,
 
 			),
-			'customerId=' . $_SESSION['customerId']
+			'userId=' . $_SESSION['userId']
 		);
 
 		$res = $db->getResult();
@@ -590,7 +590,7 @@ if (isset($_GET['from']) and $_GET['from'] == 'add-review') {
 	$productVariationId = $db->escapeString($_GET['productVariationId']);
 	$productReview = $db->escapeString($_POST['productReview']);
 	$productReviewDate = $db->escapeString(date('Y-m-d'));
-	$customerId = $db->escapeString($_SESSION['customerId']);
+	$userId = $db->escapeString($_SESSION['userId']);
 
 
 	$db->insert('product_reviews_table',
@@ -598,7 +598,7 @@ if (isset($_GET['from']) and $_GET['from'] == 'add-review') {
 		'productVariationId'=>$productVariationId,
 		'productReview'=>$productReview,
 		'productReviewDate'=>$productReviewDate,
-		'customerId'=>$customerId,
+		'userId'=>$userId,
 		)
 	);
 
