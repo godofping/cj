@@ -32,13 +32,13 @@ if ($res['customerIsBlocked'] == 1 and isset($_SESSION['customerId']) and $filen
 <title>CJ-Ashley Fashion Hub</title>
 <link rel="icon" type="image/png" sizes="16x16" href="dashboard/etc/logo.jpg">
 
-<!-- SLIDER REVOLUTION 4.x CSS SETTINGS -->
+
 <link rel="stylesheet" type="text/css" href="rs-plugin/css/settings.css" media="screen" />
 
-<!-- Bootstrap Core CSS -->
+
 <link href="css/bootstrap.min.css" rel="stylesheet">
 
-<!-- Custom CSS -->
+
 <link href="css/font-awesome.min.css" rel="stylesheet" type="text/css">
 <link href="css/ionicons.min.css" rel="stylesheet">
 <link href="css/main.css" rel="stylesheet">
@@ -46,33 +46,27 @@ if ($res['customerIsBlocked'] == 1 and isset($_SESSION['customerId']) and $filen
 <link href="css/responsive.css" rel="stylesheet">
 <link href="font/flaticon.css" rel="stylesheet">
 
-<!-- JavaScripts -->
+
 <script src="js/modernizr.js"></script>
 
-<!-- Online Fonts -->
+
 <link href="https://fonts.googleapis.com/css?family=Merriweather:300,400,700,900|Poppins:300,400,500,600,700|Montserrat:300,400,500,600,700,800" rel="stylesheet">
 
-<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-<!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-<![endif]-->
 
 </head>
 <body>
 
-<!-- LOADER -->
+
 <div id="loader">
   <div class="position-center-center">
     <div class="ldr"></div>
   </div>
 </div>
 
-<!-- Wrap -->
+
 <div id="wrap"> 
   
-  <!-- TOP Bar -->
+
   <div class="top-bar">
     <div class="container-full">
       <p><i class="icon-envelope"></i> cjashley@gmail.com </p>
@@ -82,12 +76,12 @@ if ($res['customerIsBlocked'] == 1 and isset($_SESSION['customerId']) and $filen
     </div>
   </div>
   
-  <!-- header -->
+
   <header>
     <div class="sticky">
       <div class="container-full"> 
         
-        <!-- Logo -->
+     
         <div class="logo"> <a href="index.php"><img class="img-responsive" height="30px" src="images/logo.jpg" alt="" ></a> </div>
         <nav class="navbar ownmenu navbar-expand-lg ">
           <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"> <span></span> </button>
@@ -145,7 +139,7 @@ if ($res['customerIsBlocked'] == 1 and isset($_SESSION['customerId']) and $filen
 
 
           <?php if (isset($_SESSION['customerId'])): ?>
-            <!-- Nav Right -->
+    
             <div class="nav-right">
                 <ul class="navbar-right">
 
@@ -173,7 +167,7 @@ if ($res['customerIsBlocked'] == 1 and isset($_SESSION['customerId']) and $filen
                     }
 
                   ?>
-                  <!-- USER BASKET -->
+        
                   <li> <a href="shopping-cart.php"><span class="c-no"><?php echo $total; ?></span><i class="lnr lnr-cart"></i> </a> </li>
        
 

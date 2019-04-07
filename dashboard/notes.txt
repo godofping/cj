@@ -51,7 +51,6 @@ reports
 	reviews
 	feedback
 if cancelled ibalik ang items sa may inventory
-add confirm pickup date, resched
 backup and restore
 over due
 customers
@@ -65,6 +64,7 @@ customers
 	schedule of order
 
 
-..remove middle name on users
+//staff recieve payment. recorded
+
 
 

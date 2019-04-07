@@ -235,7 +235,7 @@ $res = $db->getResult(); $res = $res[0];
                                 <thead>
                                     <tr>
                                         <th>Amount (₱)</th>
-                                        <th>Reciept</th>
+                                        <th>Receipt</th>
                                         <th>Remittance Center</th>
                                         <th>Control Number</th>
                                         <th>Transaction Date</th>

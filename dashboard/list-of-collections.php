@@ -50,7 +50,7 @@ $period = $_GET['period'];
                             <thead>
                                 <tr>
                                     <th>Amount (₱)</th>
-                                    <th class="noExport">Reciept</th>
+                                    <th class="noExport">Receipt</th>
                                     <th>Remittance Center</th>
                                     <th>Control Number</th>
                                     <th>Transaction Date</th>

@@ -190,6 +190,9 @@ $orderStatus = $res['orderStatus'];
                     <input type="text" name="sum" value="<?php echo $sum ?>" hidden>
 
                   </div>
+                  <div class="col-md-12">
+                      <a target="_blank" href="print-acknowledgement-receipt.php?orderId=<?php echo base64_encode($res['orderId']) ?>"><button type="button" class="btn btn-dark pull-right ">Print Acknowledgement Receipt</button></a>
+                    </div>
 
                 </div>
 
@@ -251,7 +254,7 @@ $orderStatus = $res['orderStatus'];
                           </li>
 
                           <li class="col-sm-6">
-                            <label>Reciept Image *
+                            <label>Receipt Image *
                               <input  style="border:none;" type="file" class="form-control" name="paymentRecieptImage" id="paymentRecieptImage" placeholder="" required="" >
                             </label>
                           </li>
@@ -276,7 +279,7 @@ $orderStatus = $res['orderStatus'];
                           <tr>
 
                             <th scope="col">Amount</th>
-                            <th scope="col">Reciept</th>
+                            <th scope="col">Receipt</th>
                             <th></th>
                             <th scope="col">Remittance Center</th>
                             <th scope="col">Control Number</th>
@@ -322,16 +325,16 @@ $orderStatus = $res['orderStatus'];
                         </tbody>
                       </table>
                       </div>
-
-                     
                     </div>
+
                   </div>
 
- 
-                </div>
-              </div>
 
-            
+
+  
+                </div>
+
+              </div>
 
             </div>
           </div>

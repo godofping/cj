@@ -1,8 +1,8 @@
-<!-- FOOTER -->
+
   <footer>
     <div class="container">
         <div class="row"> 
-          <!-- ABOUT Location -->
+
           <div class="col-md-4">
             <div class="about-footer"> <img class="margin-bottom-30" height="150" src="images/logo.jpg" alt="" >
               <p><i class="icon-pointer"></i> Bendero Bldg, Nat’l Highway, Tacurong City, Sultan Kudarat  <br>
@@ -12,7 +12,7 @@
             </div>
           </div>
           
-          <!-- HELPFUL LINKS -->
+
           <div class="col-md-5">
             <h6>Links</h6>
             <ul class="link two-half">
@@ -31,7 +31,7 @@
             </ul>
           </div>
           
-          <!-- HELPFUL LINKS -->
+   
           <div class="col-md-3">
             <?php if (isset($_SESSION['customerId'])): ?>
             <h6>My Account</h6>
@@ -45,7 +45,7 @@
           </div>
         </div>
       </div>
-    <!-- Rights -->
+
     <div class="rights">
       <div class="container">
         <div class="row">

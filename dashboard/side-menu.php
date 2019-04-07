@@ -100,7 +100,7 @@
                                 <li><a href="#.php" class="<?php if ($filename == 's'): ?>active<?php endif ?>">List of Re-order Point</a></li>
                                 <li><a href="#.php" class="<?php if ($filename == 's'): ?>active<?php endif ?>">List of Stock-in</a></li>
                                 <li><a href="#.php" class="<?php if ($filename == 's'): ?>active<?php endif ?>">List of Stock-out</a></li>
-                                <li><a href="#.php" class="<?php if ($filename == 's'): ?>active<?php endif ?>">List of Acknowledgement Reciept</a></li>
+                                <li><a href="#.php" class="<?php if ($filename == 's'): ?>active<?php endif ?>">List of Acknowledgement Receipt</a></li>
                                 <li><a href="#.php" class="<?php if ($filename == 's'): ?>active<?php endif ?>">Reviews</a></li>
                                 <li><a href="feedbacks.php" class="<?php if ($filename == 'feedbacks'): ?>active<?php endif ?>">Feedbacks</a></li>
                                 
