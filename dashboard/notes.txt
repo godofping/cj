@@ -35,7 +35,6 @@ s3 - color - red - capacity - 64
 
 ----kulang----
 notifications
-reciepts
 reports
 	list of customers
 	list of collection
@@ -54,19 +53,18 @@ if cancelled ibalik ang items sa may inventory
 backup and restore
 over due
 customers
+	accounts
+	feedbacks
 	reviews
 	list of customers with action
-	update customer
 
 //notifications
 	all transaction sa order
 	all transaction sa payment
 	schedule of order
+	reorder point
 
 
 //si customer na staff.
-
-
-
 
 

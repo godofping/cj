@@ -102,7 +102,17 @@ $res = $db->getResult(); $res = $res[0];
 
                         <?php if ($res['orderStatus'] == 'Pending Approval' and $res['customerIsBlocked'] == 0): ?>
 
+                        <?php if ($res['orderPaymentStatus'] == 'Paid'): ?>
+
                         <a onclick = "return confirm('Are you sure want to confirm this order?')" href="controller.php?from=confirm-order&orderId=<?php echo $res['orderId'] ?>"><button type="button" class="btn btn-info waves-effect waves-light m-r-10 pull-right">Confirm Order</button></a>  
+                       
+                        <?php endif ?>
+
+                        <?php if ($res['orderPaymentStatus'] == 'Unpaid'): ?>
+
+                        <button type="button" class="btn btn-info waves-effect waves-light m-r-10 pull-right" data-toggle="tooltip" title="Order payment status is unpaid. Please make sure it is paid before confirming the order.">Confirm Order</button>  
+                       
+                        <?php endif ?>
                         
                         <a onclick = "return confirm('Are you sure want to cancel this order?')" href="controller.php?from=cancel-order&orderId=<?php echo $res['orderId'] ?>"><button  type="button" class="btn btn-warning waves-effect waves-light m-r-10 pull-right">Cancel Order</button></a>  
                         
@@ -285,7 +295,19 @@ $res = $db->getResult(); $res = $res[0];
                             </table>
                         </div>
 
-                        <h3 class="float-right">Total:<b> ₱<?php echo number_format($res['orderTotalAmount'], 2); ?></b></h3>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h3 class="float-right">Total:<b> ₱<?php echo number_format($res['orderTotalAmount'], 2); ?></b></h3>
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <a target="_blank" href="../print-acknowledgement-receipt.php?orderId=<?php echo base64_encode($res['orderId']); ?>&customerId=<?php echo $res['customerId'] ?>&admin=yes"><button type="button" class="btn btn-dark pull-right ">Print Acknowledgement Receipt</button></a>
+                            </div>
+                        </div>
+
 
                     </div>
                 </div>

@@ -1,25 +1,33 @@
 <?php
 include('dashboard/connection.php');
-$filename = basename($_SERVER["SCRIPT_FILENAME"], '.php');
-
-if ($filename != "finish-registration" and isset($_SESSION['customerId'])) {
-  $db->select('customers_table','*',NULL,'customerId = "' . $_SESSION['customerId'] . '"', NULL); 
-  $res = $db->getResult(); $res = $res[0];
-
-  if ($res['customerFirstName'] == '' and $res['customerLastName'] == '' and $res['customerAddress'] == '' and $res['customerPhoneNumber'] == '') { ?>
-     <script type="text/javascript">window.location.replace("finish-registration.php");</script>
-  <?php }
 
 
+if (!isset($_GET['admin'])) {
+	$filename = basename($_SERVER["SCRIPT_FILENAME"], '.php');
+	if ($filename != "finish-registration" and isset($_SESSION['customerId'])) {
+	  $db->select('customers_table','*',NULL,'customerId = "' . $_SESSION['customerId'] . '"', NULL); 
+	  $res = $db->getResult(); $res = $res[0];
 
-if ($res['customerIsBlocked'] == 1 and isset($_SESSION['customerId']) and $filename <> "login") {
-  echo '<script type="text/javascript">window.location.replace("controller.php?from=logout");</script>';
+	  if ($res['customerFirstName'] == '' and $res['customerLastName'] == '' and $res['customerAddress'] == '' and $res['customerPhoneNumber'] == '') { ?>
+	     <script type="text/javascript">window.location.replace("finish-registration.php");</script>
+	<?php }
+
+
+
+	if ($res['customerIsBlocked'] == 1 and isset($_SESSION['customerId']) and $filename <> "login") {
+	  echo '<script type="text/javascript">window.location.replace("controller.php?from=logout");</script>';
+	}
+	else{
+		$db->select('customers_table','*',NULL,'customerId = "' . $_SESSION['customerId'] . '"', NULL); 
+	  	$res = $db->getResult(); $res = $res[0];
+
+	}
+	}
 }
-else{
-	$db->select('customers_table','*',NULL,'customerId = "' . $_SESSION['customerId'] . '"', NULL); 
-  	$res = $db->getResult(); $res = $res[0];
-
-}
+else
+{
+	$db->select('customers_table','*',NULL,'customerId = "' . $_GET['customerId'] . '"', NULL); 
+	$res = $db->getResult(); $res = $res[0];
 }
 
 

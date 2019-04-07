@@ -52,6 +52,17 @@ $orderStatus = $res['orderStatus'];
    
             <?php endif ?>
 
+         
+
+            <?php if ($res['orderStatus'] != 'Pending Approval'): ?>
+              
+            <div class="col-md-12">
+             <button type="button" class="btn btn-dark pull-left margin-bottom-30" data-toggle="tooltip" title="You can't cancel this order.">Cancel Order</button>
+            </div>
+
+   
+            <?php endif ?>
+
               <div class="col-sm-5">
 
               	<h6>Order Information</h6>
@@ -224,7 +235,7 @@ $orderStatus = $res['orderStatus'];
 
                       <div class="pay-meth">
 
-                      <?php if ($orderPaymentStatus == 'Unpaid' and $orderModeOfPayment == 'Remittance' and $orderStatus == 'Confirmed'): ?>
+                      <?php if ($orderPaymentStatus == 'Unpaid' and $orderModeOfPayment == 'Remittance' and $orderStatus == 'Pending Approval'): ?>
                       <label class="margin-top-50">Payment Form</label>
 
                       <?php if (isset($_SESSION['toast']) and $_SESSION['toast'] == 'payment-sent'): ?>
@@ -347,3 +358,9 @@ $orderStatus = $res['orderStatus'];
 
   
 <?php include('footer.php'); ?>
+
+<script type="text/javascript">
+  $(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+})
+</script>

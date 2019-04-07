@@ -835,6 +835,7 @@ if (isset($_GET['from']) and $_GET['from'] == 'recieve-payment') {
 	$orderId = $db->escapeString($_GET['orderId']);
 	$paymentId = $db->escapeString($_GET['paymentId']);
 	$paymentStatus = $db->escapeString("Recieved");
+	$nameOfRemmitanceCenter = $db->escapeString("Paid over the counter");
 	$orderPaymentStatus = $db->escapeString("Paid");
 
 
