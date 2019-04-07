@@ -64,7 +64,9 @@ customers
 	schedule of order
 
 
-//staff recieve payment. recorded
+//si customer na staff.
+
+
 
 
 
