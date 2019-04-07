@@ -19,10 +19,10 @@
  */
  
 // DB table to use
-$table = 'customers_view';
+$table = 'payments_view';
  
 // Table's primary key
-$primaryKey = 'customerId';
+$primaryKey = 'paymentId';
  
 // Array of database columns which should be read and sent back to DataTables.
 // The `db` parameter represents the column name in the database, while the `dt`
@@ -32,15 +32,27 @@ $primaryKey = 'customerId';
 
 $columns = array(
 
-    array( 'db' => 'customerId',   'dt' => 0 ),
-    array( 'db' => 'customerEmail',   'dt' => 1 ),
-    array( 'db' => 'customerPhoneNumber',   'dt' => 2 ),
-    array( 'db' => 'customerAddress',   'dt' => 3 ),
-    array( 'db' => 'customerRegistrationDate',   'dt' => 4,'formatter' => function( $d, $row ) {
-        return date('F d, Y', strtotime($d));
+    array( 'db' => 'paymentAmount',   'dt' => 0, 'formatter' => function( $d, $row ) {
+        return '₱' . number_format($d, 2);
+    } ),
+    array( 'db' => 'paymentRecieptImage',   'dt' => 1, 'formatter' => function( $d, $row ) {
+
+        if ($d == '') {
+            return '';
+        }else{
+        return '<a target="_blank" href="../paymentImages/'. $d .'"><img src="../paymentImages/' . $d . '" class="img-thumbnail" style="height: 80px"></a>';
+        }
+    } ),
+    array( 'db' => 'nameOfRemmitanceCenter',   'dt' => 2 ),
+    array( 'db' => 'controlNumber',   'dt' => 3 ),
+    array( 'db' => 'paymentTransactionDate',   'dt' => 4, 'formatter' => function( $d, $row ) {
+        return date('F d, Y g:i A', strtotime($d));
     } ),
 
-    // <a class = "btn btn-warning btn-xs" href="view-product.php?customerId=' . $row['customerId'] . '">View</a>
+    
+
+    
+
   
 );
  
@@ -59,7 +71,7 @@ $sql_details = array(
 
    require( 'ssp.class.php' );
     echo json_encode(
-    SSP::complex( $_POST, $sql_details, $table, $primaryKey, $columns, 'customerType = "Online"' )
+    SSP::complex( $_POST, $sql_details, $table, $primaryKey, $columns)
 );
 
 

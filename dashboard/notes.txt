@@ -26,10 +26,14 @@ s3 - color - red - capacity - 64
 	//Recieved - payment recieved and confirmed
 	//Invalid - payment is invalid
 
+//orderIsReschedule
+	//0 - pending 
+	//1 - confirm
+	//2 - resched
+
 
 
 ----kulang----
-order confirm pickup date
 notifications
 reciepts
 reports
@@ -50,5 +54,17 @@ if cancelled ibalik ang items sa may inventory
 add confirm pickup date, resched
 backup and restore
 over due
+customers
+	reviews
+	list of customers with action
+	update customer
+
+//notifications
+	all transaction sa order
+	all transaction sa payment
+	schedule of order
+
+
+..remove middle name on users
 
 

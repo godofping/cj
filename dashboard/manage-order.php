@@ -53,7 +53,40 @@ $res = $db->getResult(); $res = $res[0];
 
                         <?php if ($res['orderDeliveryMethod'] == 'Pick Up'): ?>
 
-                        <p>Schedule of Pick Up: <b><?php echo date('F d, Y', strtotime($res['orderShippingArrivalOrPickupDate'])); ?></b></p>
+                        <p>Schedule of Pick Up: <b><?php echo date('F d, Y', strtotime($res['orderPickupDate'])); ?></b></p>
+
+                        <?php if ($res['orderStatus'] == 'Confirmed' and $res['orderIsReschedule'] == 0): ?>
+
+                        <hr>
+
+                        
+                        <form class="form-material" method="POST" action="controller.php?from=reschedule-pick-up-date&orderId=<?php echo $res['orderId'] ?>" autocomplete="off">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Reschedule Date</label>
+                                    <input class="form-control" required="" type="date" name="orderPickupDate" min="<?php echo date('Y-m-d') ?>" value="">
+                                </div>
+
+                            </div>
+                        </div>
+                        
+
+                        <div class="row">
+                            <div class="col-md-12">
+
+                                <button onclick = "return confirm('Are you sure want to reschedule the pick up date of this order?')" type="submit" class="btn btn-warning waves-effect waves-light m-r-10 pull-left">Reschedule Pick Up Date</button> 
+
+                                <a onclick = "return confirm('Are you sure want to confirm the pick up date of this order?')" href="controller.php?from=confirm-pick-up-date-order&orderId=<?php echo $res['orderId'] ?>"><button type="button" class="btn btn-info waves-effect waves-light m-r-10 pull-right">Confirm Pick Up Date</button></a>
+
+                            </div>
+                        </div>
+
+                        </form>
+
+                        <hr>
+
+                        <?php endif ?>
                         
                         <?php endif ?>
 
@@ -78,7 +111,7 @@ $res = $db->getResult(); $res = $res[0];
 
                         <?php if ($res['orderStatus'] != 'Pending Approval' and $res['customerIsBlocked'] == 0): ?>
                         
-                        <form method="POST" autocomplete="off" action="controller.php?from=save-remark&orderId=<?php echo $res['orderId'] ?>">
+                        <form method="POST" class="form-material" autocomplete="off" action="controller.php?from=save-remark&orderId=<?php echo $res['orderId'] ?>">
 
                         <div class="row">
                             <div class="col-md-12">
@@ -95,11 +128,19 @@ $res = $db->getResult(); $res = $res[0];
 
                         <?php if ($res['orderStatus'] == 'Confirmed'): ?>
 
-                            <?php if ($res['orderPaymentStatus'] == 'Unpaid'): ?>
+                            <?php if ($res['orderPaymentStatus'] == 'Unpaid' and $res['orderIsReschedule'] == 0): ?>
+                                <button type="button" class="btn btn-info waves-effect waves-light m-r-10 pull-right" data-toggle="tooltip" title="You can't finish the order unless the pick up date is confirmed or rescheduled and the customer full paid the order.">Finish Order</button>
+                            <?php endif ?>
+
+                            <?php if ($res['orderPaymentStatus'] == 'Unpaid' and $res['orderIsReschedule'] != 0): ?>
                                 <button type="button" class="btn btn-info waves-effect waves-light m-r-10 pull-right" data-toggle="tooltip" title="You can't finish the order unless the customer full paid the order.">Finish Order</button>
                             <?php endif ?>
 
-                            <?php if ($res['orderPaymentStatus'] == 'Paid'): ?>
+                            <?php if ($res['orderPaymentStatus'] == 'Paid' and $res['orderIsReschedule'] == 0): ?>
+                                <button type="button" class="btn btn-info waves-effect waves-light m-r-10 pull-right" data-toggle="tooltip" title="You can't finish the order unless the pick up date is confirmed or rescheduled.">Finish Order</button>
+                            <?php endif ?>
+
+                            <?php if ($res['orderPaymentStatus'] == 'Paid' and $res['orderIsReschedule'] != 0): ?>
                                 <a onclick = "return confirm('Are you sure want to finish this order?')" href="controller.php?from=finish-order&orderId=<?php echo $res['orderId'] ?>"><button type="button" class="btn btn-info waves-effect waves-light m-r-10 pull-right">Finish Order</button></a>
                             <?php endif ?>
 
@@ -178,7 +219,7 @@ $res = $db->getResult(); $res = $res[0];
 
                         <div class="row">
                             <div class="col-md-12">
-                                <button type="submit" class="btn btn-success waves-effect waves-light m-r-10 pull-right">Save Payment</button>
+                                <button onclick = "return confirm('Are you sure want to save the payment?')" type="submit" class="btn btn-success waves-effect waves-light m-r-10 pull-right">Save Payment</button>
                             </div>
                         </div>
 

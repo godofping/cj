@@ -85,7 +85,13 @@
                             <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-note-text"></i><span class="hide-menu">Reports</span></a>
                             <ul aria-expanded="false" class="collapse">
                                 <li><a href="list-of-customers.php" class="<?php if ($filename == 'list-of-customers'): ?>active<?php endif ?>">List of Customers</a></li>
-                                <li><a href="#.php" class="<?php if ($filename == 's'): ?>active<?php endif ?>">List of Collection</a></li>
+                                <li> <a class="<?php if ($filename == 'list-of-collections'): ?>active<?php endif ?> has-arrow" href="#" aria-expanded="false">List of Collections</a>
+                                    <ul aria-expanded="false" class="collapse">
+                                        <li><a href="list-of-collections.php?period=Daily">Daily</a></li>
+                                        <li><a href="list-of-collections.php?period=Weekly">Weekly</a></li>
+                                        <li><a href="list-of-collections.php?period=Monthly">Monthly</a></li>
+                                    </ul>
+                                </li>
                                 <li><a href="#.php" class="<?php if ($filename == 's'): ?>active<?php endif ?>">List of Orders</a></li>
                                 <li><a href="#.php" class="<?php if ($filename == 's'): ?>active<?php endif ?>">List of Cancelled Orders</a></li>
                                 <li><a href="#.php" class="<?php if ($filename == 's'): ?>active<?php endif ?>">List of Over Due</a></li>

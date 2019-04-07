@@ -486,6 +486,30 @@
             });
         <?php endif?>
 
+        <?php if (isset($_SESSION['toast']) and $_SESSION['toast'] == 'confirm-pick-up-date-order'): ?>
+            $.toast({
+              heading: 'SUCCESSFULLY UPDATED',
+              text: 'Pick Up Date Confirmed!',
+              position: 'top-center',
+              loaderBg:'#ff6849',
+              icon: 'success',
+              hideAfter: 5000, 
+              stack: 6
+            });
+        <?php endif?>
+
+        <?php if (isset($_SESSION['toast']) and $_SESSION['toast'] == 'reschedule-pick-up-date'): ?>
+            $.toast({
+              heading: 'SUCCESSFULLY RESCHEDULED',
+              text: 'Pick Up Date Rescheduled!',
+              position: 'top-center',
+              loaderBg:'#ff6849',
+              icon: 'success',
+              hideAfter: 5000, 
+              stack: 6
+            });
+        <?php endif?>
+
 
 
     </script>

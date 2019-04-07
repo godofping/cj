@@ -406,12 +406,12 @@ if (isset($_GET['from']) and $_GET['from'] == 'place-order') {
 
 
 	} elseif ($orderDeliveryMethod == 'Pick Up') {
-		$orderShippingArrivalOrPickupDate = $db->escapeString($_POST['orderShippingArrivalOrPickupDate']);
+		$orderPickupDate = $db->escapeString($_POST['orderPickupDate']);
 
 		$db->update('orders_table',
 		array(
 			'orderDeliveryMethod'=>$orderDeliveryMethod,
-			'orderShippingArrivalOrPickupDate'=>$orderShippingArrivalOrPickupDate,
+			'orderPickupDate'=>$orderPickupDate,
 
 			),
 			'orderId=' . $orderId

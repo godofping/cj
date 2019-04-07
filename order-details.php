@@ -62,7 +62,7 @@ $orderStatus = $res['orderStatus'];
 
           			<?php if ($res['orderDeliveryMethod'] == 'Pick Up'): ?>
 
-                  <h5>Schedule of Pick Up: <b><?php echo date('F d, Y', strtotime($res['orderShippingArrivalOrPickupDate'])); ?></b></h5>
+                  <h5>Schedule of Pick Up: <b><?php echo date('F d, Y', strtotime($res['orderPickupDate'])); ?></b></h5>
                     
                 <?php endif ?>
 

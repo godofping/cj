@@ -922,5 +922,51 @@ if (isset($_GET['from']) and $_GET['from'] == 'add-payment') {
 }
 
 
+if (isset($_GET['from']) and $_GET['from'] == 'confirm-pick-up-date-order') {
+
+	$orderIsReschedule = $db->escapeString(1);
+
+	$db->update('orders_table',
+	array(
+		'orderIsReschedule'=>$orderIsReschedule,
+		),
+		'orderId=' . $_GET['orderId']
+	);
+
+	$res = $db->getResult();
+
+
+	header("Location: manage-order.php?orderId=".$_GET['orderId']);
+	$_SESSION['toast'] = 'confirm-pick-up-date-order';
+
+}
+
+
+if (isset($_GET['from']) and $_GET['from'] == 'reschedule-pick-up-date') {
+
+	$orderPickupDate = $db->escapeString($_POST['orderPickupDate']);
+	$orderIsReschedule = $db->escapeString(2);
+
+	$db->update('orders_table',
+	array(
+		'orderPickupDate'=>$orderPickupDate,
+		'orderIsReschedule'=>$orderIsReschedule,
+		
+		),
+		'orderId=' . $_GET['orderId']
+	);
+
+	$res = $db->getResult();
+
+
+	header("Location: manage-order.php?orderId=".$_GET['orderId']);
+	$_SESSION['toast'] = 'reschedule-pick-up-date';
+
+}
+
+
+
+
+
 
 ?>
