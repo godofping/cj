@@ -752,12 +752,33 @@ if (isset($_GET['from']) and $_GET['from'] == 'unblock-customer') {
 if (isset($_GET['from']) and $_GET['from'] == 'confirm-order') {
 
 	$orderStatus = $db->escapeString("Confirmed");
-
+	$orderId = $db->escapeString($_GET['orderId']);
+	$userId = $db->escapeString($_GET['userId']);
+	$notificationMessage = $db->escapeString("Order number " . $orderId . " was confirmed.");
+	$notificationDateTime = $db->escapeString(date('Y-m-d H:i:s'));
+	$notificationIsRead = $db->escapeString(0);
+	
+	
+	
 	$db->update('orders_table',
 	array(
 		'orderStatus'=>$orderStatus,
 		),
-		'orderId=' . $_GET['orderId']
+		'orderId=' . $orderId
+	);
+
+	$res = $db->getResult();
+
+
+	$db->insert('notifications_table',
+	array(
+		'userId'=>$userId,
+		'notificationMessage'=>$notificationMessage,
+		'notificationDateTime'=>$notificationDateTime,
+		'notificationIsRead'=>$notificationIsRead,
+		'orderId'=>$orderId,
+
+		)
 	);
 
 	$res = $db->getResult();
@@ -774,6 +795,11 @@ if (isset($_GET['from']) and $_GET['from'] == 'cancel-order') {
 	$orderStatus = $db->escapeString("Cancelled");
 	$orderId = $db->escapeString($_GET['orderId']);
 
+	$userId = $db->escapeString($_GET['userId']);
+	$notificationMessage = $db->escapeString("Order number " . $orderId . " was cancelled.");
+	$notificationDateTime = $db->escapeString(date('Y-m-d H:i:s'));
+	$notificationIsRead = $db->escapeString(0);
+
 	$db->update('orders_table',
 	array(
 		'orderStatus'=>$orderStatus,
@@ -782,6 +808,23 @@ if (isset($_GET['from']) and $_GET['from'] == 'cancel-order') {
 	);
 
 	$res = $db->getResult();
+
+
+	$db->insert('notifications_table',
+	array(
+		'userId'=>$userId,
+		'notificationMessage'=>$notificationMessage,
+		'notificationDateTime'=>$notificationDateTime,
+		'notificationIsRead'=>$notificationIsRead,
+		'orderId'=>$orderId,
+
+		)
+	);
+
+	$res = $db->getResult();
+
+
+
 
 	$db->select('order_details_view','*',NULL,'orderId = "' . $orderId . '"', NULL); 
 	$output = $db->getResult();
@@ -830,18 +873,33 @@ if (isset($_GET['from']) and $_GET['from'] == 'cancel-order') {
 if (isset($_GET['from']) and $_GET['from'] == 'finish-order') {
 
 	$orderStatus = $db->escapeString("Finished");
+	$orderId = $db->escapeString($_GET['orderId']);
+	
+	$userId = $db->escapeString($_GET['userId']);
+	$notificationMessage = $db->escapeString("Order number " . $orderId . " was finished.");
+	$notificationDateTime = $db->escapeString(date('Y-m-d H:i:s'));
+	$notificationIsRead = $db->escapeString(0);
 
 	$db->update('orders_table',
 	array(
 		'orderStatus'=>$orderStatus,
 		),
-		'orderId=' . $_GET['orderId']
+		'orderId=' . $orderId
 	);
 
-	$res = $db->getResult();
+	$db->insert('notifications_table',
+	array(
+		'userId'=>$userId,
+		'notificationMessage'=>$notificationMessage,
+		'notificationDateTime'=>$notificationDateTime,
+		'notificationIsRead'=>$notificationIsRead,
+		'orderId'=>$orderId,
+
+		)
+	);
 
 
-	header("Location: manage-order.php?orderId=".$_GET['orderId']);
+	header("Location: manage-order.php?orderId=".$orderId);
 	$_SESSION['toast'] = 'finish-order';
 
 }
@@ -874,6 +932,11 @@ if (isset($_GET['from']) and $_GET['from'] == 'recieve-payment') {
 	$nameOfRemmitanceCenter = $db->escapeString("Paid over the counter");
 	$orderPaymentStatus = $db->escapeString("Paid");
 
+	$userId = $db->escapeString($_GET['userId']);
+	$notificationMessage = $db->escapeString("Order number " . $orderId . " payment was recieved.");
+	$notificationDateTime = $db->escapeString(date('Y-m-d H:i:s'));
+	$notificationIsRead = $db->escapeString(0);
+
 
 	$db->update('payments_table',
 	array(
@@ -882,7 +945,7 @@ if (isset($_GET['from']) and $_GET['from'] == 'recieve-payment') {
 		'paymentId=' . $paymentId
 	);
 
-	$res = $db->getResult();
+
 
 	$db->update('orders_table',
 	array(
@@ -891,7 +954,17 @@ if (isset($_GET['from']) and $_GET['from'] == 'recieve-payment') {
 		'orderId=' . $orderId
 	);
 
-	$res = $db->getResult();
+
+	$db->insert('notifications_table',
+	array(
+		'userId'=>$userId,
+		'notificationMessage'=>$notificationMessage,
+		'notificationDateTime'=>$notificationDateTime,
+		'notificationIsRead'=>$notificationIsRead,
+		'orderId'=>$orderId,
+
+		)
+	);
 
 
 	header("Location: manage-order.php?orderId=".$orderId);
@@ -905,6 +978,11 @@ if (isset($_GET['from']) and $_GET['from'] == 'invalid-payment') {
 	$paymentId = $db->escapeString($_GET['paymentId']);
 	$paymentStatus = $db->escapeString("Invalid");
 
+	$userId = $db->escapeString($_GET['userId']);
+	$notificationMessage = $db->escapeString("Order number " . $orderId . " payment was invalid.");
+	$notificationDateTime = $db->escapeString(date('Y-m-d H:i:s'));
+	$notificationIsRead = $db->escapeString(0);
+
 
 	$db->update('payments_table',
 	array(
@@ -913,8 +991,18 @@ if (isset($_GET['from']) and $_GET['from'] == 'invalid-payment') {
 		'paymentId=' . $paymentId
 	);
 
-	$res = $db->getResult();
 
+	$db->insert('notifications_table',
+	array(
+		'userId'=>$userId,
+		'notificationMessage'=>$notificationMessage,
+		'notificationDateTime'=>$notificationDateTime,
+		'notificationIsRead'=>$notificationIsRead,
+		'orderId'=>$orderId,
+
+		)
+	);
+	
 
 	header("Location: manage-order.php?orderId=".$orderId);
 	$_SESSION['toast'] = 'invalid-payment';
@@ -928,8 +1016,13 @@ if (isset($_GET['from']) and $_GET['from'] == 'add-payment') {
 	$orderId = $db->escapeString($_GET['orderId']);
 	$paymentTransactionDate = $db->escapeString(date('Y-m-d H:i:s'));
 	$paymentStatus = $db->escapeString("Recieved");
-
 	$orderPaymentStatus = $db->escapeString("Paid");
+
+	$userId = $db->escapeString($_GET['userId']);
+	$notificationMessage = $db->escapeString("Order number " . $orderId . " payment was recieved.");
+	$notificationDateTime = $db->escapeString(date('Y-m-d H:i:s'));
+	$notificationIsRead = $db->escapeString(0);
+
 	
 
 	$db->insert('payments_table',
@@ -942,8 +1035,6 @@ if (isset($_GET['from']) and $_GET['from'] == 'add-payment') {
 		)
 	);
 
-	$res = $db->getResult();
-
 
 	$db->update('orders_table',
 	array(
@@ -952,7 +1043,18 @@ if (isset($_GET['from']) and $_GET['from'] == 'add-payment') {
 		'orderId=' . $orderId
 	);
 
-	$res = $db->getResult();
+
+	$db->insert('notifications_table',
+	array(
+		'userId'=>$userId,
+		'notificationMessage'=>$notificationMessage,
+		'notificationDateTime'=>$notificationDateTime,
+		'notificationIsRead'=>$notificationIsRead,
+		'orderId'=>$orderId,
+
+		)
+	);
+
 
 	header("Location: manage-order.php?orderId=".$orderId);
 	$_SESSION['toast'] = 'add-payment';
@@ -962,18 +1064,36 @@ if (isset($_GET['from']) and $_GET['from'] == 'add-payment') {
 if (isset($_GET['from']) and $_GET['from'] == 'confirm-pick-up-date-order') {
 
 	$orderIsReschedule = $db->escapeString(1);
+	$orderId = $db->escapeString($_GET['orderId']);
+	
+	$userId = $db->escapeString($_GET['userId']);
+	$notificationMessage = $db->escapeString("Order number " . $orderId . " pick up date was confirmed.");
+	$notificationDateTime = $db->escapeString(date('Y-m-d H:i:s'));
+	$notificationIsRead = $db->escapeString(0);
+	
+
 
 	$db->update('orders_table',
 	array(
 		'orderIsReschedule'=>$orderIsReschedule,
 		),
-		'orderId=' . $_GET['orderId']
+		'orderId=' . $orderId
 	);
 
-	$res = $db->getResult();
+	
+	$db->insert('notifications_table',
+	array(
+		'userId'=>$userId,
+		'notificationMessage'=>$notificationMessage,
+		'notificationDateTime'=>$notificationDateTime,
+		'notificationIsRead'=>$notificationIsRead,
+		'orderId'=>$orderId,
+
+		)
+	);
 
 
-	header("Location: manage-order.php?orderId=".$_GET['orderId']);
+	header("Location: manage-order.php?orderId=".$orderId);
 	$_SESSION['toast'] = 'confirm-pick-up-date-order';
 
 }
@@ -982,7 +1102,13 @@ if (isset($_GET['from']) and $_GET['from'] == 'confirm-pick-up-date-order') {
 if (isset($_GET['from']) and $_GET['from'] == 'reschedule-pick-up-date') {
 
 	$orderPickupDate = $db->escapeString($_POST['orderPickupDate']);
+	$orderId = $db->escapeString($_GET['orderId']);
 	$orderIsReschedule = $db->escapeString(2);
+
+	$userId = $db->escapeString($_GET['userId']);
+	$notificationMessage = $db->escapeString("Order number " . $orderId . " was rescheduled to " . date('F d, Y', strtotime($_POST['orderPickupDate'])) . ".");
+	$notificationDateTime = $db->escapeString(date('Y-m-d H:i:s'));
+	$notificationIsRead = $db->escapeString(0);
 
 	$db->update('orders_table',
 	array(
@@ -990,10 +1116,23 @@ if (isset($_GET['from']) and $_GET['from'] == 'reschedule-pick-up-date') {
 		'orderIsReschedule'=>$orderIsReschedule,
 		
 		),
-		'orderId=' . $_GET['orderId']
+		'orderId=' . $orderId
 	);
 
 	$res = $db->getResult();
+
+	$db->insert('notifications_table',
+	array(
+		'userId'=>$userId,
+		'notificationMessage'=>$notificationMessage,
+		'notificationDateTime'=>$notificationDateTime,
+		'notificationIsRead'=>$notificationIsRead,
+		'orderId'=>$orderId,
+
+		)
+	);
+
+
 
 
 	header("Location: manage-order.php?orderId=".$_GET['orderId']);

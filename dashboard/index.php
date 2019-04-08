@@ -48,7 +48,7 @@ include('connection.php');
     <!-- Main wrapper - style you can find in pages.scss -->
     <!-- ============================================================== -->
     <section id="wrapper">
-        <div class="login-register" style="background-image:url(etc/blur-bg-blurred.jpg);">
+        <div class="login-register" style="background-image:url(etc/test.png);">
             <div class="login-box card">
                 <div class="card-body">
                     <form class="form-horizontal form-material" id="loginform" action="controller.php?from=login" method="POST" autocomplete="off">

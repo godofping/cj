@@ -111,9 +111,8 @@ if ($res['userIsBlocked'] == 1 and isset($_SESSION['userId']) and $filename <> "
                 </ul>
               </li>
               <?php if (isset($_SESSION['userId'])): ?>
-              <li class="dropdown <?php if ($filename == 'my-profile' or $filename == 'my-orders' or $filename == 'reviews' or $filename == 'shopping-cart' or $filename == 'my-reviews' or $filename == 'review'): ?>active<?php endif ?>"> <a href="#" class="dropdown-toggle" data-toggle="dropdown">My Account</a>
+              <li class="dropdown <?php if ($filename == 'my-profile' or $filename == 'my-orders' or $filename == 'reviews' or $filename == 'order-details' or $filename == 'my-reviews' or $filename == 'review'): ?>active<?php endif ?>"> <a href="#" class="dropdown-toggle" data-toggle="dropdown">My Account</a>
                 <ul class="dropdown-menu">
-                  <li> <a href="shopping-cart.php">Shopping Cart</a> </li>
                   <li> <a href="my-feedbacks.php">My Feedbacks</a> </li>
                   <li> <a href="my-orders.php?selected=All">My Orders </a> </li>
                   <li> <a href="my-profile.php">My Profile </a> </li>
@@ -168,7 +167,7 @@ if ($res['userIsBlocked'] == 1 and isset($_SESSION['userId']) and $filename <> "
                   ?>
         
                   <li> <a href="shopping-cart.php"><span class="c-no"><?php echo $total; ?></span><i class="lnr lnr-cart"></i> </a> </li>
-                  <li> <a href="my-notifications.php"><span class="c-no">0</span><i class="lnr lnr-alarm"></i> </a> </li>
+                  <li> <a href="my-notifications.php"><span class="c-no" id="notificationCounter">0</span><i class="lnr lnr-alarm"></i> </a> </li>
 
                 </ul>
             </div>

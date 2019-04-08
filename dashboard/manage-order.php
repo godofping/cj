@@ -47,7 +47,7 @@ $res = $db->getResult(); $res = $res[0];
                             <h1>THIS CUSTOMER IS BLOCKED.</h1>
                         <?php } ?>
 
-                        <p>Customer: <b><?php echo $res['administratorfullName']; ?></b></p>
+                        <p>Customer: <b><?php echo $res['userFirstName'] . " " . $res['userLastName']; ?></b></p>
 
                         <p>Delivery Method: <b><?php echo $res['orderDeliveryMethod']; ?></b></p>
 
@@ -91,7 +91,7 @@ $res = $db->getResult(); $res = $res[0];
                             <?php if ($res['orderStatus'] == 'Confirmed' and $res['orderIsReschedule'] == 0 and $res['orderDeliveryMethod'] == 'Pick Up'){ ?>
 
 
-                            <form class="form-material mb-3" method="POST" action="controller.php?from=reschedule-pick-up-date&orderId=<?php echo $res['orderId'] ?>" autocomplete="off">
+                            <form class="form-material mb-3" method="POST" action="controller.php?from=reschedule-pick-up-date&orderId=<?php echo $res['orderId'] ?>&userId=<?php echo $res['userId'] ?>" autocomplete="off">
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group">
@@ -108,7 +108,7 @@ $res = $db->getResult(); $res = $res[0];
 
                                     <button onclick = "return confirm('Are you sure want to reschedule the pick up date of this order?')" type="submit" class="btn btn-warning waves-effect waves-light m-r-10 pull-left">Reschedule Pick Up Date</button> 
 
-                                    <a onclick = "return confirm('Are you sure want to confirm the pick up date of this order?')" href="controller.php?from=confirm-pick-up-date-order&orderId=<?php echo $res['orderId'] ?>"><button type="button" class="btn btn-info waves-effect waves-light m-r-10 pull-right">Confirm Pick Up Date</button></a>
+                                    <a onclick = "return confirm('Are you sure want to confirm the pick up date of this order?')" href="controller.php?from=confirm-pick-up-date-order&orderId=<?php echo $res['orderId'] ?>&userId=<?php echo $res['userId'] ?>"><button type="button" class="btn btn-info waves-effect waves-light m-r-10 pull-right">Confirm Pick Up Date</button></a>
 
                                 </div>
                             </div>
@@ -143,7 +143,7 @@ $res = $db->getResult(); $res = $res[0];
                                             <?php } ?>
 
                                             <?php if ($res['orderIsReschedule'] != 0){ ?>
-                                                <a onclick = "return confirm('Are you sure want to finish this order?')" href="controller.php?from=finish-order&orderId=<?php echo $res['orderId'] ?>"><button type="button" class="btn btn-info waves-effect waves-light m-r-10 pull-right">Finish Order</button></a>
+                                                <a onclick = "return confirm('Are you sure want to finish this order?')" href="controller.php?from=finish-order&orderId=<?php echo $res['orderId'] ?>&userId=<?php echo $res['userId'] ?>"><button type="button" class="btn btn-info waves-effect waves-light m-r-10 pull-right">Finish Order</button></a>
                                             <?php } ?>
 
                                         <?php } ?>
@@ -183,7 +183,7 @@ $res = $db->getResult(); $res = $res[0];
                                 
                             <?php if ($res['orderPaymentStatus'] == 'Paid'){ ?>
 
-                                <a onclick = "return confirm('Are you sure want to confirm this order?')" href="controller.php?from=confirm-order&orderId=<?php echo $res['orderId'] ?>"><button type="button" class="btn btn-info waves-effect waves-light m-r-10 pull-right">Confirm Order</button></a>  
+                                <a onclick = "return confirm('Are you sure want to confirm this order?')" href="controller.php?from=confirm-order&orderId=<?php echo $res['orderId'] ?>&userId=<?php echo $res['userId'] ?>"><button type="button" class="btn btn-info waves-effect waves-light m-r-10 pull-right">Confirm Order</button></a>  
                      
                             <?php } ?>
 
@@ -194,7 +194,7 @@ $res = $db->getResult(); $res = $res[0];
                             <?php } ?>
                             
              
-                            <a onclick = "return confirm('Are you sure want to cancel this order?')" href="controller.php?from=cancel-order&orderId=<?php echo $res['orderId'] ?>"><button  type="button" class="btn btn-warning waves-effect waves-light m-r-10 pull-right">Cancel Order</button></a>  
+                            <a onclick = "return confirm('Are you sure want to cancel this order?')" href="controller.php?from=cancel-order&orderId=<?php echo $res['orderId'] ?>&userId=<?php echo $res['userId'] ?>"><button  type="button" class="btn btn-warning waves-effect waves-light m-r-10 pull-right">Cancel Order</button></a>  
              
                             </div>
                         </div>
@@ -260,7 +260,7 @@ $res = $db->getResult(); $res = $res[0];
 
                         <p>* indicates required fields</p>
 
-                        <form autocomplete="off" class="form-material m-t-40" method="POST" action="controller.php?from=add-payment&orderId=<?php echo $_GET['orderId'] ?>">
+                        <form autocomplete="off" class="form-material m-t-40" method="POST" action="controller.php?from=add-payment&orderId=<?php echo $_GET['orderId'] ?>&userId=<?php echo $res['userId'] ?>">
 
                         <div class="row">
                             <div class="col-md-12">

@@ -66,6 +66,19 @@
 <script src="js/jquery.magnific-popup.min.js"></script> 
 <script src="js/owl.carousel.min.js"></script> 
 <script src="js/main.js"></script>
+<script type="text/javascript">
+  
+  setInterval(function(){
+
+  $.get("inc-notifications-counter.php", function(data, status){
+    $('#notificationCounter').text(data);
+  });
+
+
+
+  },1000);
+
+</script>
 </body>
 </html>
 <?php unset($_SESSION['toast']) ?>

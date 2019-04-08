@@ -32,6 +32,9 @@ $primaryKey = 'paymentId';
 
 $columns = array(
 
+    array( 'db' => 'userId',   'dt' => -1 ),
+    array( 'db' => 'orderPaymentStatus',   'dt' => -1 ),
+
     array( 'db' => 'paymentAmount',   'dt' => 0, 'formatter' => function( $d, $row ) {
         return '₱' . number_format($d, 2);
     } ),
@@ -52,8 +55,21 @@ $columns = array(
     array( 'db' => 'paymentId', 'dt' => 6,'formatter' => function( $d, $row ) {
 
         if ($row['paymentStatus'] == 'Pending') {
-        return '<a onclick = "return confirm('."'Are you sure want to update this record?'".')" class = "btn btn-info btn-xs" href="controller.php?from=recieve-payment&paymentId=' . $row['paymentId'] . '&orderId='.$_POST['orderId'].'">Recieved</a> 
-        <a onclick = "return confirm('."'Are you sure want to update this record?'".')" class = "btn btn-warning btn-xs" href="controller.php?from=invalid-payment&paymentId=' . $row['paymentId'] . '&orderId='.$_POST['orderId'].'">Invalid</a>';
+
+            if ($row['orderPaymentStatus'] == 'Unpaid') {
+                return '
+                    <a onclick = "return confirm('."'Are you sure want to update this record?'".')" class = "btn btn-info btn-xs" href="controller.php?from=recieve-payment&paymentId=' . $row['paymentId'] . '&orderId='.$_POST['orderId'].'&userId='.$row['userId'].'">Recieved</a> 
+
+                    <a onclick = "return confirm('."'Are you sure want to update this record?'".')" class = "btn btn-warning btn-xs" href="controller.php?from=invalid-payment&paymentId=' . $row['paymentId'] . '&orderId='.$_POST['orderId'].'&userId='.$row['userId'].'">Invalid</a>';
+            }
+
+            if ($row['orderPaymentStatus'] == 'Paid') {
+                 return '
+                    <a onclick = "return confirm('."'Are you sure want to update this record?'".')" class = "btn btn-warning btn-xs" href="controller.php?from=invalid-payment&paymentId=' . $row['paymentId'] . '&orderId='.$_POST['orderId'].'&userId='.$row['userId'].'">Invalid</a>';
+            }
+
+        
+
         }
         else
         {
