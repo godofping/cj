@@ -37,7 +37,6 @@
                                     <th>Customer Name</th>
                                     <th>Feedback</th>
                                     <th>Date Submitted</th>
-                                    <th>Status</th>
                                     <th class="noExport">Actions</th>
 
                                 </tr>
@@ -71,7 +70,7 @@
                 },
         "columnDefs":[
             {
-                "targets":[4],
+                "targets":[3],
                 "orderable":false,
             },
         ],

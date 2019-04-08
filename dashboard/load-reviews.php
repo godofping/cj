@@ -19,10 +19,10 @@
  */
  
 // DB table to use
-$table = 'user_feedbacks_view';
+$table = 'product_reviews_view';
  
 // Table's primary key
-$primaryKey = 'userFeedbackId';
+$primaryKey = 'productReviewId';
  
 // Array of database columns which should be read and sent back to DataTables.
 // The `db` parameter represents the column name in the database, while the `dt`
@@ -32,16 +32,12 @@ $primaryKey = 'userFeedbackId';
 
 $columns = array(
 
-    array( 'db' => 'userFullName',   'dt' => 0 ),
-    array( 'db' => 'userFeedback',   'dt' => 1 ),
-    array( 'db' => 'userFeedbackDate',   'dt' => 2, 'formatter' => function( $d, $row ) {
-        return  date('F d, Y', strtotime($d));
-    }  ),
-
-    array( 'db' => 'userFeedbackId', 'dt' => 3,'formatter' => function( $d, $row ) {
-
-        return '<a class = "btn btn-danger btn-xs" onclick = "return confirm('."'Are you sure want to delete this record?'".')" href="controller.php?from=delete-feedback&userFeedbackId=' . $row['userFeedbackId'] . '">Delete</a>';
-        
+    array( 'db' => 'productName',   'dt' => 0 ),
+    array( 'db' => 'productOption1',   'dt' => 1 ),
+    array( 'db' => 'productOption2',   'dt' => 2 ),
+    array( 'db' => 'productReview',   'dt' => 3 ),
+    array( 'db' => 'productReviewId', 'dt' => 4,'formatter' => function( $d, $row ) {
+        return '<a class = "btn btn-danger btn-xs" onclick = "return confirm('."'Are you sure want to delete this record?'".')" href="controller.php?from=delete-review&productReviewId=' . $row['productReviewId'] . '">Delete</a>';
     } ),
     
   
@@ -62,7 +58,7 @@ $sql_details = array(
 
    require( 'ssp.class.php' );
     echo json_encode(
-    SSP::complex( $_POST, $sql_details, $table, $primaryKey, $columns )
+    SSP::simple( $_POST, $sql_details, $table, $primaryKey, $columns )
 );
 
 

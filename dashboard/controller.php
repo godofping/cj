@@ -583,44 +583,32 @@ if (isset($_GET['from']) and $_GET['from'] == 'delete-product-variation') {
 
 }
 
-if (isset($_GET['from']) and $_GET['from'] == 'approve-feedback') {
 
 
-
-	$db->update('user_feedbacks_table',
-	array(
-		'userFeedbackStatus'=>1,
-		),
-		'userFeedbackId=' . $_GET['userFeedbackId']
-	);
+if (isset($_GET['from']) and $_GET['from'] == 'delete-feedback') {
+	
+	$db->delete('user_feedbacks_table','userFeedbackId=' . $_GET['userFeedbackId']);
 
 	$res = $db->getResult();
 
 
 	header("Location: feedbacks.php");
-	$_SESSION['toast'] = 'approve-feedback';
+	$_SESSION['toast'] = 'delete-feedback';
 
 }
 
 
-if (isset($_GET['from']) and $_GET['from'] == 'disapprove-feedback') {
-
-	$userFeedbackId = $db->escapeString($_GET['userFeedbackId']);
-
-	$db->update('user_feedbacks_table',
-	array(
-		'userFeedbackStatus'=>2,
-		),
-		'userFeedbackId=' . $userFeedbackId
-	);
+if (isset($_GET['from']) and $_GET['from'] == 'delete-review') {
+	
+	$db->delete('product_reviews_table','productReviewId=' . $_GET['productReviewId']);
 
 	$res = $db->getResult();
 
-	header("Location: feedbacks.php");
-	$_SESSION['toast'] = 'disapprove-feedback';
+
+	header("Location: reviews.php");
+	$_SESSION['toast'] = 'delete-review';
 
 }
-
 
 if (isset($_GET['from']) and $_GET['from'] == 'stock-in') {
 

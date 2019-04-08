@@ -30,13 +30,13 @@ $res = $db->getResult(); $res = $res[0];
           
           <div class="row">
 
-            <div class="col-md-12"> 
+            <div class="col-md-8"> 
               <table class="table">
                 <thead>
                   <tr>
                     <th scope="col">Date submitted</th>
                     <th scope="col">Feedback</th>
-                    <th scope="col">Status</th>
+                
                   </tr>
                 </thead>
                 <tbody>
@@ -49,19 +49,7 @@ $res = $db->getResult(); $res = $res[0];
           
                     <td><?php echo date('F d, Y',strtotime($res['userFeedbackDate'])); ?></td>
                     <td><?php echo $res['userFeedback']; ?></td>
-                    <td><?php
-                      $d = $res['userFeedbackStatus']; 
-                    if ($d == 0) {
-                        $status =  "Pending";
-                    }elseif ($d == 1) {
-                        $status = 'Approved';
-                    }
-                    elseif ($d == 2) {
-                        $status = 'Disapproved';
-                    } 
-
-                    echo $status; ?></td>
-
+       
 
                   </tr>
 
@@ -71,6 +59,33 @@ $res = $db->getResult(); $res = $res[0];
               </table>
 
              
+            </div>
+
+            <div class="col-md-4"> 
+              <h5>Submit a feedback.</h5>
+
+              <?php if (isset($_SESSION['toast']) and $_SESSION['toast'] == 'add-feedback'): ?>
+                    <div class="alert alert-success" role="alert">
+                    Feedback submitted.
+                  </div>
+              <?php endif ?>
+
+           
+              <form role="form" id="contact_form" class="contact-form" method="post" action="controller.php?from=add-feedback" autocomplete="off">
+                <ul class="row">
+                  <li class="col-sm-12">
+                    <label>Message
+                      <textarea class="form-control" required="" name="userFeedback" id="userFeedback" rows="5" placeholder=""></textarea>
+                    </label>
+
+                  </li>
+                
+
+                  <li class="col-sm-12">
+                    <button type="submit" value="submit" class="btn" id="btn_submit" >submit</button>
+                  </li>
+                </ul>
+              </form>
             </div>
 
 

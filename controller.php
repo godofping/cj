@@ -201,7 +201,6 @@ if (isset($_GET['from']) and $_GET['from'] == 'add-feedback') {
 	array(
 		'userFeedback'=>$userFeedback,
 		'userFeedbackDate'=>date('Y-m-d'),
-		'userFeedbackStatus'=>0,
 		'userId'=>$_SESSION['userId'],
 
 		)
@@ -209,7 +208,7 @@ if (isset($_GET['from']) and $_GET['from'] == 'add-feedback') {
 
 	$res = $db->getResult();
 
-	header("Location: feedbacks.php");
+	header("Location: my-feedbacks.php");
 	$_SESSION['toast'] = 'add-feedback';
 }
 

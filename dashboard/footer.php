@@ -287,22 +287,22 @@
       <?php endif?>
 
 
-      <?php if (isset($_SESSION['toast']) and $_SESSION['toast'] == 'approve-feedback'): ?>
+      <?php if (isset($_SESSION['toast']) and $_SESSION['toast'] == 'delete-feedback'): ?>
           $.toast({
-            heading: 'APPROVED',
-            text: 'Feedback Confirmed!',
+            heading: 'DELETED',
+            text: 'Feedback Deleted!',
             position: 'top-center',
             loaderBg:'#ff6849',
-            icon: 'success',
+            icon: 'error',
             hideAfter: 5000, 
             stack: 6
           });
       <?php endif?>
 
-      <?php if (isset($_SESSION['toast']) and $_SESSION['toast'] == 'disapprove-feedback'): ?>
+      <?php if (isset($_SESSION['toast']) and $_SESSION['toast'] == 'delete-review'): ?>
           $.toast({
-            heading: 'DISAPPROVED',
-            text: 'Feedback Disapproved!',
+            heading: 'DELETED',
+            text: 'Review Deleted!',
             position: 'top-center',
             loaderBg:'#ff6849',
             icon: 'error',
