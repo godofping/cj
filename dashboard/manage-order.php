@@ -124,7 +124,7 @@ $res = $db->getResult(); $res = $res[0];
                                 <div class="row mt-3">
                                     <div class="col-md-12">
 
-                                    <?php if ($res['orderPaymentStatus'] == 'Unpaid' and $res['orderIsReschedule'] == 0){ ?>
+                                    <?php if ($res['orderPaymentStatus'] == 'Unpaid' and $res['orderIsReschedule'] == 0 and $res['orderDeliveryMethod'] == 'Pick Up'){ ?>
                                         <button type="button" class="btn btn-info waves-effect waves-light m-r-10 pull-right" data-toggle="tooltip" title="You can't finish the order unless the pick up date is confirmed or rescheduled and the customer full paid the order.">Finish Order</button>
                                     <?php } ?>
 
@@ -132,7 +132,7 @@ $res = $db->getResult(); $res = $res[0];
                                         <button type="button" class="btn btn-info waves-effect waves-light m-r-10 pull-right" data-toggle="tooltip" title="You can't finish the order unless the customer full paid the order.">Finish Order</button>
                                     <?php } ?>
 
-                                    <?php if ($res['orderPaymentStatus'] == 'Paid' and $res['orderIsReschedule'] == 0){ ?>
+                                    <?php if ($res['orderPaymentStatus'] == 'Paid' and $res['orderIsReschedule'] == 0 and $res['orderDeliveryMethod'] == 'Pick Up'){ ?>
                                         <button type="button" class="btn btn-info waves-effect waves-light m-r-10 pull-right" data-toggle="tooltip" title="You can't finish the order unless the pick up date is confirmed or rescheduled.">Finish Order</button>
                                     <?php } ?>
 
