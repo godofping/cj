@@ -33,7 +33,7 @@
                         </li>
 
                         
-                        <li class="<?php if ($filename == 'add-product' or $filename == 'update-product' or $filename == 'add-category' or $filename == 'update-category' or $filename == 'add-sub-category' or $filename == 'update-sub-category' or $filename == 'manage-product' or $filename == 'add-option-group' or $filename == 'update-option-group' or $filename == 'option-group'): ?>
+                        <li class="<?php if ($filename == 'add-product' or $filename == 'update-product' or $filename == 'add-category' or $filename == 'update-category' or $filename == 'add-sub-category' or $filename == 'update-sub-category' or $filename == 'manage-product' or $filename == 'add-option-group' or $filename == 'update-option-group' or $filename == 'option-group' or $filename == 'reviews'): ?>
                             active
                         <?php endif ?>"> 
                             <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-basket"></i><span class="hide-menu">Products</span></a>
@@ -41,6 +41,7 @@
                                  <li><a href="catalog.php" class="<?php if ($filename == 'add-product' or $filename == 'update-product' or $filename == 'manage-product'): ?>active<?php endif ?>">Catalog</a></li>
                                 <li><a href="categories.php" class="<?php if ($filename == 'add-category' or $filename == 'update-category'): ?>active<?php endif ?>">Categories</a></li>
                                 <li><a href="sub-categories.php" class="<?php if ($filename == 'add-sub-category' or $filename == 'update-sub-category'): ?>active<?php endif ?>">Sub Categories</a></li>
+                                <li><a href="sub-categories.php" class="<?php if ($filename == 'add-sub-category' or $filename == 'update-sub-category'): ?>active<?php endif ?>">Reviews</a></li>
 
                        
                                 
@@ -67,6 +68,18 @@
                             </ul>
                         </li>
 
+                        <li class="<?php if ($filename == 'feedbacks'): ?>
+                            active
+                        <?php endif ?>"> 
+                            <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-account-settings-variant"></i><span class="hide-menu">Customers</span></a>
+                            <ul aria-expanded="false" class="collapse">
+                                <li><a href="customers.php" class="<?php if ($filename == 'add-user' or $filename == 'update-user'): ?>active<?php endif ?>">View All</a></li>
+                                <li><a href="feedbacks.php" class="<?php if ($filename == 'feedbacks'): ?>active<?php endif ?>">Feedbacks</a></li>
+                    
+                                
+                            </ul>
+                        </li>
+
 
                         <li class="<?php if ($filename == 'add-user' or $filename == 'update-user'): ?>
                             active
@@ -79,7 +92,7 @@
                         </li>
 
 
-                        <li class="<?php if ($filename == 'list-of-customers' or $filename == 'feedbacks'): ?>
+                        <li class="<?php if ($filename == 'list-of-customers'): ?>
                             active
                         <?php endif ?>"> 
                             <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-note-text"></i><span class="hide-menu">Reports</span></a>
@@ -102,7 +115,7 @@
                                 <li><a href="#.php" class="<?php if ($filename == 's'): ?>active<?php endif ?>">List of Stock-out</a></li>
                                 <li><a href="#.php" class="<?php if ($filename == 's'): ?>active<?php endif ?>">List of Acknowledgement Receipt</a></li>
                                 <li><a href="#.php" class="<?php if ($filename == 's'): ?>active<?php endif ?>">Reviews</a></li>
-                                <li><a href="feedbacks.php" class="<?php if ($filename == 'feedbacks'): ?>active<?php endif ?>">Feedbacks</a></li>
+                                <li><a href="list-of-feedbacks.php" class="<?php if ($filename == 'list-of-feedbacks'): ?>active<?php endif ?>">List of Feedbacks</a></li>
                                 
                             </ul>
                         </li>

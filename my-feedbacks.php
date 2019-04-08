@@ -41,7 +41,7 @@ $res = $db->getResult(); $res = $res[0];
                 </thead>
                 <tbody>
                 <?php
-                  $db->select('customer_feedbacks_view','*',NULL,'userId = "' . $_SESSION['userId'] . '"', "userFeedbackId ASC"); 
+                  $db->select('user_feedbacks_view','*',NULL,'userId = "' . $_SESSION['userId'] . '"', "userFeedbackId DESC"); 
                   $output = $db->getResult();
                   foreach ($output as $res) { ?>     
 
@@ -55,6 +55,9 @@ $res = $db->getResult(); $res = $res[0];
                         $status =  "Pending";
                     }elseif ($d == 1) {
                         $status = 'Approved';
+                    }
+                    elseif ($d == 2) {
+                        $status = 'Disapproved';
                     } 
 
                     echo $status; ?></td>

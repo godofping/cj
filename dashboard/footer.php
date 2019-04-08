@@ -64,6 +64,17 @@
     <!--Custom JavaScript -->
     <script src="assets/plugins/toast-master/js/jquery.toast.js"></script>
     <script type="text/javascript">
+      
+      setInterval(function(){
+
+      $.get("inc-notifications-counter.php", function(data, status){
+        $('#notificationCounter').text(data);
+      });
+
+      },1000);
+
+    </script>
+    <script type="text/javascript">
         <?php if (isset($_SESSION['toast']) and $_SESSION['toast'] == 'login-successful'): ?>
             $.toast({
               heading: 'LOGIN SUCCESSFUL',
@@ -79,7 +90,7 @@
 
         <?php if (isset($_SESSION['toast']) and $_SESSION['toast'] == 'add-category'): ?>
             $.toast({
-              heading: 'SUCCESSFULLY ADDED',
+              heading: 'ADDED',
               text: 'Category Saved!',
               position: 'top-center',
               loaderBg:'#ff6849',
@@ -91,7 +102,7 @@
 
         <?php if (isset($_SESSION['toast']) and $_SESSION['toast'] == 'update-category'): ?>
             $.toast({
-              heading: 'SUCCESSFULLY UPDATED',
+              heading: 'UPDATED',
               text: 'Category Updated!',
               position: 'top-center',
               loaderBg:'#ff6849',
@@ -103,7 +114,7 @@
 
         <?php if (isset($_SESSION['toast']) and $_SESSION['toast'] == 'delete-category'): ?>
             $.toast({
-              heading: 'SUCCESSFULLY DELETED',
+              heading: 'DELETED',
               text: 'Category Deleted!',
               position: 'top-center',
               loaderBg:'#ff6849',
@@ -115,7 +126,7 @@
 
         <?php if (isset($_SESSION['toast']) and $_SESSION['toast'] == 'add-user'): ?>
             $.toast({
-              heading: 'SUCCESSFULLY ADDED',
+              heading: 'ADDED',
               text: 'User Saved!',
               position: 'top-center',
               loaderBg:'#ff6849',
@@ -127,7 +138,7 @@
 
         <?php if (isset($_SESSION['toast']) and $_SESSION['toast'] == 'update-user'): ?>
             $.toast({
-              heading: 'SUCCESSFULLY UPDATED',
+              heading: 'UPDATED',
               text: 'User Updated!',
               position: 'top-center',
               loaderBg:'#ff6849',
@@ -139,7 +150,7 @@
 
         <?php if (isset($_SESSION['toast']) and $_SESSION['toast'] == 'delete-user'): ?>
             $.toast({
-              heading: 'SUCCESSFULLY DELETED',
+              heading: 'DELETED',
               text: 'User Deleted!',
               position: 'top-center',
               loaderBg:'#ff6849',
@@ -167,7 +178,7 @@
 
         <?php if (isset($_SESSION['toast']) and $_SESSION['toast'] == 'change-password'): ?>
             $.toast({
-              heading: 'SUCCESSFULLY UPDATED',
+              heading: 'UPDATED',
               text: 'Password Updated!',
               position: 'top-center',
               loaderBg:'#ff6849',
@@ -179,7 +190,7 @@
 
         <?php if (isset($_SESSION['toast']) and $_SESSION['toast'] == 'update-profile'): ?>
             $.toast({
-              heading: 'SUCCESSFULLY UPDATED',
+              heading: 'UPDATED',
               text: 'Profile Updated!',
               position: 'top-center',
               loaderBg:'#ff6849',
@@ -192,7 +203,7 @@
 
          <?php if (isset($_SESSION['toast']) and $_SESSION['toast'] == 'add-sub-category'): ?>
             $.toast({
-              heading: 'SUCCESSFULLY ADDED',
+              heading: 'ADDED',
               text: 'Sub Category Saved!',
               position: 'top-center',
               loaderBg:'#ff6849',
@@ -204,7 +215,7 @@
 
         <?php if (isset($_SESSION['toast']) and $_SESSION['toast'] == 'update-sub-category'): ?>
             $.toast({
-              heading: 'SUCCESSFULLY UPDATED',
+              heading: 'UPDATED',
               text: 'Sub Category Updated!',
               position: 'top-center',
               loaderBg:'#ff6849',
@@ -216,7 +227,7 @@
 
         <?php if (isset($_SESSION['toast']) and $_SESSION['toast'] == 'delete-sub-category'): ?>
             $.toast({
-              heading: 'SUCCESSFULLY DELETED',
+              heading: 'DELETED',
               text: 'Sub Category Deleted!',
               position: 'top-center',
               loaderBg:'#ff6849',
@@ -229,7 +240,7 @@
 
          <?php if (isset($_SESSION['toast']) and $_SESSION['toast'] == 'add-product'): ?>
             $.toast({
-              heading: 'SUCCESSFULLY ADDED',
+              heading: 'ADDED',
               text: 'Product Saved!',
               position: 'top-center',
               loaderBg:'#ff6849',
@@ -241,7 +252,7 @@
 
         <?php if (isset($_SESSION['toast']) and $_SESSION['toast'] == 'update-product'): ?>
             $.toast({
-              heading: 'SUCCESSFULLY UPDATED',
+              heading: 'UPDATED',
               text: 'Product Updated!',
               position: 'top-center',
               loaderBg:'#ff6849',
@@ -253,7 +264,7 @@
 
         <?php if (isset($_SESSION['toast']) and $_SESSION['toast'] == 'delete-product'): ?>
             $.toast({
-              heading: 'SUCCESSFULLY DELETED',
+              heading: 'DELETED',
               text: 'Product Deleted!',
               position: 'top-center',
               loaderBg:'#ff6849',
@@ -265,7 +276,7 @@
 
        <?php if (isset($_SESSION['toast']) and $_SESSION['toast'] == 'product-images'): ?>
           $.toast({
-            heading: 'SUCCESSFULLY UPDATED',
+            heading: 'UPDATED',
             text: 'Product Images Updated!',
             position: 'top-center',
             loaderBg:'#ff6849',
@@ -276,9 +287,9 @@
       <?php endif?>
 
 
-      <?php if (isset($_SESSION['toast']) and $_SESSION['toast'] == 'confirm-feedback'): ?>
+      <?php if (isset($_SESSION['toast']) and $_SESSION['toast'] == 'approve-feedback'): ?>
           $.toast({
-            heading: 'SUCCESSFULLY CONFIRMED',
+            heading: 'APPROVED',
             text: 'Feedback Confirmed!',
             position: 'top-center',
             loaderBg:'#ff6849',
@@ -288,10 +299,10 @@
           });
       <?php endif?>
 
-      <?php if (isset($_SESSION['toast']) and $_SESSION['toast'] == 'delete-feedback'): ?>
+      <?php if (isset($_SESSION['toast']) and $_SESSION['toast'] == 'disapprove-feedback'): ?>
           $.toast({
-            heading: 'SUCCESSFULLY DELETED',
-            text: 'Feedback Deleted!',
+            heading: 'DISAPPROVED',
+            text: 'Feedback Disapproved!',
             position: 'top-center',
             loaderBg:'#ff6849',
             icon: 'error',
@@ -303,7 +314,7 @@
 
       <?php if (isset($_SESSION['toast']) and $_SESSION['toast'] == 'add-product-variation'): ?>
           $.toast({
-            heading: 'SUCCESSFULLY ADDED',
+            heading: 'ADDED',
             text: 'Product Variation Saved!',
             position: 'top-center',
             loaderBg:'#ff6849',
@@ -316,7 +327,7 @@
 
       <?php if (isset($_SESSION['toast']) and $_SESSION['toast'] == 'update-product-variation'): ?>
           $.toast({
-            heading: 'SUCCESSFULLY UPDATED',
+            heading: 'UPDATED',
             text: 'Product Variation Updated!',
             position: 'top-center',
             loaderBg:'#ff6849',
@@ -328,7 +339,7 @@
 
       <?php if (isset($_SESSION['toast']) and $_SESSION['toast'] == 'delete-product-variation'): ?>
           $.toast({
-            heading: 'SUCCESSFULLY DELETED',
+            heading: 'DELETED',
             text: 'Product Variation Deleted!',
             position: 'top-center',
             loaderBg:'#ff6849',
@@ -340,7 +351,7 @@
          
       <?php if (isset($_SESSION['toast']) and $_SESSION['toast'] == 'stock-in'): ?>
           $.toast({
-            heading: 'SUCCESSFULLY UPDATED',
+            heading: 'UPDATED',
             text: 'Stocks Updated!',
             position: 'top-center',
             loaderBg:'#ff6849',
@@ -352,7 +363,7 @@
 
       <?php if (isset($_SESSION['toast']) and $_SESSION['toast'] == 'stock-out'): ?>
           $.toast({
-            heading: 'SUCCESSFULLY UPDATED',
+            heading: 'UPDATED',
             text: 'Stocks Updated!',
             position: 'top-center',
             loaderBg:'#ff6849',
@@ -364,7 +375,7 @@
 
       <?php if (isset($_SESSION['toast']) and $_SESSION['toast'] == 'reorder-point'): ?>
           $.toast({
-            heading: 'SUCCESSFULLY UPDATED',
+            heading: 'UPDATED',
             text: 'Stocks Reorder Point Updated!',
             position: 'top-center',
             loaderBg:'#ff6849',
@@ -376,7 +387,7 @@
 
       <?php if (isset($_SESSION['toast']) and $_SESSION['toast'] == 'block-customer'): ?>
           $.toast({
-            heading: 'SUCCESSFULLY BLOCKED',
+            heading: 'BLOCKED',
             text: 'Customer Blocked!',
             position: 'top-center',
             loaderBg:'#ff6849',
@@ -389,7 +400,7 @@
 
       <?php if (isset($_SESSION['toast']) and $_SESSION['toast'] == 'unblock-customer'): ?>
           $.toast({
-            heading: 'SUCCESSFULLY UNBLOCKED',
+            heading: 'UNBLOCKED',
             text: 'Customer Unblocked!',
             position: 'top-center',
             loaderBg:'#ff6849',
@@ -401,7 +412,7 @@
 
       <?php if (isset($_SESSION['toast']) and $_SESSION['toast'] == 'confirm-order'): ?>
           $.toast({
-            heading: 'SUCCESSFULLY UPDATED',
+            heading: 'UPDATED',
             text: 'Order Confirmed!',
             position: 'top-center',
             loaderBg:'#ff6849',
@@ -414,7 +425,7 @@
 
       <?php if (isset($_SESSION['toast']) and $_SESSION['toast'] == 'cancel-order'): ?>
           $.toast({
-            heading: 'SUCCESSFULLY UPDATED',
+            heading: 'UPDATED',
             text: 'Customer Cancelled!',
             position: 'top-center',
             loaderBg:'#ff6849',
@@ -427,7 +438,7 @@
 
       <?php if (isset($_SESSION['toast']) and $_SESSION['toast'] == 'finish-order'): ?>
           $.toast({
-            heading: 'SUCCESSFULLY UPDATED',
+            heading: 'UPDATED',
             text: 'Order Finished!',
             position: 'top-center',
             loaderBg:'#ff6849',
@@ -440,7 +451,7 @@
 
       <?php if (isset($_SESSION['toast']) and $_SESSION['toast'] == 'save-remark'): ?>
           $.toast({
-            heading: 'SUCCESSFULLY UPDATED',
+            heading: 'UPDATED',
             text: 'Order Remark Updated!',
             position: 'top-center',
             loaderBg:'#ff6849',
@@ -452,7 +463,7 @@
 
       <?php if (isset($_SESSION['toast']) and ($_SESSION['toast'] == 'recieve-payment' or $_SESSION['toast'] == 'invalid-payment')): ?>
           $.toast({
-            heading: 'SUCCESSFULLY UPDATED',
+            heading: 'UPDATED',
             text: 'Payment Status Updated!',
             position: 'top-center',
             loaderBg:'#ff6849',
@@ -476,7 +487,7 @@
 
       <?php if (isset($_SESSION['toast']) and $_SESSION['toast'] == 'add-payment'): ?>
             $.toast({
-              heading: 'SUCCESSFULLY SAVED',
+              heading: 'SAVED',
               text: 'Payment Saved!',
               position: 'top-center',
               loaderBg:'#ff6849',
@@ -488,7 +499,7 @@
 
         <?php if (isset($_SESSION['toast']) and $_SESSION['toast'] == 'confirm-pick-up-date-order'): ?>
             $.toast({
-              heading: 'SUCCESSFULLY UPDATED',
+              heading: 'UPDATED',
               text: 'Pick Up Date Confirmed!',
               position: 'top-center',
               loaderBg:'#ff6849',
@@ -500,7 +511,7 @@
 
         <?php if (isset($_SESSION['toast']) and $_SESSION['toast'] == 'reschedule-pick-up-date'): ?>
             $.toast({
-              heading: 'SUCCESSFULLY RESCHEDULED',
+              heading: 'RESCHEDULED',
               text: 'Pick Up Date Rescheduled!',
               position: 'top-center',
               loaderBg:'#ff6849',

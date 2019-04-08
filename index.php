@@ -57,14 +57,14 @@ $res = $db->getResult(); $res = $res[0];
         <div class="two-col">
 
           <?php
-          $db->select('customer_feedbacks_view','*',NULL,'userFeedbackStatus = 1', "userFeedbackId DESC LIMIT 10"); 
+          $db->select('user_feedbacks_view','*',NULL,'userFeedbackStatus = 1', "userFeedbackId DESC LIMIT 10"); 
           $output = $db->getResult();
           foreach ($output as $res) { ?>    
           
           <!-- Slide -->
           <div class="testi-in"> <i class="fa fa-quote-left"></i>
             <p><?php echo $res['userFeedback']; ?></p>
-            <h5><?php echo $res['customerFullName'] ?></h5>
+            <h5><?php echo $res['userFullName'] ?></h5>
             <span><?php echo date('F d, Y',strtotime($res['userFeedbackDate'])); ?></span>
           </div>
 

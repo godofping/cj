@@ -6,7 +6,7 @@
     </div>
     <div class="col-md-7 align-self-center">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="javascript:void(0)">Reports</a></li>
+            <li class="breadcrumb-item"><a href="javascript:void(0)">Customers</a></li>
 <!--             <li class="breadcrumb-item">pages</li> -->
             <li class="breadcrumb-item active">Feedbacks</li>
         </ol>

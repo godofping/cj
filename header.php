@@ -71,6 +71,14 @@ if ($res['userIsBlocked'] == 1 and isset($_SESSION['userId']) and $filename <> "
     <div class="container-full">
       <p><i class="icon-envelope"></i> cjashley@gmail.com </p>
       <p class="call"> <i class="icon-call-in"></i> 0975 436 3955 </p>
+
+      <div class="login-info">
+        <ul>
+  
+          <li><p class="call"> <i class="icon-user"></i> Hi, <?php echo $_SESSION['userFirstName'] . " " . $_SESSION['userLastName']; ?>! | <?php echo $_SESSION['userEmail']; ?> </p></li>
+
+        </ul>
+      </div>
       
  
     </div>
@@ -167,7 +175,12 @@ if ($res['userIsBlocked'] == 1 and isset($_SESSION['userId']) and $filename <> "
                   ?>
         
                   <li> <a href="shopping-cart.php"><span class="c-no"><?php echo $total; ?></span><i class="lnr lnr-cart"></i> </a> </li>
-                  <li> <a href="my-notifications.php"><span class="c-no" id="notificationCounter">0</span><i class="lnr lnr-alarm"></i> </a> </li>
+                  <li> <a href="my-notifications.php"><span class="c-no" id="notificationCounter"><?php $db->select('notifications_table','coalesce(count(*), 0) as total',NULL,'userId = "' . $_SESSION['userId'] . '" and notificationIsRead = 0', NULL); 
+$res = $db->getResult(); 
+
+$res = $res[0];
+
+echo $res['total']; ?></span><i class="lnr lnr-alarm"></i> </a> </li>
 
                 </ul>
             </div>

@@ -89,6 +89,18 @@ include('connection.php');
                         <!-- This is  -->
                         <li class="nav-item"> <a class="nav-link nav-toggler hidden-md-up text-muted waves-effect waves-dark" href="javascript:void(0)"><i class="mdi mdi-menu"></i></a> </li>
                         <li class="nav-item m-l-10"> <a class="nav-link sidebartoggler hidden-sm-down text-muted waves-effect waves-dark" href="javascript:void(0)"><i class="ti-menu"></i></a> </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-muted text-muted waves-effect waves-dark" href="notifications.php">
+                                <i class="mdi mdi-bell"></i> <sup id="notificationCounter"><?php $db->select('notifications_table','coalesce(count(*), 0) as total',NULL,'administratorUserId = "' . $_SESSION['administratorUserId'] . '" and notificationIsRead = 0', NULL); 
+$res = $db->getResult(); 
+
+$res = $res[0];
+
+echo $res['total']; ?></sup>
+                            
+                            </a>
+                       
+                        </li>
                     </ul>
                     <!-- ============================================================== -->
                     <!-- User profile -->

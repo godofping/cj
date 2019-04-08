@@ -19,7 +19,7 @@
  */
  
 // DB table to use
-$table = 'customer_feedbacks_view';
+$table = 'user_feedbacks_view';
  
 // Table's primary key
 $primaryKey = 'userFeedbackId';
@@ -32,7 +32,7 @@ $primaryKey = 'userFeedbackId';
 
 $columns = array(
 
-    array( 'db' => 'customerFullName',   'dt' => 0 ),
+    array( 'db' => 'userFullName',   'dt' => 0 ),
     array( 'db' => 'userFeedback',   'dt' => 1 ),
     array( 'db' => 'userFeedbackDate',   'dt' => 2, 'formatter' => function( $d, $row ) {
         return  date('F d, Y', strtotime($d));
@@ -44,17 +44,20 @@ $columns = array(
         }elseif ($d == 1) {
             $status = 'Approved';
         }
+        elseif ($d == 2) {
+            $status = 'Disapproved';
+        }
 
         return  $status;
     } ),
     array( 'db' => 'userFeedbackId', 'dt' => 4,'formatter' => function( $d, $row ) {
 
         if ($row['userFeedbackStatus'] == 0) {
-            return '<a class = "btn btn-success btn-xs" href="controller.php?from=confirm-feedback&userFeedbackId=' . $row['userFeedbackId'] . '">Confirm</a> <a class = "btn btn-danger btn-xs" onclick = "return confirm('."'Are you sure want to delete this record?'".')" href="controller.php?from=delete-feedback&userFeedbackId=' . $row['userFeedbackId'] . '">Delete</a>';
+            return '<a class = "btn btn-success btn-xs" href="controller.php?from=approve-feedback&userFeedbackId=' . $row['userFeedbackId'] . '" onclick = "return confirm('."'Are you sure want to approve this feedback?'".')">Approve</a> <a class = "btn btn-danger btn-xs" onclick = "return confirm('."'Are you sure want to disapprove this record?'".')" href="controller.php?from=disapprove-feedback&userFeedbackId=' . $row['userFeedbackId'] . '">Disapprove</a>';
         }
         else
         {
-            return '<a class = "btn btn-danger btn-xs" onclick = "return confirm('."'Are you sure want to delete this record?'".')" href="controller.php?from=delete-feedback&userFeedbackId=' . $row['userFeedbackId'] . '">Delete</a>';
+            return '';
         }
         
     } ),

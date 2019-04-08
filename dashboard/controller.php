@@ -59,7 +59,7 @@ if (isset($_GET['from']) and $_GET['from'] == 'add-category') {
 		)
 	);
 
-	$res = $db->getResult();
+	
 
 	header("Location: add-category.php");
 	$_SESSION['toast'] = 'add-category';
@@ -77,7 +77,7 @@ if (isset($_GET['from']) and $_GET['from'] == 'update-category') {
 		'productCategoryId=' . $_POST['productCategoryId']
 	);
 
-	$res = $db->getResult();
+	
 
 	header("Location: update-category.php?productCategoryId=".$_POST['productCategoryId']."");
 	$_SESSION['toast'] = 'update-category';
@@ -86,7 +86,7 @@ if (isset($_GET['from']) and $_GET['from'] == 'update-category') {
 if (isset($_GET['from']) and $_GET['from'] == 'delete-category') {
 
 	$db->delete('product_categories_table','productCategoryId=' . $_GET['productCategoryId']);
-	$res = $db->getResult();
+
 	header("Location: categories.php");
 	$_SESSION['toast'] = 'delete-category';
 }
@@ -111,7 +111,7 @@ if (isset($_GET['from']) and $_GET['from'] == 'add-user') {
 			)
 		);
 
-		$res = $db->getResult();
+
 
 		
 		$_SESSION['toast'] = 'add-user';
@@ -150,7 +150,6 @@ if (isset($_GET['from']) and $_GET['from'] == 'update-user') {
 				'administratorUserId=' . $_POST['administratorUserId']
 			);
 
-			$res = $db->getResult();
 
 			
 			$_SESSION['toast'] = 'update-user';
@@ -171,7 +170,7 @@ if (isset($_GET['from']) and $_GET['from'] == 'update-user') {
 			'administratorUserId=' . $_POST['administratorUserId']
 		);
 
-		$res = $db->getResult();
+
 		$_SESSION['toast'] = 'update-user';
 	}
 
@@ -241,9 +240,6 @@ if (isset($_GET['from']) and $_GET['from'] == 'add-product') {
 	$productSubCategoryId = $db->escapeString($_POST['productSubCategoryId']);
 	$productDetails = $db->escapeString($_POST['productDetails']);
 
-
-
-
 	$db->insert('products_table',
 	array(
 		'productName'=>$productName,
@@ -291,7 +287,7 @@ if (isset($_GET['from']) and $_GET['from'] == 'add-product') {
 	$res = $db->getResult();
 
 
-	header("Location: add-product.php");
+	header("Location: manage-product.php?productId=".$productId);
 	$_SESSION['toast'] = 'add-product';
 }
 
@@ -580,7 +576,7 @@ if (isset($_GET['from']) and $_GET['from'] == 'delete-product-variation') {
 
 }
 
-if (isset($_GET['from']) and $_GET['from'] == 'confirm-feedback') {
+if (isset($_GET['from']) and $_GET['from'] == 'approve-feedback') {
 
 
 
@@ -595,27 +591,25 @@ if (isset($_GET['from']) and $_GET['from'] == 'confirm-feedback') {
 
 
 	header("Location: feedbacks.php");
-	$_SESSION['toast'] = 'confirm-feedback';
+	$_SESSION['toast'] = 'approve-feedback';
 
 }
 
 
-if (isset($_GET['from']) and $_GET['from'] == 'delete-feedback') {
+if (isset($_GET['from']) and $_GET['from'] == 'disapprove-feedback') {
 
-
+	$userFeedbackId = $db->escapeString($_GET['userFeedbackId']);
 
 	$db->update('user_feedbacks_table',
 	array(
 		'userFeedbackStatus'=>2,
 		),
-		'userFeedbackId=' . $_GET['userFeedbackId']
+		'userFeedbackId=' . $userFeedbackId
 	);
-
-	$res = $db->getResult();
 
 
 	header("Location: feedbacks.php");
-	$_SESSION['toast'] = 'delete-feedback';
+	$_SESSION['toast'] = 'disapprove-feedback';
 
 }
 

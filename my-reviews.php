@@ -97,7 +97,13 @@ $res = $db->getResult(); $res = $res[0];
                     <td><img style="height: 100px;" src="dashboard/images/<?php echo $imgres['productImageLocation'] ?>" class="img-thumbnail"></td>
                     <td><?php echo $res['productName']; ?> (<?php echo $res['productOption1']; ?> <?php echo $res['productOption2']; ?>)</td>
                     <td><?php echo $string; ?></td>
-                    <td><a href="review.php?productVariationId=<?php echo $res['productVariationId'] ?>"><button type="submit" value="submit" class="btn" id="btn_submit" >Review</button></a></td>
+                    <td>
+                      <?php if ($string == "Not yet reviewed"): ?>
+                      <a href="review.php?productVariationId=<?php echo $res['productVariationId'] ?>"><button type="submit" value="submit" class="btn" id="btn_submit" >Review</button></a>
+                      <?php endif ?>
+
+
+                    </td>
                   </tr>
                 <?php } ?>
 
