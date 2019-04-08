@@ -434,7 +434,7 @@ if (isset($_GET['from']) and $_GET['from'] == 'place-order') {
 	    	$inOrOut = $db->escapeString("Out");
 	    	$quantity = $db->escapeString($res['quantity']);
 	    	$transactionDateTime = $db->escapeString(date('Y-m-d H:i:s'));
-			$inventoryLogRemark = $db->escapeString("The stocks is decreased by " . $quantity . " because of Order number " . $orderId);
+			$inventoryLogRemark = $db->escapeString("The stocks is decreased by " . $quantity . " because of Order number " . $orderId . ".");
 
 			$currentStocks = $res['productStock'] - $quantity;
 

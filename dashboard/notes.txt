@@ -32,10 +32,18 @@ s3 - color - red - capacity - 64
 	//2 - resched
 
 
+//customer
+	
+	*users_table, customerType = Online
+
+//staff
+
+	*users_table, customerType = Staff
+
+
 
 ----kulang----
 attendant module
-
 notifications
 reports
 	list of customers
@@ -51,7 +59,7 @@ reports
 	list of acknowledgement reciept
 	reviews
 	feedback
-if cancelled ibalik ang items sa may inventory
+
 backup and restore
 over due
 customers
@@ -73,6 +81,7 @@ customers
 //shipment order is near
 //available stocks of the items on hand, a number of stocks left
 //shipping fee
+
 
 
 
