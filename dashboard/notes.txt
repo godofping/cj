@@ -34,6 +34,8 @@ s3 - color - red - capacity - 64
 
 
 ----kulang----
+attendant module
+
 notifications
 reports
 	list of customers
@@ -65,6 +67,12 @@ customers
 	reorder point
 
 
-//si customer na staff.
+----questions----
+//remove username, middlename. email ang ginagamit sa login. (customer and staff). like shopee
+//view pickup of the day
+//shipment order is near
+//available stocks of the items on hand, a number of stocks left
+//shipping fee
+
 
 

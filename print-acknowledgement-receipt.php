@@ -62,6 +62,13 @@ else
 
 <script src="js/modernizr.js"></script>
 
+<style type="text/css">
+
+@page {margin:0 -6cm}
+html {margin:0 6cm}
+html {margin-top: 60px}
+</style>
+
 
 <link href="https://fonts.googleapis.com/css?family=Merriweather:300,400,700,900|Poppins:300,400,500,600,700|Montserrat:300,400,500,600,700,800" rel="stylesheet">
 

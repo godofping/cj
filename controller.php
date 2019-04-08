@@ -434,7 +434,7 @@ if (isset($_GET['from']) and $_GET['from'] == 'place-order') {
 	    	$inOrOut = $db->escapeString("Out");
 	    	$quantity = $db->escapeString($res['quantity']);
 	    	$transactionDateTime = $db->escapeString(date('Y-m-d H:i:s'));
-			$inventoryLogRemark = $db->escapeString("The stocks is decreased by " . $quantity . " because of Order ID " . $orderId);
+			$inventoryLogRemark = $db->escapeString("The stocks is decreased by " . $quantity . " because of Order number " . $orderId);
 
 			$currentStocks = $res['productStock'] - $quantity;
 
@@ -578,6 +578,45 @@ if (isset($_GET['from']) and $_GET['from'] == 'cancel-order') {
 	);
 
 	$res = $db->getResult();
+
+	$db->select('order_details_view','*',NULL,'orderId = "' . $orderId . '"', NULL); 
+	$output = $db->getResult();
+
+	foreach ($output as $res) {
+
+		$productStock = $db->escapeString($res['productStock']);
+		$quantity = $db->escapeString($res['quantity']);
+		$productVariationId = $db->escapeString($res['productVariationId']);
+
+		$total = $productStock + $quantity;
+
+		$db->update('product_variations_table',
+		array(
+			'productStock'=>$total,
+			),
+			'productVariationId=' . $res['productVariationId']
+		);
+		$db->getResult();
+
+
+		$db->insert('inventory_logs_table',
+		array(
+			'productVariationId'=>$productVariationId,
+			'inOrOut'=>'In',
+			'quantity'=>$quantity,
+			'transactionDateTime'=>date('Y-m-d H:i:s'),
+			'inventoryLogRemark'=>'The stocks is increased by ' . $quantity . ' because the order number ' . $orderId . ' is cancelled.',
+			)
+		);
+		$db->getResult();
+
+		
+
+	}
+
+
+
+
 
 	header("Location: order-details.php?orderId=".base64_encode($orderId));
 	$_SESSION['toast'] = 'cancel-order';

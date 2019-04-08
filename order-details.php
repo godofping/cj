@@ -43,6 +43,14 @@ $orderStatus = $res['orderStatus'];
 
             <div class="row"> 
 
+              <div class="col-md-12">
+                <?php if (isset($_SESSION['toast']) and $_SESSION['toast'] == 'cancel-order'): ?>
+                  <div class="alert alert-danger" role="alert">
+                  Order is cancelled successfully.
+                  </div>
+                <?php endif ?>
+              </div>
+
               <?php if ($res['orderStatus'] == 'Pending Approval'): ?>
                 
               <div class="col-md-12">

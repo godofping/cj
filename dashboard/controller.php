@@ -772,15 +772,53 @@ if (isset($_GET['from']) and $_GET['from'] == 'confirm-order') {
 if (isset($_GET['from']) and $_GET['from'] == 'cancel-order') {
 
 	$orderStatus = $db->escapeString("Cancelled");
+	$orderId = $db->escapeString($_GET['orderId']);
 
 	$db->update('orders_table',
 	array(
 		'orderStatus'=>$orderStatus,
 		),
-		'orderId=' . $_GET['orderId']
+		'orderId=' . $orderId
 	);
 
 	$res = $db->getResult();
+
+	$db->select('order_details_view','*',NULL,'orderId = "' . $orderId . '"', NULL); 
+	$output = $db->getResult();
+
+	foreach ($output as $res) {
+
+		$productStock = $db->escapeString($res['productStock']);
+		$quantity = $db->escapeString($res['quantity']);
+		$productVariationId = $db->escapeString($res['productVariationId']);
+
+		$total = $productStock + $quantity;
+
+		$db->update('product_variations_table',
+		array(
+			'productStock'=>$total,
+			),
+			'productVariationId=' . $res['productVariationId']
+		);
+		$db->getResult();
+
+
+		$db->insert('inventory_logs_table',
+		array(
+			'productVariationId'=>$productVariationId,
+			'inOrOut'=>'In',
+			'quantity'=>$quantity,
+			'transactionDateTime'=>date('Y-m-d H:i:s'),
+			'inventoryLogRemark'=>'The stocks is increased by ' . $quantity . ' because the order number ' . $orderId . ' is cancelled.',
+			)
+		);
+		$db->getResult();
+
+		
+
+	}
+
+
 
 
 	header("Location: manage-order.php?orderId=".$_GET['orderId']);
