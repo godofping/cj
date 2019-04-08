@@ -119,26 +119,51 @@ $res = $db->getResult(); $res = $res[0];
 
                             <?php if ($res['orderStatus'] == 'Confirmed'){ ?>
 
-                    
-
+                  
                                 <div class="row mt-3">
                                     <div class="col-md-12">
 
-                                    <?php if ($res['orderPaymentStatus'] == 'Unpaid' and $res['orderIsReschedule'] == 0 and $res['orderDeliveryMethod'] == 'Pick Up'){ ?>
-                                        <button type="button" class="btn btn-info waves-effect waves-light m-r-10 pull-right" data-toggle="tooltip" title="You can't finish the order unless the pick up date is confirmed or rescheduled and the customer full paid the order.">Finish Order</button>
+                                    <?php if ($res['orderDeliveryMethod'] == 'Pick Up'){ ?>
+                                        <?php if ($res['orderPaymentStatus'] == 'Unpaid'){ ?>
+                                    
+                                            <?php if ($res['orderIsReschedule'] == 0){ ?>
+                                                <button type="button" class="btn btn-info waves-effect waves-light m-r-10 pull-right" data-toggle="tooltip" title="You can't set the order status to finish unless this order is paid and the pick up date is confirmed or rescheduled.">Finish Order</button>
+                                            <?php } ?>
+
+                                            <?php if ($res['orderIsReschedule'] != 0){ ?>
+                                                <button type="button" class="btn btn-info waves-effect waves-light m-r-10 pull-right" data-toggle="tooltip" title="You can't set the order status to finish unless this order is paid.">Finish Order</button>
+                                            <?php } ?>
+
+                                        <?php } ?>
+
+                                        <?php if ($res['orderPaymentStatus'] == 'Paid'){ ?>
+
+                                            <?php if ($res['orderIsReschedule'] == 0){ ?>
+                                                <button type="button" class="btn btn-info waves-effect waves-light m-r-10 pull-right" data-toggle="tooltip" title="You can't set the order status to finish unless the pick up date is confirmed or rescheduled.">Finish Order</button>
+                                            <?php } ?>
+
+                                            <?php if ($res['orderIsReschedule'] != 0){ ?>
+                                                <a onclick = "return confirm('Are you sure want to finish this order?')" href="controller.php?from=finish-order&orderId=<?php echo $res['orderId'] ?>"><button type="button" class="btn btn-info waves-effect waves-light m-r-10 pull-right">Finish Order</button></a>
+                                            <?php } ?>
+
+                                        <?php } ?>
+
                                     <?php } ?>
 
-                                    <?php if ($res['orderPaymentStatus'] == 'Unpaid' and $res['orderIsReschedule'] != 0){ ?>
-                                        <button type="button" class="btn btn-info waves-effect waves-light m-r-10 pull-right" data-toggle="tooltip" title="You can't finish the order unless the customer full paid the order.">Finish Order</button>
+                                    <?php if ($res['orderDeliveryMethod'] == 'Shipping'){ ?>
+
+                                        <?php if ($res['orderPaymentStatus'] == 'Unpaid'){ ?>
+                                            <button type="button" class="btn btn-info waves-effect waves-light m-r-10 pull-right" data-toggle="tooltip" title="You can't set the order status to finish unless this order is paid.">Finish Order</button>
+                                        <?php } ?>
+
+                                        <?php if ($res['orderPaymentStatus'] == 'Paid'){ ?>
+                                            <a onclick = "return confirm('Are you sure want to finish this order?')" href="controller.php?from=finish-order&orderId=<?php echo $res['orderId'] ?>"><button type="button" class="btn btn-info waves-effect waves-light m-r-10 pull-right">Finish Order</button></a>
+                                        <?php } ?>
+                                        
                                     <?php } ?>
 
-                                    <?php if ($res['orderPaymentStatus'] == 'Paid' and $res['orderIsReschedule'] == 0 and $res['orderDeliveryMethod'] == 'Pick Up'){ ?>
-                                        <button type="button" class="btn btn-info waves-effect waves-light m-r-10 pull-right" data-toggle="tooltip" title="You can't finish the order unless the pick up date is confirmed or rescheduled.">Finish Order</button>
-                                    <?php } ?>
-
-                                    <?php if ($res['orderPaymentStatus'] == 'Paid' and $res['orderIsReschedule'] != 0){ ?>
-                                        <a onclick = "return confirm('Are you sure want to finish this order?')" href="controller.php?from=finish-order&orderId=<?php echo $res['orderId'] ?>"><button type="button" class="btn btn-info waves-effect waves-light m-r-10 pull-right">Finish Order</button></a>
-                                    <?php } ?>
+                                    
+    
 
                                     </div>
                                 </div>
