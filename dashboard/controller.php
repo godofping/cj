@@ -59,7 +59,7 @@ if (isset($_GET['from']) and $_GET['from'] == 'add-category') {
 		)
 	);
 
-	
+	$res = $db->getResult();
 
 	header("Location: add-category.php");
 	$_SESSION['toast'] = 'add-category';
@@ -77,6 +77,8 @@ if (isset($_GET['from']) and $_GET['from'] == 'update-category') {
 		'productCategoryId=' . $_POST['productCategoryId']
 	);
 
+	$res = $db->getResult();
+
 	
 
 	header("Location: update-category.php?productCategoryId=".$_POST['productCategoryId']."");
@@ -87,8 +89,12 @@ if (isset($_GET['from']) and $_GET['from'] == 'delete-category') {
 
 	$db->delete('product_categories_table','productCategoryId=' . $_GET['productCategoryId']);
 
+	$res = $db->getResult();
+
 	header("Location: categories.php");
 	$_SESSION['toast'] = 'delete-category';
+
+
 }
 
 
@@ -111,7 +117,7 @@ if (isset($_GET['from']) and $_GET['from'] == 'add-user') {
 			)
 		);
 
-
+		$res = $db->getResult();
 
 		
 		$_SESSION['toast'] = 'add-user';
@@ -150,7 +156,7 @@ if (isset($_GET['from']) and $_GET['from'] == 'update-user') {
 				'administratorUserId=' . $_POST['administratorUserId']
 			);
 
-
+			$res = $db->getResult();
 			
 			$_SESSION['toast'] = 'update-user';
 		}
@@ -170,6 +176,7 @@ if (isset($_GET['from']) and $_GET['from'] == 'update-user') {
 			'administratorUserId=' . $_POST['administratorUserId']
 		);
 
+		$res = $db->getResult();
 
 		$_SESSION['toast'] = 'update-user';
 	}
@@ -607,6 +614,7 @@ if (isset($_GET['from']) and $_GET['from'] == 'disapprove-feedback') {
 		'userFeedbackId=' . $userFeedbackId
 	);
 
+	$res = $db->getResult();
 
 	header("Location: feedbacks.php");
 	$_SESSION['toast'] = 'disapprove-feedback';
@@ -881,6 +889,8 @@ if (isset($_GET['from']) and $_GET['from'] == 'finish-order') {
 		'orderId=' . $orderId
 	);
 
+	$res = $db->getResult();
+
 	$db->insert('notifications_table',
 	array(
 		'userId'=>$userId,
@@ -891,6 +901,8 @@ if (isset($_GET['from']) and $_GET['from'] == 'finish-order') {
 
 		)
 	);
+
+	$res = $db->getResult();
 
 
 	header("Location: manage-order.php?orderId=".$orderId);
@@ -939,7 +951,7 @@ if (isset($_GET['from']) and $_GET['from'] == 'recieve-payment') {
 		'paymentId=' . $paymentId
 	);
 
-
+	$res = $db->getResult();
 
 	$db->update('orders_table',
 	array(
@@ -948,6 +960,7 @@ if (isset($_GET['from']) and $_GET['from'] == 'recieve-payment') {
 		'orderId=' . $orderId
 	);
 
+	$res = $db->getResult();
 
 	$db->insert('notifications_table',
 	array(
@@ -960,6 +973,7 @@ if (isset($_GET['from']) and $_GET['from'] == 'recieve-payment') {
 		)
 	);
 
+	$res = $db->getResult();
 
 	header("Location: manage-order.php?orderId=".$orderId);
 	$_SESSION['toast'] = 'recieve-payment';
@@ -985,6 +999,7 @@ if (isset($_GET['from']) and $_GET['from'] == 'invalid-payment') {
 		'paymentId=' . $paymentId
 	);
 
+	$res = $db->getResult();
 
 	$db->insert('notifications_table',
 	array(
@@ -997,6 +1012,7 @@ if (isset($_GET['from']) and $_GET['from'] == 'invalid-payment') {
 		)
 	);
 	
+	$res = $db->getResult();
 
 	header("Location: manage-order.php?orderId=".$orderId);
 	$_SESSION['toast'] = 'invalid-payment';
@@ -1029,6 +1045,7 @@ if (isset($_GET['from']) and $_GET['from'] == 'add-payment') {
 		)
 	);
 
+	$res = $db->getResult();
 
 	$db->update('orders_table',
 	array(
@@ -1036,7 +1053,7 @@ if (isset($_GET['from']) and $_GET['from'] == 'add-payment') {
 		),
 		'orderId=' . $orderId
 	);
-
+	$res = $db->getResult();
 
 	$db->insert('notifications_table',
 	array(
@@ -1049,7 +1066,7 @@ if (isset($_GET['from']) and $_GET['from'] == 'add-payment') {
 		)
 	);
 
-
+	$res = $db->getResult();
 	header("Location: manage-order.php?orderId=".$orderId);
 	$_SESSION['toast'] = 'add-payment';
 }
@@ -1074,7 +1091,8 @@ if (isset($_GET['from']) and $_GET['from'] == 'confirm-pick-up-date-order') {
 		'orderId=' . $orderId
 	);
 
-	
+	$res = $db->getResult();
+
 	$db->insert('notifications_table',
 	array(
 		'userId'=>$userId,
@@ -1085,6 +1103,7 @@ if (isset($_GET['from']) and $_GET['from'] == 'confirm-pick-up-date-order') {
 
 		)
 	);
+	$res = $db->getResult();
 
 
 	header("Location: manage-order.php?orderId=".$orderId);
@@ -1126,7 +1145,7 @@ if (isset($_GET['from']) and $_GET['from'] == 'reschedule-pick-up-date') {
 		)
 	);
 
-
+	$res = $db->getResult();
 
 
 	header("Location: manage-order.php?orderId=".$_GET['orderId']);

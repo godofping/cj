@@ -69,12 +69,15 @@ customers
 	reviews
 	list of customers with action
 
+product is ready to pick up
+
 //notifications
 	all transaction sa order
 	all transaction sa payment
 	schedule of order
 	reorder point
 
+uniform add review and add  feedback
 
 ----questions----
 //remove username, middlename. email ang ginagamit sa login. (customer and staff). like shopee
@@ -83,12 +86,11 @@ customers
 //available stocks of the items on hand, a number of stocks left
 //shipping fee
 
-short cut sa variants
-change confirm sa save payment
 
 
 
-----
+
+---- admin
 $orderId = $db->escapeString($_GET['orderId']);
 
 $userId = $db->escapeString($_GET['userId']);
@@ -106,4 +108,29 @@ array(
 
 	)
 );
+$res = $db->getResult();
 
+---- user
+
+$db->select('administrators_view'); 
+	$output = $db->getResult();
+
+	foreach ($output as $res) {
+
+		$administratorUserId = $db->escapeString($res['administratorUserId']);
+		$notificationMessage = $db->escapeString("Order number " . $orderId . " was placed.");
+		$notificationDateTime = $db->escapeString(date('Y-m-d H:i:s'));
+		$notificationIsRead = $db->escapeString(0);
+
+		$db->insert('notifications_table',
+		array(
+			'administratorUserId'=>$administratorUserId,
+			'notificationMessage'=>$notificationMessage,
+			'notificationDateTime'=>$notificationDateTime,
+			'notificationIsRead'=>$notificationIsRead,
+			'orderId'=>$orderId,
+
+			)
+		);
+		$res = $db->getResult();
+	}

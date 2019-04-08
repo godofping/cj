@@ -203,7 +203,6 @@ if (isset($_GET['from']) and $_GET['from'] == 'add-feedback') {
 		'userFeedbackDate'=>date('Y-m-d'),
 		'userFeedbackStatus'=>0,
 		'userId'=>$_SESSION['userId'],
-		
 
 		)
 	);
@@ -467,6 +466,32 @@ if (isset($_GET['from']) and $_GET['from'] == 'place-order') {
 	    }
 
 
+	$db->select('administrators_view'); 
+	$output = $db->getResult();
+
+	foreach ($output as $res) {
+
+		$administratorUserId = $db->escapeString($res['administratorUserId']);
+		$notificationMessage = $db->escapeString("Order number " . $orderId . " was placed.");
+		$notificationDateTime = $db->escapeString(date('Y-m-d H:i:s'));
+		$notificationIsRead = $db->escapeString(0);
+
+		$db->insert('notifications_table',
+		array(
+			'administratorUserId'=>$administratorUserId,
+			'notificationMessage'=>$notificationMessage,
+			'notificationDateTime'=>$notificationDateTime,
+			'notificationIsRead'=>$notificationIsRead,
+			'orderId'=>$orderId,
+
+			)
+		);
+
+		$res = $db->getResult();
+	}
+
+
+
 	header("Location: thank-you.php?orderId=".base64_encode($orderId));
 	$_SESSION['toast'] = 'order-placed';
 }
@@ -556,7 +581,34 @@ if (isset($_GET['from']) and $_GET['from'] == 'payment-form') {
 		)
 	);
 
-	$res = $db->getResult();
+	$output = $db->getResult();
+
+
+	$db->select('administrators_view'); 
+	$output = $db->getResult();
+
+	foreach ($output as $res) {
+
+
+		$administratorUserId = $db->escapeString($res['administratorUserId']);
+		$notificationMessage = $db->escapeString("Order number " . $orderId . " payment was sent.");
+		$notificationDateTime = $db->escapeString(date('Y-m-d H:i:s'));
+		$notificationIsRead = $db->escapeString(0);
+
+		$db->insert('notifications_table',
+		array(
+			'administratorUserId'=>$administratorUserId,
+			'notificationMessage'=>$notificationMessage,
+			'notificationDateTime'=>$notificationDateTime,
+			'notificationIsRead'=>$notificationIsRead,
+			'orderId'=>$orderId,
+
+			)
+		);
+		$output = $db->getResult();
+
+	}
+
 
 	$_SESSION['toast'] = 'payment-sent';
 	header("Location: order-details.php?orderId=". base64_encode($orderId));
@@ -615,6 +667,29 @@ if (isset($_GET['from']) and $_GET['from'] == 'cancel-order') {
 	}
 
 
+	$db->select('administrators_view'); 
+	$output = $db->getResult();
+
+	foreach ($output as $res) {
+
+		$administratorUserId = $db->escapeString($res['administratorUserId']);
+		$notificationMessage = $db->escapeString("Order number " . $orderId . " was cancelled by the customer.");
+		$notificationDateTime = $db->escapeString(date('Y-m-d H:i:s'));
+		$notificationIsRead = $db->escapeString(0);
+
+		$db->insert('notifications_table',
+		array(
+			'administratorUserId'=>$administratorUserId,
+			'notificationMessage'=>$notificationMessage,
+			'notificationDateTime'=>$notificationDateTime,
+			'notificationIsRead'=>$notificationIsRead,
+			'orderId'=>$orderId,
+
+			)
+		);
+
+		$res = $db->getResult();
+	}
 
 
 

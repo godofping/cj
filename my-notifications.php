@@ -61,9 +61,6 @@
           'userId=' . $_SESSION['userId']
         );
 
-       
-
-
         ?>
 
         <hr>

@@ -72,13 +72,15 @@ if ($res['userIsBlocked'] == 1 and isset($_SESSION['userId']) and $filename <> "
       <p><i class="icon-envelope"></i> cjashley@gmail.com </p>
       <p class="call"> <i class="icon-call-in"></i> 0975 436 3955 </p>
 
-      <div class="login-info">
+      <?php if (isset($_SESSION['userId'])): ?>
+        <div class="login-info">
         <ul>
   
           <li><p class="call"> <i class="icon-user"></i> Hi, <?php echo $_SESSION['userFirstName'] . " " . $_SESSION['userLastName']; ?>! | <?php echo $_SESSION['userEmail']; ?> </p></li>
 
         </ul>
       </div>
+      <?php endif ?>
       
  
     </div>
