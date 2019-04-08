@@ -88,7 +88,7 @@ $res = $db->getResult(); $res = $res[0];
 
                             </form>
 
-                            <?php if ($res['orderStatus'] == 'Confirmed' and $res['orderIsReschedule'] == 0){ ?>
+                            <?php if ($res['orderStatus'] == 'Confirmed' and $res['orderIsReschedule'] == 0 and $res['orderDeliveryMethod'] == 'Pick Up'){ ?>
 
 
                             <form class="form-material mb-3" method="POST" action="controller.php?from=reschedule-pick-up-date&orderId=<?php echo $res['orderId'] ?>" autocomplete="off">
