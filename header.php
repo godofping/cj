@@ -121,10 +121,10 @@ if ($res['userIsBlocked'] == 1 and isset($_SESSION['userId']) and $filename <> "
               <?php if (isset($_SESSION['userId'])): ?>
               <li class="dropdown <?php if ($filename == 'my-profile' or $filename == 'my-orders' or $filename == 'reviews' or $filename == 'order-details' or $filename == 'my-reviews' or $filename == 'review'): ?>active<?php endif ?>"> <a href="#" class="dropdown-toggle" data-toggle="dropdown">My Account</a>
                 <ul class="dropdown-menu">
+                  <li> <a href="my-orders.php?selected=All">My Orders</a> </li>
+                  <li> <a href="my-profile.php">My Profile</a> </li>
                   <li> <a href="my-feedbacks.php">My Feedbacks</a> </li>
-                  <li> <a href="my-orders.php?selected=All">My Orders </a> </li>
-                  <li> <a href="my-profile.php">My Profile </a> </li>
-                  <li> <a href="my-reviews.php?selected=All">My Reviews </a> </li>
+                  <li> <a href="my-reviews.php?selected=All">My Reviews</a> </li>
                 </ul>
               </li>
               <?php endif ?>
