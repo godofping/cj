@@ -27,14 +27,46 @@ $res = $db->getResult(); $res = $res[0];
     <section class="contact padding-top-100 padding-bottom-100">
       <div class="container">
         <div class="contact-form">
+
+
+          <div class="row">
+            <div class="col-md-6"></div>
+            <div class="col-md-6"> 
+   
+
+              <?php if (isset($_SESSION['toast']) and $_SESSION['toast'] == 'add-feedback'): ?>
+                    <div class="alert alert-success" role="alert">
+                    Feedback submitted.
+                  </div>
+              <?php endif ?>
+
+           
+              <form role="form" id="contact_form" class="contact-form" method="post" action="controller.php?from=add-feedback" autocomplete="off">
+                <ul class="row">
+                  <li class="col-sm-12">
+                    <label>Submit a feedback.
+                      <textarea class="form-control" required="" name="userFeedback" id="userFeedback" rows="5" placeholder=""></textarea>
+                    </label>
+
+                  </li>
+                
+
+                  <li class="col-sm-12">
+                    <button type="submit" value="submit" class="btn pull-right" id="btn_submit" >submit</button>
+                  </li>
+                </ul>
+              </form>
+            </div>
+          </div>
+
           
           <div class="row">
 
-            <div class="col-md-8"> 
+            <div class="col-md-12"> 
               <table class="table">
                 <thead>
                   <tr>
-                    <th scope="col">Date submitted</th>
+                    <th scope="col" class="pr-5">Date submitted</th>
                     <th scope="col">Feedback</th>
                 
                   </tr>
@@ -61,35 +93,6 @@ $res = $db->getResult(); $res = $res[0];
              
             </div>
 
-            <div class="col-md-4"> 
-              <h5>Submit a feedback.</h5>
-
-              <?php if (isset($_SESSION['toast']) and $_SESSION['toast'] == 'add-feedback'): ?>
-                    <div class="alert alert-success" role="alert">
-                    Feedback submitted.
-                  </div>
-              <?php endif ?>
-
-           
-              <form role="form" id="contact_form" class="contact-form" method="post" action="controller.php?from=add-feedback" autocomplete="off">
-                <ul class="row">
-                  <li class="col-sm-12">
-                    <label>Message
-                      <textarea class="form-control" required="" name="userFeedback" id="userFeedback" rows="5" placeholder=""></textarea>
-                    </label>
-
-                  </li>
-                
-
-                  <li class="col-sm-12">
-                    <button type="submit" value="submit" class="btn" id="btn_submit" >submit</button>
-                  </li>
-                </ul>
-              </form>
-            </div>
-
-
-        
 
             
           </div>
