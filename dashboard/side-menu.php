@@ -92,7 +92,7 @@
                         </li>
 
 
-                        <li class="<?php if ($filename == 'list-of-customers'): ?>
+                        <li class="<?php if ($filename == 'list-of-customers' or $filename == 'list-of-orders' or $filename == 'list-of-cancelled-orders'): ?>
                             active
                         <?php endif ?>"> 
                             <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-note-text"></i><span class="hide-menu">Reports</span></a>
@@ -105,8 +105,8 @@
                                         <li><a href="list-of-collections.php?period=Monthly">Monthly</a></li>
                                     </ul>
                                 </li>
-                                <li><a href="#.php" class="<?php if ($filename == 's'): ?>active<?php endif ?>">List of Orders</a></li>
-                                <li><a href="#.php" class="<?php if ($filename == 's'): ?>active<?php endif ?>">List of Cancelled Orders</a></li>
+                                <li><a href="list-of-orders.php?date=<?php echo date('Y-m-d') ?>" class="<?php if ($filename == 'list-of-orders'): ?>active<?php endif ?>">List of Orders</a></li>
+                                <li><a href="list-of-cancelled-orders.php" class="<?php if ($filename == 'list-of-cancelled-orders'): ?>active<?php endif ?>">List of Cancelled Orders</a></li>
                                 <li><a href="#.php" class="<?php if ($filename == 's'): ?>active<?php endif ?>">List of Over Due</a></li>
                                 <li><a href="#.php" class="<?php if ($filename == 's'): ?>active<?php endif ?>">List of Customer Pending Payments</a></li>
                                 <li><a href="#.php" class="<?php if ($filename == 's'): ?>active<?php endif ?>">List of Available Stocks</a></li>

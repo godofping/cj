@@ -19,7 +19,7 @@
  */
  
 // DB table to use
-$table = 'customers_view';
+$table = 'orders_view';
  
 // Table's primary key
 $primaryKey = 'userId';
@@ -32,23 +32,17 @@ $primaryKey = 'userId';
 
 $columns = array(
 
-    array( 'db' => 'userFullName',   'dt' => 0 ),
-    array( 'db' => 'userEmail',   'dt' => 1 ),
-    array( 'db' => 'userPhoneNumber',   'dt' => 2 ),
-    array( 'db' => 'userAddress',   'dt' => 3 ),
-    array( 'db' => 'userRegistrationDate',   'dt' => 4,'formatter' => function( $d, $row ) {
-        return date('F d, Y', strtotime($d));
-    } ),
-    array( 'db' => 'userIsBlocked',   'dt' => 5,'formatter' => function( $d, $row ) {
-        if ($row['userIsBlocked'] == 1) {
-            return 'Yes';
-        }
-        else
-        {
-            return 'No';
-        }
-    } ),
-    
+    array( 'db' => 'orderId',   'dt' => 0 ),
+    array( 'db' => 'orderPlacedDate',   'dt' => 1,'formatter' => function( $d, $row ) {
+        return date('F d, Y g:i A', strtotime($d));
+    }),
+    array( 'db' => 'userFullName',   'dt' => 2 ),
+    array( 'db' => 'userType',   'dt' => 3 ),
+    array( 'db' => 'orderDeliveryMethod',   'dt' =>4 ),
+    array( 'db' => 'orderModeOfPayment',   'dt' => 5 ),
+    array( 'db' => 'orderStatus',   'dt' => 6 ),
+    array( 'db' => 'orderPaymentStatus',   'dt' => 7 ),
+ 
 
 
   
@@ -69,7 +63,7 @@ $sql_details = array(
 
    require( 'ssp.class.php' );
     echo json_encode(
-    SSP::complex( $_POST, $sql_details, $table, $primaryKey, $columns, 'userType = "Customer"' )
+    SSP::complex( $_POST, $sql_details, $table, $primaryKey, $columns, 'orderStatus = "Cancelled"' )
 );
 
 

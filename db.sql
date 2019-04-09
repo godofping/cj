@@ -340,6 +340,7 @@ DROP TABLE IF EXISTS `customers_view`;
  `userPassword` varchar(60) ,
  `userFirstName` varchar(60) ,
  `userLastName` varchar(60) ,
+ `userFullName` varchar(121) ,
  `userAddress` varchar(60) ,
  `userRegistrationDate` date ,
  `userPhoneNumber` varchar(60) ,
@@ -465,7 +466,7 @@ DROP TABLE IF EXISTS `orders_view`;
  `userPassword` varchar(60) ,
  `userFirstName` varchar(60) ,
  `userLastName` varchar(60) ,
- `administratorfullName` varchar(121) ,
+ `userFullName` varchar(121) ,
  `userAddress` varchar(60) ,
  `userRegistrationDate` date ,
  `userPhoneNumber` varchar(60) ,
@@ -748,7 +749,7 @@ DROP TABLE IF EXISTS `users_view`;
 /*!50001 DROP TABLE IF EXISTS `customers_view` */;
 /*!50001 DROP VIEW IF EXISTS `customers_view` */;
 
-/*!50001 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `customers_view` AS select `users_table`.`userId` AS `userId`,`users_table`.`userEmail` AS `userEmail`,`users_table`.`userPassword` AS `userPassword`,`users_table`.`userFirstName` AS `userFirstName`,`users_table`.`userLastName` AS `userLastName`,`users_table`.`userAddress` AS `userAddress`,`users_table`.`userRegistrationDate` AS `userRegistrationDate`,`users_table`.`userPhoneNumber` AS `userPhoneNumber`,`users_table`.`userType` AS `userType`,`users_table`.`userIsBlocked` AS `userIsBlocked` from `users_table` where ((`users_table`.`userType` = 'Customer') and (`users_table`.`userIsBlocked` = 0)) */;
+/*!50001 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `customers_view` AS select `users_table`.`userId` AS `userId`,`users_table`.`userEmail` AS `userEmail`,`users_table`.`userPassword` AS `userPassword`,`users_table`.`userFirstName` AS `userFirstName`,`users_table`.`userLastName` AS `userLastName`,concat(`users_table`.`userFirstName`,' ',`users_table`.`userLastName`) AS `userFullName`,`users_table`.`userAddress` AS `userAddress`,`users_table`.`userRegistrationDate` AS `userRegistrationDate`,`users_table`.`userPhoneNumber` AS `userPhoneNumber`,`users_table`.`userType` AS `userType`,`users_table`.`userIsBlocked` AS `userIsBlocked` from `users_table` where (`users_table`.`userType` = 'Customer') */;
 
 /*View structure for view inventory_logs_view */
 
@@ -769,7 +770,7 @@ DROP TABLE IF EXISTS `users_view`;
 /*!50001 DROP TABLE IF EXISTS `orders_view` */;
 /*!50001 DROP VIEW IF EXISTS `orders_view` */;
 
-/*!50001 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `orders_view` AS select `orders_table`.`orderId` AS `orderId`,`orders_table`.`orderPickupDate` AS `orderPickupDate`,`orders_table`.`orderPlacedDate` AS `orderPlacedDate`,`orders_table`.`orderShippingAddress` AS `orderShippingAddress`,`orders_table`.`orderType` AS `orderType`,`orders_table`.`orderShipFirstName` AS `orderShipFirstName`,`orders_table`.`orderShipLastName` AS `orderShipLastName`,`orders_table`.`orderShipEmail` AS `orderShipEmail`,`orders_table`.`orderShipPhoneNumber` AS `orderShipPhoneNumber`,`orders_table`.`orderStatus` AS `orderStatus`,`orders_table`.`orderPaymentStatus` AS `orderPaymentStatus`,`orders_table`.`orderTotalAmount` AS `orderTotalAmount`,`orders_table`.`userId` AS `userId`,`orders_table`.`orderDeliveryMethod` AS `orderDeliveryMethod`,`orders_table`.`billingAddress` AS `billingAddress`,`orders_table`.`billingFirstName` AS `billingFirstName`,`orders_table`.`billingLastName` AS `billingLastName`,`orders_table`.`billingEmail` AS `billingEmail`,`orders_table`.`billingPhoneNumber` AS `billingPhoneNumber`,`orders_table`.`orderShippingFee` AS `orderShippingFee`,`orders_table`.`orderRemarks` AS `orderRemarks`,`orders_table`.`orderModeOfPayment` AS `orderModeOfPayment`,`orders_table`.`orderIsReschedule` AS `orderIsReschedule`,`users_table`.`userEmail` AS `userEmail`,`users_table`.`userPassword` AS `userPassword`,`users_table`.`userFirstName` AS `userFirstName`,`users_table`.`userLastName` AS `userLastName`,concat(`users_table`.`userFirstName`,' ',`users_table`.`userFirstName`) AS `administratorfullName`,`users_table`.`userAddress` AS `userAddress`,`users_table`.`userRegistrationDate` AS `userRegistrationDate`,`users_table`.`userPhoneNumber` AS `userPhoneNumber`,`users_table`.`userType` AS `userType`,`users_table`.`userIsBlocked` AS `userIsBlocked` from (`orders_table` join `users_table` on((`orders_table`.`userId` = `users_table`.`userId`))) */;
+/*!50001 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `orders_view` AS select `orders_table`.`orderId` AS `orderId`,`orders_table`.`orderPickupDate` AS `orderPickupDate`,`orders_table`.`orderPlacedDate` AS `orderPlacedDate`,`orders_table`.`orderShippingAddress` AS `orderShippingAddress`,`orders_table`.`orderType` AS `orderType`,`orders_table`.`orderShipFirstName` AS `orderShipFirstName`,`orders_table`.`orderShipLastName` AS `orderShipLastName`,`orders_table`.`orderShipEmail` AS `orderShipEmail`,`orders_table`.`orderShipPhoneNumber` AS `orderShipPhoneNumber`,`orders_table`.`orderStatus` AS `orderStatus`,`orders_table`.`orderPaymentStatus` AS `orderPaymentStatus`,`orders_table`.`orderTotalAmount` AS `orderTotalAmount`,`orders_table`.`userId` AS `userId`,`orders_table`.`orderDeliveryMethod` AS `orderDeliveryMethod`,`orders_table`.`billingAddress` AS `billingAddress`,`orders_table`.`billingFirstName` AS `billingFirstName`,`orders_table`.`billingLastName` AS `billingLastName`,`orders_table`.`billingEmail` AS `billingEmail`,`orders_table`.`billingPhoneNumber` AS `billingPhoneNumber`,`orders_table`.`orderShippingFee` AS `orderShippingFee`,`orders_table`.`orderRemarks` AS `orderRemarks`,`orders_table`.`orderModeOfPayment` AS `orderModeOfPayment`,`orders_table`.`orderIsReschedule` AS `orderIsReschedule`,`users_table`.`userEmail` AS `userEmail`,`users_table`.`userPassword` AS `userPassword`,`users_table`.`userFirstName` AS `userFirstName`,`users_table`.`userLastName` AS `userLastName`,concat(`users_table`.`userFirstName`,' ',`users_table`.`userLastName`) AS `userFullName`,`users_table`.`userAddress` AS `userAddress`,`users_table`.`userRegistrationDate` AS `userRegistrationDate`,`users_table`.`userPhoneNumber` AS `userPhoneNumber`,`users_table`.`userType` AS `userType`,`users_table`.`userIsBlocked` AS `userIsBlocked` from (`orders_table` join `users_table` on((`orders_table`.`userId` = `users_table`.`userId`))) */;
 
 /*View structure for view payments_view */
 

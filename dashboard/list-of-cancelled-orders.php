@@ -2,13 +2,13 @@
 <?php include('header.php'); ?>
 <div class="row page-titles">
     <div class="col-md-5 align-self-center">
-        <h3 class="text-themecolor">List of Customers</h3>
+        <h3 class="text-themecolor">List of Cancelled Orders</h3>
     </div>
     <div class="col-md-7 align-self-center">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="javascript:void(0)">Reports</a></li>
 <!--             <li class="breadcrumb-item">pages</li> -->
-            <li class="breadcrumb-item active">List of Customers</li>
+            <li class="breadcrumb-item active">List of Cancelled Orders</li>
         </ol>
     </div>
    
@@ -33,12 +33,15 @@
                         <table id="datable" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
-                                    <th>Name</th>
-                                    <th>Email</th>
-                                    <th>Phone Number</th>
-                                    <th>Address</th>
-                                    <th>Registration Date</th>
-                                    <th>Blocked</th>
+                                    <th>Order Number</th>
+                                    <th>Date Placed</th>
+                                    <th>Customer Type</th>
+                                    <th>Delivery Method</th>
+                                    <th>Mode of Payment</th>
+                                    <th>Customer</th>
+                                    <th>Order Status</th>
+                                    <th>Payment Status</th>
+                         
 
                                 </tr>
                             </thead>
@@ -58,7 +61,7 @@
 <?php include('footer.php'); ?>
 
 <script type="text/javascript">
-	var title = "List of Customers";
+	var title = "List of Cancelled Orders";
     var dataTable = $('#datable').DataTable({
         // "processing":true,
         // "serverSide":true,
@@ -66,8 +69,7 @@
         "order":[],
         "ajax": {
                     "type": 'POST',
-                    "url": 'load-list-of-customers.php',
-                    
+                    "url": 'load-list-of-cancelled-orders.php',                    
                 },
         "columnDefs":[
             {
@@ -95,6 +97,13 @@
         autoWidth: false,
     });
 
+</script>
+
+<script type="text/javascript">
+    $('#date').change(function(){
+        var date = $('#date').val();
+        window.location.replace("list-of-orders.php?date=" + date);
+    });
 </script>
 
 

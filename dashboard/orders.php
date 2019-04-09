@@ -34,12 +34,13 @@
                             <thead>
                                 <tr>
                                     <th>Order Number</th>
-                                    <th>Customer</th>
+                                    <th>Date Placed</th>
                                     <th>Customer Type</th>
                                     <th>Delivery Method</th>
                                     <th>Mode of Payment</th>
-                                    <th>Date Placed</th>
-                                    <th>Status</th>
+                                    <th>Customer</th>
+                                    <th>Order Status</th>
+                                    <th>Payment Status</th>
                                     <th class="noExport">Actions</th>
 
                                 </tr>
@@ -73,7 +74,7 @@
                 },
         "columnDefs":[
             {
-                "targets":[7],
+                "targets":[8],
                 "orderable":false,
             },
         ],

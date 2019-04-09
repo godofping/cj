@@ -33,15 +33,16 @@ $primaryKey = 'orderId';
 $columns = array(
 
     array( 'db' => 'orderId',   'dt' => 0 ),
-    array( 'db' => 'administratorfullName',   'dt' => 1 ),
-    array( 'db' => 'userType',   'dt' => 2 ),
-    array( 'db' => 'orderDeliveryMethod',   'dt' => 3 ),
-    array( 'db' => 'orderModeOfPayment',   'dt' => 4 ),
-    array( 'db' => 'orderPlacedDate',   'dt' => 5,'formatter' => function( $d, $row ) {
+    array( 'db' => 'orderPlacedDate',   'dt' => 1,'formatter' => function( $d, $row ) {
         return date('F d, Y g:i A', strtotime($d));
     }),
+    array( 'db' => 'userFullName',   'dt' => 2 ),
+    array( 'db' => 'userType',   'dt' => 3 ),
+    array( 'db' => 'orderDeliveryMethod',   'dt' =>4 ),
+    array( 'db' => 'orderModeOfPayment',   'dt' => 5 ),
     array( 'db' => 'orderStatus',   'dt' => 6 ),
-    array( 'db' => 'orderId', 'dt' => 7,'formatter' => function( $d, $row ) {
+    array( 'db' => 'orderPaymentStatus',   'dt' => 7 ),
+    array( 'db' => 'orderId', 'dt' => 8,'formatter' => function( $d, $row ) {
         return '<a class = "btn btn-info btn-xs" href="manage-order.php?orderId=' . $row['orderId'] . '">Manage Order</a>';
     } ),
     
