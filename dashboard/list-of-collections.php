@@ -34,18 +34,35 @@ $period = $_GET['period'];
             <div class="card">
                 <div class="card-body">
 
-                    <form autocomplete="off" class="form-material m-t-40" method="POST" action="controller.php?from=add-category">
+                    <form class="form-material">
                     <div class="row">
                         <div class="col-md-2">
                             <div class="form-group">
-                                <label>Date</label>
-                                <input type="date" class="form-control" id="datepicker">
+
+                                <?php if ($_GET['period'] == 'Daily'): ?>
+                                    <label>Date</label>
+                                    <input type="date" id="date" class="form-control" value="<?php echo $_GET['date'] ?>">
+                                <?php endif ?>
+
+                                <?php if ($_GET['period'] == 'Weekly'): ?>
+                                    <label>Date</label>
+                                    <input type="week" id="date" class="form-control" value="<?php echo $_GET['date'] ?>">
+                                <?php endif ?>
+
+                                <?php if ($_GET['period'] == 'Monthly'): ?>
+                                    <label>Date</label>
+                                    <input type="month" id="date" class="form-control" value="<?php echo $_GET['date'] ?>">
+                                <?php endif ?>
+
+                                
+
+
                             </div>
                         </div>
                     </div>
                     </form>
 
-                    <div class="table-responsive m-t-40">
+                    <div class="table-responsive">
                         <table id="datable" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
@@ -113,13 +130,32 @@ $period = $_GET['period'];
 
 </script>
 
-<script type="text/javascript">
-    $('#datepicker').change(function(){
-        var datepicker = $('#datepicker').val();
-        alert(datepicker);
-    });
-</script>
 
 
+<?php if ($_GET['period'] == 'Daily'): ?>
+    <script type="text/javascript">
+        $('#date').change(function(){
+            var date = $('#date').val();
+            window.location.replace("list-of-orders-daily.php?date=" + date);
+        });
+    </script>
+<?php endif ?>
 
+<?php if ($_GET['period'] == 'Weekly'): ?>
+    <script type="text/javascript">
+        $('#date').change(function(){
+            var date = $('#date').val();
+            window.location.replace("list-of-orders-daily.php?date=" + date);
+        });
+    </script>
+<?php endif ?>
+
+<?php if ($_GET['period'] == 'Monthly'): ?>
+    <script type="text/javascript">
+        $('#date').change(function(){
+            var date = $('#date').val();
+            window.location.replace("list-of-orders-daily.php?date=" + date);
+        });
+    </script>
+<?php endif ?>
 

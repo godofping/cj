@@ -29,16 +29,15 @@
 
             <div class="card">
                 <div class="card-body">
-                    <div class="table-responsive m-t-40">
+                    <div class="table-responsive">
                         <table id="datable" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
                                     <th>Order Number</th>
+                                    <th>Order Amount</th>
                                     <th>Date Placed</th>
-                                    <th>Customer Type</th>
                                     <th>Delivery Method</th>
                                     <th>Mode of Payment</th>
-                                    <th>Customer</th>
                                     <th>Order Status</th>
                                     <th>Payment Status</th>
                                     <th class="noExport">Actions</th>
@@ -74,7 +73,7 @@
                 },
         "columnDefs":[
             {
-                "targets":[8],
+                "targets":[7],
                 "orderable":false,
             },
         ],

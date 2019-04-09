@@ -29,8 +29,7 @@
 
             <div class="card">
                 <div class="card-body">
- 					<a href="add-category.php"><button class="btn btn-info pull-right">Add Category</button></a>
-                    <div class="table-responsive m-t-40">
+                    <div class="table-responsive">
                         <table id="datable" class="table table-bordered table-striped">
                             <thead>
                                 <tr>

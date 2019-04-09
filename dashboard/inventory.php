@@ -30,7 +30,7 @@
             <div class="card">
                 <div class="card-body">
 
-                    <div class="table-responsive m-t-40">
+                    <div class="table-responsive">
                         <table id="datable" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
