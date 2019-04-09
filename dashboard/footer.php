@@ -153,7 +153,7 @@
         <?php if (isset($_SESSION['toast']) and $_SESSION['toast'] == 'update-staff'): ?>
             $.toast({
               heading: 'UPDATED',
-              text: 'Staff Updated!',
+              text: 'Staff Profile Updated!',
               position: 'top-center',
               loaderBg:'#ff6849',
               icon: 'success',
@@ -174,9 +174,51 @@
             });
         <?php endif?>
 
-        <?php if (isset($_SESSION['toast']) and $_SESSION['toast'] == 'administratorUserName-taken'): ?>
+
+        <?php if (isset($_SESSION['toast']) and $_SESSION['toast'] == 'unblock-staff'): ?>
             $.toast({
-              heading: 'USERNAME TAKEN',
+              heading: 'UNBLOCKED',
+              text: 'Staff Unblocked!',
+              position: 'top-center',
+              loaderBg:'#ff6849',
+              icon: 'success',
+              hideAfter: 5000, 
+              stack: 6
+            });
+        <?php endif?>
+
+        <?php if (isset($_SESSION['toast']) and $_SESSION['toast'] == 'block-customer-view-all'): ?>
+            $.toast({
+              heading: 'BLOCKED',
+              text: 'Customer Blocked!',
+              position: 'top-center',
+              loaderBg:'#ff6849',
+              icon: 'error',
+              hideAfter: 5000, 
+              stack: 6
+            });
+        <?php endif?>
+
+
+        <?php if (isset($_SESSION['toast']) and $_SESSION['toast'] == 'unblock-customer-view-all'): ?>
+            $.toast({
+              heading: 'UNBLOCKED',
+              text: 'Customer Unblocked!',
+              position: 'top-center',
+              loaderBg:'#ff6849',
+              icon: 'success',
+              hideAfter: 5000, 
+              stack: 6
+            });
+        <?php endif?>
+
+
+
+
+
+        <?php if (isset($_SESSION['toast']) and $_SESSION['toast'] == 'userEmail-taken'): ?>
+            $.toast({
+              heading: 'EMAIL ALREADY TAKEN',
               text: 'Please use another Username!',
               position: 'top-center',
               loaderBg:'#ff6849',

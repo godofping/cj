@@ -29,7 +29,7 @@
 
             <div class="card">
                 <div class="card-body">
- 					<a href="add-user.php"><button class="btn btn-info pull-right">Add User</button></a>
+ 					<a href="add-staff.php"><button class="btn btn-info pull-right">Add Staff</button></a>
                     <div class="table-responsive m-t-40">
                         <table id="datable" class="table table-bordered table-striped">
                             <thead>
@@ -71,7 +71,7 @@
                 },
         "columnDefs":[
             {
-                "targets":[3],
+                "targets":[4],
                 "orderable":false,
             },
         ],

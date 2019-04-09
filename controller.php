@@ -12,6 +12,7 @@ if (isset($_GET['from']) and $_GET['from'] == 'login') {
 
 	if (count($res) > 0) {
 		$res = $res[0];
+
 		
 		$_SESSION['userType'] = $res['userType'];
 		$_SESSION['userEmail'] = $res['userEmail'];
@@ -46,6 +47,7 @@ if (isset($_GET['from']) and $_GET['from'] == 'login') {
 		$_SESSION['toast'] = 'login-failed';
 		header("Location: login.php?show=login");
 	}
+
 }
 
 if (isset($_GET['from']) and $_GET['from'] == 'logout') {

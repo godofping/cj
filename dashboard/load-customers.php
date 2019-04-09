@@ -19,7 +19,7 @@
  */
  
 // DB table to use
-$table = 'staffs_view';
+$table = 'customers_view';
  
 // Table's primary key
 $primaryKey = 'userId';
@@ -35,7 +35,10 @@ $columns = array(
     array( 'db' => 'userEmail',   'dt' => 0 ),
     array( 'db' => 'userFirstName',   'dt' => 1 ),
     array( 'db' => 'userLastName',   'dt' => 2 ),
-    array( 'db' => 'userIsBlocked',   'dt' => 3,'formatter' => function( $d, $row ) {
+    array( 'db' => 'userAddress',   'dt' => 3 ),
+    array( 'db' => 'userPhoneNumber',   'dt' => 4 ),
+    array( 'db' => 'userRegistrationDate',   'dt' => 5 ),
+    array( 'db' => 'userIsBlocked',   'dt' => 6,'formatter' => function( $d, $row ) {
         if ($row['userIsBlocked'] == 1) {
             return 'Yes';
         }
@@ -44,14 +47,14 @@ $columns = array(
             return 'No';
         }
     } ),
-    array( 'db' => 'userId', 'dt' => 4,'formatter' => function( $d, $row ) {
+    array( 'db' => 'userId', 'dt' => 7,'formatter' => function( $d, $row ) {
 
         if ($row['userIsBlocked'] == 1) {
-            return '<a class = "btn btn-info btn-xs" href="update-staff.php?userId=' . $row['userId'] . '">Update</a> <a class = "btn btn-danger btn-xs" onclick = "return confirm('."'Are you sure want to unblock this account?'".')" href="controller.php?from=unblock-staff&userId=' . $row['userId'] . '">Unblock</a>';
+            return '<a class = "btn btn-danger btn-xs" onclick = "return confirm('."'Are you sure want to unblock this account?'".')" href="controller.php?from=unblock-customer-view-all&userId=' . $row['userId'] . '">Unblock</a>';
         }
         else
         {
-            return '<a class = "btn btn-info btn-xs" href="update-staff.php?userId=' . $row['userId'] . '">Update</a> <a class = "btn btn-danger btn-xs" onclick = "return confirm('."'Are you sure want to block this account?'".')" href="controller.php?from=block-staff&userId=' . $row['userId'] . '">Block</a>';
+            return '<a class = "btn btn-danger btn-xs" onclick = "return confirm('."'Are you sure want to block this account?'".')" href="controller.php?from=block-customer-view-all&userId=' . $row['userId'] . '">Block</a>';
         }
 
         

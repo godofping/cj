@@ -106,90 +106,100 @@ if (isset($_GET['from']) and $_GET['from'] == 'delete-category') {
 }
 
 
-if (isset($_GET['from']) and $_GET['from'] == 'add-user') {
+if (isset($_GET['from']) and $_GET['from'] == 'add-staff') {
 
-	$db->select('administrators_table','*',NULL,'administratorUserName = "' . $_POST['administratorUserName'] . '"', NULL); 
+	$db->select('users_table','*',NULL,'userEmail = "' . $_POST['userEmail'] . '"', NULL); 
 	$res = $db->getResult();
 	
 	if (count($res) == 0) {
-		$administratorUserName = $db->escapeString($_POST['administratorUserName']);
-		$administratorUserPassword = $db->escapeString(md5($_POST['administratorUserPassword']));
-		$administratorfullName = $db->escapeString($_POST['administratorfullName']);
+		$userEmail = $db->escapeString($_POST['userEmail']);
+		$userPassword = $db->escapeString(md5($_POST['userPassword']));
+		$userFirstName = $db->escapeString($_POST['userFirstName']);
+		$userLastName = $db->escapeString($_POST['userLastName']);
+		$userRegistrationDate = $db->escapeString(date('Y-m-d'));
+		$userType = $db->escapeString("Staff");
 
-		$db->insert('administrators_table',
+		$db->insert('users_table',
 		array(
-			'administratorUserName'=>$administratorUserName,
-			'administratorUserPassword'=>$administratorUserPassword,
-			'administratorfullName'=>$administratorfullName,
-			'isDeleted'=>'0',
+			'userEmail'=>$userEmail,
+			'userPassword'=>$userPassword,
+			'userFirstName'=>$userFirstName,
+			'userLastName'=>$userLastName,
+			'userRegistrationDate'=>$userRegistrationDate,
+			'userType'=>$userType,
+			'userIsBlocked'=>'0',
 			)
 		);
 
 		$res = $db->getResult();
 
 		
-		$_SESSION['toast'] = 'add-user';
+		$_SESSION['toast'] = 'add-staff';
 	}
 	else
 	{
-		$_SESSION['toast'] = 'administratorUserName-taken';
+		$_SESSION['toast'] = 'userEmail-taken';
 
 	}
-	header("Location: add-user.php");
+	header("Location: add-staff.php");
 
 	
 }
 
-if (isset($_GET['from']) and $_GET['from'] == 'update-user') {
+if (isset($_GET['from']) and $_GET['from'] == 'update-staff') {
 
-	$administratorUserName = $db->escapeString($_POST['administratorUserName']);
-	$administratorUserPassword = $db->escapeString(md5($_POST['administratorUserPassword']));
-	$administratorfullName = $db->escapeString($_POST['administratorfullName']);
+	$userEmail = $db->escapeString($_POST['userEmail']);
+	$userPassword = $db->escapeString(md5($_POST['userPassword']));
+	$userFirstName = $db->escapeString($_POST['userFirstName']);
+	$userLastName = $db->escapeString($_POST['userLastName']);
 
-	$db->select('administrators_table','*',NULL,'administratorUserId = "' . $_POST['administratorUserId'] . '"', NULL); 
+	$db->select('users_table','*',NULL,'userId = "' . $_GET['userId'] . '"', NULL); 
 	$res = $db->getResult(); $res = $res[0];
 
-	if ($administratorUserName != $res['administratorUserName']) {
+	if ($userEmail != $res['userEmail']) {
 
-		$db->select('administrators_table','*',NULL,'administratorUserName = "' . $_POST['administratorUserName'] . '"', NULL); 
+		$db->select('users_table','*',NULL,'userEmail = "' . $_POST['userEmail'] . '"', NULL); 
 		$res = $db->getResult();
 		
 		if (count($res) == 0) {
-			$db->update('administrators_table',
+			$db->update('users_table',
 			array(
-				'administratorUserName'=>$administratorUserName,
-				'administratorUserPassword'=>$administratorUserPassword,
-				'administratorfullName'=>$administratorfullName,
+				'userEmail'=>$userEmail,
+				'userPassword'=>$userPassword,
+				'userFirstName'=>$userFirstName,
+				'userLastName'=>$userLastName,
 				),
-				'administratorUserId=' . $_POST['administratorUserId']
+				'userId=' . $_GET['userId']
 			);
 
 			$res = $db->getResult();
 			
-			$_SESSION['toast'] = 'update-user';
+			$_SESSION['toast'] = 'update-staff';
 		}
 		else
 		{
-			$_SESSION['toast'] = 'administratorUserName-taken';
+			$_SESSION['toast'] = 'userEmail-taken';
 		}
 
 	}
 	else
 	{
-		$db->update('administrators_table',
+		$db->update('users_table',
 		array(
-			'administratorUserPassword'=>$administratorUserPassword,
-			'administratorfullName'=>$administratorfullName,
+			'userPassword'=>$userPassword,
+			'userFirstName'=>$userFirstName,
+			'userLastName'=>$userLastName,
 			),
-			'administratorUserId=' . $_POST['administratorUserId']
+			'userId=' . $_GET['userId']
 		);
 
 		$res = $db->getResult();
 
-		$_SESSION['toast'] = 'update-user';
+		$_SESSION['toast'] = 'update-staff';
 	}
 
-	header("Location: update-user.php?administratorUserId=".$_POST['administratorUserId']."");
+
+	header("Location: update-staff.php?userId=".$_GET['userId']."");
 		
 }
 
@@ -212,6 +222,59 @@ if (isset($_GET['from']) and $_GET['from'] == 'block-staff') {
 	$_SESSION['toast'] = 'block-staff';
 }
 
+if (isset($_GET['from']) and $_GET['from'] == 'unblock-staff') {
+
+	$userId = $db->escapeString($_GET['userId']);
+
+	$db->update('users_table',
+	array(
+		'userIsBlocked'=>'0',
+		),
+		'userId=' . $userId
+	);
+
+	$res = $db->getResult();
+
+
+	header("Location: manage-staffs.php");
+	$_SESSION['toast'] = 'unblock-staff';
+}
+
+if (isset($_GET['from']) and $_GET['from'] == 'block-customer-view-all') {
+
+	$userId = $db->escapeString($_GET['userId']);
+
+	$db->update('users_table',
+	array(
+		'userIsBlocked'=>'1',
+		),
+		'userId=' . $userId
+	);
+
+	$res = $db->getResult();
+
+
+	header("Location: customers.php");
+	$_SESSION['toast'] = 'block-customer-view-all';
+}
+
+if (isset($_GET['from']) and $_GET['from'] == 'unblock-customer-view-all') {
+
+	$userId = $db->escapeString($_GET['userId']);
+
+	$db->update('users_table',
+	array(
+		'userIsBlocked'=>'0',
+		),
+		'userId=' . $userId
+	);
+
+	$res = $db->getResult();
+
+
+	header("Location: customers.php");
+	$_SESSION['toast'] = 'unblock-customer-view-all';
+}
 
 
 if (isset($_GET['from']) and $_GET['from'] == 'change-password') {

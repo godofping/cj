@@ -63,11 +63,8 @@ reports
 backup and restore
 over due
 staffs
-customers
-	accounts
-	feedbacks
-	reviews
-	list of customers with action
+
+
 
 product is ready to pick up
 

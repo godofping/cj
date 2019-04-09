@@ -12,7 +12,7 @@ if (empty($res)) { ?>
     <script type="text/javascript">window.location.replace("index.php");</script>
 <?php }
 
-$db->select('users_view','*',NULL,'userId = "' . $_SESSION['userId'] . '"', NULL); 
+$db->select('customers_view','*',NULL,'userId = "' . $_SESSION['userId'] . '"', NULL); 
 $res = $db->getResult(); $res = $res[0];
 
  } ?>
