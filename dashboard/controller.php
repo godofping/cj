@@ -89,10 +89,18 @@ if (isset($_GET['from']) and $_GET['from'] == 'delete-category') {
 
 	$db->delete('product_categories_table','productCategoryId=' . $_GET['productCategoryId']);
 
-	$res = $db->getResult();
+	$res = $db->getResult(); $res = $res[0];
+
+	if ($res == 1) {
+		$_SESSION['toast'] = 'delete-category';
+	}
+	else
+	{
+		$_SESSION['toast'] = 'delete-category-failed';
+	}
 
 	header("Location: categories.php");
-	$_SESSION['toast'] = 'delete-category';
+	 
 
 
 }
@@ -186,23 +194,22 @@ if (isset($_GET['from']) and $_GET['from'] == 'update-user') {
 }
 
 
-if (isset($_GET['from']) and $_GET['from'] == 'delete-user') {
+if (isset($_GET['from']) and $_GET['from'] == 'block-staff') {
 
-	$administratorUserId = $db->escapeString($_GET['administratorUserId']);
+	$userId = $db->escapeString($_GET['userId']);
 
-	$db->update('administrators_table',
+	$db->update('users_table',
 	array(
-		'isDeleted'=>'1',
+		'userIsBlocked'=>'1',
 		),
-		'administratorUserId=' . $_GET['administratorUserId']
+		'userId=' . $userId
 	);
 
 	$res = $db->getResult();
 
-	print_r($res);
 
-	header("Location: manage-users.php");
-	$_SESSION['toast'] = 'delete-user';
+	header("Location: manage-staffs.php");
+	$_SESSION['toast'] = 'block-staff';
 }
 
 
@@ -502,10 +509,18 @@ if (isset($_GET['from']) and $_GET['from'] == 'delete-sub-category') {
 
 	$db->delete('product_sub_categories_table','productSubCategoryId=' . $productSubCategoryId); 
 
-	$res = $db->getResult();
+	$res = $db->getResult(); $res = $res[0];
+
+	if ($res == 1) {
+		$_SESSION['toast'] = 'delete-sub-category';
+	}
+	else
+	{
+		$_SESSION['toast'] = 'delete-sub-category-failed';
+	}
 
 	header("Location: sub-categories.php");
-	$_SESSION['toast'] = 'delete-sub-category';
+	
 }
 
 

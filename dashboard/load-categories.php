@@ -19,7 +19,7 @@
  */
  
 // DB table to use
-$table = 'product_categories_table';
+$table = 'product_categories_view';
  
 // Table's primary key
 $primaryKey = 'productCategoryId';

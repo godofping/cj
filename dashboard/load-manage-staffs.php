@@ -19,10 +19,10 @@
  */
  
 // DB table to use
-$table = 'administrators_view';
+$table = 'staffs_view';
  
 // Table's primary key
-$primaryKey = 'administratorUserId';
+$primaryKey = 'userId';
  
 // Array of database columns which should be read and sent back to DataTables.
 // The `db` parameter represents the column name in the database, while the `dt`
@@ -32,10 +32,20 @@ $primaryKey = 'administratorUserId';
 
 $columns = array(
 
-    array( 'db' => 'administratorUserName',   'dt' => 0 ),
-    array( 'db' => 'administratorfullName',   'dt' => 1 ),
-    array( 'db' => 'administratorUserId', 'dt' => 2,'formatter' => function( $d, $row ) {
-        return '<a class = "btn btn-info btn-xs" href="update-user.php?administratorUserId=' . $row['administratorUserId'] . '">Update</a> <a class = "btn btn-danger btn-xs" onclick = "return confirm('."'Are you sure want to delete this record?'".')" href="controller.php?from=delete-user&administratorUserId=' . $row['administratorUserId'] . '">Delete</a>';
+    array( 'db' => 'userEmail',   'dt' => 0 ),
+    array( 'db' => 'userFirstName',   'dt' => 1 ),
+    array( 'db' => 'userLastName',   'dt' => 2 ),
+    array( 'db' => 'userIsBlocked',   'dt' => 3,'formatter' => function( $d, $row ) {
+        if ($row['userIsBlocked'] == 1) {
+            return 'Yes';
+        }
+        else
+        {
+            return 'No';
+        }
+    } ),
+    array( 'db' => 'userId', 'dt' => 4,'formatter' => function( $d, $row ) {
+        return '<a class = "btn btn-info btn-xs" href="update-staff.php?userId=' . $row['userId'] . '">Update</a> <a class = "btn btn-danger btn-xs" onclick = "return confirm('."'Are you sure want to block this account?'".')" href="controller.php?from=block-staff&userId=' . $row['userId'] . '">Block</a>';
     } ),
 
 );
@@ -55,7 +65,7 @@ $sql_details = array(
 
    require( 'ssp.class.php' );
     echo json_encode(
-    SSP::complex( $_POST, $sql_details, $table, $primaryKey, $columns,'isDeleted = 0' )
+    SSP::complex( $_POST, $sql_details, $table, $primaryKey, $columns )
 );
 
 

@@ -124,10 +124,24 @@
             });
         <?php endif?>
 
-        <?php if (isset($_SESSION['toast']) and $_SESSION['toast'] == 'add-user'): ?>
+        <?php if (isset($_SESSION['toast']) and $_SESSION['toast'] == 'delete-category-failed'): ?>
+            $.toast({
+              heading: 'Failed',
+              text: 'Category Deletion Failed!',
+              position: 'top-center',
+              loaderBg:'#ff6849',
+              icon: 'error',
+              hideAfter: 5000, 
+              stack: 6
+            });
+        <?php endif?>
+
+        
+
+        <?php if (isset($_SESSION['toast']) and $_SESSION['toast'] == 'add-staff'): ?>
             $.toast({
               heading: 'ADDED',
-              text: 'User Saved!',
+              text: 'Staff Added!',
               position: 'top-center',
               loaderBg:'#ff6849',
               icon: 'success',
@@ -136,10 +150,10 @@
             });
         <?php endif?>
 
-        <?php if (isset($_SESSION['toast']) and $_SESSION['toast'] == 'update-user'): ?>
+        <?php if (isset($_SESSION['toast']) and $_SESSION['toast'] == 'update-staff'): ?>
             $.toast({
               heading: 'UPDATED',
-              text: 'User Updated!',
+              text: 'Staff Updated!',
               position: 'top-center',
               loaderBg:'#ff6849',
               icon: 'success',
@@ -148,10 +162,10 @@
             });
         <?php endif?>
 
-        <?php if (isset($_SESSION['toast']) and $_SESSION['toast'] == 'delete-user'): ?>
+        <?php if (isset($_SESSION['toast']) and $_SESSION['toast'] == 'block-staff'): ?>
             $.toast({
-              heading: 'DELETED',
-              text: 'User Deleted!',
+              heading: 'BLOCKED',
+              text: 'Staff Blocked!',
               position: 'top-center',
               loaderBg:'#ff6849',
               icon: 'error',
@@ -236,6 +250,20 @@
               stack: 6
             });
          <?php endif?>
+
+         <?php if (isset($_SESSION['toast']) and $_SESSION['toast'] == 'delete-sub-category-failed'): ?>
+            $.toast({
+              heading: 'FAILED',
+              text: 'Sub Category Deletion Failed!',
+              position: 'top-center',
+              loaderBg:'#ff6849',
+              icon: 'error',
+              hideAfter: 5000, 
+              stack: 6
+            });
+         <?php endif?>
+
+         
 
 
          <?php if (isset($_SESSION['toast']) and $_SESSION['toast'] == 'add-product'): ?>
@@ -464,7 +492,7 @@
       <?php if (isset($_SESSION['toast']) and ($_SESSION['toast'] == 'recieve-payment' or $_SESSION['toast'] == 'invalid-payment')): ?>
           $.toast({
             heading: 'UPDATED',
-            text: 'Payment Status Updated!',
+            text: 'Order Payment Status Updated!',
             position: 'top-center',
             loaderBg:'#ff6849',
             icon: 'success',

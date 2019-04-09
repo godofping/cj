@@ -6,7 +6,7 @@
     </div>
     <div class="col-md-7 align-self-center">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="javascript:void(0)">Users</a></li>
+            <li class="breadcrumb-item"><a href="javascript:void(0)">Staffs</a></li>
 <!--             <li class="breadcrumb-item">pages</li> -->
             <li class="breadcrumb-item active">Manage</li>
         </ol>
@@ -34,8 +34,10 @@
                         <table id="datable" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
-                                    <th>Username</th>
-                                    <th>Full Name</th>
+                                    <th>Email</th>
+                                    <th>First Name</th>
+                                    <th>Last Name</th>
+                                    <th>Blocked</th>
                                     <th class="noExport">Actions</th>
 
                                 </tr>
@@ -64,12 +66,12 @@
         "order":[],
         "ajax": {
                     "type": 'POST',
-                    "url": 'load-manage-users.php',
+                    "url": 'load-manage-staffs.php',
                     
                 },
         "columnDefs":[
             {
-                "targets":[2],
+                "targets":[3],
                 "orderable":false,
             },
         ],

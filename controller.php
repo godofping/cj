@@ -89,7 +89,7 @@ if (isset($_GET['from']) and $_GET['from'] == 'customer-registration') {
 		array(
 			'userEmail'=>$userEmail,
 			'userPassword'=>$userPassword,
-			'userType'=>'Online',
+			'userType'=>'Customer',
 			'userIsBlocked'=>'0',
 			'userRegistrationDate'=>date('Y-m-d'),
 			)

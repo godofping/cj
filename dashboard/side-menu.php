@@ -81,12 +81,12 @@
                         </li>
 
 
-                        <li class="<?php if ($filename == 'add-user' or $filename == 'update-user'): ?>
+                        <li class="<?php if ($filename == 'add-staff' or $filename == 'update-staff'): ?>
                             active
                         <?php endif ?>"> 
-                            <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-account-settings-variant"></i><span class="hide-menu">Users</span></a>
+                            <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-account-settings-variant"></i><span class="hide-menu">Staffs</span></a>
                             <ul aria-expanded="false" class="collapse">
-                                <li><a href="manage-users.php" class="<?php if ($filename == 'add-user' or $filename == 'update-user'): ?>active<?php endif ?>">Manage</a></li>
+                                <li><a href="manage-staffs.php" class="<?php if ($filename == 'add-staff' or $filename == 'update-staff'): ?>active<?php endif ?>">Manage</a></li>
                                 
                             </ul>
                         </li>

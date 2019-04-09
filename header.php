@@ -76,7 +76,11 @@ if ($res['userIsBlocked'] == 1 and isset($_SESSION['userId']) and $filename <> "
         <div class="login-info">
         <ul>
   
-          <li><p class="call"> <i class="icon-user"></i> Hi, <?php echo $_SESSION['userFirstName'] . " " . $_SESSION['userLastName']; ?>! | <?php echo $_SESSION['userEmail']; ?> </p></li>
+          <li><p class="call"> <i class="icon-user"></i> Hi, <?php 
+
+          $db->select('users_table','*',NULL,'userId = "' . $_SESSION['userId'] . '"', NULL); 
+          $res = $db->getResult(); $res = $res[0];
+          echo $res['userFirstName'] . " " . $res['userLastName']; ?>! | <?php echo $res['userEmail']; ?> </p></li>
 
         </ul>
       </div>
@@ -85,7 +89,7 @@ if ($res['userIsBlocked'] == 1 and isset($_SESSION['userId']) and $filename <> "
  
     </div>
   </div>
-  
+
 
   <header>
     <div class="sticky">
