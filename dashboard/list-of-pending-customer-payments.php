@@ -63,7 +63,7 @@ include('header.php');
 <?php include('footer.php'); ?>
 
 <script type="text/javascript">
-	var title = "List of Customer Pending Payments";
+	var title = "List of Pending Customer Payments";
     var dataTable = $('#datable').DataTable({
         // "processing":true,
         // "serverSide":true,
