@@ -2,7 +2,8 @@
 include('header.php');
 
 $period = $_GET['period'];
-
+$date = $_GET['date'];
+$string ="";
 ?>
 <div class="row page-titles">
     <div class="col-md-5 align-self-center">
@@ -39,19 +40,25 @@ $period = $_GET['period'];
                         <div class="col-md-2">
                             <div class="form-group">
 
-                                <?php if ($_GET['period'] == 'Daily'): ?>
+                                <?php if ($period == 'Daily'): 
+                                    $string = "List of Daily Collections (" . date('F d, Y', strtotime($date)) . ")";
+                                ?>
                                     <label>Date</label>
-                                    <input type="date" id="date" class="form-control" value="<?php echo $_GET['date'] ?>">
+                                    <input type="date" id="date" class="form-control" value="<?php echo $date ?>">
                                 <?php endif ?>
 
-                                <?php if ($_GET['period'] == 'Weekly'): ?>
+                                <?php if ($period == 'Weekly'): 
+                                    $string = "List of Weekly Collections (Week " . date('W, Y', strtotime($date)) . ")";
+                                ?>
                                     <label>Date</label>
-                                    <input type="week" id="date" class="form-control" value="<?php echo $_GET['date'] ?>">
+                                    <input type="week" id="date" class="form-control" value="<?php echo $date ?>">
                                 <?php endif ?>
 
-                                <?php if ($_GET['period'] == 'Monthly'): ?>
+                                <?php if ($period == 'Monthly'): 
+                                    $string = "List of Monthly Collections (" . date('F Y', strtotime($date)) . ")";
+                                ?>
                                     <label>Date</label>
-                                    <input type="month" id="date" class="form-control" value="<?php echo $_GET['date'] ?>">
+                                    <input type="month" id="date" class="form-control" value="<?php echo $date ?>">
                                 <?php endif ?>
 
                                 
@@ -91,7 +98,7 @@ $period = $_GET['period'];
 <?php include('footer.php'); ?>
 
 <script type="text/javascript">
-	var title = "List of Customers";
+	var title = "<?php echo $string; ?>";
     var dataTable = $('#datable').DataTable({
         // "processing":true,
         // "serverSide":true,
@@ -100,6 +107,10 @@ $period = $_GET['period'];
         "ajax": {
                     "type": 'POST',
                     "url": 'load-list-of-collections.php',
+                    "data": {
+                            date:"<?php echo $date ?>",
+                            period:"<?php echo $period ?>",
+                    },
                     
                 },
         "columnDefs":[
@@ -132,29 +143,29 @@ $period = $_GET['period'];
 
 
 
-<?php if ($_GET['period'] == 'Daily'): ?>
+<?php if ($period == 'Daily'): ?>
     <script type="text/javascript">
         $('#date').change(function(){
             var date = $('#date').val();
-            window.location.replace("list-of-orders-daily.php?date=" + date);
+            window.location.replace("list-of-collections.php?period=Daily&date=" + date);
         });
     </script>
 <?php endif ?>
 
-<?php if ($_GET['period'] == 'Weekly'): ?>
+<?php if ($period == 'Weekly'): ?>
     <script type="text/javascript">
         $('#date').change(function(){
             var date = $('#date').val();
-            window.location.replace("list-of-orders-daily.php?date=" + date);
+            window.location.replace("list-of-collections.php?period=Weekly&date=" + date);
         });
     </script>
 <?php endif ?>
 
-<?php if ($_GET['period'] == 'Monthly'): ?>
+<?php if ($period == 'Monthly'): ?>
     <script type="text/javascript">
         $('#date').change(function(){
             var date = $('#date').val();
-            window.location.replace("list-of-orders-daily.php?date=" + date);
+            window.location.replace("list-of-collections.php?period=Monthly&date=" + date);
         });
     </script>
 <?php endif ?>

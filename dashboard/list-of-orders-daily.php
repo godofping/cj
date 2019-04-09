@@ -71,7 +71,7 @@
 <?php include('footer.php'); ?>
 
 <script type="text/javascript">
-	var title = "List of Orders (<?php echo date('F d, Y', strtotime($_GET['date'])) ?>)";
+	var title = "List of Daily Orders (<?php echo date('F d, Y', strtotime($_GET['date'])) ?>)";
     var dataTable = $('#datable').DataTable({
         // "processing":true,
         // "serverSide":true,

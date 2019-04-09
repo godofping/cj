@@ -70,9 +70,19 @@ $sql_details = array(
  */
 
    require( 'ssp.class.php' );
+
+if ($_POST['period'] == 'Daily') {
     echo json_encode(
-    SSP::complex( $_POST, $sql_details, $table, $primaryKey, $columns)
-);
+    SSP::complex( $_POST, $sql_details, $table, $primaryKey, $columns, "paymentTransactionDate like '%" . $_POST['date'] . "%'"));
+}
 
+if ($_POST['period'] == 'Weekly') {
+    echo json_encode(
+    SSP::complex( $_POST, $sql_details, $table, $primaryKey, $columns, "weekCode = '" . $_POST['date'] . "'"));
+}
 
- 
+if ($_POST['period'] == 'Monthly') {
+    echo json_encode(
+    SSP::complex( $_POST, $sql_details, $table, $primaryKey, $columns, "paymentTransactionDate like '%" . $_POST['date'] . "%'"));
+}
+

@@ -92,17 +92,17 @@
                         </li>
 
 
-                        <li class="<?php if ($filename == 'list-of-customers' or $filename == 'list-of-orders-daily' or $filename == 'list-of-cancelled-orders'): ?>
+                        <li class="<?php if ($filename == 'list-of-customers' or $filename == 'list-of-orders-daily' or $filename == 'list-of-cancelled-orders' or $filename == 'list-of-collections'): ?>
                             active
                         <?php endif ?>"> 
                             <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-note-text"></i><span class="hide-menu">Reports</span></a>
                             <ul aria-expanded="false" class="collapse">
                                 <li><a href="list-of-customers.php" class="<?php if ($filename == 'list-of-customers'): ?>active<?php endif ?>">List of Customers</a></li>
-                                <li> <a class="<?php if ($filename == 'list-of-collections'): ?>active<?php endif ?> has-arrow" href="#" aria-expanded="false">List of Collections</a>
+                                <li class="<?php if ($filename == 'list-of-collections' and ($_GET['period'] == 'Daily' or $_GET['period'] == 'Weekly' or $_GET['period'] == 'Monthly')): ?>active<?php endif ?>"> <a class="<?php if ($filename == 'list-of-collections'): ?>active<?php endif ?> has-arrow" href="#" aria-expanded="false">List of Collections</a>
                                     <ul aria-expanded="false" class="collapse">
-                                        <li><a href="list-of-collections.php?period=Daily&date=<?php echo date('Y-m-d') ?>">Daily</a></li>
-                                        <li><a href="list-of-collections.php?period=Weekly">Weekly</a></li>
-                                        <li><a href="list-of-collections.php?period=Monthly">Monthly</a></li>
+                                        <li><a class="<?php if ($filename == 'list-of-collections' and $_GET['period'] == 'Daily'): ?>active<?php endif ?>" href="list-of-collections.php?period=Daily&date=<?php echo date('Y-m-d') ?>">Daily</a></li>
+                                        <li><a class="<?php if ($filename == 'list-of-collections' and $_GET['period'] == 'Weekly'): ?>active<?php endif ?>" href="list-of-collections.php?period=Weekly&date=<?php echo date('Y-') . "W" . date('W'); ?>">Weekly</a></li>
+                                        <li><a class="<?php if ($filename == 'list-of-collections' and $_GET['period'] == 'Monthly'): ?>active<?php endif ?>" href="list-of-collections.php?period=Monthly&date=<?php echo date('Y-m'); ?>">Monthly</a></li>
                                     </ul>
                                 </li>
                                 <li><a href="list-of-orders-daily.php?date=<?php echo date('Y-m-d') ?>" class="<?php if ($filename == 'list-of-orders-daily'): ?>active<?php endif ?>">List of Orders (Daily)</a></li>
