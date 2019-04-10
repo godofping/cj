@@ -15,8 +15,8 @@ $res = $db->getResult(); $res = $res[0];
         <div class="container-full"> 
           <!-- Header Text -->
       <!--     <div class="text-left col-lg-8 no-padding"> <span class="price"><small>$</small>299.99</span> -->
-            <h4>The Latest Summer Products for 2019</h4>
-            <h1 class="extra-huge-text">look hot with 2019 style</h1>
+            <h4>Welcome to</h4>
+            <h1 class="extra-huge-text">CJ Ashley Fashion Hub</h1>
             <div class="text-btn"> <a href="shop.php?productCategoryId=<?php echo $res['productCategoryId'] ?>" class="btn btn-inverse margin-top-40">SHOP NOW</a> </div>
           </div>
         </div>
@@ -34,7 +34,6 @@ $res = $db->getResult(); $res = $res[0];
                 <h3>We always stay with our clients and respect their business. We deliver 100% and provide instant response to help them succeed in constantly changing and challenging business world. </h3>
                 <ul class="social_icons">
                   <li><a href="https://www.facebook.com/ashley.simpal.1"><i class="icon-social-facebook"></i></a></li>
-                  <li><a href="https://twitter.com/XinBasco"><i class="icon-social-twitter"></i></a></li>
                 </ul>
               </div>
      

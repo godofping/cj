@@ -50,7 +50,7 @@
       <div class="container">
         <div class="row">
           <div class="col-md-6">
-            <p>©  <?php echo date('Y'); ?> CJ-Ashley Fashion Hub.  All right reserved.</p>
+            <p>©  <?php echo date('Y'); ?> CJ Ashley Fashion Hub.  All right reserved.</p>
           </div>
           <div class="col-md-6 text-right"> <img src="images/card-icon.png" alt="" > </div>
         </div>

@@ -29,7 +29,7 @@ if ($res['userIsBlocked'] == 1 and isset($_SESSION['userId']) and $filename <> "
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="">
 <meta name="author" content="M_Adnan">
-<title>CJ-Ashley Fashion Hub</title>
+<title>CJ Ashley Fashion Hub</title>
 <link rel="icon" type="image/png" sizes="16x16" href="dashboard/etc/logo.jpg">
 
 
