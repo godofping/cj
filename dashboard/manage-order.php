@@ -157,7 +157,7 @@ $res = $db->getResult(); $res = $res[0];
                                         <?php } ?>
 
                                         <?php if ($res['orderPaymentStatus'] == 'Paid'){ ?>
-                                            <a onclick = "return confirm('Are you sure want to finish this order?')" href="controller.php?from=finish-order&orderId=<?php echo $res['orderId'] ?>"><button type="button" class="btn btn-info waves-effect waves-light m-r-10 pull-right">Finish Order</button></a>
+                                            <a onclick = "return confirm('Are you sure want to finish this order?')" href="controller.php?from=finish-order&orderId=<?php echo $res['orderId'] ?>&userId=<?php echo $res['userId'] ?>"><button type="button" class="btn btn-info waves-effect waves-light m-r-10 pull-right">Finish Order</button></a>
                                         <?php } ?>
                                         
                                     <?php } ?>

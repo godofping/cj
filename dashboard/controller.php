@@ -969,6 +969,7 @@ if (isset($_GET['from']) and $_GET['from'] == 'finish-order') {
 	);
 
 	$res = $db->getResult();
+	print_r($res);
 
 
 	header("Location: manage-order.php?orderId=".$orderId);
