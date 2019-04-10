@@ -168,7 +168,7 @@ CREATE TABLE `product_categories_table` (
   `productCategoryId` int(6) NOT NULL AUTO_INCREMENT,
   `productCategory` varchar(60) DEFAULT NULL,
   PRIMARY KEY (`productCategoryId`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
 
 /*Data for the table `product_categories_table` */
 
@@ -368,7 +368,15 @@ DROP TABLE IF EXISTS `inventory_logs_view`;
  `productOption1` varchar(60) ,
  `productOption2` varchar(60) ,
  `productVariationIsDeleted` tinyint(1) ,
- `productPrice` float 
+ `productPrice` float ,
+ `productName` varchar(60) ,
+ `productSubCategoryId` int(6) ,
+ `productDetails` text ,
+ `productUpdateDate` datetime ,
+ `productIsDeleted` tinyint(1) ,
+ `productSubCategory` varchar(60) ,
+ `productCategoryId` int(6) ,
+ `productCategory` varchar(60) 
 )*/;
 
 /*Table structure for table `order_details_view` */
@@ -442,6 +450,7 @@ DROP TABLE IF EXISTS `orders_view`;
  `orderId` int(6) ,
  `orderPickupDate` date ,
  `orderPlacedDate` datetime ,
+ `overDueDate` datetime ,
  `orderShippingAddress` text ,
  `orderType` varchar(60) ,
  `orderShipFirstName` varchar(60) ,
@@ -757,7 +766,7 @@ DROP TABLE IF EXISTS `users_view`;
 /*!50001 DROP TABLE IF EXISTS `inventory_logs_view` */;
 /*!50001 DROP VIEW IF EXISTS `inventory_logs_view` */;
 
-/*!50001 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `inventory_logs_view` AS select `inventory_logs_table`.`inventorylogId` AS `inventorylogId`,`inventory_logs_table`.`productVariationId` AS `productVariationId`,`inventory_logs_table`.`inOrOut` AS `inOrOut`,`inventory_logs_table`.`quantity` AS `quantity`,`inventory_logs_table`.`transactionDateTime` AS `transactionDateTime`,`inventory_logs_table`.`inventoryLogRemark` AS `inventoryLogRemark`,`product_variations_table`.`productId` AS `productId`,`product_variations_table`.`productStock` AS `productStock`,`product_variations_table`.`productStocksReorderPoint` AS `productStocksReorderPoint`,`product_variations_table`.`productOption1` AS `productOption1`,`product_variations_table`.`productOption2` AS `productOption2`,`product_variations_table`.`productVariationIsDeleted` AS `productVariationIsDeleted`,`product_variations_table`.`productPrice` AS `productPrice` from (`inventory_logs_table` join `product_variations_table` on((`inventory_logs_table`.`productVariationId` = `product_variations_table`.`productVariationId`))) */;
+/*!50001 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `inventory_logs_view` AS select `inventory_logs_table`.`inventorylogId` AS `inventorylogId`,`inventory_logs_table`.`productVariationId` AS `productVariationId`,`inventory_logs_table`.`inOrOut` AS `inOrOut`,`inventory_logs_table`.`quantity` AS `quantity`,`inventory_logs_table`.`transactionDateTime` AS `transactionDateTime`,`inventory_logs_table`.`inventoryLogRemark` AS `inventoryLogRemark`,`product_variations_table`.`productId` AS `productId`,`product_variations_table`.`productStock` AS `productStock`,`product_variations_table`.`productStocksReorderPoint` AS `productStocksReorderPoint`,`product_variations_table`.`productOption1` AS `productOption1`,`product_variations_table`.`productOption2` AS `productOption2`,`product_variations_table`.`productVariationIsDeleted` AS `productVariationIsDeleted`,`product_variations_table`.`productPrice` AS `productPrice`,`products_table`.`productName` AS `productName`,`products_table`.`productSubCategoryId` AS `productSubCategoryId`,`products_table`.`productDetails` AS `productDetails`,`products_table`.`productUpdateDate` AS `productUpdateDate`,`products_table`.`productIsDeleted` AS `productIsDeleted`,`product_sub_categories_table`.`productSubCategory` AS `productSubCategory`,`product_sub_categories_table`.`productCategoryId` AS `productCategoryId`,`product_categories_table`.`productCategory` AS `productCategory` from ((((`inventory_logs_table` join `product_variations_table` on((`inventory_logs_table`.`productVariationId` = `product_variations_table`.`productVariationId`))) join `products_table` on((`product_variations_table`.`productId` = `products_table`.`productId`))) join `product_sub_categories_table` on((`products_table`.`productSubCategoryId` = `product_sub_categories_table`.`productSubCategoryId`))) join `product_categories_table` on((`product_sub_categories_table`.`productCategoryId` = `product_categories_table`.`productCategoryId`))) where (`products_table`.`productIsDeleted` = 0) */;
 
 /*View structure for view order_details_view */
 
@@ -771,7 +780,7 @@ DROP TABLE IF EXISTS `users_view`;
 /*!50001 DROP TABLE IF EXISTS `orders_view` */;
 /*!50001 DROP VIEW IF EXISTS `orders_view` */;
 
-/*!50001 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `orders_view` AS select `orders_table`.`orderId` AS `orderId`,`orders_table`.`orderPickupDate` AS `orderPickupDate`,`orders_table`.`orderPlacedDate` AS `orderPlacedDate`,`orders_table`.`orderShippingAddress` AS `orderShippingAddress`,`orders_table`.`orderType` AS `orderType`,`orders_table`.`orderShipFirstName` AS `orderShipFirstName`,`orders_table`.`orderShipLastName` AS `orderShipLastName`,`orders_table`.`orderShipEmail` AS `orderShipEmail`,`orders_table`.`orderShipPhoneNumber` AS `orderShipPhoneNumber`,`orders_table`.`orderStatus` AS `orderStatus`,`orders_table`.`orderPaymentStatus` AS `orderPaymentStatus`,`orders_table`.`orderTotalAmount` AS `orderTotalAmount`,`orders_table`.`userId` AS `userId`,`orders_table`.`orderDeliveryMethod` AS `orderDeliveryMethod`,`orders_table`.`billingAddress` AS `billingAddress`,`orders_table`.`billingFirstName` AS `billingFirstName`,`orders_table`.`billingLastName` AS `billingLastName`,`orders_table`.`billingEmail` AS `billingEmail`,`orders_table`.`billingPhoneNumber` AS `billingPhoneNumber`,`orders_table`.`orderShippingFee` AS `orderShippingFee`,`orders_table`.`orderRemarks` AS `orderRemarks`,`orders_table`.`orderModeOfPayment` AS `orderModeOfPayment`,`orders_table`.`orderIsReschedule` AS `orderIsReschedule`,`users_table`.`userEmail` AS `userEmail`,`users_table`.`userPassword` AS `userPassword`,`users_table`.`userFirstName` AS `userFirstName`,`users_table`.`userLastName` AS `userLastName`,concat(`users_table`.`userFirstName`,' ',`users_table`.`userLastName`) AS `userFullName`,`users_table`.`userAddress` AS `userAddress`,`users_table`.`userRegistrationDate` AS `userRegistrationDate`,`users_table`.`userPhoneNumber` AS `userPhoneNumber`,`users_table`.`userType` AS `userType`,`users_table`.`userIsBlocked` AS `userIsBlocked` from (`orders_table` join `users_table` on((`orders_table`.`userId` = `users_table`.`userId`))) */;
+/*!50001 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `orders_view` AS select `orders_table`.`orderId` AS `orderId`,`orders_table`.`orderPickupDate` AS `orderPickupDate`,`orders_table`.`orderPlacedDate` AS `orderPlacedDate`,(`orders_table`.`orderPlacedDate` + interval 2 day) AS `overDueDate`,`orders_table`.`orderShippingAddress` AS `orderShippingAddress`,`orders_table`.`orderType` AS `orderType`,`orders_table`.`orderShipFirstName` AS `orderShipFirstName`,`orders_table`.`orderShipLastName` AS `orderShipLastName`,`orders_table`.`orderShipEmail` AS `orderShipEmail`,`orders_table`.`orderShipPhoneNumber` AS `orderShipPhoneNumber`,`orders_table`.`orderStatus` AS `orderStatus`,`orders_table`.`orderPaymentStatus` AS `orderPaymentStatus`,`orders_table`.`orderTotalAmount` AS `orderTotalAmount`,`orders_table`.`userId` AS `userId`,`orders_table`.`orderDeliveryMethod` AS `orderDeliveryMethod`,`orders_table`.`billingAddress` AS `billingAddress`,`orders_table`.`billingFirstName` AS `billingFirstName`,`orders_table`.`billingLastName` AS `billingLastName`,`orders_table`.`billingEmail` AS `billingEmail`,`orders_table`.`billingPhoneNumber` AS `billingPhoneNumber`,`orders_table`.`orderShippingFee` AS `orderShippingFee`,`orders_table`.`orderRemarks` AS `orderRemarks`,`orders_table`.`orderModeOfPayment` AS `orderModeOfPayment`,`orders_table`.`orderIsReschedule` AS `orderIsReschedule`,`users_table`.`userEmail` AS `userEmail`,`users_table`.`userPassword` AS `userPassword`,`users_table`.`userFirstName` AS `userFirstName`,`users_table`.`userLastName` AS `userLastName`,concat(`users_table`.`userFirstName`,' ',`users_table`.`userLastName`) AS `userFullName`,`users_table`.`userAddress` AS `userAddress`,`users_table`.`userRegistrationDate` AS `userRegistrationDate`,`users_table`.`userPhoneNumber` AS `userPhoneNumber`,`users_table`.`userType` AS `userType`,`users_table`.`userIsBlocked` AS `userIsBlocked` from (`orders_table` join `users_table` on((`orders_table`.`userId` = `users_table`.`userId`))) */;
 
 /*View structure for view payments_view */
 

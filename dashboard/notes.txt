@@ -1,7 +1,12 @@
 ---------------------------------------------
+cjashleyfashionhub_db
 cjashleyfashionhub.tk
+148.66.138.149
 izr262rx6jyg
 Android123#
+
+
+
 ---------------------------------------------
 
 tshirt-novo - color  - red - s
@@ -51,6 +56,7 @@ attendant module
 notifications
 	pick up date
 	over due
+	reorder point
 reports
 
 	list of acknowledgement reciept
