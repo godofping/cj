@@ -12,6 +12,9 @@ $orderTotalAmount = $res['orderTotalAmount'];
 $orderPaymentStatus = $res['orderPaymentStatus'];
 $orderModeOfPayment = $res['orderModeOfPayment'];
 $orderStatus = $res['orderStatus'];
+$orderShippingFee = $res['orderShippingFee'];
+$orderDeliveryMethod = $res['orderDeliveryMethod'];
+
 }
 ?>
 	
@@ -28,7 +31,7 @@ $orderStatus = $res['orderStatus'];
 
 	<div id="content"> 
     
-  <form role="form" id="contact_form" class="contact-form" method="post" action="controller.php?from=payment-form&orderId=<?php echo base64_decode($_GET['orderId']); ?>" autocomplete="off" enctype="multipart/form-data">
+  <form role="form" id="contact_form" class="contact-form" method="post" action="controller.php?from=payment-form&orderId=<?php echo base64_decode($_GET['orderId']); ?>&orderDeliveryMethod=<?php echo $orderDeliveryMethod ?>&orderShippingFee=<?php echo $orderShippingFee; ?>" autocomplete="off" enctype="multipart/form-data">
 
 
   
@@ -44,32 +47,32 @@ $orderStatus = $res['orderStatus'];
             <div class="row"> 
 
               <div class="col-md-12">
-                <?php if (isset($_SESSION['toast']) and $_SESSION['toast'] == 'cancel-order'): ?>
+                <?php if (isset($_SESSION['toast']) and $_SESSION['toast'] == 'cancel-order'){ ?>
                   <div class="alert alert-danger" role="alert">
                   Order is cancelled successfully.
                   </div>
-                <?php endif ?>
+                <?php } ?>
               </div>
 
-              <?php if ($res['orderStatus'] == 'Pending Approval'): ?>
+              <?php if ($res['orderStatus'] == 'Pending Approval'){ ?>
                 
               <div class="col-md-12">
                 <a href="controller.php?from=cancel-order&orderId=<?php echo $res['orderId'] ?>"><button type="button" class="btn btn-dark pull-left margin-bottom-30">Cancel Order</button></a>
               </div>
 
    
-            <?php endif ?>
+            <?php } ?>
 
          
 
-            <?php if ($res['orderStatus'] != 'Pending Approval'): ?>
+            <?php if ($res['orderStatus'] != 'Pending Approval'){ ?>
               
             <div class="col-md-12">
              <button type="button" class="btn btn-dark pull-left margin-bottom-30" data-toggle="tooltip" title="You can't cancel this order.">Cancel Order</button>
             </div>
 
    
-            <?php endif ?>
+            <?php } ?>
 
               <div class="col-sm-5">
 
@@ -79,11 +82,11 @@ $orderStatus = $res['orderStatus'];
 
           			<h5>Delivery Method: <b><?php echo $res['orderDeliveryMethod'] ?></b></h5>
 
-          			<?php if ($res['orderDeliveryMethod'] == 'Pick Up'): ?>
+          			<?php if ($res['orderDeliveryMethod'] == 'Pick Up'){ ?>
 
                   <h5>Schedule of Pick Up: <b><?php echo date('F d, Y', strtotime($res['orderPickupDate'])); ?></b></h5>
                     
-                <?php endif ?>
+                <?php } ?>
 
           			<h5>Mode of Payment: <b><?php echo $res['orderModeOfPayment'] ?></b></h5>
 
@@ -138,7 +141,7 @@ $orderStatus = $res['orderStatus'];
                 </ul>
           
                 
-	            <?php if ($res['orderDeliveryMethod'] == 'Shipping'): ?>
+	            <?php if ($res['orderDeliveryMethod'] == 'Shipping'){ ?>
 
             	<h6>Shipping Information</h6>
                 
@@ -172,7 +175,7 @@ $orderStatus = $res['orderStatus'];
 
                 </ul>
 
-	            <?php endif ?>
+	            <?php } ?>
 
               	</div>
 
@@ -202,8 +205,13 @@ $orderStatus = $res['orderStatus'];
 
                   <?php } ?>
 
+                    <?php if ($orderDeliveryMethod == 'Shipping'){ 
+                      $sum = $sum + $orderShippingFee;
+                    ?>
+                    <p>Shipping Fee <span>₱<?php echo number_format($orderShippingFee, 2); ?> </span></p>
+                    <?php } ?>
                     
-            
+
                     <p class="all-total">Total <span> ₱<?php echo number_format($sum, 2); ?></span></p>
 
                     <input type="text" name="sum" value="<?php echo $sum ?>" hidden>
@@ -232,8 +240,15 @@ $orderStatus = $res['orderStatus'];
 
                       $totalAmountPaid = $res['totalAmountPaid'];
 
+                      if ($orderPaymentStatus == 'Paid' and $orderDeliveryMethod == 'Shipping') {
+                        $totalAmountPaid = $totalAmountPaid + $orderShippingFee;
+                      }
+
                       $balance = $orderTotalAmount - $totalAmountPaid;
 
+                      if ($orderDeliveryMethod == 'Shipping') {
+                        $balance = $balance + $orderShippingFee;
+                      }
                       ?>
 
 
@@ -241,16 +256,17 @@ $orderStatus = $res['orderStatus'];
                       <h5>Total Amount Paid: ₱<?php echo number_format($totalAmountPaid, 2); ?></h5>
                       <h5>Balance: ₱<?php echo number_format($balance, 2); ?></h5>
 
+
                       <div class="pay-meth">
 
-                      <?php if ($orderPaymentStatus == 'Unpaid' and $orderModeOfPayment == 'Remittance' and $orderStatus == 'Pending Approval'): ?>
+                      <?php if ($orderPaymentStatus == 'Unpaid' and $orderModeOfPayment == 'Remittance' and $orderStatus == 'Pending Approval'){ ?>
                       <label class="margin-top-50">Payment Form</label>
 
-                      <?php if (isset($_SESSION['toast']) and $_SESSION['toast'] == 'payment-sent'): ?>
+                      <?php if (isset($_SESSION['toast']) and $_SESSION['toast'] == 'payment-sent'){ ?>
                         <div class="alert alert-success" role="alert">
                         Payment sent.
                         </div>
-                      <?php endif ?>
+                      <?php } ?>
 
                       
                         <ul class="row">
@@ -279,9 +295,20 @@ $orderStatus = $res['orderStatus'];
                           </li>
                         </ul>
 
-                        <button type="submit" class="btn  btn-dark pull-right margin-top-30">SEND PAYMENT</button>
+                        <?php if ($orderDeliveryMethod != 'Shipping'){ ?>
+                          <button type="submit" class="btn  btn-dark pull-right margin-top-30">SEND PAYMENT</button>
+                        <?php } ?>
 
-                        <?php endif ?>
+                        <?php if ($orderDeliveryMethod == 'Shipping' and $orderShippingFee == 0){ ?>
+                          <button type="button" class="btn  btn-dark pull-right margin-top-30" data-toggle="tooltip" title="Sending of payment is disabled because shipping fee is not yet added.">SEND PAYMENT</button>
+                        <?php } ?>
+
+                        <?php if ($orderDeliveryMethod == 'Shipping' and $orderShippingFee != 0){ ?>
+                          <button type="submit" class="btn  btn-dark pull-right margin-top-30">SEND PAYMENT</button>
+                        <?php } ?>
+                        
+
+                        <?php } ?>
                      
 
                       </div>
@@ -312,20 +339,24 @@ $orderStatus = $res['orderStatus'];
                         </thead>
                         <tbody>
                         <?php
+                          $additional = 0;
+                          if ($orderDeliveryMethod == 'Shipping') {
+                            $additional = $additional + $orderShippingFee;
+                          }
                           $db->select('payments_view','*',NULL,'orderId = "' . base64_decode($_GET['orderId']) . '"'); 
                           $output = $db->getResult();
                           foreach ($output as $res) { ?>     
 
                           <tr>
 
-                            <td>₱<?php echo number_format($res['paymentAmount'], 2); ?></td>
+                            <td>₱<?php echo number_format($res['paymentAmount'] + $additional, 2); ?></td>
                             <td>
-                              <?php if ($res['paymentRecieptImage'] == ''): ?>
+                              <?php if ($res['paymentRecieptImage'] == ''){ ?>
                                 
-                              <?php endif ?>
-                              <?php if ($res['paymentRecieptImage'] != ''): ?>
+                              <?php } ?>
+                              <?php if ($res['paymentRecieptImage'] != ''){ ?>
                                  <a target="_blank" href="paymentImages/<?php echo $res['paymentRecieptImage']; ?>"><img src="paymentImages/<?php echo $res['paymentRecieptImage']; ?>" class="img-thumbnail"></a>
-                              <?php endif ?>
+                              <?php } ?>
                              
                             </td>
                             <td></td>

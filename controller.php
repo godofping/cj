@@ -567,6 +567,14 @@ if (isset($_GET['from']) and $_GET['from'] == 'payment-form') {
 	$controlNumber = $db->escapeString($_POST['controlNumber']);
 	$paymentTransactionDate = $db->escapeString(date('Y-m-d H:i:s'));
 	$paymentRecieptImage = $db->escapeString($filename);
+	$orderDeliveryMethod = $db->escapeString($_GET['orderDeliveryMethod']);
+	$orderShippingFee = $db->escapeString($_GET['orderShippingFee']);
+
+
+	if ($orderDeliveryMethod == 'Shipping') {
+		$paymentAmount = $paymentAmount - $orderShippingFee;
+	}
+
 
 
 	$db->insert('payments_table',

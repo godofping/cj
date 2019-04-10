@@ -591,6 +591,18 @@
             });
         <?php endif?>
 
+        <?php if (isset($_SESSION['toast']) and $_SESSION['toast'] == 'set-shipping-fee'): ?>
+            $.toast({
+              heading: 'SAVED',
+              text: 'Shipping Fee Set!',
+              position: 'top-center',
+              loaderBg:'#ff6849',
+              icon: 'success',
+              hideAfter: 5000, 
+              stack: 6
+            });
+        <?php endif?>
+
 
 
     </script>

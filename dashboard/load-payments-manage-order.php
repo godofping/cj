@@ -33,10 +33,20 @@ $primaryKey = 'paymentId';
 $columns = array(
 
     array( 'db' => 'userId',   'dt' => -1 ),
+    array( 'db' => 'orderShippingFee',   'dt' => -1 ),
+    array( 'db' => 'orderDeliveryMethod',   'dt' => -1 ),
     array( 'db' => 'orderPaymentStatus',   'dt' => -1 ),
 
     array( 'db' => 'paymentAmount',   'dt' => 0, 'formatter' => function( $d, $row ) {
+
+        if ($row['orderDeliveryMethod'] == 'Shipping') {
+            $d = $d + $row['orderShippingFee'];
+        }
+
         return '₱' . number_format($d, 2);
+
+
+
     } ),
     array( 'db' => 'paymentRecieptImage',   'dt' => 1, 'formatter' => function( $d, $row ) {
 

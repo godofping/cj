@@ -150,8 +150,8 @@ html {margin-top: 60px}
 
                   	<td><?php echo $res['productName']; ?> (<?php echo $res['productOption1']; ?> <?php echo $res['productOption2']; ?>)</td>
                   	<td><?php echo $res['quantity']; ?></td>
-                 	<td>₱<?php echo number_format($res['price'], 2); ?></td>
-                 	<td>₱<?php echo $sum = $res['price'] * $res['quantity']; number_format($sum,2); ?></td>
+                   	<td>₱<?php echo number_format($res['price'], 2); ?></td>
+                   	<td>₱<?php echo $sum = $res['price'] * $res['quantity']; number_format($sum,2); ?></td>
 
                   </tr>
 
@@ -160,7 +160,11 @@ html {margin-top: 60px}
                 </tbody>
               </table>
 
-              <h6 class="float-right">Total: ₱<?php echo number_format($sum, 2); ?>	</h6>
+              <hr>
+              <div class="float-right" style="text-align: right">
+              <p>Shipping Fee: ₱<?php echo number_format($res['orderShippingFee'], 2); $sum = $sum + $res['orderShippingFee'] ?> </p>
+              <h6>Total: ₱<?php echo number_format($sum, 2); ?>	</h6>
+              </div>
 
             </div>
 

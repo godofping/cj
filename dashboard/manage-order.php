@@ -92,11 +92,18 @@ $res = $db->getResult(); $res = $res[0];
 
 
                             <form class="form-material mb-3" method="POST" action="controller.php?from=reschedule-pick-up-date&orderId=<?php echo $res['orderId'] ?>&userId=<?php echo $res['userId'] ?>" autocomplete="off">
-                            <div class="row">
-                                <div class="col-md-4">
+                            <div class="row mt-3">
+                                <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Reschedule Date</label>
                                         <input class="form-control" required="" type="date" name="orderPickupDate" min="<?php echo date('Y-m-d') ?>" value="">
+                                    </div>
+
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <p>The pick up date set by the customer is <?php echo date('F d, Y', strtotime($res['orderPickupDate'])); ?></p>
                                     </div>
 
                                 </div>
@@ -107,6 +114,7 @@ $res = $db->getResult(); $res = $res[0];
                                 <div class="col-md-12">
 
                                     <button onclick = "return confirm('Are you sure want to reschedule the pick up date of this order?')" type="submit" class="btn btn-warning waves-effect waves-light m-r-10 pull-left">Reschedule Pick Up Date</button> 
+
 
                                     <a onclick = "return confirm('Are you sure want to confirm the pick up date of this order?')" href="controller.php?from=confirm-pick-up-date-order&orderId=<?php echo $res['orderId'] ?>&userId=<?php echo $res['userId'] ?>"><button type="button" class="btn btn-info waves-effect waves-light m-r-10 pull-right">Confirm Pick Up Date</button></a>
 
@@ -245,6 +253,15 @@ $res = $db->getResult(); $res = $res[0];
 
                         $balance = $orderTotalAmount - $totalAmountPaid;
 
+                        $orderTotalAmount = $res['orderTotalAmount'];
+
+                        if ($res['orderDeliveryMethod'] == 'Shipping') {
+                           $orderTotalAmount = $orderTotalAmount + $res['orderShippingFee'];
+                           $totalAmountPaid = $totalAmountPaid + $res['orderShippingFee'];
+                        }
+
+                        
+
                         ?>
 
                         <h4 class="card-title">Payments</h4>
@@ -253,32 +270,66 @@ $res = $db->getResult(); $res = $res[0];
 
                         <p>Total Amount Paid: <b>₱<?php echo number_format($totalAmountPaid, 2); ?></b></p>
                         <p>Balance: <b>₱<?php echo number_format($balance, 2); ?></b></p>
+                        
+                        <?php if ($res['orderDeliveryMethod'] == 'Shipping'){ ?>
+                        <p>Shipping Fee: <b><?php if ($res['orderShippingFee'] > 0){ ?>
+                            ₱<?php echo number_format($res['orderShippingFee'], 2); ?>
+                        <?php } else {echo "Not yet set.";} ?></b></p> 
+                        <?php } ?>
 
                         <?php if ($res['orderPaymentStatus'] == 'Unpaid' and $res['userIsBlocked'] == 0 and $res['orderStatus'] != 'Cancelled'){ ?>
 
                         <hr>
 
+                        
                         <p>* indicates required fields</p>
-
-                        <form autocomplete="off" class="form-material m-t-40" method="POST" action="controller.php?from=add-payment&orderId=<?php echo $_GET['orderId'] ?>&userId=<?php echo $res['userId'] ?>">
-
                         <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label>Amount *</label>
-                                    <input type="number" step="0.1" class="form-control form-control-line" min="<?php echo $balance ?>" max="<?php echo $balance ?>" required="" name="paymentAmount"> 
-                                </div>
+
+                            <div class="col-md-6">
+                            
+                                <form autocomplete="off" class="form-material m-t-40" method="POST" action="controller.php?from=add-payment&orderId=<?php echo $_GET['orderId'] ?>&userId=<?php echo $res['userId'] ?>">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label>Amount *</label>
+                                                <input type="number" step="0.1" class="form-control form-control-line" min="<?php echo $balance ?>" max="<?php echo $balance ?>" required="" name="paymentAmount"> 
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <button onclick = "return confirm('Are you sure want to save the payment?')" type="submit" class="btn btn-success waves-effect waves-light m-r-10 pull-right">Save Payment</button>
+                                        </div>
+                                    </div>
+                                </form>
                             </div>
 
-                        </div>
+                            <?php if ($res['orderDeliveryMethod'] == 'Shipping' and $res['orderShippingFee'] == 0){ ?>
+                            <div class="col-md-6">
+                     
+                                <form autocomplete="off" class="form-material m-t-40" method="POST" action="controller.php?from=set-shipping-fee&orderId=<?php echo $_GET['orderId'] ?>&userId=<?php echo $res['userId'] ?>">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label>Shipping Fee *</label>
+                                                <input type="number" step="0.1" class="form-control form-control-line"  required="" name="orderShippingFee"> 
+                                            </div>
+                                        </div>
 
-                        <div class="row">
-                            <div class="col-md-12">
-                                <button onclick = "return confirm('Are you sure want to save the payment?')" type="submit" class="btn btn-success waves-effect waves-light m-r-10 pull-right">Save Payment</button>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <button onclick = "return confirm('Are you sure want to set the shipping fee? This is irrevocable.')" type="submit" class="btn btn-success waves-effect waves-light m-r-10 pull-right">Set Shipping Fee</button>
+                                        </div>
+                                    </div>
+                                </form>
                             </div>
-                        </div>
+                            <?php } ?>
 
-                        </form>
+                        </div>
 
                         <hr>
                             
@@ -340,9 +391,23 @@ $res = $db->getResult(); $res = $res[0];
                             </table>
                         </div>
 
+                        <?php
+
+                        $additional = 0;
+
+                        if ($res['orderDeliveryMethod'] == 'Shipping'){
+                        $additional = $additional + $res['orderShippingFee'];
+                        ?>
                         <div class="row">
                             <div class="col-md-12">
-                                <h3 class="float-right">Total:<b> ₱<?php echo number_format($res['orderTotalAmount'], 2); ?></b></h3>
+                                <h4 class="float-right">Shipping Fee:<b> ₱<?php echo number_format($res['orderShippingFee'], 2); ?></b></h4>
+                            </div>
+                        </div>
+                        <?php } ?>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h3 class="float-right">Total:<b> ₱<?php echo number_format($res['orderTotalAmount'] + $additional, 2); ?></b></h3>
                             </div>
                         </div>
 

@@ -1221,6 +1221,42 @@ if (isset($_GET['from']) and $_GET['from'] == 'reschedule-pick-up-date') {
 }
 
 
+if (isset($_GET['from']) and $_GET['from'] == 'set-shipping-fee') {
+
+	$orderShippingFee = $db->escapeString($_POST['orderShippingFee']);
+	$orderId = $db->escapeString($_GET['orderId']);
+
+	$userId = $db->escapeString($_GET['userId']);
+	$notificationMessage = $db->escapeString("Order number " . $orderId . " shipping fee was set.");
+	$notificationDateTime = $db->escapeString(date('Y-m-d H:i:s'));
+	$notificationIsRead = $db->escapeString(0);
+
+	
+
+
+	$db->update('orders_table',
+	array(
+		'orderShippingFee'=>$orderShippingFee,
+		),
+		'orderId=' . $orderId
+	);
+	$res = $db->getResult();
+
+	$db->insert('notifications_table',
+	array(
+		'userId'=>$userId,
+		'notificationMessage'=>$notificationMessage,
+		'notificationDateTime'=>$notificationDateTime,
+		'notificationIsRead'=>$notificationIsRead,
+		'orderId'=>$orderId,
+
+		)
+	);
+
+	$res = $db->getResult();
+	header("Location: manage-order.php?orderId=".$orderId);
+	$_SESSION['toast'] = 'set-shipping-fee';
+}
 
 
 
