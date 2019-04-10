@@ -40,9 +40,6 @@ $columns = array(
     array( 'db' => 'productReviewDate',   'dt' => 5, 'formatter' => function( $d, $row ) {
         return  date('F d, Y', strtotime($d));
     }  ),
-    array( 'db' => 'productReviewId', 'dt' => 6,'formatter' => function( $d, $row ) {
-        return '<a class = "btn btn-danger btn-xs" onclick = "return confirm('."'Are you sure want to delete this record?'".')" href="controller.php?from=delete-review&productReviewId=' . $row['productReviewId'] . '">Delete</a>';
-    } ),
     
   
 );

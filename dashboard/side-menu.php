@@ -92,7 +92,7 @@
                         </li>
 
 
-                        <li class="<?php if ($filename == 'list-of-customers' or $filename == 'list-of-orders-daily' or $filename == 'list-of-cancelled-orders' or $filename == 'list-of-collections' or $filename == 'list-of-pending-customer-payments'): ?>
+                        <li class="<?php if ($filename == 'list-of-customers' or $filename == 'list-of-orders-daily' or $filename == 'list-of-cancelled-orders' or $filename == 'list-of-collections' or $filename == 'list-of-pending-customer-payments' or $filename == 'list-of-overdue' or $filename == 'list-of-available-stocks' or $filename == 'list-of-reoder-point' or $filename == 'list-of-stock-in' or $filename == 'list-of-stock-out' or $filename == 'list-of-acknowledgement-receipt' or $filename == 'list-of-reviews' or $filename == 'list-of-feedbacks'): ?>
                             active
                         <?php endif ?>"> 
                             <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-note-text"></i><span class="hide-menu">Reports</span></a>
@@ -107,14 +107,14 @@
                                 </li>
                                 <li><a href="list-of-orders-daily.php?date=<?php echo date('Y-m-d') ?>" class="<?php if ($filename == 'list-of-orders-daily'): ?>active<?php endif ?>">List of Orders (Daily)</a></li>
                                 <li><a href="list-of-cancelled-orders.php" class="<?php if ($filename == 'list-of-cancelled-orders'): ?>active<?php endif ?>">List of Cancelled Orders</a></li>
-                                <li><a href="#.php" class="<?php if ($filename == 's'): ?>active<?php endif ?>">List of Over Due</a></li>
+                                <li><a href="list-of-overdue.php" class="<?php if ($filename == 'list-of-overdue'): ?>active<?php endif ?>">List of Overdue</a></li>
                                 <li><a href="list-of-pending-customer-payments.php" class="<?php if ($filename == 'list-of-pending-customer-payments'): ?>active<?php endif ?>">List of Customer Pending Payments</a></li>
-                                <li><a href="#.php" class="<?php if ($filename == 's'): ?>active<?php endif ?>">List of Available Stocks</a></li>
-                                <li><a href="#.php" class="<?php if ($filename == 's'): ?>active<?php endif ?>">List of Re-order Point</a></li>
-                                <li><a href="#.php" class="<?php if ($filename == 's'): ?>active<?php endif ?>">List of Stock-in</a></li>
-                                <li><a href="#.php" class="<?php if ($filename == 's'): ?>active<?php endif ?>">List of Stock-out</a></li>
-                                <li><a href="#.php" class="<?php if ($filename == 's'): ?>active<?php endif ?>">List of Acknowledgement Receipt</a></li>
-                                <li><a href="#.php" class="<?php if ($filename == 's'): ?>active<?php endif ?>">Reviews</a></li>
+                                <li><a href="list-of-available-stocks.php" class="<?php if ($filename == 'list-of-available-stocks'): ?>active<?php endif ?>">List of Available Stocks</a></li>
+                                <li><a href="list-of-reorder-point.php" class="<?php if ($filename == 'list-of-reoder-point'): ?>active<?php endif ?>">List of Reorder Point</a></li>
+                                <li><a href="list-of-stock-in.php" class="<?php if ($filename == 'list-of-stock-in'): ?>active<?php endif ?>">List of Stock-in</a></li>
+                                <li><a href="list-of-stock-out.php" class="<?php if ($filename == 'list-of-stock-out'): ?>active<?php endif ?>">List of Stock-out</a></li>
+                                <li><a href="list-of-acknowledgement-receipt.php" class="<?php if ($filename == 'list-of-acknowledgement-receipt'): ?>active<?php endif ?>">List of Acknowledgement Receipt</a></li>
+                                <li><a href="list-of-reviews.php" class="<?php if ($filename == 'list-of-reviews'): ?>active<?php endif ?>">List of Reviews</a></li>
                                 <li><a href="list-of-feedbacks.php" class="<?php if ($filename == 'list-of-feedbacks'): ?>active<?php endif ?>">List of Feedbacks</a></li>
                                 
                             </ul>

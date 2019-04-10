@@ -64,7 +64,7 @@ $sql_details = array(
 
    require( 'ssp.class.php' );
     echo json_encode(
-    SSP::complex( $_POST, $sql_details, $table, $primaryKey, $columns, 'orderPaymentStatus = "Unpaid"' )
+    SSP::complex( $_POST, $sql_details, $table, $primaryKey, $columns, 'orderPaymentStatus = "Unpaid" and orderStatus = "Pending Approval"' )
 );
 
 

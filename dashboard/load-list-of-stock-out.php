@@ -1,11 +1,10 @@
 <?php
- 
 /*
  * DataTables example server-side processing script.
  *
  * Please note that this script is intentionally extremely simply to show how
  * server-side processing can be implemented, and probably shouldn't be used as
- * the basis for a large complex system. It is suitable for simple use cases as
+ * the basis for a large inventorylogId system. It is suitable for simple use cases as
  * for learning.
  *
  * See http://datatables.net/usage/server-side for full details on the server-
@@ -19,10 +18,10 @@
  */
  
 // DB table to use
-$table = 'product_reviews_view';
+$table = 'inventory_logs_view';
  
 // Table's primary key
-$primaryKey = 'productReviewId';
+$primaryKey = 'inventorylogId';
  
 // Array of database columns which should be read and sent back to DataTables.
 // The `db` parameter represents the column name in the database, while the `dt`
@@ -32,17 +31,19 @@ $primaryKey = 'productReviewId';
 
 $columns = array(
 
-    array( 'db' => 'userFullName',   'dt' => 0 ),
-    array( 'db' => 'productName',   'dt' => 1 ),
-    array( 'db' => 'productOption1',   'dt' => 2 ),
-    array( 'db' => 'productOption2',   'dt' => 3 ),
-    array( 'db' => 'productReview',   'dt' => 4 ),
-    array( 'db' => 'productReviewDate',   'dt' => 5, 'formatter' => function( $d, $row ) {
-        return  date('F d, Y', strtotime($d));
-    }  ),
-    array( 'db' => 'productReviewId', 'dt' => 6,'formatter' => function( $d, $row ) {
-        return '<a class = "btn btn-danger btn-xs" onclick = "return confirm('."'Are you sure want to delete this record?'".')" href="controller.php?from=delete-review&productReviewId=' . $row['productReviewId'] . '">Delete</a>';
+    array( 'db' => 'productName',   'dt' => 0 ),
+    array( 'db' => 'productOption1',   'dt' => 1 ),
+    array( 'db' => 'productOption2',   'dt' => 2 ),
+    
+    array( 'db' => 'inOrOut',   'dt' => 3 ),
+    array( 'db' => 'quantity',   'dt' => 4 ),
+    array( 'db' => 'transactionDateTime', 'dt' => 5,'formatter' => function( $d, $row ) {
+
+        return date('F d, Y g:i A', strtotime($d));
     } ),
+    array( 'db' => 'inventoryLogRemark',   'dt' => 6),
+
+
     
   
 );
@@ -62,7 +63,7 @@ $sql_details = array(
 
    require( 'ssp.class.php' );
     echo json_encode(
-    SSP::simple( $_POST, $sql_details, $table, $primaryKey, $columns )
+    SSP::complex( $_POST, $sql_details, $table, $primaryKey, $columns, "inOrOut = 'Out'" )
 );
 
 

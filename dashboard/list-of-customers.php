@@ -58,7 +58,7 @@
 <?php include('footer.php'); ?>
 
 <script type="text/javascript">
-	var title = "List of Customers";
+	var title = "List of Customers (<?php echo date('F d, Y') ?>)";
     var dataTable = $('#datable').DataTable({
         // "processing":true,
         // "serverSide":true,

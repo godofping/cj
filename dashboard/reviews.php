@@ -33,10 +33,12 @@
                         <table id="datable" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
+                                    <th>Customer Name</th>
                                     <th>Product Name</th>
                                     <th>Option 1</th>
                                     <th>Option 2</th>
                                     <th>Review</th>
+                                    <th>Date Submitted</th>
                                     <th class="noExport">Actions</th>
 
                                 </tr>
@@ -70,7 +72,7 @@
                 },
         "columnDefs":[
             {
-                "targets":[4],
+                "targets":[6],
                 "orderable":false,
             },
         ],
