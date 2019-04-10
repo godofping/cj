@@ -131,3 +131,16 @@ $db->select('administrators_view');
 		);
 		$res = $db->getResult();
 	}
+
+
+----------------------------------
+DELETE FROM inventory_logs_table;
+DELETE FROM notifications_table;
+DELETE FROM order_details_table;
+DELETE FROM orders_table;
+DELETE FROM payments_table;
+DELETE FROM product_images_table;
+DELETE FROM product_reviews_table;
+DELETE FROM product_variations_table;
+DELETE FROM products_table;
+DELETE FROM user_feedbacks_table;
