@@ -35,6 +35,37 @@ $string ="";
             <div class="card">
                 <div class="card-body">
 
+                    <h4 class="card-title">Total Collections are ₱<?php 
+                    $totalAmount = 0;
+
+                    if ($period == 'Daily') {
+
+                        $db->select('payments_view','sum(paymentAmount) as total',NULL,"orderPaymentStatus = 'Paid' and paymentStatus = 'Recieved' and paymentTransactionDate like '%" . $date . "%'", NULL); 
+                        $res = $db->getResult(); $res = $res[0];
+                        echo number_format($res['total'],2);
+
+                    }
+
+                    if ($period == 'Weekly') {
+                        
+                        $db->select('payments_view','sum(paymentAmount) as total',NULL,"orderPaymentStatus = 'Paid' and paymentStatus = 'Recieved' and weekCode = '" . $date . "'", NULL); 
+                        $res = $db->getResult(); $res = $res[0];
+                        echo number_format($res['total'],2);
+
+                    }
+
+                    if ($period == 'Monthly') {
+                        
+                        $db->select('payments_view','sum(paymentAmount) as total',NULL,"orderPaymentStatus = 'Paid' and paymentStatus = 'Recieved' and paymentTransactionDate like '%" . $date. "%'", NULL); 
+                        $res = $db->getResult(); $res = $res[0];
+                        echo number_format($res['total'],2);
+                    }
+
+                    
+
+                    ?>.</h4>
+
+
                     <form class="form-material">
                     <div class="row">
                         <div class="col-md-2">
@@ -73,6 +104,7 @@ $string ="";
                         <table id="datable" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
+                                    <th>Order number</th>
                                     <th>Amount (₱)</th>
                                     <th class="noExport">Receipt</th>
                                     <th>Remittance Center</th>
@@ -98,7 +130,35 @@ $string ="";
 <?php include('footer.php'); ?>
 
 <script type="text/javascript">
-	var title = "<?php echo $string; ?>";
+	var title = "<?php echo $string; ?> Total Collections are ₱<?php 
+                    $totalAmount = 0;
+
+                    if ($period == 'Daily') {
+
+                        $db->select('payments_view','sum(paymentAmount) as total',NULL,"orderPaymentStatus = 'Paid' and paymentStatus = 'Recieved' and paymentTransactionDate like '%" . $date . "%'", NULL); 
+                        $res = $db->getResult(); $res = $res[0];
+                        echo number_format($res['total'],2);
+
+                    }
+
+                    if ($period == 'Weekly') {
+                        
+                        $db->select('payments_view','sum(paymentAmount) as total',NULL,"orderPaymentStatus = 'Paid' and paymentStatus = 'Recieved' and weekCode = '" . $date . "'", NULL); 
+                        $res = $db->getResult(); $res = $res[0];
+                        echo number_format($res['total'],2);
+
+                    }
+
+                    if ($period == 'Monthly') {
+                        
+                        $db->select('payments_view','sum(paymentAmount) as total',NULL,"orderPaymentStatus = 'Paid' and paymentStatus = 'Recieved' and paymentTransactionDate like '%" . $date. "%'", NULL); 
+                        $res = $db->getResult(); $res = $res[0];
+                        echo number_format($res['total'],2);
+                    }
+
+                    
+
+                    ?>.";
     var dataTable = $('#datable').DataTable({
         // "processing":true,
         // "serverSide":true,

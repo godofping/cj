@@ -63,11 +63,9 @@ reports
 
 backup and restore
 over due
-
-
-
-
+message
 product is ready to pick up
+
 
 //notifications
 	all transaction sa order
@@ -75,7 +73,8 @@ product is ready to pick up
 	schedule of order
 	reorder point
 
-uniform add review and add  feedback
+total kag order number sa list of collections
+
 
 ----questions----
 //remove username, middlename. email ang ginagamit sa login. (customer and staff). like shopee

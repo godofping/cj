@@ -42,36 +42,7 @@ $res = $db->getResult(); $res = $res[0];
         </div>
     </section>
     
-    <!-- Testimonial -->
-    <section class="testimonial padding-top-100 padding-bottom-80">
-      <div class="container"> 
-        
-        <!-- Main Heading -->
-        <div class="heading text-center margin-bottom-60">
-          <h4>Our Customers Feedback</h4>
-          <hr>
-        </div>
-        
-        <!-- Slide -->
-        <div class="two-col">
-
-          <?php
-          $db->select('user_feedbacks_view','*',NULL,'userFeedbackStatus = 1', "userFeedbackId DESC LIMIT 10"); 
-          $output = $db->getResult();
-          foreach ($output as $res) { ?>    
-          
-          <!-- Slide -->
-          <div class="testi-in"> <i class="fa fa-quote-left"></i>
-            <p><?php echo $res['userFeedback']; ?></p>
-            <h5><?php echo $res['userFullName'] ?></h5>
-            <span><?php echo date('F d, Y',strtotime($res['userFeedbackDate'])); ?></span>
-          </div>
-
-          <?php } ?>
-          
-        </div>
-      </div>
-    </section>
+ 
     
     <!-- Clients -->
     <section class="clients light-gray-bg padding-top-60 padding-bottom-80">
