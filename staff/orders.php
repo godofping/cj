@@ -36,11 +36,10 @@
                                     <th>Order Number</th>
                                     <th>Order Amount</th>
                                     <th>Date Placed</th>
-                                    <th>Delivery Method</th>
-                                    <th>Mode of Payment</th>
                                     <th>Order Status</th>
                                     <th>Payment Status</th>
-                                    <th class="noExport">Actions</th>
+                                    <th>Actions</th>
+                                
 
                                 </tr>
                             </thead>
@@ -73,7 +72,7 @@
                 },
         "columnDefs":[
             {
-                "targets":[7],
+                "targets":[4],
                 "orderable":false,
             },
         ],

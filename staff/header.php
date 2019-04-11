@@ -123,12 +123,28 @@ if (isset($_SESSION['userId']) and $_SESSION['userType'] == 'Customer') {
                                 }
 
                               ?>
-                            <a class="nav-link dropdown-toggle text-muted text-muted waves-effect waves-dark" href="notifications.php">
+                            <a class="nav-link dropdown-toggle text-muted text-muted waves-effect waves-dark" href="shopping-cart.php">
                                 <i class="mdi mdi-cart-outline"></i> <sup><?php echo $total; ?></sup>
                             
                             </a>
+
+                            <a class="nav-link dropdown-toggle text-muted text-muted waves-effect waves-dark" href="shopping-cart.php">
+                                Total Collections Today: ₱
+                                <?php
+                                $db->select('orders_view', 'sum(orderTotalAmount) as total', NULL, 'userId = "' . $_SESSION['userId']  .'" and orderPaymentStatus = "Paid"');
+                                $res = $db->getResult(); $res = $res[0];
+
+                                echo number_format($res['total'], 2);
+
+                                ?>
+                            
+                            </a>
+
+
                        
                         </li>
+
+
                     </ul>
                     <!-- ============================================================== -->
                     <!-- User profile -->

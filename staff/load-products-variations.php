@@ -75,7 +75,7 @@ $sql_details = array(
 
    require( 'ssp.class.php' );
     echo json_encode(
-    SSP::simple( $_POST, $sql_details, $table, $primaryKey, $columns )
+    SSP::complex( $_POST, $sql_details, $table, $primaryKey, $columns, 'productStock > 0' )
 );
 
 

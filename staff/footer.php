@@ -193,7 +193,54 @@
             });
         <?php endif?>
 
-      
+        <?php if (isset($_SESSION['toast']) and $_SESSION['toast'] == 'update-cart'): ?>
+          $.toast({
+            heading: 'UPDATED',
+            text: 'Cart Updated!',
+            position: 'top-center',
+            loaderBg:'#ff6849',
+            icon: 'success',
+            hideAfter: 5000, 
+            stack: 6
+          });
+        <?php endif?>
+
+        <?php if (isset($_SESSION['toast']) and $_SESSION['toast'] == 'remove-item'): ?>
+          $.toast({
+            heading: 'REMOVED',
+            text: 'Item Removed!',
+            position: 'top-center',
+            loaderBg:'#ff6849',
+            icon: 'success',
+            hideAfter: 5000, 
+            stack: 6
+          });
+        <?php endif?>
+
+
+        <?php if (isset($_SESSION['toast']) and $_SESSION['toast'] == 'place-order'): ?>
+          $.toast({
+            heading: 'SUCCESS',
+            text: 'Order Placed!',
+            position: 'top-center',
+            loaderBg:'#ff6849',
+            icon: 'success',
+            hideAfter: 5000, 
+            stack: 6
+          });
+        <?php endif?>
+
+        <?php if (isset($_SESSION['toast']) and $_SESSION['toast'] == 'save-remark'): ?>
+          $.toast({
+            heading: 'SAVED',
+            text: 'Remark Saved!',
+            position: 'top-center',
+            loaderBg:'#ff6849',
+            icon: 'success',
+            hideAfter: 5000, 
+            stack: 6
+          });
+        <?php endif?>
 
    
 

@@ -18,7 +18,7 @@ if (!isset($_GET['admin'])) {
 	  echo '<script type="text/javascript">window.location.replace("controller.php?from=logout");</script>';
 	}
 	else{
-		$db->select('users_table','*',NULL,'userId = "' . $_SESSION['userId'] . '"', NULL); 
+		$db->select('orders_view','*',NULL,'orderId = "' . base64_decode($_GET['orderId']) . '"', NULL); 
 	  	$res = $db->getResult(); $res = $res[0];
 
 	}
@@ -26,8 +26,8 @@ if (!isset($_GET['admin'])) {
 }
 else
 {
-	$db->select('users_table','*',NULL,'userId = "' . $_GET['userId'] . '"', NULL); 
-	$res = $db->getResult(); $res = $res[0];
+	$db->select('orders_view','*',NULL,'orderId = "' . base64_decode($_GET['orderId']) . '"', NULL); 
+	$res = $db->getResult();$res = $res[0];
 }
 
 
@@ -103,13 +103,13 @@ html {margin-top: 60px}
 
       <div class="row mt-5">
      	<div class="col-md-12">
-     		<h5 class="text-left">Customer: <b><?php echo $res['userFirstName']; ?> <?php echo $res['userLastName']; ?></b></h5>
+     		<h5 class="text-left">Customer: <b><?php echo $res['billingFirstName']; ?> <?php echo $res['billingLastName']; ?></b></h5>
      	</div>
       </div>
 
       <div class="row">
      	<div class="col-md-12">
-     		<h5 class="text-left">Address: <b><?php echo $res['userAddress']; ?></b></h5>
+     		<h5 class="text-left">Address: <b><?php echo $res['billingAddress']; ?></b></h5>
      	</div>
       </div>
 

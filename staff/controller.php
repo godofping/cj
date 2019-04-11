@@ -204,4 +204,256 @@ if (isset($_GET['from']) and $_GET['from'] == 'empty-cart') {
 }
 
 
+if (isset($_GET['from']) and $_GET['from'] == 'update-cart') {
+
+	$orderDetailId = $db->escapeString($_GET['orderDetailId']);
+	$quantity = $db->escapeString($_POST['quantity']);
+	$price = $db->escapeString($_GET['price']);
+
+
+
+	$db->update('order_details_table',
+	array(
+		'quantity'=>$quantity,
+		'price'=>$price,
+
+		),
+		'orderDetailId=' . $orderDetailId
+	);
+
+	$res = $db->getResult();
+
+	$_SESSION['toast'] = 'update-cart';
+	header("Location: shopping-cart.php");
+	
+}
+
+
+if (isset($_GET['from']) and $_GET['from'] == 'remove-item') {
+
+	$orderDetailId = $db->escapeString($_GET['orderDetailId']);
+
+	$db->delete('order_details_table','orderDetailId = "' . $orderDetailId .  '"');
+	$db->getResult();  
+
+
+
+	$_SESSION['toast'] = 'remove-item';
+	header("Location: shopping-cart.php");
+	
+}
+
+
+if (isset($_GET['from']) and $_GET['from'] == 'place-order') {
+
+	$orderId = $db->escapeString($_GET['orderId']);
+	$orderPlacedDate = $db->escapeString(date('Y-m-d H:i:s'));
+	$orderStatus = $db->escapeString("Finished");
+	$orderTotalAmount = $db->escapeString($_GET['sum']);
+	$orderPaymentStatus = $db->escapeString("Paid");
+	
+
+	//billing information
+	$billingFirstName = $db->escapeString($_POST['billingFirstName']);
+	$billingLastName = $db->escapeString($_POST['billingLastName']);
+	$billingAddress = $db->escapeString($_POST['billingAddress']);
+	$billingPhoneNumber = $db->escapeString($_POST['billingPhoneNumber']);
+	$billingEmail = $db->escapeString($_POST['billingEmail']);
+
+	$orderModeOfPayment = $db->escapeString("Walk In");
+
+	$db->update('orders_table',
+		array(
+			'orderPlacedDate'=>$orderPlacedDate,
+			'orderStatus'=>$orderStatus,
+			'orderTotalAmount'=>$orderTotalAmount,
+			'billingFirstName'=>$billingFirstName,
+			'billingLastName'=>$billingLastName,
+			'billingAddress'=>$billingAddress,
+			'billingPhoneNumber'=>$billingPhoneNumber,
+			'billingEmail'=>$billingEmail,
+			'orderModeOfPayment'=>$orderModeOfPayment,
+			'orderPaymentStatus'=>$orderPaymentStatus,
+			
+
+			),
+			'orderId=' . $orderId
+		);
+
+	$res = $db->getResult();
+
+
+
+	$orderDeliveryMethod = $db->escapeString("Pick Up");
+
+	if ($orderDeliveryMethod == 'Pick Up') {
+		$orderPickupDate = $db->escapeString(date('Y-m-d'));
+
+		$db->update('orders_table',
+		array(
+			'orderDeliveryMethod'=>$orderDeliveryMethod,
+			'orderPickupDate'=>$orderPickupDate,
+
+			),
+			'orderId=' . $orderId
+		);
+
+		$res = $db->getResult();
+
+	}
+
+
+
+		$db->select('order_details_view','*',NULL,'userId = "' . $_SESSION['userId'] . '" and orderId = "' . $orderId . '" ', NULL); 
+	    $output = $db->getResult();
+	    
+	    
+	    foreach ($output as $res) { 
+
+
+	    	$productVariationId = $db->escapeString($res['productVariationId']);
+	    	$inOrOut = $db->escapeString("Out");
+	    	$quantity = $db->escapeString($res['quantity']);
+	    	$transactionDateTime = $db->escapeString(date('Y-m-d H:i:s'));
+			$inventoryLogRemark = $db->escapeString("The stocks is decreased by " . $quantity . " because of Order number " . $orderId . ".");
+
+			$currentStocks = $res['productStock'] - $quantity;
+
+	    	
+
+	    	$db->insert('inventory_logs_table',
+			array(
+				'productVariationId'=>$productVariationId,
+				'inOrOut'=>$inOrOut,
+				'quantity'=>$quantity,
+				'transactionDateTime'=>$transactionDateTime,
+				'inventoryLogRemark'=>$inventoryLogRemark,
+				)
+			);
+
+			$res = $db->getResult();
+
+
+
+			$db->update('product_variations_table',
+			array(
+				'productStock'=>$currentStocks,
+
+				),
+				'productVariationId=' . $productVariationId
+			);
+
+			$res = $db->getResult();
+
+	    }
+
+
+	$db->select('administrators_view'); 
+	$output = $db->getResult();
+
+	foreach ($output as $res) {
+
+		$administratorUserId = $db->escapeString($res['administratorUserId']);
+		$notificationMessage = $db->escapeString("Order number " . $orderId . " was Finished.");
+		$notificationDateTime = $db->escapeString(date('Y-m-d H:i:s'));
+		$notificationIsRead = $db->escapeString(0);
+
+		$db->insert('notifications_table',
+		array(
+			'administratorUserId'=>$administratorUserId,
+			'notificationMessage'=>$notificationMessage,
+			'notificationDateTime'=>$notificationDateTime,
+			'notificationIsRead'=>$notificationIsRead,
+			'orderId'=>$orderId,
+
+			)
+		);
+
+		$res = $db->getResult();
+	}
+
+
+
+	//tae
+	$paymentAmount = $db->escapeString($_GET['sum']);
+	$orderId = $db->escapeString($_GET['orderId']);
+	$paymentStatus = $db->escapeString("Recieved");
+	$nameOfRemmitanceCenter = $db->escapeString("");
+	$controlNumber = $db->escapeString("");
+	$paymentTransactionDate = $db->escapeString(date('Y-m-d H:i:s'));
+	$paymentRecieptImage = $db->escapeString("");
+
+
+	$db->insert('payments_table',
+	array(
+		'paymentAmount'=>$paymentAmount,
+		'orderId'=>$orderId,
+		'paymentRecieptImage'=>$paymentRecieptImage,
+		'paymentStatus'=>$paymentStatus,
+		'nameOfRemmitanceCenter'=>$nameOfRemmitanceCenter,
+		'controlNumber'=>$controlNumber,
+		'paymentTransactionDate'=>$paymentTransactionDate,
+
+		)
+	);
+
+	$output = $db->getResult();
+
+
+	$db->select('administrators_view'); 
+	$output = $db->getResult();
+
+	foreach ($output as $res) {
+
+
+		$administratorUserId = $db->escapeString($res['administratorUserId']);
+		$notificationMessage = $db->escapeString("Order number " . $orderId . " payment was recieved.");
+		$notificationDateTime = $db->escapeString(date('Y-m-d H:i:s'));
+		$notificationIsRead = $db->escapeString(0);
+
+		$db->insert('notifications_table',
+		array(
+			'administratorUserId'=>$administratorUserId,
+			'notificationMessage'=>$notificationMessage,
+			'notificationDateTime'=>$notificationDateTime,
+			'notificationIsRead'=>$notificationIsRead,
+			'orderId'=>$orderId,
+
+			)
+		);
+		$output = $db->getResult();
+
+	}
+
+
+
+
+	header("Location: orders.php");
+	$_SESSION['toast'] = 'order-placed';
+}
+
+if (isset($_GET['from']) and $_GET['from'] == 'save-remark') {
+
+	$orderRemarks = $db->escapeString($_POST['orderRemarks']);
+
+	$db->update('orders_table',
+	array(
+		'orderRemarks'=>$orderRemarks,
+		),
+		'orderId=' . $_GET['orderId']
+	);
+
+	$res = $db->getResult();
+
+
+	header("Location: manage-order.php?orderId=".$_GET['orderId']);
+	$_SESSION['toast'] = 'save-remark';
+
+}
+
+
+
+
+
+
 ?>

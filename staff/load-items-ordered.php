@@ -1,5 +1,5 @@
 <?php
- session_start();
+ 
 /*
  * DataTables example server-side processing script.
  *
@@ -19,10 +19,10 @@
  */
  
 // DB table to use
-$table = 'orders_view';
+$table = 'order_details_view';
  
 // Table's primary key
-$primaryKey = 'orderId';
+$primaryKey = 'orderDetailId';
  
 // Array of database columns which should be read and sent back to DataTables.
 // The `db` parameter represents the column name in the database, while the `dt`
@@ -32,20 +32,20 @@ $primaryKey = 'orderId';
 
 $columns = array(
 
-    array( 'db' => 'orderId',   'dt' => 0 ),
-    array( 'db' => 'orderTotalAmount',   'dt' => 1,'formatter' => function( $d, $row ) {
-        return '₱' . number_format($d,2);
+    array( 'db' => 'productOption1',   'dt' => -1 ),
+    array( 'db' => 'productOption2',   'dt' => -1 ),
+    array( 'db' => 'productName',   'dt' => 0 ,'formatter' => function( $d, $row ) {
+        return $d . " (" . $row['productOption1'] . " " . $row['productOption2'] . ")" ;
     } ),
-    array( 'db' => 'orderPlacedDate',   'dt' => 2,'formatter' => function( $d, $row ) {
-        return date('F d, Y g:i A', strtotime($d));
-    }),
-    array( 'db' => 'orderStatus',   'dt' => 3 ),
-    array( 'db' => 'orderPaymentStatus',   'dt' => 4 ),
-    array( 'db' => 'orderId', 'dt' => 5,'formatter' => function( $d, $row ) {
-        return '<a class = "btn btn-info btn-xs" href="manage-order.php?orderId=' . $row['orderId'] . '">Manage Order</a>';
+    array( 'db' => 'quantity',   'dt' => 1 ),
+    array( 'db' => 'price',   'dt' => 2, 'formatter' => function( $d, $row ) {
+        return '₱' . number_format($d, 2);
     } ),
 
-    
+    array( 'db' => 'price', 'dt' => 3,'formatter' => function( $d, $row ) {
+       return '₱' . number_format($d * $row['quantity'], 2);
+    } ),
+    // <a class = "btn btn-warning btn-xs" href="view-product.php?orderDetailId=' . $row['orderDetailId'] . '">View</a>
   
 );
  
@@ -64,7 +64,7 @@ $sql_details = array(
 
    require( 'ssp.class.php' );
     echo json_encode(
-    SSP::complex( $_POST, $sql_details, $table, $primaryKey, $columns, 'orderStatus <> "On Cart" and userId = "' . $_SESSION['userId'] . '"' )
+    SSP::complex( $_POST, $sql_details, $table, $primaryKey, $columns, 'orderId = "' . $_POST['orderId'] . '"')
 );
 
 

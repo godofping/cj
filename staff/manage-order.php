@@ -11,7 +11,7 @@ $res = $db->getResult(); $res = $res[0];
     <div class="col-md-7 align-self-center">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="javascript:void(0)">Orders</a></li>
-            <li class="breadcrumb-item">All Orders</li>
+            <li class="breadcrumb-item">My Orders</li>
             <li class="breadcrumb-item active">Manage Order</li>
         </ol>
     </div>
@@ -269,7 +269,7 @@ $res = $db->getResult(); $res = $res[0];
                         <hr class="mt-1 mb-3">
 
                         <p>Total Amount Paid: <b>₱<?php echo number_format($totalAmountPaid, 2); ?></b></p>
-                        <p>Balance: <b>₱<?php echo number_format($balance, 2); ?></b></p>
+                    
                         
                         <?php if ($res['orderDeliveryMethod'] == 'Shipping'){ ?>
                         <p>Shipping Fee: <b><?php if ($res['orderShippingFee'] > 0){ ?>
@@ -341,12 +341,9 @@ $res = $db->getResult(); $res = $res[0];
                                 <thead>
                                     <tr>
                                         <th>Amount</th>
-                                        <th>Receipt</th>
-                                        <th>Remittance Center</th>
-                                        <th>Control Number</th>
                                         <th>Transaction Date</th>
                                         <th>Status</th>
-                                        <th>Actions</th>
+                              
      
                                     </tr>
                                 </thead>
@@ -568,7 +565,7 @@ $res = $db->getResult(); $res = $res[0];
                 },
         "columnDefs":[
             {
-                "targets":[0,1,2,3,4,5,6],
+                "targets":[0,1,2],
                 "orderable":false,
             },
         ],
