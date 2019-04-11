@@ -144,3 +144,40 @@ DELETE FROM product_reviews_table;
 DELETE FROM product_variations_table;
 DELETE FROM products_table;
 DELETE FROM user_feedbacks_table;
+
+---------
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW payments_view AS 
+SELECT
+  payments_table.`paymentId`              AS paymentId,
+  payments_table.`paymentAmount`          AS paymentAmount,
+  payments_table.`orderId`                AS orderId,
+  payments_table.`paymentRecieptImage`    AS paymentRecieptImage,
+  payments_table.`paymentStatus`          AS paymentStatus,
+  payments_table.`nameOfRemmitanceCenter` AS nameOfRemmitanceCenter,
+  payments_table.`controlNumber`          AS controlNumber,
+  payments_table.`paymentTransactionDate` AS paymentTransactionDate,
+  orders_table.`orderPickupDate`          AS orderPickupDate,
+  orders_table.`orderPlacedDate`          AS orderPlacedDate,
+  orders_table.`orderShippingAddress`     AS orderShippingAddress,
+  orders_table.`orderType`                AS orderType,
+  orders_table.`orderShipFirstName`       AS orderShipFirstName,
+  orders_table.`orderShipLastName`        AS orderShipLastName,
+  orders_table.`orderShipEmail`           AS orderShipEmail,
+  orders_table.`orderShipPhoneNumber`     AS orderShipPhoneNumber,
+  orders_table.`orderStatus`              AS orderStatus,
+  orders_table.`orderPaymentStatus`       AS orderPaymentStatus,
+  orders_table.`orderTotalAmount`         AS orderTotalAmount,
+  orders_table.`orderShippingFee`         AS orderShippingFee,
+  orders_table.`userId`                   AS userId,
+  orders_table.`orderDeliveryMethod`      AS orderDeliveryMethod,
+  orders_table.`billingAddress`           AS billingAddress,
+  orders_table.`billingFirstName`         AS billingFirstName,
+  orders_table.`billingLastName`          AS billingLastName,
+  orders_table.`billingEmail`             AS billingEmail,
+  orders_table.`billingPhoneNumber`       AS billingPhoneNumber,
+  orders_table.`orderModeOfPayment`       AS orderModeOfPayment,
+  orders_table.`orderRemarks`             AS orderRemarks,
+  CONCAT(YEAR(payments_table.`paymentTransactionDate`),'-W',(WEEK(payments_table.`paymentTransactionDate`) + 1)) AS weekCode
+FROM (payments_table
+   JOIN orders_table
+     ON ((payments_table.`orderId` = orders_table.`orderId`)));

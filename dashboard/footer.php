@@ -71,7 +71,7 @@
         $('#notificationCounter').text(data);
       });
 
-      },1000);
+      },2000);
 
     </script>
     <script type="text/javascript">
