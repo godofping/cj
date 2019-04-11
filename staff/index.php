@@ -1,7 +1,7 @@
 <?php
 include('connection.php');
 
- if (isset($_SESSION['administratorUserId'])){
+ if (isset($_SESSION['userId'])){
     header("Location: dashboard.php");
 }
 
@@ -61,12 +61,12 @@ include('connection.php');
                         <h3 class="box-title m-b-20">Sign In</h3>
                         <div class="form-group ">
                             <div class="col-xs-12">
-                                <input class="form-control" type="text" required="" placeholder="Username" name="administratorUserName">
+                                <input class="form-control" type="email" required="" placeholder="Email" name="userEmail">
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="col-xs-12">
-                                <input class="form-control" type="password" required="" placeholder="Password" name="administratorUserPassword">
+                                <input class="form-control" type="password" required="" placeholder="Password" name="userPassword">
                             </div>
                         </div>
     
@@ -129,6 +129,19 @@ include('connection.php');
               position: 'top-center',
               loaderBg:'#ff6849',
               icon: 'warning',
+              hideAfter: 5000, 
+              stack: 6
+            });
+        <?php endif?>
+
+
+        <?php if (isset($_SESSION['toast']) and $_SESSION['toast'] == 'staff-account-blocked'): ?>
+            $.toast({
+              heading: 'LOGIN FAILED',
+              text: 'Account Blocked!',
+              position: 'top-center',
+              loaderBg:'#ff6849',
+              icon: 'error',
               hideAfter: 5000, 
               stack: 6
             });

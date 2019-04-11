@@ -14,7 +14,7 @@
                     </div>
                     <!-- User profile text-->
                     <div class="profile-text"> 
-                            <h5>Hi, <?php echo $_SESSION['administratorUserName']; ?>!</h5>
+                            <h5>Hi, <?php echo $_SESSION['administratorfullName']; ?>!</h5>
                     </div>
                 </div>
                 <!-- End User profile text-->

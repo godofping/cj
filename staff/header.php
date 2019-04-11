@@ -1,7 +1,7 @@
 <?php
 include('connection.php');
 
- if (!isset($_SESSION['administratorUserId'])){
+ if (!isset($_SESSION['userId'])){
     $_SESSION['toast'] = 'session-expired';
     header("Location: index.php");
 }
@@ -91,7 +91,7 @@ include('connection.php');
                         <li class="nav-item m-l-10"> <a class="nav-link sidebartoggler hidden-sm-down text-muted waves-effect waves-dark" href="javascript:void(0)"><i class="ti-menu"></i></a> </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle text-muted text-muted waves-effect waves-dark" href="notifications.php">
-                                <i class="mdi mdi-bell"></i> <sup id="notificationCounter"><?php $db->select('notifications_table','coalesce(count(*), 0) as total',NULL,'administratorUserId = "' . $_SESSION['administratorUserId'] . '" and notificationIsRead = 0', NULL); 
+                                <i class="mdi mdi-bell"></i> <sup id="notificationCounter"><?php $db->select('notifications_table','coalesce(count(*), 0) as total',NULL,'userId = "' . $_SESSION['userId'] . '" and notificationIsRead = 0', NULL); 
 $res = $db->getResult(); 
 
 $res = $res[0];

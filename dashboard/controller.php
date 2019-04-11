@@ -14,6 +14,8 @@ if (isset($_GET['from']) and $_GET['from'] == 'login') {
 		$res = $res[0];
 		$_SESSION['administratorUserId'] = $res['administratorUserId'];
 		$_SESSION['administratorUserName'] = $res['administratorUserName'];
+		$_SESSION['administratorfullName'] = $res['administratorfullName'];
+		
 		$_SESSION['toast'] = 'login-successful';
 		header("Location: dashboard.php");
 	}
@@ -46,6 +48,8 @@ if (isset($_GET['from']) and $_GET['from'] == 'update-profile') {
 
 	header("Location: update-profile.php");
 	$_SESSION['toast'] = 'update-profile';
+	$_SESSION['administratorfullName'] = $administratorfullName;
+	
 }
 
 
