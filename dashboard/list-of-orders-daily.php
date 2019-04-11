@@ -87,7 +87,7 @@
                 },
         "columnDefs":[
             {
-                "targets":[],
+                "targets":[1],
                 "orderable":false,
             },
         ],

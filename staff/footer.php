@@ -64,17 +64,6 @@
     <!--Custom JavaScript -->
     <script src="assets/plugins/toast-master/js/jquery.toast.js"></script>
     <script type="text/javascript">
-      
-      setInterval(function(){
-
-      $.get("inc-notifications-counter.php", function(data, status){
-        $('#notificationCounter').text(data);
-      });
-
-      },1000);
-
-    </script>
-    <script type="text/javascript">
         <?php if (isset($_SESSION['toast']) and $_SESSION['toast'] == 'login-successful'): ?>
             $.toast({
               heading: 'LOGIN SUCCESSFUL',
@@ -152,10 +141,66 @@
             });
         <?php endif?>
 
-        <?php echo $_SESSION['toast']; ?>
 
+        <?php if (isset($_SESSION['toast']) and $_SESSION['toast'] == 'add-cart'): ?>
+          $.toast({
+            heading: 'UPDATED',
+            text: 'Category Updated!',
+            position: 'top-center',
+            loaderBg:'#ff6849',
+            icon: 'success',
+            hideAfter: 5000, 
+            stack: 6
+          });
+        <?php endif?>
+
+
+        <?php if (isset($_SESSION['toast']) and $_SESSION['toast'] == 'update-password-failed'): ?>
+            $.toast({
+              heading: 'FAILED',
+              text: 'Update Password Failed! Please make sure old password is correct and new password and new confirm password are the same.',
+              position: 'top-center',
+              loaderBg:'#ff6849',
+              icon: 'error',
+              hideAfter: 5000, 
+              stack: 6
+            });
+        <?php endif?>
+
+
+        <?php if (isset($_SESSION['toast']) and $_SESSION['toast'] == 'update-password'): ?>
+          $.toast({
+            heading: 'UPDATED',
+            text: 'Password Updated!',
+            position: 'top-center',
+            loaderBg:'#ff6849',
+            icon: 'success',
+            hideAfter: 5000, 
+            stack: 6
+          });
+        <?php endif?>
+
+
+        <?php if (isset($_SESSION['toast']) and $_SESSION['toast'] == 'empty-cart'): ?>
+            $.toast({
+              heading: 'EMPTIED',
+              text: 'Cart Emptied!',
+              position: 'top-center',
+              loaderBg:'#ff6849',
+              icon: 'error',
+              hideAfter: 5000, 
+              stack: 6
+            });
+        <?php endif?>
+
+      
+
+   
 
     </script>
+
+
+    
 
     
     

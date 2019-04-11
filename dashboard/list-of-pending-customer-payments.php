@@ -76,7 +76,7 @@ include('header.php');
                 },
         "columnDefs":[
             {
-                "targets":[],
+                "targets":[1],
                 "orderable":false,
             },
         ],

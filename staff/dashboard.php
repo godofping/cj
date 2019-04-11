@@ -24,129 +24,91 @@
     <!-- ============================================================== -->
     <!-- Start Page Content -->
     <!-- ============================================================== -->
-
-     <div class="row">
+    <div class="row">
         <div class="col-md-12">
+
             <div class="card">
                 <div class="card-body">
-                    <h1 class="text-center">Ordering Management System for CJ Ashley Fashion Hub</h1>
-                    
+
+                    <div class="table-responsive">
+                        <table id="datable" class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Image</th>
+                                    <th>Product Name</th>
+                                    <th>Category</th>
+                                    <th>Sub Category</th>
+                                    <th>Price (₱)</th>
+                                    <th>Option 1</th>
+                                    <th>Option 2</th>
+                                    <th>Stocks</th>
+                                    <th class="noExport">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-
-
-<!--     <?php 
-    $db->sql('select count(*) as total from match_sanctioning_table'); 
-    $res = $db->getResult(); $res = $res[0]; 
-    ?> -->
-<!--     <div class="card-group">
-        <div class="card">
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-md-12">
-                        <h2 class="m-b-0"><i class="mdi mdi mdi-crosshairs-gps text-info"></i></h2>
-                        <h3 class=""><?php echo $res['total']; ?></h3>
-                        <h6 class="card-subtitle">Match Sanctioning</h6></div>
-                    <div class="col-md-12">
-                        <div class="progress">
-                            <div class="progress-bar bg-info" role="progressbar" style="width: 100%; height: 6px;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div> -->
-        <!-- Column -->
-        <!-- Column -->
-<!--         <?php 
-        $db->sql('select count(*) as total from gun_club_affiliation_table'); 
-        $res = $db->getResult(); $res = $res[0]; 
-        ?> -->
-<!--         <div class="card">
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-md-12">
-                        <h2 class="m-b-0"><i class="mdi mdi-alert-circle text-success"></i></h2>
-                        <h3 class=""><?php echo $res['total']; ?></h3>
-                        <h6 class="card-subtitle">Gun Club Affiliation</h6></div>
-                    <div class="col-md-12">
-                        <div class="progress">
-                            <div class="progress-bar bg-success" role="progressbar" style="width: 100%; height: 6px;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div> -->
-        <!-- Column -->
-        <!-- Column -->
-<!--         <?php 
-        $db->sql('select count(*) as total from match_remittance_sanctioning_table'); 
-        $res = $db->getResult(); $res = $res[0]; 
-        ?> -->
-<!--         <div class="card">
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-md-12">
-                        <h2 class="m-b-0"><i class="mdi mdi-wallet text-purple"></i></h2>
-                        <h3 class=""><?php echo $res['total']; ?></h3>
-                        <h6 class="card-subtitle">Match Remittance Sanctioning</h6></div>
-                    <div class="col-md-12">
-                        <div class="progress">
-                            <div class="progress-bar bg-primary" role="progressbar" style="width: 100%; height: 6px;" aria-valuenow="100" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div> -->
-        <!-- Column -->
-        <!-- Column -->
-<!--         <?php 
-        $db->sql('select count(*) as total from membership_table'); 
-        $res = $db->getResult(); $res = $res[0]; 
-        ?>
- --><!--         <div class="card">
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-md-12">
-                        <h2 class="m-b-0"><i class="mdi mdi-buffer text-warning"></i></h2>
-                        <h3 class=""><?php echo $res['total']; ?></h3>
-                        <h6 class="card-subtitle">Membership</h6></div>
-                    <div class="col-md-12">
-                        <div class="progress">
-                            <div class="progress-bar bg-warning" role="progressbar" style="width: 100%; height: 6px;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div> -->
-        <!-- Column -->
- <!--        <?php 
-        $db->sql('select count(*) as total from match_table'); 
-        $res = $db->getResult(); $res = $res[0]; 
-        ?> -->
-       <!--  <div class="card">
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-md-12">
-                        <h2 class="m-b-0"><i class="mdi mdi-buffer text-secondary"></i></h2>
-                        <h3 class=""><?php echo $res['total']; ?></h3>
-                        <h6 class="card-subtitle">Match</h6></div>
-                    <div class="col-md-12">
-                        <div class="progress">
-                            <div class="progress-bar bg-warning" role="progressbar" style="width: 100%; height: 6px;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div> -->
-
-    </div>
-
-   
-    <!-- ============================================================== -->
-    <!-- End PAge Content -->
-    <!-- ============================================================== -->
-    <!-- ============================================================== -->
+</div>
+<!-- ============================================================== -->
+<!-- End PAge Content -->
+<!-- ============================================================== -->
+<!-- ============================================================== -->
          
 <?php include('footer.php'); ?>
+
+<script type="text/javascript">
+    var title = "";
+    var dataTable = $('#datable').DataTable({
+        // "processing":true,
+        // "serverSide":true,
+        deferRender: true,
+        "order":[],
+        "ajax": {
+                    "type": 'POST',
+                    "url": 'load-products-variations.php',
+                    
+                },
+        "columnDefs":[
+            {
+                "targets":[5],
+                "orderable":false,
+            },
+        ],
+         buttons: [
+        {
+            extend: 'excel',
+            title: title,
+            exportOptions: {
+                columns: "thead th:not(.noExport)"
+            }
+        },
+        {
+            extend: 'csv',
+            title: title,
+            exportOptions: {
+                columns: "thead th:not(.noExport)"
+            }
+        },
+        {
+            extend: 'print',
+            title: title,
+            exportOptions: {
+                columns: "thead th:not(.noExport)"
+            }
+        }
+
+    ],
+        // dom: 'Bfrltip',
+        language: { search: "",searchPlaceholder: "Search" },
+
+        "info":     true,
+        "bFilter":     true,
+        responsive: true,
+        autoWidth: false,
+    });
+
+</script>

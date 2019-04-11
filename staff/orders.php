@@ -1,15 +1,14 @@
-<?php 
-include('header.php');
-?>
+
+<?php include('header.php'); ?>
 <div class="row page-titles">
     <div class="col-md-5 align-self-center">
-        <h3 class="text-themecolor">List of Overdue</h3>
+        <h3 class="text-themecolor">All Orders</h3>
     </div>
     <div class="col-md-7 align-self-center">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="javascript:void(0)">Reports</a></li>
-            <!-- <li class="breadcrumb-item"></li> -->
-            <li class="breadcrumb-item active">List of Overdue</li>
+            <li class="breadcrumb-item"><a href="javascript:void(0)">Orders</a></li>
+<!--             <li class="breadcrumb-item">pages</li> -->
+            <li class="breadcrumb-item active">All Orders</li>
         </ol>
     </div>
    
@@ -30,8 +29,6 @@ include('header.php');
 
             <div class="card">
                 <div class="card-body">
-
-
                     <div class="table-responsive">
                         <table id="datable" class="table table-bordered table-striped">
                             <thead>
@@ -39,12 +36,11 @@ include('header.php');
                                     <th>Order Number</th>
                                     <th>Order Amount</th>
                                     <th>Date Placed</th>
-                                    <th>Over Due Date</th>
                                     <th>Delivery Method</th>
                                     <th>Mode of Payment</th>
                                     <th>Order Status</th>
                                     <th>Payment Status</th>
-
+                                    <th class="noExport">Actions</th>
 
                                 </tr>
                             </thead>
@@ -64,25 +60,38 @@ include('header.php');
 <?php include('footer.php'); ?>
 
 <script type="text/javascript">
-	var title = "List of Overdue (<?php echo date('F d, Y') ?>)";
+	var title = "";
     var dataTable = $('#datable').DataTable({
         // "processing":true,
         // "serverSide":true,
         deferRender: true,
-        "order":[],
+        "order":[0,"ASC"],
         "ajax": {
                     "type": 'POST',
-                    "url": 'load-list-of-overdue.php',
-    
+                    "url": 'load-orders.php',
+                    
                 },
         "columnDefs":[
             {
-                "targets":[1],
+                "targets":[7],
                 "orderable":false,
             },
         ],
          buttons: [
-       
+        {
+            extend: 'excel',
+            title: title,
+            exportOptions: {
+                columns: "thead th:not(.noExport)"
+            }
+        },
+        {
+            extend: 'csv',
+            title: title,
+            exportOptions: {
+                columns: "thead th:not(.noExport)"
+            }
+        },
         {
             extend: 'print',
             title: title,
@@ -92,7 +101,7 @@ include('header.php');
         }
 
     ],
-        dom: 'Bfrltip',
+        // dom: 'Bfrltip',
         language: { search: "",searchPlaceholder: "Search" },
 
         "info":     true,
@@ -102,6 +111,7 @@ include('header.php');
     });
 
 </script>
+
 
 
 

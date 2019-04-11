@@ -340,7 +340,7 @@ $res = $db->getResult(); $res = $res[0];
                             <table id="datablePayments" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
-                                        <th>Amount (₱)</th>
+                                        <th>Amount</th>
                                         <th>Receipt</th>
                                         <th>Remittance Center</th>
                                         <th>Control Number</th>
@@ -381,8 +381,8 @@ $res = $db->getResult(); $res = $res[0];
                                     <tr>
                                         <th>Product</th>
                                         <th>Quantity</th>
-                                        <th>Price (₱)</th>
-                                        <th>Amount (₱)</th>
+                                        <th>Price</th>
+                                        <th>Amount</th>
      
                                     </tr>
                                 </thead>

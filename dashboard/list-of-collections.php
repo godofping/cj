@@ -105,7 +105,7 @@ $string ="";
                             <thead>
                                 <tr>
                                     <th>Order number</th>
-                                    <th>Amount (₱)</th>
+                                    <th>Amount</th>
                                     <th class="noExport">Receipt</th>
                                     <th>Remittance Center</th>
                                     <th>Control Number</th>
@@ -175,7 +175,7 @@ $string ="";
                 },
         "columnDefs":[
             {
-                "targets":[],
+                "targets":[1],
                 "orderable":false,
             },
         ],

@@ -102,7 +102,7 @@ $res = $db->getResult(); $res = $res[0];
 
                   <li class="col-sm-12">
                     <label>New Password *
-                      <input type="password" class="form-control" name="newPasssword" id="newPasssword" placeholder="" required="">
+                      <input type="password" class="form-control" name="newPassword" id="newPassword" placeholder="" required="">
                     </label>
                   </li>
 

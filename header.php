@@ -2,6 +2,11 @@
 include('dashboard/connection.php');
 $filename = basename($_SERVER["SCRIPT_FILENAME"], '.php');
 
+
+if (isset($_SESSION['userType']) and $_SESSION['userType'] == 'Staff') {
+  echo '<script type="text/javascript">window.location.replace("controller.php?from=logout");</script>';
+}
+
 if ($filename != "finish-registration" and isset($_SESSION['userId'])) {
   $db->select('users_table','*',NULL,'userId = "' . $_SESSION['userId'] . '"', NULL); 
   $res = $db->getResult(); $res = $res[0];

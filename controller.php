@@ -525,14 +525,14 @@ if (isset($_GET['from']) and $_GET['from'] == 'update-profile') {
 if (isset($_GET['from']) and $_GET['from'] == 'update-password') {
 
 	$oldPassword = $db->escapeString(md5($_POST['oldPassword']));
-	$newPasssword = $db->escapeString(md5($_POST['newPasssword']));
+	$newPassword = $db->escapeString(md5($_POST['newPassword']));
 	$confirmNewPassword = $db->escapeString(md5($_POST['confirmNewPassword']));
 	$userPassword = $db->escapeString($_POST['userPassword']);
 
-	if (($oldPassword == $userPassword) and ($newPasssword == $confirmNewPassword)) {
+	if (($oldPassword == $userPassword) and ($newPassword == $confirmNewPassword)) {
 		$db->update('users_table',
 		array(
-			'userPassword'=>$newPasssword,
+			'userPassword'=>$newPassword,
 
 			),
 			'userId=' . $_SESSION['userId']

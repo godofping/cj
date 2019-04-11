@@ -1,5 +1,10 @@
+<?php 
+include('header.php');
 
-<?php include('header.php'); ?>
+$db->select('staffs_view','*',NULL,'userId = "' . $_SESSION['userId'] . '"', NULL); 
+$res = $db->getResult(); $res = $res[0];
+?>
+
 <div class="row page-titles">
     <div class="col-md-5 align-self-center">
         <h3 class="text-themecolor">Change Password</h3>
@@ -22,7 +27,7 @@
             <div class="card">
                 <div class="card-body">
                     <p>* indicates required fields</p>
-                	<form autocomplete="off" class="form-material m-t-40" method="POST" action="controller.php?from=change-password">
+                	<form autocomplete="off" class="form-material m-t-40" method="POST" action="controller.php?from=update-password">
 
                         <div class="row">
                             <div class="col-md-12">
@@ -51,7 +56,7 @@
                             </div>
                         </div>
 
-
+                        <input type="password" name="userPassword" value="<?php echo $res['userPassword'] ?>" hidden>
 
                     <button type="submit" class="btn btn-success waves-effect waves-light m-r-10 pull-right">Save Changes</button>
 

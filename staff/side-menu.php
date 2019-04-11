@@ -14,7 +14,14 @@
                     </div>
                     <!-- User profile text-->
                     <div class="profile-text"> 
-                            <h5>Hi, <?php echo $_SESSION['staffFullName']; ?>!</h5>
+                            <h5>Hi, <?php 
+
+
+
+                            $db->select('staffs_view','*',NULL,'userId = "' . $_SESSION['userId'] . '"', NULL); 
+                            $res = $db->getResult(); $res = $res[0];
+
+                            echo $res['userFirstName'] . " " . $res['userLastName']; ?>!</h5>
                     </div>
                 </div>
                 <!-- End User profile text-->
@@ -24,21 +31,25 @@
                         <li class="nav-devider"></li>
                         <li class="nav-small-cap">MENU</li>
 
-                        <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-home"></i><span class="hide-menu">Home</span></a>
+                        <li class="<?php if ($filename == 'shopping-cart' or $filename == 'dashboard'): ?>
+                            active
+                        <?php endif ?>"> 
+                            <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-home"></i><span class="hide-menu">Home</span></a>
                             <ul aria-expanded="false" class="collapse">
                                 <li><a href="dashboard.php">Dashboard</a></li>
+                                <li><a href="shopping-cart.php">Shopping Cart</a></li>
                        
                                 
                             </ul>
                         </li>
 
 
-                        <li class="<?php if ($filename == 'orders' or $filename == 'manage-order'): ?>
+                        <li class="<?php if ($filename == 'orders'): ?>
                             active
                         <?php endif ?>"> 
                             <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-cart"></i><span class="hide-menu">Orders</span></a>
                             <ul aria-expanded="false" class="collapse">
-                                <li><a href="orders.php" class="<?php if ($filename == 'orders' or $filename == 'manage-order'): ?>active<?php endif ?>">All Orders</a></li>
+                                <li><a href="orders.php" class="<?php if ($filename == 'orders' or $filename == 'manage-order'): ?>active<?php endif ?>">My Orders</a></li>
                                 
                             </ul>
                         </li>
