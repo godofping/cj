@@ -35,7 +35,8 @@ $columns = array(
     array( 'db' => 'userEmail',   'dt' => 0 ),
     array( 'db' => 'userFirstName',   'dt' => 1 ),
     array( 'db' => 'userLastName',   'dt' => 2 ),
-    array( 'db' => 'userIsBlocked',   'dt' => 3,'formatter' => function( $d, $row ) {
+    array( 'db' => 'userPhoneNumber',   'dt' => 3 ),
+    array( 'db' => 'userIsBlocked',   'dt' => 4,'formatter' => function( $d, $row ) {
         if ($row['userIsBlocked'] == 1) {
             return 'Yes';
         }
@@ -44,7 +45,7 @@ $columns = array(
             return 'No';
         }
     } ),
-    array( 'db' => 'userId', 'dt' => 4,'formatter' => function( $d, $row ) {
+    array( 'db' => 'userId', 'dt' => 5,'formatter' => function( $d, $row ) {
 
         if ($row['userIsBlocked'] == 1) {
             return '<a class = "btn btn-info btn-xs" href="update-staff.php?userId=' . $row['userId'] . '">Update</a> <a class = "btn btn-danger btn-xs" onclick = "return confirm('."'Are you sure want to unblock this account?'".')" href="controller.php?from=unblock-staff&userId=' . $row['userId'] . '">Unblock</a>';

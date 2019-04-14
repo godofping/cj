@@ -120,6 +120,7 @@ if (isset($_GET['from']) and $_GET['from'] == 'add-staff') {
 		$userPassword = $db->escapeString(md5($_POST['userPassword']));
 		$userFirstName = $db->escapeString($_POST['userFirstName']);
 		$userLastName = $db->escapeString($_POST['userLastName']);
+		$userPhoneNumber = $db->escapeString($_POST['userPhoneNumber']);
 		$userRegistrationDate = $db->escapeString(date('Y-m-d'));
 		$userType = $db->escapeString("Staff");
 
@@ -129,6 +130,7 @@ if (isset($_GET['from']) and $_GET['from'] == 'add-staff') {
 			'userPassword'=>$userPassword,
 			'userFirstName'=>$userFirstName,
 			'userLastName'=>$userLastName,
+			'userPhoneNumber'=>$userPhoneNumber,
 			'userRegistrationDate'=>$userRegistrationDate,
 			'userType'=>$userType,
 			'userIsBlocked'=>'0',
@@ -156,6 +158,7 @@ if (isset($_GET['from']) and $_GET['from'] == 'update-staff') {
 	$userPassword = $db->escapeString(md5($_POST['userPassword']));
 	$userFirstName = $db->escapeString($_POST['userFirstName']);
 	$userLastName = $db->escapeString($_POST['userLastName']);
+	$userPhoneNumber = $db->escapeString($_POST['userPhoneNumber']);
 
 	$db->select('users_table','*',NULL,'userId = "' . $_GET['userId'] . '"', NULL); 
 	$res = $db->getResult(); $res = $res[0];
@@ -172,6 +175,7 @@ if (isset($_GET['from']) and $_GET['from'] == 'update-staff') {
 				'userPassword'=>$userPassword,
 				'userFirstName'=>$userFirstName,
 				'userLastName'=>$userLastName,
+				'userPhoneNumber'=>$userPhoneNumber,
 				),
 				'userId=' . $_GET['userId']
 			);
@@ -193,6 +197,7 @@ if (isset($_GET['from']) and $_GET['from'] == 'update-staff') {
 			'userPassword'=>$userPassword,
 			'userFirstName'=>$userFirstName,
 			'userLastName'=>$userLastName,
+			'userPhoneNumber'=>$userPhoneNumber,
 			),
 			'userId=' . $_GET['userId']
 		);

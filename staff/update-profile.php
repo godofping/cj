@@ -30,6 +30,15 @@ $res = $db->getResult(); $res = $res[0];
                 	<form autocomplete="off" class="form-material m-t-40" method="POST" action="controller.php?from=update-profile">
 
                         <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Email *</label>
+                                    <input type="text" class="form-control form-control-line" required="" name="userEmail" value="<?php echo $res['userEmail'] ?>" readonly> 
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
                         	<div class="col-md-12">
                         		<div class="form-group">
 		                            <label>First Name *</label>
@@ -43,6 +52,16 @@ $res = $db->getResult(); $res = $res[0];
                                 <div class="form-group">
                                     <label>Last Name *</label>
                                     <input type="text" class="form-control form-control-line" required="" name="userLastName" value="<?php echo $res['userLastName'] ?>"> 
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Phone Number *</label>
+                                    <input type="text" class="form-control form-control-line" required="" name="userPhoneNumber" value="<?php echo $res['userPhoneNumber'] ?>"> 
                                 </div>
                             </div>
                         </div>

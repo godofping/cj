@@ -37,6 +37,7 @@
                                     <th>Email</th>
                                     <th>First Name</th>
                                     <th>Last Name</th>
+                                    <th>Phone Number</th>
                                     <th>Blocked</th>
                                     <th class="noExport">Actions</th>
 
@@ -71,7 +72,7 @@
                 },
         "columnDefs":[
             {
-                "targets":[4],
+                "targets":[5],
                 "orderable":false,
             },
         ],

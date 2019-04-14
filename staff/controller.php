@@ -58,11 +58,13 @@ if (isset($_GET['from']) and $_GET['from'] == 'update-profile') {
 
 	$userFirstName = $db->escapeString($_POST['userFirstName']);
 	$userLastName = $db->escapeString($_POST['userLastName']);
+	$userPhoneNumber = $db->escapeString($_POST['userPhoneNumber']);
 
 	$db->update('users_table',
 	array(
 		'userFirstName'=>$userFirstName,
 		'userLastName'=>$userLastName,
+		'userPhoneNumber'=>$userPhoneNumber,
 		),
 		'userId=' . $_SESSION['userId']
 	);

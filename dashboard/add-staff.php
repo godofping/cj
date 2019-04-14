@@ -61,6 +61,16 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
+                                    <label>Phone Number *</label>
+                                    <input type="text" class="form-control form-control-line" required="" name="userPhoneNumber"> 
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
                                     <label>Password *</label>
                                     <input type="password" class="form-control form-control-line" required="" name="userPassword"> 
                                 </div>
