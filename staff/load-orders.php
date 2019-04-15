@@ -33,15 +33,16 @@ $primaryKey = 'orderId';
 $columns = array(
 
     array( 'db' => 'orderId',   'dt' => 0 ),
-    array( 'db' => 'orderTotalAmount',   'dt' => 1,'formatter' => function( $d, $row ) {
+    array( 'db' => 'billingFullName',   'dt' => 1 ),
+    array( 'db' => 'orderTotalAmount',   'dt' => 2,'formatter' => function( $d, $row ) {
         return '₱' . number_format($d,2);
     } ),
-    array( 'db' => 'orderPlacedDate',   'dt' => 2,'formatter' => function( $d, $row ) {
+    array( 'db' => 'orderPlacedDate',   'dt' => 3,'formatter' => function( $d, $row ) {
         return date('F d, Y g:i A', strtotime($d));
     }),
-    array( 'db' => 'orderStatus',   'dt' => 3 ),
-    array( 'db' => 'orderPaymentStatus',   'dt' => 4 ),
-    array( 'db' => 'orderId', 'dt' => 5,'formatter' => function( $d, $row ) {
+    array( 'db' => 'orderStatus',   'dt' => 4 ),
+    array( 'db' => 'orderPaymentStatus',   'dt' => 5 ),
+    array( 'db' => 'orderId', 'dt' => 6,'formatter' => function( $d, $row ) {
         return '<a class = "btn btn-info btn-xs" href="manage-order.php?orderId=' . $row['orderId'] . '">Manage Order</a>';
     } ),
 

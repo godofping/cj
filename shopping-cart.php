@@ -89,7 +89,7 @@
                         $imgoutput = $db->getResult(); $imgoutput = $imgoutput[0];
                       ?>
 
-                      <a href="#." class="item-img"> <img class="media-object" src="dashboard/images/<?php echo $imgoutput['productImageLocation'] ?>" alt=""> </a> 
+                      <a href="product-details.php?productId=<?php echo $res['productId'] ?>" class="item-img"> <img class="media-object" src="dashboard/images/<?php echo $imgoutput['productImageLocation'] ?>" alt=""> </a> 
                       <!-- Item Name -->
                       <div class="media-body">
                         <p class="pt-4"><?php echo $res['productName']; ?> (<?php echo $res['productOption1']; ?> <?php echo $res['productOption2']; ?>)</p>

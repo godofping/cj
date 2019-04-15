@@ -34,6 +34,7 @@
                             <thead>
                                 <tr>
                                     <th>Order Number</th>
+                                    <th>Customer</th>
                                     <th>Order Amount</th>
                                     <th>Date Placed</th>
                                     <th>Delivery Method</th>
@@ -73,7 +74,7 @@
                 },
         "columnDefs":[
             {
-                "targets":[7],
+                "targets":[8],
                 "orderable":false,
             },
         ],

@@ -47,7 +47,7 @@ $res = $db->getResult(); $res = $res[0];
                             <h1>THIS CUSTOMER IS BLOCKED.</h1>
                         <?php } ?>
 
-                        <p>Customer: <b><?php echo $res['userFirstName'] . " " . $res['userLastName']; ?></b></p>
+                        <p>Customer: <b><?php echo $res['billingFullName']; ?></b></p>
 
                         <p>Delivery Method: <b><?php echo $res['orderDeliveryMethod']; ?></b></p>
 
