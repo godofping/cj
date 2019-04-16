@@ -33,16 +33,18 @@ $primaryKey = 'userId';
 $columns = array(
 
     array( 'db' => 'orderId',   'dt' => 0 ),
-    array( 'db' => 'orderTotalAmount',   'dt' => 1,'formatter' => function( $d, $row ) {
+    array( 'db' => 'billingFullName',   'dt' => 1 ),
+
+    array( 'db' => 'orderTotalAmount',   'dt' => 2,'formatter' => function( $d, $row ) {
         return '₱' . number_format($d,2);
     } ),
-    array( 'db' => 'orderPlacedDate',   'dt' => 2,'formatter' => function( $d, $row ) {
+    array( 'db' => 'orderPlacedDate',   'dt' => 3,'formatter' => function( $d, $row ) {
         return date('F d, Y g:i A', strtotime($d));
     }),
-    array( 'db' => 'orderDeliveryMethod',   'dt' => 3 ),
-    array( 'db' => 'orderModeOfPayment',   'dt' => 4 ),
-    array( 'db' => 'orderStatus',   'dt' => 5 ),
-    array( 'db' => 'orderPaymentStatus',   'dt' => 6 ),
+    array( 'db' => 'orderDeliveryMethod',   'dt' => 4 ),
+    array( 'db' => 'orderModeOfPayment',   'dt' => 5 ),
+    array( 'db' => 'orderStatus',   'dt' => 6 ),
+    array( 'db' => 'orderPaymentStatus',   'dt' => 7 ),
  
 
 

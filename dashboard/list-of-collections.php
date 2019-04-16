@@ -105,6 +105,7 @@ $string ="";
                             <thead>
                                 <tr>
                                     <th>Order number</th>
+                                    <th>Customer</th>
                                     <th>Amount</th>
                                     <th class="noExport">Receipt</th>
                                     <th>Remittance Center</th>
@@ -175,7 +176,7 @@ $string ="";
                 },
         "columnDefs":[
             {
-                "targets":[1],
+                "targets":[2],
                 "orderable":false,
             },
         ],

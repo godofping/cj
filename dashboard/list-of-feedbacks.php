@@ -36,7 +36,7 @@ include('header.php');
                         <table id="datable" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
-                                	<th>Customer Name</th>
+                                	<th>Customer</th>
                                     <th>Feedback</th>
                                     <th>Date Submitted</th>
 

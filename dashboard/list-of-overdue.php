@@ -37,6 +37,7 @@ include('header.php');
                             <thead>
                                 <tr>
                                     <th>Order Number</th>
+                                    <th>Customer</th>
                                     <th>Order Amount</th>
                                     <th>Date Placed</th>
                                     <th>Over Due Date</th>
@@ -77,7 +78,7 @@ include('header.php');
                 },
         "columnDefs":[
             {
-                "targets":[1],
+                "targets":[2],
                 "orderable":false,
             },
         ],

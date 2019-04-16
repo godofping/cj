@@ -33,7 +33,7 @@
                         <table id="datable" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
-                                    <th>Customer Name</th>
+                                    <th>Customer</th>
                                     <th>Product Name</th>
                                     <th>Option 1</th>
                                     <th>Option 2</th>

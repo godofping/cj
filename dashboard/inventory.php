@@ -38,7 +38,7 @@
                                     <th>Price (₱)</th>
                                     <th>Option 1</th>
                                     <th>Option 2</th>
-                                    <th>Stocks</th>
+                                    <th>Current Stocks</th>
                                     <th>Product Stocks Reorder Point</th>
                                     <th>Status</th>
                                     <th class="noExport">Actions</th>
