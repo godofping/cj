@@ -30,6 +30,15 @@ $res = $db->getResult(); $res = $res[0];
                 	<form autocomplete="off" class="form-material m-t-40" method="POST" action="controller.php?from=update-profile">
 
                         <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Email </label>
+                                    <input type="text" class="form-control form-control-line" readonly="" required="" name="administratorEmail" value="<?php echo $res['administratorEmail'] ?>"> 
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
                         	<div class="col-md-12">
                         		<div class="form-group">
 		                            <label>Full Name *</label>

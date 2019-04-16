@@ -22,7 +22,7 @@ DROP TABLE IF EXISTS `administrators_table`;
 
 CREATE TABLE `administrators_table` (
   `administratorUserId` int(6) NOT NULL AUTO_INCREMENT,
-  `administratorUserName` varchar(60) DEFAULT NULL,
+  `administratorEmail` varchar(60) DEFAULT NULL,
   `administratorUserPassword` varchar(60) DEFAULT NULL,
   `isDeleted` tinyint(1) DEFAULT '0',
   `administratorfullName` varchar(60) DEFAULT NULL,
@@ -31,7 +31,7 @@ CREATE TABLE `administrators_table` (
 
 /*Data for the table `administrators_table` */
 
-insert  into `administrators_table`(`administratorUserId`,`administratorUserName`,`administratorUserPassword`,`isDeleted`,`administratorfullName`) values (1,'admin','21232f297a57a5a743894a0e4a801fc3',0,'Admin Name1'),(2,'user1','24c9e15e52afc47c225b757e7bee1f9d',1,'user1'),(3,'user2','7e58d63b60197ceb55a1c487989a3720',1,'user2'),(4,'user3','92877af70a45fd6a2ed7fe81e1236b78',1,'user3'),(5,'1','c4ca4238a0b923820dcc509a6f75849b',0,'1');
+insert  into `administrators_table`(`administratorUserId`,`administratorEmail`,`administratorUserPassword`,`isDeleted`,`administratorfullName`) values (1,'admin@gmail.com','21232f297a57a5a743894a0e4a801fc3',0,'Susan Lopez'),(5,'admin1@gmail.com','c4ca4238a0b923820dcc509a6f75849b',0,'1');
 
 /*Table structure for table `inventory_logs_table` */
 
@@ -317,7 +317,7 @@ DROP TABLE IF EXISTS `administrators_view`;
 
 /*!50001 CREATE TABLE  `administrators_view`(
  `administratorUserId` int(6) ,
- `administratorUserName` varchar(60) ,
+ `administratorEmail` varchar(60) ,
  `administratorUserPassword` varchar(60) ,
  `isDeleted` tinyint(1) ,
  `administratorfullName` varchar(60) 
@@ -750,7 +750,7 @@ DROP TABLE IF EXISTS `users_view`;
 /*!50001 DROP TABLE IF EXISTS `administrators_view` */;
 /*!50001 DROP VIEW IF EXISTS `administrators_view` */;
 
-/*!50001 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `administrators_view` AS select `administrators_table`.`administratorUserId` AS `administratorUserId`,`administrators_table`.`administratorUserName` AS `administratorUserName`,`administrators_table`.`administratorUserPassword` AS `administratorUserPassword`,`administrators_table`.`isDeleted` AS `isDeleted`,`administrators_table`.`administratorfullName` AS `administratorfullName` from `administrators_table` where (`administrators_table`.`isDeleted` = 0) */;
+/*!50001 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `administrators_view` AS select `administrators_table`.`administratorUserId` AS `administratorUserId`,`administrators_table`.`administratorEmail` AS `administratorEmail`,`administrators_table`.`administratorUserPassword` AS `administratorUserPassword`,`administrators_table`.`isDeleted` AS `isDeleted`,`administrators_table`.`administratorfullName` AS `administratorfullName` from `administrators_table` where (`administrators_table`.`isDeleted` = 0) */;
 
 /*View structure for view customers_view */
 

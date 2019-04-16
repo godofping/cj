@@ -4,16 +4,16 @@ include('connection.php');
 
 if (isset($_GET['from']) and $_GET['from'] == 'login') {
 	
-	$administratorUserName = $db->escapeString($_POST['administratorUserName']);
+	$administratorEmail = $db->escapeString($_POST['administratorEmail']);
 	$administratorUserPassword = $db->escapeString(md5($_POST['administratorUserPassword']));
 
-	$db->select('administrators_table', '*', NULL, 'administratorUserName = "' . $administratorUserName  .'" and administratorUserPassword = "' . $administratorUserPassword . '"');
+	$db->select('administrators_table', '*', NULL, 'administratorEmail = "' . $administratorEmail  .'" and administratorUserPassword = "' . $administratorUserPassword . '"');
 	$res = $db->getResult();
 
 	if (count($res) > 0) {
 		$res = $res[0];
 		$_SESSION['administratorUserId'] = $res['administratorUserId'];
-		$_SESSION['administratorUserName'] = $res['administratorUserName'];
+		$_SESSION['administratorEmail'] = $res['administratorEmail'];
 		$_SESSION['administratorfullName'] = $res['administratorfullName'];
 		
 		$_SESSION['toast'] = 'login-successful';

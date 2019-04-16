@@ -118,22 +118,22 @@ if (isset($_GET['from']) and $_GET['from'] == 'customer-registration') {
 
 if (isset($_GET['from']) and $_GET['from'] == 'update-user') {
 
-	$administratorUserName = $db->escapeString($_POST['administratorUserName']);
+	$administratorEmail = $db->escapeString($_POST['administratorEmail']);
 	$administratorUserPassword = $db->escapeString(md5($_POST['administratorUserPassword']));
 	$administratorfullName = $db->escapeString($_POST['administratorfullName']);
 
 	$db->select('administrators_table','*',NULL,'administratorUserId = "' . $_POST['administratorUserId'] . '"', NULL); 
 	$res = $db->getResult(); $res = $res[0];
 
-	if ($administratorUserName != $res['administratorUserName']) {
+	if ($administratorEmail != $res['administratorEmail']) {
 
-		$db->select('administrators_table','*',NULL,'administratorUserName = "' . $_POST['administratorUserName'] . '"', NULL); 
+		$db->select('administrators_table','*',NULL,'administratorEmail = "' . $_POST['administratorEmail'] . '"', NULL); 
 		$res = $db->getResult();
 		
 		if (count($res) == 0) {
 			$db->update('administrators_table',
 			array(
-				'administratorUserName'=>$administratorUserName,
+				'administratorEmail'=>$administratorEmail,
 				'administratorUserPassword'=>$administratorUserPassword,
 				'administratorfullName'=>$administratorfullName,
 				),
@@ -147,7 +147,7 @@ if (isset($_GET['from']) and $_GET['from'] == 'update-user') {
 		}
 		else
 		{
-			$_SESSION['toast'] = 'administratorUserName-taken';
+			$_SESSION['toast'] = 'administratorEmail-taken';
 		}
 
 	}

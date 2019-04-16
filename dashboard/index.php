@@ -61,7 +61,7 @@ include('connection.php');
                         <h3 class="box-title m-b-20">Sign In</h3>
                         <div class="form-group ">
                             <div class="col-xs-12">
-                                <input class="form-control" type="text" required="" placeholder="Username" name="administratorUserName">
+                                <input class="form-control" type="email" required="" placeholder="Email" name="administratorEmail">
                             </div>
                         </div>
                         <div class="form-group">
