@@ -739,16 +739,29 @@ if (isset($_GET['from']) and $_GET['from'] == 'forgot-password') {
 
 	$userEmail = $db->escapeString($_POST['userEmail']);
 
-	$msg = "Please click the link below to reset your password. <br>";
+	$db->select('customers_view','count(*) as total',NULL,'userEmail = "' . $userEmail . '"', NULL); 
+	$res = $db->getResult(); $res = $res[0];
 
-	$msg = wordwrap($msg,70);
+	echo $res['total'];
 
-	mail($userEmail,"Reset Password",$msg);
+	if ($res['total'] > 0) {
+
+		$s = base64_encode(date('Y-m-d H:i:s') . ";customer;" . $userEmail);
+		$msg = "Please click the link to reset your password to \"1234\". The link will expire after 5 minutes. http://cjashleyfashionhub.tk/reset-password.php?s=".$s ." If you didn't request a password reset, you can ignore this message.";
+
+		mail($userEmail,"Reset Password (CJ Ashley Fasion Hub)",$msg);
+
+		$_SESSION['toast'] = 'message-sent';
+		
+
+	}
+	else
+	{
+		$_SESSION['toast'] = 'message-sent-failed';
+	}
 
 
-	$_SESSION['toast'] = 'message-sent';
 	header("Location: forgot-password.php");
-
 }
 
 
