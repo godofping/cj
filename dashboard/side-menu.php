@@ -65,6 +65,10 @@
                             <ul aria-expanded="false" class="collapse">
                                 <li><a href="inventory.php" class="<?php if ($filename == 'inventory' or $filename == 'manage-stocks'): ?>active<?php endif ?>">Manage</a></li>
                                 <li><a href="available-stocks.php" class="<?php if ($filename == 'available-stocks'): ?>active<?php endif ?>">Available Stocks</a></li>
+                                <li><a href="available-stocks.php" class="<?php if ($filename == 'available-stocks'): ?>active<?php endif ?>">Stocks Left</a></li>
+                                <li><a href="available-stocks.php" class="<?php if ($filename == 'available-stocks'): ?>active<?php endif ?>">Reoder Point</a></li>
+                                <li><a href="available-stocks.php" class="<?php if ($filename == 'available-stocks'): ?>active<?php endif ?>">Stocks In</a></li>
+                                <li><a href="available-stocks.php" class="<?php if ($filename == 'available-stocks'): ?>active<?php endif ?>">Stocks Out</a></li>
                                 
                             </ul>
                         </li>
