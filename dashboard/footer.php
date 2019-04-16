@@ -603,6 +603,30 @@
             });
         <?php endif?>
 
+        <?php if (isset($_SESSION['toast']) and $_SESSION['toast'] == 'backup'): ?>
+            $.toast({
+              heading: 'CREATED',
+              text: 'Backup Created!',
+              position: 'top-center',
+              loaderBg:'#ff6849',
+              icon: 'success',
+              hideAfter: 5000, 
+              stack: 6
+            });
+        <?php endif?>
+
+        <?php if (isset($_SESSION['toast']) and $_SESSION['toast'] == 'restore'): ?>
+            $.toast({
+              heading: 'RESTORED',
+              text: 'Backup Restored!',
+              position: 'top-center',
+              loaderBg:'#ff6849',
+              icon: 'success',
+              hideAfter: 5000, 
+              stack: 6
+            });
+        <?php endif?>
+
 
 
     </script>

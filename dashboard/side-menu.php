@@ -63,7 +63,8 @@
                         <?php endif ?>"> 
                             <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-format-list-bulleted"></i><span class="hide-menu">Inventory</span></a>
                             <ul aria-expanded="false" class="collapse">
-                                <li><a href="inventory.php" class="<?php if ($filename == 'inventory' or $filename == 'manage-stocks'): ?>active<?php endif ?>">View all</a></li>
+                                <li><a href="inventory.php" class="<?php if ($filename == 'inventory' or $filename == 'manage-stocks'): ?>active<?php endif ?>">Manage</a></li>
+                                <li><a href="available-stocks.php" class="<?php if ($filename == 'available-stocks'): ?>active<?php endif ?>">Available Stocks</a></li>
                                 
                             </ul>
                         </li>
@@ -123,9 +124,9 @@
                         <li class="<?php if ($filename == 'backup' or $filename == 'restore'): ?>
                             active
                         <?php endif ?>"> 
-                            <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-settings"></i><span class="hide-menu">Back up and Restore</span></a>
+                            <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-settings"></i><span class="hide-menu">Backup and Restore</span></a>
                             <ul aria-expanded="false" class="collapse">
-                                <li><a href="backup.php" class="<?php if ($filename == 'backup'): ?>active<?php endif ?>">Back up</a></li>
+                                <li><a href="backup.php" class="<?php if ($filename == 'backup'): ?>active<?php endif ?>">Backup</a></li>
                                 <li><a href="restore.php" class="<?php if ($filename == 'restore'): ?>active<?php endif ?>">Restore</a></li>
                                 
                             </ul>

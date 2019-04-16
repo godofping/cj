@@ -1,14 +1,15 @@
-
-<?php include('header.php'); ?>
+<?php 
+include('header.php');
+?>
 <div class="row page-titles">
     <div class="col-md-5 align-self-center">
-        <h3 class="text-themecolor">Manage</h3>
+        <h3 class="text-themecolor">List of Available Stocks</h3>
     </div>
     <div class="col-md-7 align-self-center">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="javascript:void(0)">Inventory</a></li>
-<!--             <li class="breadcrumb-item">pages</li> -->
-            <li class="breadcrumb-item active">Manage</li>
+            <li class="breadcrumb-item"><a href="javascript:void(0)">Reports</a></li>
+            <!-- <li class="breadcrumb-item"></li> -->
+            <li class="breadcrumb-item active">List of Available Stocks</li>
         </ol>
     </div>
    
@@ -30,18 +31,18 @@
             <div class="card">
                 <div class="card-body">
 
+
                     <div class="table-responsive">
                         <table id="datable" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
                                     <th>Product Name</th>
-                                    <th>Price (₱)</th>
                                     <th>Option 1</th>
                                     <th>Option 2</th>
-                                    <th>Current Stocks</th>
-                                    <th>Product Stocks Reorder Point</th>
-                                    <th>Status</th>
-                                    <th class="noExport">Actions</th>
+                                    <th>Stocks</th>
+
+
+
                                 </tr>
                             </thead>
                             <tbody>
@@ -60,7 +61,7 @@
 <?php include('footer.php'); ?>
 
 <script type="text/javascript">
-	var title = "";
+    var title = "List of Available Stocks (<?php echo date('F d, Y') ?>)";
     var dataTable = $('#datable').DataTable({
         // "processing":true,
         // "serverSide":true,
@@ -68,30 +69,17 @@
         "order":[],
         "ajax": {
                     "type": 'POST',
-                    "url": 'load-inventory.php',
-                    
+                    "url": 'load-list-of-available-stocks.php',
+    
                 },
         "columnDefs":[
             {
-                "targets":[7],
+                "targets":[],
                 "orderable":false,
             },
         ],
          buttons: [
-        {
-            extend: 'excel',
-            title: title,
-            exportOptions: {
-                columns: "thead th:not(.noExport)"
-            }
-        },
-        {
-            extend: 'csv',
-            title: title,
-            exportOptions: {
-                columns: "thead th:not(.noExport)"
-            }
-        },
+       
         {
             extend: 'print',
             title: title,
@@ -101,7 +89,7 @@
         }
 
     ],
-        // dom: 'Bfrltip',
+        dom: 'Bfrltip',
         language: { search: "",searchPlaceholder: "Search" },
 
         "info":     true,
@@ -111,7 +99,6 @@
     });
 
 </script>
-
 
 
 

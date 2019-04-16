@@ -1269,5 +1269,39 @@ if (isset($_GET['from']) and $_GET['from'] == 'set-shipping-fee') {
 
 
 
+if (isset($_GET['from']) and $_GET['from'] == 'backup') {
+
+	$server_name   = "localhost";
+	$username      = "izr262rx6jyg";
+	$password      = "Android123#";
+	$database_name = "cjashleyfashionhub_db";
+
+
+	$cmd = "mysqldump -h {$server_name} -u {$username} -p{$password} {$database_name} administrators_table inventory_logs_table notifications_table order_details_table orders_table payments_table product_categories_table product_images_table product_reviews_table product_sub_categories_table product_variations_table products_table user_feedbacks_table users_table > " . BACKUP_PATH . "{$database_name}.sql";
+	
+
+	exec($cmd);
+
+
+	header("Location: backup.php");
+	$_SESSION['toast'] = 'backup';
+}
+
+if (isset($_GET['from']) and $_GET['from'] == 'restore') {
+
+	$restore_file  = "database/cjashleyfashionhub_db.sql";
+	$server_name   = "localhost";
+	$username      = "izr262rx6jyg";
+	$password      = "Android123#";
+	$database_name = "cjashleyfashionhub_db";
+
+	$cmd = "mysql -h {$server_name} -u {$username} -p{$password} {$database_name} < $restore_file";
+	exec($cmd);
+
+
+	header("Location: restore.php");
+	$_SESSION['toast'] = 'restore';
+}
+
 
 ?>

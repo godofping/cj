@@ -11,7 +11,7 @@ $res = $db->getResult(); $res = $res[0];
     <div class="col-md-7 align-self-center">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="javascript:void(0)">Inventory</a></li>
-            <li class="breadcrumb-item">View all</li>
+            <li class="breadcrumb-item">Manage</li>
             <li class="breadcrumb-item active">Manage Stocks</li>
         </ol>
     </div>
