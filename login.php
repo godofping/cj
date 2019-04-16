@@ -73,7 +73,7 @@ if (isset($_SESSION['userId'])) { ?>
                         </li>
 
                         <li class="col-md-6">
-                          <div class="margin-top-15 text-right"> <a href="forgot-password.php">Forget Password</a> </div>
+                          <div class="margin-top-15 text-right"> <a href="forgot-password.php">Forgot Password</a> </div>
                         </li>
 
                         
@@ -108,7 +108,7 @@ if (isset($_SESSION['userId'])) { ?>
                         </li>
 
                         <li class="col-md-6">
-                          <div class="margin-top-15 text-right"> <a href="forgot-password.php">Forget Password</a> </div>
+                          <div class="margin-top-15 text-right"> <a href="forgot-password.php">Forgot Password</a> </div>
                         </li>
 
                         

@@ -1,5 +1,6 @@
 <?php
- 
+include('class/mysql_crud.php');
+
 /*
  * DataTables example server-side processing script.
  *
@@ -32,8 +33,18 @@ $primaryKey = 'productVariationId';
 
 $columns = array(
 
+    array( 'db' => 'productId',   'dt' => -1 ),
     array( 'db' => 'productVariationId',   'dt' => 0,'formatter' => function( $d, $row ) {
-        return $d;
+
+        $db = new Database();
+        $db->connect();
+         
+
+        $db->select('product_images_view','*',NULL,'productId = "' . $row['productId'] . '" and isThumbnail = 1', NULL); 
+        $res = $db->getResult(); $res = $res[0];
+
+        return '<a target="_blank" href="../dashboard/images/' . $res['productImageLocation'] . '"><img class="img-thumnail" height="80px" src="../dashboard/images/' . $res['productImageLocation'] . '" alt=""></a>';
+    
     } ),
     array( 'db' => 'productName',   'dt' => 1 ),
     array( 'db' => 'productCategory',   'dt' => 2 ),

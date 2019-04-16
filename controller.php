@@ -732,9 +732,24 @@ if (isset($_GET['from']) and $_GET['from'] == 'add-review') {
 	$_SESSION['toast'] = 'add-review';
 	header("Location: review.php?productVariationId=". $productVariationId);
 
-
 }
 
+
+if (isset($_GET['from']) and $_GET['from'] == 'forgot-password') {
+
+	$userEmail = $db->escapeString($_POST['userEmail']);
+
+	$msg = "Please click the link below to reset your password. <br>";
+
+	$msg = wordwrap($msg,70);
+
+	mail($userEmail,"Reset Password",$msg);
+
+
+	$_SESSION['toast'] = 'message-sent';
+	header("Location: forgot-password.php");
+
+}
 
 
 ?>

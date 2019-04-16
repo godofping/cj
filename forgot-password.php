@@ -29,12 +29,18 @@ if (isset($_SESSION['userId'])) { ?>
               
            
               <div class="col-sm-7 center-block"> 
+
+                <?php if (isset($_SESSION['toast']) and $_SESSION['toast'] == 'message-sent'): ?>
+                  <div class="alert alert-success" role="alert">
+                    Email sent! Please check your inbox.
+                  </div>
+                <?php endif ?>
                 
             
-                <form method="POST" action="controller.php?from=login" autocomplete="off">
+                <form method="POST" action="controller.php?from=forgot-password" autocomplete="off">
                       <ul class="row">
 
-                      <p>We will email you the the reset password link. That link will expire after 5 minutes.</p>
+                      <p>We will email you the the reset password link.</p>
 
                         <li class="col-md-12">
                           <label> Email Address

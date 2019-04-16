@@ -181,3 +181,35 @@ SELECT
 FROM (payments_table
    JOIN orders_table
      ON ((payments_table.`orderId` = orders_table.`orderId`)));
+
+
+--------------------------------
+
+
+private $db_host = "localhost";  // Change as required
+	private $db_user = "root";  // Change as required
+	private $db_pass = "";  // Change as required
+	private $db_name = "cj_db";	// Change as required
+
+
+private $db_host = "localhost";  // Change as required
+	private $db_user = "izr262rx6jyg";  // Change as required
+	private $db_pass = "Android123#";  // Change as required
+	private $db_name = "cjashleyfashionhub_db";	// Change as required
+
+
+
+$sql_details = array(
+    'user' => 'root',
+    'pass' => '',
+    'db'   => 'cj_db',
+    'host' => 'localhost'
+);
+
+
+$sql_details = array(
+    'user' => 'izr262rx6jyg',
+    'pass' => 'Android123#',
+    'db'   => 'cjashleyfashionhub_db',
+    'host' => 'localhost'
+);
