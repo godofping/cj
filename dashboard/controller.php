@@ -14,7 +14,7 @@ if (isset($_GET['from']) and $_GET['from'] == 'login') {
 		$res = $res[0];
 		$_SESSION['administratorUserId'] = $res['administratorUserId'];
 		$_SESSION['administratorEmail'] = $res['administratorEmail'];
-		$_SESSION['administratorfullName'] = $res['administratorfullName'];
+		$_SESSION['administratorFullName'] = $res['administratorFullName'];
 		
 		$_SESSION['toast'] = 'login-successful';
 		header("Location: dashboard.php");
@@ -35,11 +35,11 @@ if (isset($_GET['from']) and $_GET['from'] == 'logout') {
 
 if (isset($_GET['from']) and $_GET['from'] == 'update-profile') {
 
-	$administratorfullName = $db->escapeString($_POST['administratorfullName']);
+	$administratorFullName = $db->escapeString($_POST['administratorFullName']);
 
 	$db->update('administrators_table',
 	array(
-		'administratorfullName'=>$administratorfullName,
+		'administratorFullName'=>$administratorFullName,
 		),
 		'administratorUserId=' . $_SESSION['administratorUserId']
 	);
@@ -48,7 +48,7 @@ if (isset($_GET['from']) and $_GET['from'] == 'update-profile') {
 
 	header("Location: update-profile.php");
 	$_SESSION['toast'] = 'update-profile';
-	$_SESSION['administratorfullName'] = $administratorfullName;
+	$_SESSION['administratorFullName'] = $administratorFullName;
 	
 }
 

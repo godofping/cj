@@ -82,7 +82,18 @@
             title: title,
             exportOptions: {
                 columns: "thead th:not(.noExport)"
-            }
+            },
+            customize: function ( win ) {
+                    $(win.document.body)
+                        .css( 'font-size', '10pt' )
+                        .prepend(
+                            '<div style="text-align: left"><p>Prepared by: <?php echo $_SESSION['administratorFullName']; ?></p></div><div style="text-align: center; margin-bottom: 20px;"><img src="http://cjashleyfashionhub.tk/dashboard/etc/logo.jpg" height= "100px" /></div>'
+                        );
+ 
+                    $(win.document.body).find( 'table' )
+                        .addClass( 'compact' )
+                        .css( 'font-size', 'inherit' );
+                }
         }
 
     ],

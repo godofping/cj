@@ -42,7 +42,7 @@ $res = $db->getResult(); $res = $res[0];
                         	<div class="col-md-12">
                         		<div class="form-group">
 		                            <label>Full Name *</label>
-		                            <input type="text" class="form-control form-control-line" required="" name="administratorfullName" value="<?php echo $res['administratorfullName'] ?>"> 
+		                            <input type="text" class="form-control form-control-line" required="" name="administratorFullName" value="<?php echo $res['administratorFullName'] ?>"> 
 		                        </div>
                         	</div>
                         </div>

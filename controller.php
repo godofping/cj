@@ -59,11 +59,11 @@ if (isset($_GET['from']) and $_GET['from'] == 'logout') {
 
 if (isset($_GET['from']) and $_GET['from'] == 'update-profile') {
 
-	$administratorfullName = $db->escapeString($_POST['administratorfullName']);
+	$administratorFullName = $db->escapeString($_POST['administratorFullName']);
 
 	$db->update('administrators_table',
 	array(
-		'administratorfullName'=>$administratorfullName,
+		'administratorFullName'=>$administratorFullName,
 		),
 		'administratorUserId=' . $_SESSION['administratorUserId']
 	);
@@ -120,7 +120,7 @@ if (isset($_GET['from']) and $_GET['from'] == 'update-user') {
 
 	$administratorEmail = $db->escapeString($_POST['administratorEmail']);
 	$administratorUserPassword = $db->escapeString(md5($_POST['administratorUserPassword']));
-	$administratorfullName = $db->escapeString($_POST['administratorfullName']);
+	$administratorFullName = $db->escapeString($_POST['administratorFullName']);
 
 	$db->select('administrators_table','*',NULL,'administratorUserId = "' . $_POST['administratorUserId'] . '"', NULL); 
 	$res = $db->getResult(); $res = $res[0];
@@ -135,7 +135,7 @@ if (isset($_GET['from']) and $_GET['from'] == 'update-user') {
 			array(
 				'administratorEmail'=>$administratorEmail,
 				'administratorUserPassword'=>$administratorUserPassword,
-				'administratorfullName'=>$administratorfullName,
+				'administratorFullName'=>$administratorFullName,
 				),
 				'administratorUserId=' . $_POST['administratorUserId']
 			);
@@ -156,7 +156,7 @@ if (isset($_GET['from']) and $_GET['from'] == 'update-user') {
 		$db->update('administrators_table',
 		array(
 			'administratorUserPassword'=>$administratorUserPassword,
-			'administratorfullName'=>$administratorfullName,
+			'administratorFullName'=>$administratorFullName,
 			),
 			'administratorUserId=' . $_POST['administratorUserId']
 		);
