@@ -14,7 +14,7 @@ if (isset($_GET['s'])) {
     if ($timeNow > ($timeFromEmail + 600)) {
         $_SESSION['toast'] = 'reset-failed';
     }
-    elseif ($what != 'customer' or count($s) != 3) {
+    elseif ($what != 'staff' or count($s) != 3) {
         $_SESSION['toast'] = 'error';
     }
     else {
@@ -97,7 +97,7 @@ if (isset($_SESSION['userId'])){
                             </div>
                         </div>
 
-                        <h3 class="box-title m-b-20">Sign In</h3>
+                        <h3 class="box-title m-b-20">Staff Login Form</h3>
 
                         <div class="form-group ">
                             <div class="col-xs-12">
@@ -125,7 +125,7 @@ if (isset($_SESSION['userId'])){
 
                     </form>
 
-                     <form class="form-horizontal form-material" id="recoverform" action="controller.php?from=forgot-password" method="POST" autocomplete="off">
+                    <form class="form-horizontal form-material" id="recoverform" action="controller.php?from=forgot-password" method="POST" autocomplete="off">
 
                         <div class="form-group ">
                             <div class="col-xs-12">

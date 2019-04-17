@@ -1304,4 +1304,35 @@ if (isset($_GET['from']) and $_GET['from'] == 'restore') {
 }
 
 
+if (isset($_GET['from']) and $_GET['from'] == 'forgot-password') {
+
+	$administratorEmail = $db->escapeString($_POST['administratorEmail']);
+
+	$db->select('administrators_view','count(*) as total',NULL,'administratorEmail = "' . $administratorEmail . '"', NULL); 
+	$res = $db->getResult(); $res = $res[0];
+
+
+	if ($res['total'] > 0) {
+
+		$s = base64_encode(date('Y-m-d H:i:s') . ";administrator;" . $administratorEmail);
+		$msg = "Please click the link to reset your password to \"1234\". The link will expire after 5 minutes. http://cjashleyfashionhub.tk/dashboard/index.php?s=".$s ." If you didn't request a password reset, you can ignore this message.";
+
+		mail($administratorEmail,"Reset Password (CJ Ashley Fasion Hub)",$msg);
+
+		$_SESSION['toast'] = 'message-sent';
+		
+
+	}
+	else
+	{
+		$_SESSION['toast'] = 'message-sent-failed';
+	}
+
+
+	header("Location: index.php");
+}
+
+
+
+
 ?>

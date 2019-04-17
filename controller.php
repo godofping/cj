@@ -57,25 +57,6 @@ if (isset($_GET['from']) and $_GET['from'] == 'logout') {
 
 
 
-if (isset($_GET['from']) and $_GET['from'] == 'update-profile') {
-
-	$administratorFullName = $db->escapeString($_POST['administratorFullName']);
-
-	$db->update('administrators_table',
-	array(
-		'administratorFullName'=>$administratorFullName,
-		),
-		'administratorUserId=' . $_SESSION['administratorUserId']
-	);
-
-	$res = $db->getResult();
-
-	header("Location: update-profile.php");
-	$_SESSION['toast'] = 'update-profile';
-}
-
-
-
 
 if (isset($_GET['from']) and $_GET['from'] == 'customer-registration') {
 
@@ -112,62 +93,9 @@ if (isset($_GET['from']) and $_GET['from'] == 'customer-registration') {
 
 	}
 	
-
-	
 }
 
-if (isset($_GET['from']) and $_GET['from'] == 'update-user') {
 
-	$administratorEmail = $db->escapeString($_POST['administratorEmail']);
-	$administratorUserPassword = $db->escapeString(md5($_POST['administratorUserPassword']));
-	$administratorFullName = $db->escapeString($_POST['administratorFullName']);
-
-	$db->select('administrators_table','*',NULL,'administratorUserId = "' . $_POST['administratorUserId'] . '"', NULL); 
-	$res = $db->getResult(); $res = $res[0];
-
-	if ($administratorEmail != $res['administratorEmail']) {
-
-		$db->select('administrators_table','*',NULL,'administratorEmail = "' . $_POST['administratorEmail'] . '"', NULL); 
-		$res = $db->getResult();
-		
-		if (count($res) == 0) {
-			$db->update('administrators_table',
-			array(
-				'administratorEmail'=>$administratorEmail,
-				'administratorUserPassword'=>$administratorUserPassword,
-				'administratorFullName'=>$administratorFullName,
-				),
-				'administratorUserId=' . $_POST['administratorUserId']
-			);
-
-			$res = $db->getResult();
-
-			
-			$_SESSION['toast'] = 'update-user';
-		}
-		else
-		{
-			$_SESSION['toast'] = 'administratorEmail-taken';
-		}
-
-	}
-	else
-	{
-		$db->update('administrators_table',
-		array(
-			'administratorUserPassword'=>$administratorUserPassword,
-			'administratorFullName'=>$administratorFullName,
-			),
-			'administratorUserId=' . $_POST['administratorUserId']
-		);
-
-		$res = $db->getResult();
-		$_SESSION['toast'] = 'update-user';
-	}
-
-	header("Location: update-user.php?administratorUserId=".$_POST['administratorUserId']."");
-		
-}
 
 
 if (isset($_GET['from']) and $_GET['from'] == 'finish-registration') {

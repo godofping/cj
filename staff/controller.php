@@ -465,7 +465,7 @@ if (isset($_GET['from']) and $_GET['from'] == 'forgot-password') {
 	if ($res['total'] > 0) {
 
 		$s = base64_encode(date('Y-m-d H:i:s') . ";staff;" . $userEmail);
-		$msg = "Please click the link to reset your password to \"1234\". The link will expire after 5 minutes. http://cjashleyfashionhub.tk/staff/reset-password.php?s=".$s ." If you didn't request a password reset, you can ignore this message.";
+		$msg = "Please click the link to reset your password to \"1234\". The link will expire after 5 minutes. http://cjashleyfashionhub.tk/staff/index.php?s=".$s ." If you didn't request a password reset, you can ignore this message.";
 
 		mail($userEmail,"Reset Password (CJ Ashley Fasion Hub)",$msg);
 
