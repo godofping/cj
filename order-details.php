@@ -231,6 +231,14 @@ $orderDeliveryMethod = $res['orderDeliveryMethod'];
                   <div class="row">
                     <div class="col-md-12">
 
+                      <p>
+                        Please send your payment to this person <br>
+                        Name: Jose Dela Cruz <br>
+                        Address: Tacurong City <br>
+                        Contact #: 0975 414 9825 <br>
+
+                      </p>
+
                       <?php
 
                       

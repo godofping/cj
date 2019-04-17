@@ -1,5 +1,5 @@
 <?php
- 
+ include('class/mysql_crud.php');
 /*
  * DataTables example server-side processing script.
  *
@@ -33,9 +33,28 @@ $primaryKey = 'productVariationId';
 $columns = array(
 
     array( 'db' => 'productName',   'dt' => 0 ),
-    array( 'db' => 'productOption1',   'dt' => 1 ),
-    array( 'db' => 'productOption2',   'dt' => 2 ),
-    array( 'db' => 'productStock',   'dt' => 3 ),
+    array( 'db' => 'productPrice', 'dt' => 1,'formatter' => function( $d, $row ) {
+        return number_format($d,2);
+    } ),
+    array( 'db' => 'productOption1',   'dt' => 2 ),
+    array( 'db' => 'productOption2',   'dt' => 3 ),
+    array( 'db' => 'productVariationId', 'dt' => 4,'formatter' => function( $d, $row ) {
+        $db = new Database();
+        $db->connect();
+         
+        $db->select('inventory_logs_view','COALESCE(SUM(quantity),0) as total',NULL,'productVariationId = "' . $d . '" and inOrOut = "In"', NULL); 
+        $res = $db->getResult(); $res = $res[0];
+
+        return $res['total'];
+
+        
+    } ),
+    array( 'db' => 'productVariationId', 'dt' => 5,'formatter' => function( $d, $row ) {
+        return '<a class = "btn btn-info btn-xs" href="manage-stocks.php?productVariationId=' . $row['productVariationId'] . '">Manage Stocks</a>';
+    } ),
+
+
+  
 );
  
 // SQL server connection information

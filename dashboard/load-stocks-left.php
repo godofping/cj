@@ -39,51 +39,18 @@ $columns = array(
     array( 'db' => 'productOption1',   'dt' => 2 ),
     array( 'db' => 'productOption2',   'dt' => 3 ),
     array( 'db' => 'productStock',   'dt' => 4 ),
-    array( 'db' => 'productStocksReorderPoint',   'dt' => 5 ),
-    array( 'db' => 'productStock', 'dt' => 6,'formatter' => function( $d, $row ) {
-        
-        if ($d > $row['productStocksReorderPoint']) {
-            $res = "Above Reorder Point";
-        }
-        else
-        {
-            $res = "Below Reorder Point";
-        }
 
-
-        if ($d == 0 and $row['productStocksReorderPoint'] == 0) {
-            $res = "No stocks";
-        }
-  
-
-       return $res;
-
-
-    } ),
-    array( 'db' => 'productVariationId', 'dt' => 7,'formatter' => function( $d, $row ) {
+    array( 'db' => 'productVariationId', 'dt' => 5,'formatter' => function( $d, $row ) {
         $db = new Database();
         $db->connect();
          
         $db->select('inventory_logs_view','COALESCE(SUM(quantity),0) as total',NULL,'productVariationId = "' . $d . '" and inOrOut = "In"', NULL); 
         $res = $db->getResult(); $res = $res[0];
 
-        return $res['total'];
+        return $res['total']; 
+    } ),
 
-        
-    } ),
-    array( 'db' => 'productVariationId', 'dt' => 8,'formatter' => function( $d, $row ) {
-        $db = new Database();
-        $db->connect();
-         
-        $db->select('inventory_logs_view','COALESCE(SUM(quantity),0) as total',NULL,'productVariationId = "' . $d . '" and inOrOut = "Out"', NULL); 
-        $res = $db->getResult(); $res = $res[0];
 
-        return $res['total'];
-    } ),
-    array( 'db' => 'productVariationId', 'dt' => 9,'formatter' => function( $d, $row ) {
-        return '<a class = "btn btn-info btn-xs" href="manage-stocks.php?productVariationId=' . $row['productVariationId'] . '">Manage Stocks</a>';
-    } ),
-    
   
 );
  
@@ -102,7 +69,7 @@ $sql_details = array(
 
    require( 'ssp.class.php' );
     echo json_encode(
-    SSP::simple( $_POST, $sql_details, $table, $primaryKey, $columns )
+    SSP::complex( $_POST, $sql_details, $table, $primaryKey, $columns, 'productStock > 0' )
 );
 
 

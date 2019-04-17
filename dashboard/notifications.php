@@ -59,7 +59,13 @@
                     <a href="manage-order.php?orderId=<?php echo $res['orderId'] ?>">
                         <div class="d-flex flex-row comment-row">
                             <div class="comment-text w-100">
-                                <h5><?php echo $res['notificationMessage']; ?></h5>
+                                <h5><?php echo $res['notificationMessage']; ?> By <?php 
+                                $orderId = $res['orderId'];
+                                $db->select('orders_view','*',NULL,'orderId = "' . $orderId . '"', NULL); 
+                                $res1 = $db->getResult(); $res1 = $res1[0];
+                                echo $res1['billingFullName'];
+
+                                ?></h5>
                                 <div class="comment-footer">
                  
                                     <p class="m-b-5 m-t-10" class="date"><?php echo date('F d, Y g:i A', strtotime($res['notificationDateTime'])); ?></p>

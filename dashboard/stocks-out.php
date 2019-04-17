@@ -2,13 +2,13 @@
 <?php include('header.php'); ?>
 <div class="row page-titles">
     <div class="col-md-5 align-self-center">
-        <h3 class="text-themecolor">Available Stocks</h3>
+        <h3 class="text-themecolor">Stocks Out</h3>
     </div>
     <div class="col-md-7 align-self-center">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="javascript:void(0)">Inventory</a></li>
 <!--             <li class="breadcrumb-item">pages</li> -->
-            <li class="breadcrumb-item active">Available Stocks</li>
+            <li class="breadcrumb-item active">Stocks Out</li>
         </ol>
     </div>
    
@@ -38,12 +38,12 @@
                                     <th>Price (₱)</th>
                                     <th>Option 1</th>
                                     <th>Option 2</th>
-                                    <th>Current Stocks</th>
-                                    <th>Product Stocks Reorder Point</th>
-                                    <th>Status</th>
-                                    <th>Total Stock In</th>
                                     <th>Total Stock Out</th>
                                     <th class="noExport">Actions</th>
+
+           
+                       
+                           
                                 </tr>
                             </thead>
                             <tbody>
@@ -70,12 +70,12 @@
         "order":[],
         "ajax": {
                     "type": 'POST',
-                    "url": 'load-inventory.php',
+                    "url": 'load-stocks-out.php',
                     
                 },
         "columnDefs":[
             {
-                "targets":[9],
+                "targets":[5],
                 "orderable":false,
             },
         ],

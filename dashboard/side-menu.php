@@ -58,17 +58,16 @@
                             </ul>
                         </li>
 
-                        <li class="<?php if ($filename == 'inventory' or $filename == 'manage-stocks'): ?>
+                        <li class="<?php if ($filename == 'inventory' or $filename == 'manage-stocks' or $filename == 'stocks-left' or $filename == 'reorder-point' or $filename == 'stocks-in' or $filename == 'stocks-out'): ?>
                             active
                         <?php endif ?>"> 
                             <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-format-list-bulleted"></i><span class="hide-menu">Inventory</span></a>
                             <ul aria-expanded="false" class="collapse">
-                                <li><a href="inventory.php" class="<?php if ($filename == 'inventory' or $filename == 'manage-stocks'): ?>active<?php endif ?>">Manage</a></li>
-                                <li><a href="available-stocks.php" class="<?php if ($filename == 'available-stocks'): ?>active<?php endif ?>">Available Stocks</a></li>
-                                <li><a href="available-stocks.php" class="<?php if ($filename == 'available-stocks'): ?>active<?php endif ?>">Stocks Left</a></li>
-                                <li><a href="available-stocks.php" class="<?php if ($filename == 'available-stocks'): ?>active<?php endif ?>">Reoder Point</a></li>
-                                <li><a href="available-stocks.php" class="<?php if ($filename == 'available-stocks'): ?>active<?php endif ?>">Stocks In</a></li>
-                                <li><a href="available-stocks.php" class="<?php if ($filename == 'available-stocks'): ?>active<?php endif ?>">Stocks Out</a></li>
+                                <li><a href="inventory.php" class="<?php if ($filename == 'inventory' or $filename == 'manage-stocks'): ?>active<?php endif ?>">Available Stocks</a></li>
+                                <li><a href="stocks-left.php" class="<?php if ($filename == 'stocks-left'): ?>active<?php endif ?>">Stocks Left</a></li>
+                                <li><a href="reorder-point.php" class="<?php if ($filename == 'reorder-point'): ?>active<?php endif ?>">Reoder Point</a></li>
+                                <li><a href="stocks-in.php" class="<?php if ($filename == 'stocks-in'): ?>active<?php endif ?>">Stocks In</a></li>
+                                <li><a href="stocks-out.php" class="<?php if ($filename == 'stocks-out'): ?>active<?php endif ?>">Stocks Out</a></li>
                                 
                             </ul>
                         </li>
