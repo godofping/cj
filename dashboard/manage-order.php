@@ -306,7 +306,7 @@ $res = $db->getResult(); $res = $res[0];
                                 </form>
                             </div>
 
-                            <?php if ($res['orderDeliveryMethod'] == 'Shipping' and $res['orderShippingFee'] == 0){ ?>
+                            <?php if ($res['orderDeliveryMethod'] == 'Shipping' and $res['orderPaymentStatus'] == 'Unpaid' and $res['orderStatus'] == 'Pending Approval'){ ?>
                             <div class="col-md-6">
                      
                                 <form autocomplete="off" class="form-material m-t-40" method="POST" action="controller.php?from=set-shipping-fee&orderId=<?php echo $_GET['orderId'] ?>&userId=<?php echo $res['userId'] ?>">
@@ -314,7 +314,7 @@ $res = $db->getResult(); $res = $res[0];
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label>Shipping Fee *</label>
-                                                <input type="number" step="0.1" class="form-control form-control-line"  required="" name="orderShippingFee"> 
+                                                <input type="number" step="0.1" class="form-control form-control-line" value="<?php echo $res['orderShippingFee'] ?>"  required="" name="orderShippingFee"> 
                                             </div>
                                         </div>
 
@@ -322,7 +322,7 @@ $res = $db->getResult(); $res = $res[0];
 
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <button onclick = "return confirm('Are you sure want to set the shipping fee? This is irrevocable.')" type="submit" class="btn btn-success waves-effect waves-light m-r-10 pull-right">Set Shipping Fee</button>
+                                            <button onclick = "return confirm('Are you sure want to update the shipping fee?')" type="submit" class="btn btn-success waves-effect waves-light m-r-10 pull-right">Update Shipping Fee</button>
                                         </div>
                                     </div>
                                 </form>
