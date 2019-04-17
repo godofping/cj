@@ -14,8 +14,11 @@ if ($timeNow > ($timeFromEmail + 600)) {
 	$title = 'Password Reset Failed';
 	$p = '<h3>The link has already expired.</h3>';
 }
-else
-{
+elseif ($what != 'customer' or count($s) != 3) {
+	$title = 'Error';
+	$p = '<h3>Something is wrong.</h3>';
+}
+else {
 	$title = 'Password Reset Succesfully';
 	$p = '<h3>You can now <a href="login.php?show=login"><b>login</b></a> your account.</h3>';
 
@@ -30,7 +33,6 @@ else
 	);
 
 	$res = $db->getResult();
-
 
 }
 

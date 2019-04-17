@@ -742,7 +742,7 @@ if (isset($_GET['from']) and $_GET['from'] == 'forgot-password') {
 	$db->select('customers_view','count(*) as total',NULL,'userEmail = "' . $userEmail . '"', NULL); 
 	$res = $db->getResult(); $res = $res[0];
 
-	echo $res['total'];
+
 
 	if ($res['total'] > 0) {
 
