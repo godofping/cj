@@ -162,6 +162,30 @@
             });
         <?php endif?>
 
+        <?php if (isset($_SESSION['toast']) and $_SESSION['toast'] == 'add-administrator'): ?>
+            $.toast({
+              heading: 'ADDED',
+              text: 'Administrator Added!',
+              position: 'top-center',
+              loaderBg:'#ff6849',
+              icon: 'success',
+              hideAfter: 5000, 
+              stack: 6
+            });
+        <?php endif?>
+
+        <?php if (isset($_SESSION['toast']) and $_SESSION['toast'] == 'update-administrator'): ?>
+            $.toast({
+              heading: 'UPDATED',
+              text: 'Administrator Profile Updated!',
+              position: 'top-center',
+              loaderBg:'#ff6849',
+              icon: 'success',
+              hideAfter: 5000, 
+              stack: 6
+            });
+        <?php endif?>
+
         <?php if (isset($_SESSION['toast']) and $_SESSION['toast'] == 'block-staff'): ?>
             $.toast({
               heading: 'BLOCKED',
@@ -622,6 +646,31 @@
               position: 'top-center',
               loaderBg:'#ff6849',
               icon: 'success',
+              hideAfter: 5000, 
+              stack: 6
+            });
+        <?php endif?>
+
+
+        <?php if (isset($_SESSION['toast']) and $_SESSION['toast'] == 'passwords-do-not-match'): ?>
+            $.toast({
+              heading: 'FAILED',
+              text: 'Passwords do not match!',
+              position: 'top-center',
+              loaderBg:'#ff6849',
+              icon: 'error',
+              hideAfter: 5000, 
+              stack: 6
+            });
+        <?php endif?>
+
+        <?php if (isset($_SESSION['toast']) and $_SESSION['toast'] == 'delete-administrator'): ?>
+            $.toast({
+              heading: 'DELETED',
+              text: 'Administrator Deleted!',
+              position: 'top-center',
+              loaderBg:'#ff6849',
+              icon: 'error',
               hideAfter: 5000, 
               stack: 6
             });

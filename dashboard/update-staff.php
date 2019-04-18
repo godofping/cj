@@ -80,6 +80,15 @@ $res = $db->getResult(); $res = $res[0];
                             </div>
                         </div>
 
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Confirm Password *</label>
+                                    <input type="password" class="form-control form-control-line" required="" name="confirmPassword" value=""> 
+                                </div>
+                            </div>
+                        </div>
+
                     <button type="submit" class="btn btn-success waves-effect waves-light m-r-10 pull-right">Save Changes</button>
 
    

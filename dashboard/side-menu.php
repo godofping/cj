@@ -95,6 +95,16 @@
                             </ul>
                         </li>
 
+                        <li class="<?php if ($filename == 'add-administrator' or $filename == 'update-administrator'): ?>
+                            active
+                        <?php endif ?>"> 
+                            <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-account-box-outline"></i><span class="hide-menu">Administrators</span></a>
+                            <ul aria-expanded="false" class="collapse">
+                                <li><a href="manage-administrators.php" class="<?php if ($filename == 'add-administrator' or $filename == 'update-administrator'): ?>active<?php endif ?>">Manage</a></li>
+                                
+                            </ul>
+                        </li>
+
 
                         <li class="<?php if ($filename == 'list-of-customers' or $filename == 'list-of-orders-daily' or $filename == 'list-of-cancelled-orders' or $filename == 'list-of-collections' or $filename == 'list-of-pending-customer-payments' or $filename == 'list-of-overdue' or $filename == 'list-of-available-stocks' or $filename == 'list-of-reoder-point' or $filename == 'list-of-stock-in' or $filename == 'list-of-stock-out' or $filename == 'list-of-acknowledgement-receipt' or $filename == 'list-of-reviews' or $filename == 'list-of-feedbacks'): ?>
                             active

@@ -2,13 +2,13 @@
 <?php include('header.php'); ?>
 <div class="row page-titles">
     <div class="col-md-5 align-self-center">
-        <h3 class="text-themecolor">Add Staff</h3>
+        <h3 class="text-themecolor">Add Administrator</h3>
     </div>
     <div class="col-md-7 align-self-center">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="javascript:void(0)">Staffs</a></li>
+            <li class="breadcrumb-item"><a href="javascript:void(0)">Administrators</a></li>
             <li class="breadcrumb-item">Manage</li>
-            <li class="breadcrumb-item active">Add Staff</li>
+            <li class="breadcrumb-item active">Add Administrator</li>
         </ol>
     </div>
    
@@ -29,13 +29,13 @@
             <div class="card">
                 <div class="card-body">
                     <p>* indicates required fields</p>
-                	<form autocomplete="off" class="form-material m-t-40" method="POST" action="controller.php?from=add-staff">
+                	<form autocomplete="off" class="form-material m-t-40" method="POST" action="controller.php?from=add-administrator">
 
                         <div class="row">
                         	<div class="col-md-12">
                         		<div class="form-group">
 		                            <label>Email *</label>
-		                            <input type="email" class="form-control form-control-line" required="" name="userEmail"> 
+		                            <input type="email" class="form-control form-control-line" required="" name="administratorEmail"> 
 		                        </div>
                         	</div>
                         </div>
@@ -43,26 +43,8 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label>First Name *</label>
-                                    <input type="text" class="form-control form-control-line" required="" name="userFirstName"> 
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label>Last Name *</label>
-                                    <input type="text" class="form-control form-control-line" required="" name="userLastName"> 
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label>Phone Number *</label>
-                                    <input type="text" class="form-control form-control-line" required="" name="userPhoneNumber"> 
+                                    <label>Full Name *</label>
+                                    <input type="text" class="form-control form-control-line" required="" name="administratorFullName"> 
                                 </div>
                             </div>
                         </div>
@@ -72,7 +54,7 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label>Password *</label>
-                                    <input type="password" class="form-control form-control-line" required="" name="userPassword"> 
+                                    <input type="password" class="form-control form-control-line" required="" name="administratorUserPassword"> 
                                 </div>
                             </div>
                         </div>
