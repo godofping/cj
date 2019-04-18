@@ -34,7 +34,16 @@ $columns = array(
 	array( 'db' => 'administratorUserId',   'dt' => -1 ),
     array( 'db' => 'administratorEmail',   'dt' => 0 ),
     array( 'db' => 'administratorFullName',   'dt' => 1 ),
-    array( 'db' => 'isDeleted', 'dt' => 2,'formatter' => function( $d, $row ) {
+    array( 'db' => 'isActivated',   'dt' => 2,'formatter' => function( $d, $row ) {
+        if ($d == 1) {
+            return 'Yes';
+        }
+        else
+        {
+            return 'No';
+        }
+    } ),
+    array( 'db' => 'isDeleted', 'dt' => 3,'formatter' => function( $d, $row ) {
 
     	if ($row['administratorUserId'] == $_SESSION['administratorUserId']) {
     		return '<button class = "btn btn-info btn-xs" data-toggle="tooltip" title="You can not update your profile here.">Update</button> <button class = "btn btn-danger btn-xs" data-toggle="tooltip" title="You can not delete your own account.">Delete</button>';

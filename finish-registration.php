@@ -11,13 +11,13 @@ if (!isset($_SESSION['userId'])) {
     <section class="contact padding-top-100 padding-bottom-100">
       <div class="container">
         <div class="contact-form">
-          <h5>Thank you for registering your account. Please fill up the profile/shipping form to proceed shopping.</h5>
+          <h5>Please fill up the form to finalize the registration and continue shopping.</h5>
           <div class="row">
             <div class="col-md-8"> 
               
 
             
-       
+              <label>Profile Form</label>
 
               <form role="form" id="contact_form" class="contact-form" method="post" action="controller.php?from=finish-registration" autocomplete="off">
                 <ul class="row">

@@ -39,6 +39,7 @@
                                     <th>Last Name</th>
                                     <th>Phone Number</th>
                                     <th>Blocked</th>
+                                    <th>Activated</th>
                                     <th class="noExport">Actions</th>
 
                                 </tr>
@@ -72,7 +73,7 @@
                 },
         "columnDefs":[
             {
-                "targets":[5],
+                "targets":[6],
                 "orderable":false,
             },
         ],

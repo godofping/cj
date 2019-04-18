@@ -36,6 +36,7 @@
                                 <tr>
                                     <th>Email</th>
                                     <th>Full Name</th>
+                                    <th>Activated</th>
                                     <th class="noExport">Actions</th>
 
                                 </tr>

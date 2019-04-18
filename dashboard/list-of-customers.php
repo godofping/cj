@@ -39,6 +39,7 @@
                                     <th>Address</th>
                                     <th>Registration Date</th>
                                     <th>Blocked</th>
+                                    <th>Activated</th>
 
                                 </tr>
                             </thead>

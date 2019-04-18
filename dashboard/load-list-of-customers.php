@@ -40,7 +40,16 @@ $columns = array(
         return date('F d, Y', strtotime($d));
     } ),
     array( 'db' => 'userIsBlocked',   'dt' => 5,'formatter' => function( $d, $row ) {
-        if ($row['userIsBlocked'] == 1) {
+        if ($d == 1) {
+            return 'Yes';
+        }
+        else
+        {
+            return 'No';
+        }
+    } ),
+    array( 'db' => 'userIsActivated',   'dt' => 6,'formatter' => function( $d, $row ) {
+        if ($d == 1) {
             return 'Yes';
         }
         else

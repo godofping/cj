@@ -40,6 +40,7 @@
                                     <th>Phone Number</th>
                                     <th>Date Registered</th>
                                     <th>Blocked</th>
+                                    <th>Activated</th>
                                     <th class="noExport">Actions</th>
 
                                 </tr>
@@ -73,7 +74,7 @@
                 },
         "columnDefs":[
             {
-                "targets":[3],
+                "targets":[3,8],
                 "orderable":false,
             },
         ],

@@ -13,34 +13,45 @@ if (isset($_GET['from']) and $_GET['from'] == 'login') {
 	if (count($res) > 0) {
 		$res = $res[0];
 
-		
-		$_SESSION['userType'] = $res['userType'];
-		$_SESSION['userEmail'] = $res['userEmail'];
-		$_SESSION['userFirstName'] = $res['userFirstName'];
-		$_SESSION['userLastName'] = $res['userLastName'];
-		$_SESSION['toast'] = 'login-successful';
+		if ($res['userIsActivated'] == 0) {
 
-	
+			$d = base64_encode(date('Y-m-d H:i:s') . ";customeractivation;" . $userEmail);
+			$msg = "Please click the link to activate your account. http://cjashleyfashionhub.tk/login.php?show=login&d=".$d ."";
 
-		if ($res['userFirstName'] == '' and $res['userLastName'] == '' and $res['userAddress'] == '' and $res['userPhoneNumber'] == '' and $res['userIsBlocked'] == 0) {
+			mail($userEmail,"Activate Account (CJ Ashley Fasion Hub)",$msg);
 
-			$_SESSION['userId'] = $res['userId'];
-			header("Location: finish-registration.php");
-
+			$_SESSION['toast'] = 'activate-account';
+			header("Location: login.php?show=login");
 		}
 		else
 		{
-			if ($res['userIsBlocked'] == 1) {
-				$_SESSION['toast'] = 'customer-block';
-				header("Location: login.php?show=login");
+			$_SESSION['userType'] = $res['userType'];
+			$_SESSION['userEmail'] = $res['userEmail'];
+			$_SESSION['userFirstName'] = $res['userFirstName'];
+			$_SESSION['userLastName'] = $res['userLastName'];
+			$_SESSION['toast'] = 'login-successful';
+
+		
+
+			if ($res['userFirstName'] == '' and $res['userLastName'] == '' and $res['userAddress'] == '' and $res['userPhoneNumber'] == '' and $res['userIsBlocked'] == 0) {
+
+				$_SESSION['userId'] = $res['userId'];
+				header("Location: finish-registration.php");
+
 			}
 			else
 			{
-				$_SESSION['userId'] = $res['userId'];
-				header("Location: index.php");
+				if ($res['userIsBlocked'] == 1) {
+					$_SESSION['toast'] = 'customer-block';
+					header("Location: login.php?show=login");
+				}
+				else
+				{
+					$_SESSION['userId'] = $res['userId'];
+					header("Location: index.php");
+				}
 			}
 		}
-
 	}
 	else
 	{
@@ -60,14 +71,14 @@ if (isset($_GET['from']) and $_GET['from'] == 'logout') {
 
 if (isset($_GET['from']) and $_GET['from'] == 'customer-registration') {
 
+	$userEmail = $db->escapeString($_POST['userEmail']);
+	$userPassword = $db->escapeString(md5($_POST['userPassword']));
+
 	$db->select('users_view','*',NULL,'userEmail = "' . $_POST['userEmail'] . '"', NULL); 
 	$res = $db->getResult();
 	
 	if (count($res) == 0) {
-		$userEmail = $db->escapeString($_POST['userEmail']);
-		$userPassword = $db->escapeString(md5($_POST['userPassword']));
-
-
+		
 		$db->insert('users_table',
 		array(
 			'userEmail'=>$userEmail,
@@ -80,19 +91,36 @@ if (isset($_GET['from']) and $_GET['from'] == 'customer-registration') {
 
 		$res = $db->getResult();
 
+		$d = base64_encode(date('Y-m-d H:i:s') . ";customeractivation;" . $userEmail);
+		$msg = "Please click the link to activate your account. http://cjashleyfashionhub.tk/login.php?show=login&d=".$d ."";
 
+		mail($userEmail,"Activate Account (CJ Ashley Fasion Hub)",$msg);
+
+		$_SESSION['toast'] = 'activation-link-sent';
 		
-		$_SESSION['userId'] = $res[0];
-		$_SESSION['toast'] = 'customer-registration';
-		header("Location: finish-registration.php");
 	}
 	else
 	{
-		$_SESSION['toast'] = 'userEmail-taken';
-		header("Location: login.php?show=registration");
 
+		$res = $res[0];
+		if ($res['userIsActivated'] == 0) {
+
+			$d = base64_encode(date('Y-m-d H:i:s') . ";customeractivation;" . $userEmail);
+			$msg = "Please click the link to activate your account. http://cjashleyfashionhub.tk/login.php?show=login&d=".$d ."";
+
+			mail($userEmail,"Activate Account (CJ Ashley Fasion Hub)",$msg);
+
+			$_SESSION['toast'] = 'activation-link-sent-account-not-activated';
+		}
+		else
+		{
+			$_SESSION['toast'] = 'userEmail-taken';
+		}
+
+		
 	}
-	
+
+	header("Location: login.php?show=registration");
 }
 
 

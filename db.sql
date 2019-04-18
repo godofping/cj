@@ -9,7 +9,6 @@ MySQL - 5.5.5-10.1.38-MariaDB : Database - cj_db
 /*!40101 SET SQL_MODE=''*/;
 
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 CREATE DATABASE /*!32312 IF NOT EXISTS*/`cj_db` /*!40100 DEFAULT CHARACTER SET latin1 */;
@@ -26,12 +25,13 @@ CREATE TABLE `administrators_table` (
   `administratorUserPassword` varchar(60) DEFAULT NULL,
   `isDeleted` tinyint(1) DEFAULT '0',
   `administratorFullName` varchar(60) DEFAULT NULL,
+  `isActivated` tinyint(1) DEFAULT '0',
   PRIMARY KEY (`administratorUserId`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 
 /*Data for the table `administrators_table` */
 
-insert  into `administrators_table`(`administratorUserId`,`administratorEmail`,`administratorUserPassword`,`isDeleted`,`administratorFullName`) values (1,'admin@gmail.com','21232f297a57a5a743894a0e4a801fc3',0,'Susan Lopez'),(5,'admin1@gmail.com2','c81e728d9d4c2f636f067f89cc14862c',0,'12'),(6,'test@gmail.com','1aedb8d9dc4751e229a335e371db8058',1,'test@gmail.com'),(7,'test1@gmail.com','245cf079454dc9a3374a7c076de247cc',0,'test1@gmail.com'),(8,'test@gmail.com','1aedb8d9dc4751e229a335e371db8058',1,'test@gmail.com'),(9,'tes2t@gmail.com','c81e728d9d4c2f636f067f89cc14862c',1,'1');
+insert  into `administrators_table`(`administratorUserId`,`administratorEmail`,`administratorUserPassword`,`isDeleted`,`administratorFullName`,`isActivated`) values (1,'admin@gmail.com','21232f297a57a5a743894a0e4a801fc3',0,'Susan Lopez',1),(5,'admin1@gmail.com2','c81e728d9d4c2f636f067f89cc14862c',0,'12',0),(6,'test@gmail.com','1aedb8d9dc4751e229a335e371db8058',1,'test@gmail.com',0),(7,'test1@gmail.com','245cf079454dc9a3374a7c076de247cc',0,'test1@gmail.com',0),(8,'test@gmail.com','1aedb8d9dc4751e229a335e371db8058',1,'test@gmail.com',0),(9,'tes2t@gmail.com','c81e728d9d4c2f636f067f89cc14862c',1,'1',0);
 
 /*Table structure for table `inventory_logs_table` */
 
@@ -303,12 +303,13 @@ CREATE TABLE `users_table` (
   `userPhoneNumber` varchar(60) DEFAULT NULL,
   `userType` varchar(60) DEFAULT NULL,
   `userIsBlocked` tinyint(1) DEFAULT NULL,
+  `userIsActivated` tinyint(1) DEFAULT '0',
   PRIMARY KEY (`userId`)
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=latin1;
 
 /*Data for the table `users_table` */
 
-insert  into `users_table`(`userId`,`userEmail`,`userPassword`,`userFirstName`,`userLastName`,`userAddress`,`userRegistrationDate`,`userPhoneNumber`,`userType`,`userIsBlocked`) values (6,'customer@gmail.com','91ec1f9324753048c0096d036a694f86','Cesar','Santiago','72, mabini street, tacurong city, sutltan kudarat','2019-03-24','09367489655','Customer',0),(7,'test@gmail.com','098f6bcd4621d373cade4e832627b4f6','Andrew','E','66 malvar street, tacurong city, sultan kudarat','2019-03-24','09754363941','Customer',0),(8,'testing@gmail.com','ae2b1fca515949e5d54fb22b8ed95575','Jonathan','Anderson','65 National Highway, Tacurong City, Sultan Kudarat','2019-03-29','09754523655','Customer',0),(9,'alex@gmail.com','73503e6f479c632ebfebc6e58a3cd335','Cong','TV','88 kalawag II, Isulan, Sultan Kudarat','2019-04-09','09168575445','Customer',0),(10,'staff1@gmail.com','4d7d719ac0cf3d78ea8a94701913fe47','Lucio','Tan',NULL,'2019-04-09',NULL,'Staff',0),(11,'staff2@gmail.com','8bc01711b8163ec3f2aa0688d12cdf3b','Henry','Sy',NULL,'2019-04-09',NULL,'Staff',0),(12,'staff3@gmail.com','8f03660f569ce4023dddaea0bf560d74','Manny','Villar',NULL,'2019-04-09',NULL,'Staff',0),(13,'alyasmouse@gmail.com','81dc9bdb52d04dc20036dbd8313ed055','Staff','Staff',NULL,'2019-04-12',NULL,'Staff',0),(14,'datu@gmail.com','18b473de493fc7124495f236d5f10150','datualjaj','alolo','midtapok','2019-04-12','0997272319','Customer',0),(15,'zxckev@gmail.com','0cf31b2c283ce3431794586df7b0996d','Kevin','Palma Gil','6969 Purok,Malipayon Tacurong City Sultan Kudarat','2019-04-12','aweqweqwe','Customer',0),(16,'errol@gmail.com','628631f07321b22d8c176c200c855e1b',NULL,NULL,NULL,'2019-04-12',NULL,'Customer',0),(17,'errol2@gmail.com','11340131feec68e7ca463f960f0f341c',NULL,NULL,NULL,'2019-04-12',NULL,'Customer',0),(18,'errrol11@gmail.com','628631f07321b22d8c176c200c855e1b',NULL,NULL,NULL,'2019-04-12',NULL,'Customer',0),(19,'Errol123@gmail.com','628631f07321b22d8c176c200c855e1b',NULL,NULL,NULL,'2019-04-12',NULL,'Customer',0),(20,'Errrol23456@yahoo.com','628631f07321b22d8c176c200c855e1b',NULL,NULL,NULL,'2019-04-12',NULL,'Customer',0),(21,'earl@gmail.com','628631f07321b22d8c176c200c855e1b',NULL,NULL,NULL,'2019-04-12',NULL,'Customer',0),(22,'john@gmail.com','73b65f2a0b6c9f399cdf393cbbbe9d5c','john','michael',NULL,'2019-04-12',NULL,'Staff',0),(23,'jufrenskix@gmail.com','429f61ffbdfc9cd4dc2547ea10de84f9','Jufren','Cervantes','Isulan, Sultan Kudarat','2019-04-12','09273737377373','Customer',0),(24,'6a5sd6@yahoo.com','37693cfc748049e45d87b8c7d8b9aacd','23','23',NULL,'2019-04-18','23','Staff',0),(25,'444@yahoo.com','37693cfc748049e45d87b8c7d8b9aacd','444','444',NULL,'2019-04-18','4441','Staff',0);
+insert  into `users_table`(`userId`,`userEmail`,`userPassword`,`userFirstName`,`userLastName`,`userAddress`,`userRegistrationDate`,`userPhoneNumber`,`userType`,`userIsBlocked`,`userIsActivated`) values (6,'customer@gmail.com','91ec1f9324753048c0096d036a694f86','Cesar','Santiago','72, mabini street, tacurong city, sutltan kudarat','2019-03-24','09367489655','Customer',0,1),(7,'test@gmail.com','098f6bcd4621d373cade4e832627b4f6','Andrew','E','66 malvar street, tacurong city, sultan kudarat','2019-03-24','09754363941','Customer',0,0),(8,'testing@gmail.com','ae2b1fca515949e5d54fb22b8ed95575','Jonathan','Anderson','65 National Highway, Tacurong City, Sultan Kudarat','2019-03-29','09754523655','Customer',0,0),(9,'alex@gmail.com','73503e6f479c632ebfebc6e58a3cd335','Cong','TV','88 kalawag II, Isulan, Sultan Kudarat','2019-04-09','09168575445','Customer',0,0),(10,'staff1@gmail.com','4d7d719ac0cf3d78ea8a94701913fe47','Lucio','Tan',NULL,'2019-04-09',NULL,'Staff',0,1),(11,'staff2@gmail.com','8bc01711b8163ec3f2aa0688d12cdf3b','Henry','Sy',NULL,'2019-04-09',NULL,'Staff',0,0),(12,'staff3@gmail.com','8f03660f569ce4023dddaea0bf560d74','Manny','Villar',NULL,'2019-04-09',NULL,'Staff',0,0),(13,'alyasmosuse@gmail.com','81dc9bdb52d04dc20036dbd8313ed055','Staff','Staff',NULL,'2019-04-12',NULL,'Staff',0,0),(14,'datu@gmail.com','18b473de493fc7124495f236d5f10150','datualjaj','alolo','midtapok','2019-04-12','0997272319','Customer',0,0),(15,'zxckev@gmail.com','0cf31b2c283ce3431794586df7b0996d','Kevin','Palma Gil','6969 Purok,Malipayon Tacurong City Sultan Kudarat','2019-04-12','aweqweqwe','Customer',0,0),(16,'errol@gmail.com','628631f07321b22d8c176c200c855e1b',NULL,NULL,NULL,'2019-04-12',NULL,'Customer',0,0),(17,'errol2@gmail.com','11340131feec68e7ca463f960f0f341c',NULL,NULL,NULL,'2019-04-12',NULL,'Customer',0,0),(18,'errrol11@gmail.com','628631f07321b22d8c176c200c855e1b',NULL,NULL,NULL,'2019-04-12',NULL,'Customer',0,0),(19,'Errol123@gmail.com','628631f07321b22d8c176c200c855e1b',NULL,NULL,NULL,'2019-04-12',NULL,'Customer',0,0),(20,'Errrol23456@yahoo.com','628631f07321b22d8c176c200c855e1b',NULL,NULL,NULL,'2019-04-12',NULL,'Customer',0,0),(21,'earl@gmail.com','628631f07321b22d8c176c200c855e1b',NULL,NULL,NULL,'2019-04-12',NULL,'Customer',0,0),(22,'john@gmail.com','73b65f2a0b6c9f399cdf393cbbbe9d5c','john','michael',NULL,'2019-04-12',NULL,'Staff',0,0),(23,'jufrenskix@gmail.com','429f61ffbdfc9cd4dc2547ea10de84f9','Jufren','Cervantes','Isulan, Sultan Kudarat','2019-04-12','09273737377373','Customer',0,0),(24,'vatexesell-4466@yahoo.com','37693cfc748049e45d87b8c7d8b9aacd','Vate','Xander',NULL,'2019-04-18','23','Staff',0,0),(25,'coteqabe-0840@yahoo.com','37693cfc748049e45d87b8c7d8b9aacd','444','444',NULL,'2019-04-18','4441','Staff',0,0),(26,'kakammixamm-9363@yahoo.com','9b0a7f326ee8f8972bb080ab35f0733f',NULL,NULL,NULL,'2019-04-18',NULL,'Customer',0,0),(27,'alyasmouse@gmail.com','27e50f1e91f1e4bcffed60fe881b8f7d','sda','sdasd','asd','2019-04-18','asdasd','Customer',0,1),(31,'ababatanini@yahoo.com','d2b8a6aff6240d92a4a52bc7a9cc76e5',NULL,NULL,NULL,'2019-04-18',NULL,'Customer',0,0);
 
 /*Table structure for table `administrators_view` */
 
@@ -322,7 +323,8 @@ DROP TABLE IF EXISTS `administrators_view`;
  `administratorEmail` varchar(60) ,
  `administratorUserPassword` varchar(60) ,
  `isDeleted` tinyint(1) ,
- `administratorFullName` varchar(60) 
+ `administratorFullName` varchar(60) ,
+ `isActivated` tinyint(1) 
 )*/;
 
 /*Table structure for table `customers_view` */
@@ -343,7 +345,8 @@ DROP TABLE IF EXISTS `customers_view`;
  `userRegistrationDate` date ,
  `userPhoneNumber` varchar(60) ,
  `userType` varchar(60) ,
- `userIsBlocked` tinyint(1) 
+ `userIsBlocked` tinyint(1) ,
+ `userIsActivated` tinyint(1) 
 )*/;
 
 /*Table structure for table `inventory_logs_view` */
@@ -700,7 +703,8 @@ DROP TABLE IF EXISTS `staffs_view`;
  `userRegistrationDate` date ,
  `userPhoneNumber` varchar(60) ,
  `userType` varchar(60) ,
- `userIsBlocked` tinyint(1) 
+ `userIsBlocked` tinyint(1) ,
+ `userIsActivated` tinyint(1) 
 )*/;
 
 /*Table structure for table `user_feedbacks_view` */
@@ -744,7 +748,8 @@ DROP TABLE IF EXISTS `users_view`;
  `userRegistrationDate` date ,
  `userPhoneNumber` varchar(60) ,
  `userType` varchar(60) ,
- `userIsBlocked` tinyint(1) 
+ `userIsBlocked` tinyint(1) ,
+ `userIsActivated` tinyint(1) 
 )*/;
 
 /*View structure for view administrators_view */
@@ -752,14 +757,14 @@ DROP TABLE IF EXISTS `users_view`;
 /*!50001 DROP TABLE IF EXISTS `administrators_view` */;
 /*!50001 DROP VIEW IF EXISTS `administrators_view` */;
 
-/*!50001 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `administrators_view` AS select `administrators_table`.`administratorUserId` AS `administratorUserId`,`administrators_table`.`administratorEmail` AS `administratorEmail`,`administrators_table`.`administratorUserPassword` AS `administratorUserPassword`,`administrators_table`.`isDeleted` AS `isDeleted`,`administrators_table`.`administratorFullName` AS `administratorFullName` from `administrators_table` where (`administrators_table`.`isDeleted` = 0) */;
+/*!50001 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `administrators_view` AS select `administrators_table`.`administratorUserId` AS `administratorUserId`,`administrators_table`.`administratorEmail` AS `administratorEmail`,`administrators_table`.`administratorUserPassword` AS `administratorUserPassword`,`administrators_table`.`isDeleted` AS `isDeleted`,`administrators_table`.`administratorFullName` AS `administratorFullName`,`administrators_table`.`isActivated` AS `isActivated` from `administrators_table` where (`administrators_table`.`isDeleted` = 0) */;
 
 /*View structure for view customers_view */
 
 /*!50001 DROP TABLE IF EXISTS `customers_view` */;
 /*!50001 DROP VIEW IF EXISTS `customers_view` */;
 
-/*!50001 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `customers_view` AS select `users_table`.`userId` AS `userId`,`users_table`.`userEmail` AS `userEmail`,`users_table`.`userPassword` AS `userPassword`,`users_table`.`userFirstName` AS `userFirstName`,`users_table`.`userLastName` AS `userLastName`,concat(`users_table`.`userFirstName`,' ',`users_table`.`userLastName`) AS `userFullName`,`users_table`.`userAddress` AS `userAddress`,`users_table`.`userRegistrationDate` AS `userRegistrationDate`,`users_table`.`userPhoneNumber` AS `userPhoneNumber`,`users_table`.`userType` AS `userType`,`users_table`.`userIsBlocked` AS `userIsBlocked` from `users_table` where (`users_table`.`userType` = 'Customer') */;
+/*!50001 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `customers_view` AS select `users_table`.`userId` AS `userId`,`users_table`.`userEmail` AS `userEmail`,`users_table`.`userPassword` AS `userPassword`,`users_table`.`userFirstName` AS `userFirstName`,`users_table`.`userLastName` AS `userLastName`,concat(`users_table`.`userFirstName`,' ',`users_table`.`userLastName`) AS `userFullName`,`users_table`.`userAddress` AS `userAddress`,`users_table`.`userRegistrationDate` AS `userRegistrationDate`,`users_table`.`userPhoneNumber` AS `userPhoneNumber`,`users_table`.`userType` AS `userType`,`users_table`.`userIsBlocked` AS `userIsBlocked`,`users_table`.`userIsActivated` AS `userIsActivated` from `users_table` where (`users_table`.`userType` = 'Customer') */;
 
 /*View structure for view inventory_logs_view */
 
@@ -843,7 +848,7 @@ DROP TABLE IF EXISTS `users_view`;
 /*!50001 DROP TABLE IF EXISTS `staffs_view` */;
 /*!50001 DROP VIEW IF EXISTS `staffs_view` */;
 
-/*!50001 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `staffs_view` AS select `users_table`.`userId` AS `userId`,`users_table`.`userEmail` AS `userEmail`,`users_table`.`userPassword` AS `userPassword`,`users_table`.`userFirstName` AS `userFirstName`,`users_table`.`userLastName` AS `userLastName`,`users_table`.`userAddress` AS `userAddress`,`users_table`.`userRegistrationDate` AS `userRegistrationDate`,`users_table`.`userPhoneNumber` AS `userPhoneNumber`,`users_table`.`userType` AS `userType`,`users_table`.`userIsBlocked` AS `userIsBlocked` from `users_table` where (`users_table`.`userType` = 'Staff') */;
+/*!50001 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `staffs_view` AS select `users_table`.`userId` AS `userId`,`users_table`.`userEmail` AS `userEmail`,`users_table`.`userPassword` AS `userPassword`,`users_table`.`userFirstName` AS `userFirstName`,`users_table`.`userLastName` AS `userLastName`,`users_table`.`userAddress` AS `userAddress`,`users_table`.`userRegistrationDate` AS `userRegistrationDate`,`users_table`.`userPhoneNumber` AS `userPhoneNumber`,`users_table`.`userType` AS `userType`,`users_table`.`userIsBlocked` AS `userIsBlocked`,`users_table`.`userIsActivated` AS `userIsActivated` from `users_table` where (`users_table`.`userType` = 'Staff') */;
 
 /*View structure for view user_feedbacks_view */
 
@@ -857,9 +862,8 @@ DROP TABLE IF EXISTS `users_view`;
 /*!50001 DROP TABLE IF EXISTS `users_view` */;
 /*!50001 DROP VIEW IF EXISTS `users_view` */;
 
-/*!50001 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `users_view` AS select `users_table`.`userId` AS `userId`,`users_table`.`userEmail` AS `userEmail`,`users_table`.`userPassword` AS `userPassword`,`users_table`.`userFirstName` AS `userFirstName`,`users_table`.`userLastName` AS `userLastName`,`users_table`.`userAddress` AS `userAddress`,`users_table`.`userRegistrationDate` AS `userRegistrationDate`,`users_table`.`userPhoneNumber` AS `userPhoneNumber`,`users_table`.`userType` AS `userType`,`users_table`.`userIsBlocked` AS `userIsBlocked` from `users_table` where (`users_table`.`userIsBlocked` = 0) */;
+/*!50001 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `users_view` AS select `users_table`.`userId` AS `userId`,`users_table`.`userEmail` AS `userEmail`,`users_table`.`userPassword` AS `userPassword`,`users_table`.`userFirstName` AS `userFirstName`,`users_table`.`userLastName` AS `userLastName`,`users_table`.`userAddress` AS `userAddress`,`users_table`.`userRegistrationDate` AS `userRegistrationDate`,`users_table`.`userPhoneNumber` AS `userPhoneNumber`,`users_table`.`userType` AS `userType`,`users_table`.`userIsBlocked` AS `userIsBlocked`,`users_table`.`userIsActivated` AS `userIsActivated` from `users_table` where (`users_table`.`userIsBlocked` = 0) */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
 /*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;

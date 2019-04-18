@@ -39,7 +39,7 @@ $columns = array(
     array( 'db' => 'userPhoneNumber',   'dt' => 4 ),
     array( 'db' => 'userRegistrationDate',   'dt' => 5 ),
     array( 'db' => 'userIsBlocked',   'dt' => 6,'formatter' => function( $d, $row ) {
-        if ($row['userIsBlocked'] == 1) {
+        if ($d == 1) {
             return 'Yes';
         }
         else
@@ -47,7 +47,16 @@ $columns = array(
             return 'No';
         }
     } ),
-    array( 'db' => 'userId', 'dt' => 7,'formatter' => function( $d, $row ) {
+    array( 'db' => 'userIsActivated',   'dt' => 7,'formatter' => function( $d, $row ) {
+        if ($d == 1) {
+            return 'Yes';
+        }
+        else
+        {
+            return 'No';
+        }
+    } ),
+    array( 'db' => 'userId', 'dt' => 8,'formatter' => function( $d, $row ) {
 
         if ($row['userIsBlocked'] == 1) {
             return '<a class = "btn btn-danger btn-xs" onclick = "return confirm('."'Are you sure want to unblock this account?'".')" href="controller.php?from=unblock-customer-view-all&userId=' . $row['userId'] . '">Unblock</a>';
