@@ -11,31 +11,44 @@ if (isset($_GET['from']) and $_GET['from'] == 'login') {
 	$res = $db->getResult();
 
 	if (count($res) > 0) {
+
 		$res = $res[0];
 
-		
-		$_SESSION['userType'] = $res['userType'];
-		$_SESSION['userEmail'] = $res['userEmail'];
-		$_SESSION['userFirstName'] = $res['userFirstName'];
-		$_SESSION['userLastName'] = $res['userLastName'];
-		$_SESSION['staffFullName'] = $res['staffFullName'];
-                           
+		if ($res['userIsActivated'] == 0) {
 
-		$_SESSION['toast'] = 'login-successful';
+			$d = base64_encode(date('Y-m-d H:i:s') . ";staffactivation;" . $userEmail);
+			$msg = "Please click the link to activate your account. http://cjashleyfashionhub.tk/staff/index.php?d=".$d ."";
 
-	
+			mail($userEmail,"Activate Account - Staff (CJ Ashley Fasion Hub)",$msg);
 
-		if ($res['userIsBlocked'] == 1) {
 
-			$_SESSION['toast'] = 'staff-account-blocked';
-
+			$_SESSION['toast'] = 'activate-account';
 			header("Location: index.php");
-
 		}
 		else
 		{
-			$_SESSION['userId'] = $res['userId'];
-			header("Location: dashboard.php");
+
+			$_SESSION['userType'] = $res['userType'];
+			$_SESSION['userEmail'] = $res['userEmail'];
+			$_SESSION['userFirstName'] = $res['userFirstName'];
+			$_SESSION['userLastName'] = $res['userLastName'];
+			$_SESSION['staffFullName'] = $res['staffFullName'];
+	                           
+
+			$_SESSION['toast'] = 'login-successful';
+
+			if ($res['userIsBlocked'] == 1) {
+
+				$_SESSION['toast'] = 'staff-account-blocked';
+
+				header("Location: index.php");
+
+			}
+			else
+			{
+				$_SESSION['userId'] = $res['userId'];
+				header("Location: dashboard.php");
+			}
 		}
 
 	}

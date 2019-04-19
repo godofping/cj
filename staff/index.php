@@ -35,6 +35,42 @@ if (isset($_GET['s'])) {
     }
 }
 
+if (isset($_GET['d'])) {
+
+
+  $d = $_GET['d'];
+  $d = base64_decode($d);
+  $d = explode(";", $d);
+
+  if (count($d) == 3 and $d[1] == 'staffactivation') {
+
+    $userEmail = $d[2];
+
+    $db->select('users_table','*',NULL,'userEmail = "' . $userEmail . '"', NULL); 
+    $res = $db->getResult(); $res = $res[0];
+
+    if ($res['userIsActivated'] == 1) {
+      $_SESSION['toast'] = 'account-already-activated';
+    }
+    else
+    {
+      $db->update('users_table',
+      array(
+        'userIsActivated'=>1,
+        ),
+        'userId=' . $res['userId']
+      );
+
+      $res = $db->getResult();
+
+      $_SESSION['toast'] = 'account-activated';
+    }
+    
+
+  }  
+
+}
+
 
 
 if (isset($_SESSION['userId'])){
@@ -284,6 +320,49 @@ if (isset($_SESSION['userId'])){
               stack: 6
             });
         <?php endif?>
+
+        <?php if (isset($_SESSION['toast']) and $_SESSION['toast'] == 'activate-account'): ?>
+            $.toast({
+              heading: 'LOGIN FAILED',
+              text: 'Your account is not yet activated. We sent you an activation link. Check your email and click on the link to activate.',
+              position: 'top-center',
+              loaderBg:'#ff6849',
+              icon: 'error',
+              hideAfter: 5000, 
+              stack: 6
+            });
+        <?php endif?>
+
+
+        <?php if (isset($_SESSION['toast']) and $_SESSION['toast'] == 'account-already-activated'): ?>
+            $.toast({
+              heading: 'INFO',
+              text: 'Your account is already activated. You can login now.',
+              position: 'top-center',
+              loaderBg:'#ff6849',
+              icon: 'info',
+              hideAfter: 5000, 
+              stack: 6
+            });
+        <?php endif?>
+
+        <?php if (isset($_SESSION['toast']) and $_SESSION['toast'] == 'account-activated'): ?>
+            $.toast({
+              heading: 'ACTIVATED',
+              text: 'Your account is now activated. You can login now.',
+              position: 'top-center',
+              loaderBg:'#ff6849',
+              icon: 'success',
+              hideAfter: 5000, 
+              stack: 6
+            });
+        <?php endif?>
+
+        
+
+
+
+        
 
 
         <?php unset($_SESSION['toast']); ?>

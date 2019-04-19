@@ -12,12 +12,24 @@ if (isset($_GET['from']) and $_GET['from'] == 'login') {
 
 	if (count($res) > 0) {
 		$res = $res[0];
-		$_SESSION['administratorUserId'] = $res['administratorUserId'];
-		$_SESSION['administratorEmail'] = $res['administratorEmail'];
-		$_SESSION['administratorFullName'] = $res['administratorFullName'];
-		
-		$_SESSION['toast'] = 'login-successful';
-		header("Location: dashboard.php");
+
+		if ($res['isActivated'] == 0) {
+			$d = base64_encode(date('Y-m-d H:i:s') . ";administratoractivation;" . $administratorEmail);
+			$msg = "Please click the link to activate your account. http://cjashleyfashionhub.tk/dashboard/index.php?d=".$d ."";
+			mail($administratorEmail,"Activate Account - Administrator (CJ Ashley Fasion Hub)",$msg);
+			
+			$_SESSION['toast'] = 'activate-account';
+			header("Location: index.php");
+
+		}
+		else{
+			$_SESSION['administratorUserId'] = $res['administratorUserId'];
+			$_SESSION['administratorEmail'] = $res['administratorEmail'];
+			$_SESSION['administratorFullName'] = $res['administratorFullName'];
+			
+			$_SESSION['toast'] = 'login-successful';
+			header("Location: dashboard.php");
+		}
 	}
 	else
 	{
@@ -127,6 +139,9 @@ if (isset($_GET['from']) and $_GET['from'] == 'add-staff') {
 			$userPhoneNumber = $db->escapeString($_POST['userPhoneNumber']);
 			$userRegistrationDate = $db->escapeString(date('Y-m-d'));
 			$userType = $db->escapeString("Staff");
+			$userIsBlocked = $db->escapeString(0);
+			$userIsActivated = $db->escapeString(0);
+			
 
 			$db->insert('users_table',
 			array(
@@ -137,11 +152,16 @@ if (isset($_GET['from']) and $_GET['from'] == 'add-staff') {
 				'userPhoneNumber'=>$userPhoneNumber,
 				'userRegistrationDate'=>$userRegistrationDate,
 				'userType'=>$userType,
-				'userIsBlocked'=>'0',
+				'userIsBlocked'=>$userIsBlocked,
+				'userIsActivated'=>$userIsActivated,
 				)
 			);
 
 			$res = $db->getResult();
+
+			$d = base64_encode(date('Y-m-d H:i:s') . ";staffactivation;" . $userEmail);
+			$msg = "Please click the link to activate your account. http://cjashleyfashionhub.tk/staff/index.php?d=".$d ."";
+			mail($userEmail,"Activate Account - Staff (CJ Ashley Fasion Hub)",$msg);
 
 			
 			$_SESSION['toast'] = 'add-staff';
@@ -172,6 +192,8 @@ if (isset($_GET['from']) and $_GET['from'] == 'update-staff') {
 	$userFirstName = $db->escapeString($_POST['userFirstName']);
 	$userLastName = $db->escapeString($_POST['userLastName']);
 	$userPhoneNumber = $db->escapeString($_POST['userPhoneNumber']);
+	$userIsActivated = $db->escapeString(0);
+	
 
 	if ($userPassword == $confirmPassword) {
 
@@ -192,11 +214,19 @@ if (isset($_GET['from']) and $_GET['from'] == 'update-staff') {
 					'userFirstName'=>$userFirstName,
 					'userLastName'=>$userLastName,
 					'userPhoneNumber'=>$userPhoneNumber,
+					'userIsActivated'=>$userIsActivated,
+					
 					),
 					'userId=' . $_GET['userId']
 				);
 
 				$res = $db->getResult();
+
+
+				$d = base64_encode(date('Y-m-d H:i:s') . ";staffactivation;" . $userEmail);
+				$msg = "Please click the link to activate your account. http://cjashleyfashionhub.tk/staff/index.php?d=".$d ."";
+				mail($userEmail,"Activate Account - Staff (CJ Ashley Fasion Hub)",$msg);
+
 				
 				$_SESSION['toast'] = 'update-staff';
 			}
@@ -1292,13 +1322,14 @@ if (isset($_GET['from']) and $_GET['from'] == 'set-shipping-fee') {
 
 if (isset($_GET['from']) and $_GET['from'] == 'backup') {
 
+	$BACKUP_PATH = 'database/';
 	$server_name   = "localhost";
 	$username      = "izr262rx6jyg";
 	$password      = "Android123#";
 	$database_name = "cjashleyfashionhub_db";
 
 
-	$cmd = "mysqldump -h {$server_name} -u {$username} -p{$password} {$database_name} administrators_table inventory_logs_table notifications_table order_details_table orders_table payments_table product_categories_table product_images_table product_reviews_table product_sub_categories_table product_variations_table products_table user_feedbacks_table users_table > " . BACKUP_PATH . "{$database_name}.sql";
+	$cmd = "mysqldump -h {$server_name} -u {$username} -p{$password} {$database_name} administrators_table inventory_logs_table notifications_table order_details_table orders_table payments_table product_categories_table product_images_table product_reviews_table product_sub_categories_table product_variations_table products_table user_feedbacks_table users_table > " . $BACKUP_PATH . "{$database_name}.sql";
 	
 
 	exec($cmd);
@@ -1367,17 +1398,25 @@ if (isset($_GET['from']) and $_GET['from'] == 'add-administrator') {
 		if (count($res) == 0) {
 			$administratorEmail = $db->escapeString($_POST['administratorEmail']);
 			$administratorFullName = $db->escapeString($_POST['administratorFullName']);
+			$isDeleted = $db->escapeString(0);
+			$isActivated = $db->escapeString(0);
 
 			$db->insert('administrators_table',
 			array(
 				'administratorEmail'=>$administratorEmail,
 				'administratorUserPassword'=>$administratorUserPassword,
 				'administratorFullName'=>$administratorFullName,
-				'isDeleted'=>'0',
+				'isDeleted'=>$isDeleted ,
+				'isActivated'=>$isActivated ,
 				)
 			);
 
 			$res = $db->getResult();
+
+			$d = base64_encode(date('Y-m-d H:i:s') . ";administratoractivation;" . $administratorEmail);
+			$msg = "Please click the link to activate your account. http://cjashleyfashionhub.tk/dashboard/index.php?d=".$d ."";
+			mail($administratorEmail,"Activate Account - Administrator (CJ Ashley Fasion Hub)",$msg);
+
 			
 			$_SESSION['toast'] = 'add-administrator';
 		}
@@ -1404,6 +1443,7 @@ if (isset($_GET['from']) and $_GET['from'] == 'update-administrator') {
 	$administratorUserPassword = $db->escapeString(md5($_POST['administratorUserPassword']));
 	$confirmPassword = $db->escapeString(md5($_POST['confirmPassword']));
 	$administratorFullName = $db->escapeString($_POST['administratorFullName']);
+	$isActivated = $db->escapeString(0);
 
 	if ($administratorUserPassword == $confirmPassword) {
 
@@ -1422,11 +1462,16 @@ if (isset($_GET['from']) and $_GET['from'] == 'update-administrator') {
 					'administratorEmail'=>$administratorEmail,
 					'administratorUserPassword'=>$administratorUserPassword,
 					'administratorFullName'=>$administratorFullName,
+					'isActivated'=>$isActivated,
 					),
 					'administratorUserId=' . $_GET['administratorUserId']
 				);
 
 				$res = $db->getResult();
+
+				$d = base64_encode(date('Y-m-d H:i:s') . ";administratoractivation;" . $administratorEmail);
+				$msg = "Please click the link to activate your account. http://cjashleyfashionhub.tk/dashboard/index.php?d=".$d ."";
+				mail($administratorEmail,"Activate Account - Administrator (CJ Ashley Fasion Hub)",$msg);
 				
 				$_SESSION['toast'] = 'update-administrator';
 			}

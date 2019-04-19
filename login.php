@@ -9,7 +9,7 @@ if (isset($_GET['d'])) {
   $d = base64_decode($d);
   $d = explode(";", $d);
 
-  if (count($d) == 3) {
+  if (count($d) == 3 and $d[1] == 'customeractivation') {
 
     $userEmail = $d[2];
 
@@ -82,7 +82,7 @@ if (isset($_GET['d'])) {
 
                     <?php if (isset($_SESSION['toast']) and $_SESSION['toast'] == 'activate-account'): ?>
                       <div class="alert alert-danger" role="alert">
-                        Your account is not yet activated. We sent you an activation link. Check your email and click on the link to verify.
+                        Your account is not yet activated. We sent you an activation link. Check your email and click on the link to activate.
                       </div>
                     <?php endif ?>
 
@@ -144,13 +144,13 @@ if (isset($_GET['d'])) {
 
                     <?php if (isset($_SESSION['toast']) and $_SESSION['toast'] == 'activation-link-sent'): ?>
                       <div class="alert alert-info" role="alert">
-                        Registration Success. We sent you an activation link. Check your email and click on the link to verify.
+                        Registration Success. We sent you an activation link. Check your email and click on the link to activate.
                       </div>
                     <?php endif ?>
 
                     <?php if (isset($_SESSION['toast']) and $_SESSION['toast'] == 'activation-link-sent-account-not-activated'): ?>
                       <div class="alert alert-info" role="alert">
-                        Email is already registered but is not yet activated. We sent you an activation link. Check your email and click on the link to verify.
+                        Email is already registered but is not yet activated. We sent you an activation link. Check your email and click on the link to activate.
                       </div>
                     <?php endif ?>
 

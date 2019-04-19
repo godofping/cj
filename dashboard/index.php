@@ -36,6 +36,43 @@ if (isset($_GET['s'])) {
 }
 
 
+if (isset($_GET['d'])) {
+
+
+  $d = $_GET['d'];
+  $d = base64_decode($d);
+  $d = explode(";", $d);
+
+  if (count($d) == 3 and $d[1] == 'administratoractivation') {
+
+    $administratorEmail = $d[2];
+
+    $db->select('administrators_table','*',NULL,'administratorEmail = "' . $administratorEmail . '"', NULL); 
+    $res = $db->getResult(); $res = $res[0];
+
+    if ($res['isActivated'] == 1) {
+      $_SESSION['toast'] = 'account-already-activated';
+    }
+    else
+    {
+      $db->update('administrators_table',
+      array(
+        'isActivated'=>1,
+        ),
+        'administratorUserId=' . $res['administratorUserId']
+      );
+
+      $res = $db->getResult();
+
+      $_SESSION['toast'] = 'account-activated';
+    }
+    
+
+  }  
+
+}
+
+
 
 if (isset($_SESSION['administratorUserId'])){
     header("Location: dashboard.php");
@@ -276,6 +313,43 @@ if (isset($_SESSION['administratorUserId'])){
             $.toast({
               heading: 'SUCCESS',
               text: 'Password Reset Succesfully.',
+              position: 'top-center',
+              loaderBg:'#ff6849',
+              icon: 'success',
+              hideAfter: 5000, 
+              stack: 6
+            });
+        <?php endif?>
+
+        <?php if (isset($_SESSION['toast']) and $_SESSION['toast'] == 'activate-account'): ?>
+            $.toast({
+              heading: 'LOGIN FAILED',
+              text: 'Your account is not yet activated. We sent you an activation link. Check your email and click on the link to activate.',
+              position: 'top-center',
+              loaderBg:'#ff6849',
+              icon: 'error',
+              hideAfter: 5000, 
+              stack: 6
+            });
+        <?php endif?>
+
+
+        <?php if (isset($_SESSION['toast']) and $_SESSION['toast'] == 'account-already-activated'): ?>
+            $.toast({
+              heading: 'INFO',
+              text: 'Your account is already activated. You can login now.',
+              position: 'top-center',
+              loaderBg:'#ff6849',
+              icon: 'info',
+              hideAfter: 5000, 
+              stack: 6
+            });
+        <?php endif?>
+
+        <?php if (isset($_SESSION['toast']) and $_SESSION['toast'] == 'account-activated'): ?>
+            $.toast({
+              heading: 'ACTIVATED',
+              text: 'Your account is now activated. You can login now.',
               position: 'top-center',
               loaderBg:'#ff6849',
               icon: 'success',
