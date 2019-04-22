@@ -93,7 +93,7 @@ include('header.php');
                 $(win.document.body)
                     .css( 'font-size', '10pt' )
                     .prepend(
-                        '<div style="text-align: center; margin-bottom: 20px;"><img src="http://cjashleyfashionhub.tk/dashboard/etc/logo.jpg" height= "100px" /></div><div style="text-align: left"><p>Prepared by: <?php echo $_SESSION['administratorFullName']; ?></p></div>'
+                        '<div style="text-align: center; margin-bottom: 20px;"><img src="https://i.imgur.com/yjxycNt.jpg" height= "100px" /></div><div style="text-align: left"><p>Prepared by: <?php echo $_SESSION['administratorFullName']; ?></p></div>'
                     );
 
                 $(win.document.body).find( 'table' )

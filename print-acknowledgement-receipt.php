@@ -83,7 +83,7 @@ html {margin-top: 60px}
 <section class=" padding-bottom-100">
   <div class="container">
 
-      <div style="text-align: center; margin-bottom: 20px;"><img src="http://cjashleyfashionhub.tk/dashboard/etc/logo.jpg" height= "100px" /></div>
+      <div style="text-align: center; margin-bottom: 20px;"><img src="https://i.imgur.com/yjxycNt.jpg" height= "100px" /></div>
 
       <div class="row">
      	<div class="col-md-12">
